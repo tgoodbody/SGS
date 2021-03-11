@@ -1,3 +1,17 @@
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{css, echo=FALSE}
+pre {
+  max-height: 300px;
+  overflow-y: auto;
+}
+pre[class] {
+  max-height: 100px;
+}
+```
+
 # Data Preparation {-#dataprep}
 
 To show the sampling methods in action I use the example data from the Romeo mallete forest in Ontario. These data are included in the [@R-RMFInventory] package.

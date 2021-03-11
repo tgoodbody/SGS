@@ -1,3 +1,17 @@
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{css, echo=FALSE}
+pre {
+  max-height: 300px;
+  overflow-y: auto;
+}
+pre[class] {
+  max-height: 100px;
+}
+```
+
 # Stratification methods {-#strat}
 
 The second method we outline is using k means stratification for consequent stratified sampling. 

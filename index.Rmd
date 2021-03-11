@@ -7,20 +7,14 @@ documentclass: book
 bibliography: [sgs.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-output:
-  bookdown::gitbook
-
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
----
 # Overview {-#overview}
 
-This document is a brief introduction to the struturally guided sampling project. Herein i provide a:
+This document is a brief introduction to the structurally guided sampling project. Herein i provide a:
 
 * Literature review about [SGS](#SGS)
 

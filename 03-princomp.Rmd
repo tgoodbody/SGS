@@ -1,3 +1,17 @@
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{css, echo=FALSE}
+pre {
+  max-height: 300px;
+  overflow-y: auto;
+}
+pre[class] {
+  max-height: 100px;
+}
+```
+
 # Principle Components {-#princomp}
 
 The first method we outline is using principle components analysis and sample selection from the [@R-RMFinventory] package. This vignette is mostly replicated from the one within that package by Martin Queinnec.
