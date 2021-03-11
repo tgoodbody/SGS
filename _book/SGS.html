@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>SGS</title>
+  <meta name="description" content="SGS" />
+  <meta name="generator" content="bookdown #bookdown:version# and GitBook 2.6.7" />
+
+  <meta property="og:title" content="SGS" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="SGS" />
+  
+  
+  
+
+<meta name="author" content="Tristan Goodbody" />
+
+
+<meta name="date" content="2021-03-11" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<!--bookdown:link_prev-->
+<!--bookdown:link_next-->
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+<!--bookdown:title:start-->
+<div id="header">
+<h1 class="title">SGS</h1>
+<p class="author"><em>Tristan Goodbody</em></p>
+<p class="date"><em>2021-03-11</em></p>
+</div>
+<!--bookdown:title:end-->
+
+<!--bookdown:toc:start-->
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+<!--bookdown:toc2:start-->
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#SGS">Structurally Guided Sampling Review</a><ul>
+<li><a href="#stratapp">Stratification approaches</a><ul>
+<li><a href="#hawbaker2009"><span class="citation">(Hawbaker et al. <span>2009</span>)</span></a></li>
+<li><a href="#dalponte2011"><span class="citation">(Dalponte et al. <span>2011</span>)</span></a></li>
+<li><a href="#maltamo2011"><span class="citation">(Maltamo et al. <span>2011</span>)</span></a></li>
+<li><a href="#junttila2013"><span class="citation">(Junttila et al. <span>2013</span>)</span></a></li>
+<li><a href="#valbuena2013"><span class="citation">(Valbuena et al. <span>2013</span>)</span></a></li>
+<li><a href="#grafstrom2013"><span class="citation">(Grafström and Ringvall <span>2013</span>)</span></a></li>
+<li><a href="#grafstrom2014"><span class="citation">(Grafström, Saarela, and Ene <span>2014</span>)</span></a></li>
+<li><a href="#niemi2016"><span class="citation">(Niemi and Vauhkonen <span>2016</span>)</span></a></li>
+<li><a href="#valbuena2017"><span class="citation">(Valbuena et al. <span>2017</span>)</span></a></li>
+<li><a href="#mcroberts2017"><span class="citation">(McRoberts, Chen, and Walters <span>2017</span>)</span></a></li>
+<li><a href="#malone2019"><span class="citation">(Malone, Minansy, and Brungard <span>2019</span>)</span></a></li>
+<li><a href="#papa2020"><span class="citation">(Papa et al. <span>2020</span>)</span></a></li>
+<li><a href="#ma2020"><span class="citation">(Ma et al. <span>2020</span>)</span></a></li>
+</ul></li>
+</ul></li>
+<li><a href="#dataprep">Data Preparation</a></li>
+<li><a href="#princomp">Principle Components</a><ul>
+<li><a href="#use-pca-model-to-get-pca-values-of-an-existing-set-of-plots">Use PCA model to get PCA values of an existing set of plots</a></li>
+<li><a href="#stratification">Stratification</a></li>
+<li><a href="#select-new-plots">Select new plots</a></li>
+</ul></li>
+<li><a href="#strat">Stratification methods</a><ul>
+<li><a href="#kmeans">K-means</a><ul>
+<li><a href="#k-means"><span class="toc-section-number">0.0.1</span> K MEANS</a></li>
+</ul></li>
+<li><a href="#determine-index-of-each-cell-so-to-map-values-correctly-without-nas"><span class="toc-section-number">0.1</span> determine index of each cell so to map values correctly without NA’s</a></li>
+<li><a href="#clusterchallenge">How many clusters??</a></li>
+<li><a href="#OSB">Optimum stratum boundaries</a></li>
+<li><a href="#sampling-within-groupsstrata">Sampling within groups/strata</a></li>
+<li><a href="#srs">Simple Random Sampling</a></li>
+<li><a href="#using-2-variables-to-stratify">Using 2 variables to stratify</a></li>
+<li><a href="#balanced-sampling">Balanced Sampling</a></li>
+<li><a href="#lhs">Latin Hypercube Sampling</a></li>
+<li><a href="#this-takes-a-while-to-do-so-only-do-it-once-if-you-can"><span class="toc-section-number">0.2</span> This takes a while to do so only do it once if you can</a></li>
+</ul></li>
+<li><a href="#disc">Discussion points</a><ul>
+<li><a href="#methods">Methods</a></li>
+<li><a href="#need-to-integrate-already-established-samples">Need to integrate already established samples</a></li>
+<li><a href="#algorithm-creation">Algorithm creation</a></li>
+<li><a href="#agenda-for-future">Agenda for future</a></li>
+</ul></li>
+<li><a href="#references">References</a></li>
+</ul>
+<!--bookdown:toc2:end-->
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">SGS</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<!--bookdown:toc:end-->
+<!--bookdown:body:start-->
+<hr />
+<div id="overview" class="section level1 unnumbered">
+<h1>Overview</h1>
+<p>This document is a brief introduction to the struturally guided sampling project. Herein i provide a:</p>
+<ul>
+<li><p>Literature review about <a href="#SGS">SGS</a></p></li>
+<li><p>Overview of how <a href="#dataprep">data has been prepared</a></p></li>
+<li><p>Work done in the RMFinventory package using <a href="#princomp">principle components</a></p></li>
+<li><p>Potential methods to apply using <a href="strat">stratification and sampling methods</a></p></li>
+<li><p>Points to <a href="#disc">discuss</a> for how the project should evolve</p></li>
+</ul>
+<!--chapter:end:index.Rmd-->
+</div>
+<div id="SGS" class="section level1 unnumbered">
+<h1>Structurally Guided Sampling Review</h1>
+<p>Placeholder</p>
+<div id="stratapp" class="section level2 unnumbered">
+<h2>Stratification approaches</h2>
+<div id="hawbaker2009" class="section level3 unnumbered">
+<h3><span class="citation">(Hawbaker et al. <a href="#ref-Hawbaker2009" role="doc-biblioref">2009</a>)</span></h3>
+</div>
+<div id="dalponte2011" class="section level3 unnumbered">
+<h3><span class="citation">(Dalponte et al. <a href="#ref-Dalponte2011" role="doc-biblioref">2011</a>)</span></h3>
+</div>
+<div id="maltamo2011" class="section level3 unnumbered">
+<h3><span class="citation">(Maltamo et al. <a href="#ref-Maltamo2011" role="doc-biblioref">2011</a>)</span></h3>
+</div>
+<div id="junttila2013" class="section level3 unnumbered">
+<h3><span class="citation">(Junttila et al. <a href="#ref-Junttila2013" role="doc-biblioref">2013</a>)</span></h3>
+</div>
+<div id="valbuena2013" class="section level3 unnumbered">
+<h3><span class="citation">(Valbuena et al. <a href="#ref-Valbuena2013" role="doc-biblioref">2013</a>)</span></h3>
+</div>
+<div id="grafstrom2013" class="section level3 unnumbered">
+<h3><span class="citation">(Grafström and Ringvall <a href="#ref-Grafstrom2013" role="doc-biblioref">2013</a>)</span></h3>
+<div id="local-pivotal-method-with-x-and-y-coordinates-lpm-xy" class="section level4 unnumbered">
+<h4>Local pivotal method with x and y coordinates (LPM-xy)</h4>
+</div>
+<div id="local-pivotal-method-lpm" class="section level4 unnumbered">
+<h4>Local pivotal method (LPM)</h4>
+</div>
+<div id="cube-method-cm" class="section level4 unnumbered">
+<h4>Cube method (CM)</h4>
+</div>
+<div id="local-cube-method-lcm" class="section level4 unnumbered">
+<h4>Local cube method (LCM)</h4>
+</div>
+</div>
+<div id="grafstrom2014" class="section level3 unnumbered">
+<h3><span class="citation">(Grafström, Saarela, and Ene <a href="#ref-Grafstrom2014" role="doc-biblioref">2014</a>)</span></h3>
+</div>
+<div id="niemi2016" class="section level3 unnumbered">
+<h3><span class="citation">(Niemi and Vauhkonen <a href="#ref-Niemi2016" role="doc-biblioref">2016</a>)</span></h3>
+</div>
+<div id="valbuena2017" class="section level3 unnumbered">
+<h3><span class="citation">(Valbuena et al. <a href="#ref-Valbuena2017" role="doc-biblioref">2017</a>)</span></h3>
+</div>
+<div id="mcroberts2017" class="section level3 unnumbered">
+<h3><span class="citation">(McRoberts, Chen, and Walters <a href="#ref-McRoberts2017" role="doc-biblioref">2017</a>)</span></h3>
+</div>
+<div id="malone2019" class="section level3 unnumbered">
+<h3><span class="citation">(Malone, Minansy, and Brungard <a href="#ref-Malone2019" role="doc-biblioref">2019</a>)</span></h3>
+</div>
+<div id="papa2020" class="section level3 unnumbered">
+<h3><span class="citation">(Papa et al. <a href="#ref-Papa2020" role="doc-biblioref">2020</a>)</span></h3>
+</div>
+<div id="ma2020" class="section level3 unnumbered">
+<h3><span class="citation">(Ma et al. <a href="#ref-Ma2020" role="doc-biblioref">2020</a>)</span></h3>
+<!--chapter:end:01-LitReview.Rmd-->
+</div>
+</div>
+</div>
+<div id="dataprep" class="section level1 unnumbered">
+<h1>Data Preparation</h1>
+<p>Placeholder</p>
+<!--chapter:end:02-dataprep.Rmd-->
+</div>
+<div id="princomp" class="section level1 unnumbered">
+<h1>Principle Components</h1>
+<p>Placeholder</p>
+<div id="use-pca-model-to-get-pca-values-of-an-existing-set-of-plots" class="section level2 unnumbered">
+<h2>Use PCA model to get PCA values of an existing set of plots</h2>
+</div>
+<div id="stratification" class="section level2 unnumbered">
+<h2>Stratification</h2>
+</div>
+<div id="select-new-plots" class="section level2 unnumbered">
+<h2>Select new plots</h2>
+<!--chapter:end:03-princomp.Rmd-->
+</div>
+</div>
+<div id="strat" class="section level1 unnumbered">
+<h1>Stratification methods</h1>
+<p>Placeholder</p>
+<div id="kmeans" class="section level2 unnumbered">
+<h2>K-means</h2>
+<div id="k-means" class="section level3">
+<h3><span class="header-section-number">0.0.1</span> K MEANS</h3>
+</div>
+</div>
+<div id="determine-index-of-each-cell-so-to-map-values-correctly-without-nas" class="section level2">
+<h2><span class="header-section-number">0.1</span> determine index of each cell so to map values correctly without NA’s</h2>
+<div id="k-means-clustering" class="section level4">
+<h4><span class="header-section-number">0.1.0.1</span> K MEANS CLUSTERING</h4>
+</div>
+<div id="determine-optimal-number-of-clusters" class="section level4">
+<h4><span class="header-section-number">0.1.0.2</span> DETERMINE OPTIMAL NUMBER OF CLUSTERS?????</h4>
+</div>
+</div>
+<div id="clusterchallenge" class="section level2 unnumbered">
+<h2>How many clusters??</h2>
+</div>
+<div id="OSB" class="section level2 unnumbered">
+<h2>Optimum stratum boundaries</h2>
+<div id="optimal-clustering-breaks" class="section level7">
+<p class="heading"><span class="header-section-number">0.1.0.2.0.0.1</span> OPTIMAL CLUSTERING BREAKS</p>
+</div>
+<div id="sampling-within-clusters" class="section level5">
+<h5><span class="header-section-number">0.1.0.2.1</span> Sampling within clusters</h5>
+</div>
+</div>
+<div id="sampling-within-groupsstrata" class="section level2 unnumbered">
+<h2>Sampling within groups/strata</h2>
+</div>
+<div id="srs" class="section level2 unnumbered">
+<h2>Simple Random Sampling</h2>
+</div>
+<div id="using-2-variables-to-stratify" class="section level2 unnumbered">
+<h2>Using 2 variables to stratify</h2>
+</div>
+<div id="balanced-sampling" class="section level2 unnumbered">
+<h2>Balanced Sampling</h2>
+</div>
+<div id="lhs" class="section level2 unnumbered">
+<h2>Latin Hypercube Sampling</h2>
+</div>
+<div id="this-takes-a-while-to-do-so-only-do-it-once-if-you-can" class="section level2">
+<h2><span class="header-section-number">0.2</span> This takes a while to do so only do it once if you can</h2>
+<div id="section" class="section level55">
+<p class="heading"><span class="header-section-number">0.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.1</span> </p>
+<!--chapter:end:04-stratmethods.Rmd-->
+</div>
+</div>
+</div>
+<div id="disc" class="section level1 unnumbered">
+<h1>Discussion points</h1>
+<p>Placeholder</p>
+<div id="methods" class="section level2 unnumbered">
+<h2>Methods</h2>
+</div>
+<div id="need-to-integrate-already-established-samples" class="section level2 unnumbered">
+<h2>Need to integrate already established samples</h2>
+</div>
+<div id="algorithm-creation" class="section level2 unnumbered">
+<h2>Algorithm creation</h2>
+</div>
+<div id="agenda-for-future" class="section level2 unnumbered">
+<h2>Agenda for future</h2>
+<!--chapter:end:05-discussion.Rmd-->
+</div>
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
+<!--chapter:end:06-references.Rmd-->
+<div id="refs" class="references">
+<div id="ref-Dalponte2011">
+<p>Dalponte, Michele, Cristina Martinez, Mirco Rodeghiero, and Damiano Gianelle. 2011. “The role of ground reference data collection in the prediction of stem volume with LiDAR data in mountain areas.” <em>ISPRS Journal of Photogrammetry and Remote Sensing</em> 66 (6): 787–97. <a href="https://doi.org/10.1016/j.isprsjprs.2011.09.003">https://doi.org/10.1016/j.isprsjprs.2011.09.003</a>.</p>
+</div>
+<div id="ref-Grafstrom2013">
+<p>Grafström, Anton, and Anna Hedström Ringvall. 2013. “Improving forest field inventories by using remote sensing data in novel sampling designs.” <em>Canadian Journal of Forest Research</em> 43 (11): 1015–22. <a href="https://doi.org/10.1139/cjfr-2013-0123">https://doi.org/10.1139/cjfr-2013-0123</a>.</p>
+</div>
+<div id="ref-Grafstrom2014">
+<p>Grafström, Anton, Svetlana Saarela, and Liviu Theodor Ene. 2014. “Efficient sampling strategies for forest inventories by spreading the sample in auxiliary space.” <em>Canadian Journal of Forest Research</em> 44 (10): 1156–64. <a href="https://doi.org/10.1139/cjfr-2014-0202">https://doi.org/10.1139/cjfr-2014-0202</a>.</p>
+</div>
+<div id="ref-Hawbaker2009">
+<p>Hawbaker, Todd J., Nicholas S. Keuler, Adrian A. Lesak, Terje Gobakken, Kirk Contrucci, and Volker C. Radeloff. 2009. “Improved estimates of forest vegetation structure and biomass with a LiDAR-optimized sampling design.” <em>Journal of Geophysical Research: Biogeosciences</em> 114 (3): 1–11. <a href="https://doi.org/10.1029/2008JG000870">https://doi.org/10.1029/2008JG000870</a>.</p>
+</div>
+<div id="ref-Junttila2013">
+<p>Junttila, Virpi, Andrew O. Finley, John B. Bradford, and Tuomo Kauranne. 2013. “Strategies for minimizing sample size for use in airborne LiDAR-based forest inventory.” <em>Forest Ecology and Management</em> 292: 75–85. <a href="https://doi.org/10.1016/j.foreco.2012.12.019">https://doi.org/10.1016/j.foreco.2012.12.019</a>.</p>
+</div>
+<div id="ref-Ma2020">
+<p>Ma, Tianwu, Dick J Brus, A-xing Zhu, Lei Zhang, and Thomas Scholten. 2020. “Geoderma Comparison of conditioned Latin hypercube and feature space coverage sampling for predicting soil classes using simulation from soil maps.” <em>Geoderma</em> 370 (April): 114366. <a href="https://doi.org/10.1016/j.geoderma.2020.114366">https://doi.org/10.1016/j.geoderma.2020.114366</a>.</p>
+</div>
+<div id="ref-Malone2019">
+<p>Malone, Brendan P, Budiman Minansy, and Colby Brungard. 2019. “Some methods to improve the utility of conditioned Latin hypercube sampling,” 1–17. <a href="https://doi.org/10.7717/peerj.6451">https://doi.org/10.7717/peerj.6451</a>.</p>
+</div>
+<div id="ref-Maltamo2011">
+<p>Maltamo, M., O. M. Bollandsås, E. Næsset, T. Gobakken, and P. Packalén. 2011. “Different plot selection strategies for field training data in ALS-assisted forest inventory.” <em>Forestry</em> 84 (1): 23–31. <a href="https://doi.org/10.1093/forestry/cpq039">https://doi.org/10.1093/forestry/cpq039</a>.</p>
+</div>
+<div id="ref-McRoberts2017">
+<p>McRoberts, Ronald E., Qi Chen, and Brian F. Walters. 2017. “Multivariate inference for forest inventories using auxiliary airborne laser scanning data.” <em>Forest Ecology and Management</em> 401: 295–303. <a href="https://doi.org/10.1016/j.foreco.2017.07.017">https://doi.org/10.1016/j.foreco.2017.07.017</a>.</p>
+</div>
+<div id="ref-Niemi2016">
+<p>Niemi, Mikko T., and Jari Vauhkonen. 2016. “Extracting canopy surface texture from airborne laser scanning data for the supervised and unsupervised prediction of area-based forest characteristics.” <em>Remote Sensing</em> 8 (7): 1–21. <a href="https://doi.org/10.3390/rs8070582">https://doi.org/10.3390/rs8070582</a>.</p>
+</div>
+<div id="ref-Papa2020">
+<p>Papa, Daniel de Almeida, Danilo Roberti Alves de Almeida, Carlos Alberto Silva, Evandro Orfanó Figueiredo, Scott C. Stark, Ruben Valbuena, Luiz Carlos Estraviz Rodriguez, and Marcus Vinício Neves d’Oliveira. 2020. “Evaluating tropical forest classification and field sampling stratification from lidar to reduce effort and enable landscape monitoring.” <em>Forest Ecology and Management</em> 457 (September 2019). <a href="https://doi.org/10.1016/j.foreco.2019.117634">https://doi.org/10.1016/j.foreco.2019.117634</a>.</p>
+</div>
+<div id="ref-Valbuena2017">
+<p>Valbuena, Rubén, Matti Maltamo, Lauri Mehtätalo, and Petteri Packalen. 2017. “Key structural features of Boreal forests may be detected directly using L-moments from airborne lidar data.” <em>Remote Sensing of Environment</em> 194: 437–46. <a href="https://doi.org/10.1016/j.rse.2016.10.024">https://doi.org/10.1016/j.rse.2016.10.024</a>.</p>
+</div>
+<div id="ref-Valbuena2013">
+<p>Valbuena, Rubén, Petteri Packalen, Lauri Mehtätalo, Antonio García-Abril, and Matti Maltamo. 2013. “Characterizing forest structural types and shelterwood dynamics from Lorenz-based indicators predicted by airborne laser scanning.” <em>Canadian Journal of Forest Research</em> 43 (11): 1063–74. <a href="https://doi.org/10.1139/cjfr-2013-0147">https://doi.org/10.1139/cjfr-2013-0147</a>.</p>
+</div>
+</div>
+</div>
+<!--bookdown:body:end-->
+            </section>
+
+          </div>
+        </div>
+      </div>
+<!--bookdown:link_prev-->
+<!--bookdown:link_next-->
+    </div>
+  </div>
+<!--bookdown:config-->
+
+</body>
+
+</html>

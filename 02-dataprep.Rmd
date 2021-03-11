@@ -1,0 +1,118 @@
+# Data Preparation {-#dataprep}
+
+To show the sampling methods in action I use the example data from the Romeo mallete forest in Ontario. These data are included in the [@R-RMFInventory] package.
+
+These data were prepared suing the following method:
+
+```{r,echo=F,message=F,warning=F}
+as.data.table.raster <- function(x, row.names = NULL, optional = FALSE, xy=FALSE, inmem = canProcessInMemory(x, 2), ...) {
+  stopifnot(require("data.table"))
+  if(inmem) {
+    v <- as.data.table(as.data.frame(x, row.names=row.names, optional=optional, xy=xy, ...))
+  } else {
+    tr <- blockSize(x, n=2)
+    l <- lapply(1:tr$n, function(i) 
+      as.data.table(as.data.frame(getValues(x, 
+                                            row=tr$row[i], 
+                                            nrows=tr$nrows[i]), 
+                                  row.names=row.names, optional=optional, xy=xy, ...)))
+    v <- rbindlist(l)
+  }
+  coln <- names(x)
+  if(xy) coln <- c("x", "y", coln)
+  setnames(v, coln)
+  v
+}
+
+if (!isGeneric("as.data.table")) {
+  setGeneric("as.data.table", function(x, ...)
+    standardGeneric("as.data.table"))
+} 
+setMethod("as.data.table", signature(x = "data.frame"),
+          data.table::as.data.table)
+setMethod("as.data.table", signature(x = "Raster"), as.data.table.raster)
+```
+
+```{r,warning=FALSE,message=FALSE}
+#Load required libraries
+library(RMFinventory)
+library(raster)
+library(sf)
+
+### Raster DATa
+wall_metrics <- brick(system.file("extdata","wall_metrics_small.tif", package = "RMFinventory"))
+names(wall_metrics) <- c("avg", "cov", "std","p10", "p20","p50","p70","p95", "p99","d0","d2","d4","dns")
+
+#Coordinate system of wall-to-wall raster
+wall_crs <- raster::crs(wall_metrics)
+
+#Plot
+plot(wall_metrics$avg)
+```
+
+```{r,warning=FALSE,message=FALSE}
+### forest polygons
+#read forest polygon shapefile
+poly <- st_read(system.file("extdata/inventory_polygons","inventory_polygons.shp", package = "RMFinventory"))
+
+#Match CRS of wall-to-wall raster layer
+poly <- st_transform(poly, wall_crs@projargs)
+
+poly_subset <- poly[poly$POLYTYPE == "FOR" & poly$OWNER == 1, ]
+plot(st_geometry(poly_subset), axes = TRUE, col = "red")
+
+poly_subset <- st_union(poly_subset)
+plot(st_geometry(poly_subset), axes = TRUE, col = "red")
+
+#Transform to SpatialPolygonDataFrame object for compatibility with the raster package
+poly_subset <- sf::as_Spatial(poly_subset)
+
+#Mask wall-to-wall layer
+wall_poly <- raster::mask(wall_metrics, mask = poly_subset)
+plot(wall_poly$avg)
+```
+
+```{r,warning=FALSE,message=FALSE}
+### roads
+#read roads shapefile
+roads <- st_read(system.file("extdata/roads","roads.shp", package = "RMFinventory"))
+roads <- st_transform(roads, wall_crs@projargs)
+plot(roads["RDTYPE"])
+
+# Select only suitable road types
+# Highway (H), Municipal (M), Primary (P), Branch (B), Clay/mineral surface haul (C) and roads accessed when dry or frozen (d) , graveled (g), industrial grade road (i), highway or municipal road(r), yearly accessible (y)
+
+roads_subset <- roads[roads$RDTYPE %in% c("H", "M", "P", "B", "C") &
+                        roads$RDMOD %in% c("d", "g", "i", "r", "y"), ]
+
+# Dissolve roads layer to work with only 1 feature
+roads_subset <- st_union(roads_subset)
+plot(st_geometry(roads_subset))
+
+#Create buffers of 30 m and 200 m
+roads_buffer_30m <- st_buffer(roads_subset, dist = 30)
+roads_buffer_200m <- st_buffer(roads_subset, dist = 200)
+
+#Take the symetrical difference between buffers to keep only roads >- 30 m AND <= 200 m
+roads_buffer <- st_sym_difference(roads_buffer_200m, roads_buffer_30m)
+plot(st_geometry(roads_buffer))
+
+#Transform to SpatialPolygonDataFrame object for compatibility with the raster package
+roads_buffer <- sf::as_Spatial(roads_buffer)
+```
+
+```{r,warning=FALSE,message=FALSE}
+#Mask wall-to-wall layer
+wall_poly_roads <- raster::mask(wall_poly, mask = roads_buffer)
+plot(wall_poly_roads$avg)
+
+rast_dt <- as.data.table.raster(wall_poly_roads,xy=T)
+```
+
+```{r,echo=FALSE}
+saveRDS(wall_poly_roads,"dat/wall_poly_roads.RDS")
+saveRDS(rast_dt,"dat/rast_dt.RDS")
+```
+
+These are the final candidate samples from which we will perform our sampling.
+

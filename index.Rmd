@@ -1,0 +1,33 @@
+--- 
+title: "SGS"
+author: "Tristan Goodbody"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [sgs.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+output:
+  bookdown::gitbook
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+---
+# Overview {-#overview}
+
+This document is a brief introduction to the struturally guided sampling project. Herein i provide a:
+
+* Literature review about [SGS](#SGS)
+
+* Overview of how [data has been prepared](#dataprep)
+
+* Work done in the RMFinventory package using [principle components](#princomp)
+
+* Potential methods to apply using [stratification and sampling methods](strat)
+
+* Points to [discuss](#disc) for how the project should evolve 

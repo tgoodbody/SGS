@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Stratification methods | SGS</title>
+  <meta name="description" content="Stratification methods | SGS" />
+  <meta name="generator" content="bookdown 0.21.5 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Stratification methods | SGS" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Stratification methods | SGS" />
+  
+  
+  
+
+<meta name="author" content="Tristan Goodbody" />
+
+
+<meta name="date" content="2021-03-11" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="princomp.html"/>
+<link rel="next" href="disc.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="SGS.html"><a href="SGS.html"><i class="fa fa-check"></i>Structurally Guided Sampling Review</a><ul>
+<li class="chapter" data-level="" data-path="SGS.html"><a href="SGS.html#stratapp"><i class="fa fa-check"></i>Stratification approaches</a><ul>
+<li><a href="SGS.html#hawbaker2009"><span class="citation">(Hawbaker et al. <span>2009</span>)</span></a></li>
+<li><a href="SGS.html#dalponte2011"><span class="citation">(Dalponte et al. <span>2011</span>)</span></a></li>
+<li><a href="SGS.html#maltamo2011"><span class="citation">(Maltamo et al. <span>2011</span>)</span></a></li>
+<li><a href="SGS.html#junttila2013"><span class="citation">(Junttila et al. <span>2013</span>)</span></a></li>
+<li><a href="SGS.html#valbuena2013"><span class="citation">(Valbuena et al. <span>2013</span>)</span></a></li>
+<li><a href="SGS.html#grafstrom2013"><span class="citation">(Grafström and Ringvall <span>2013</span>)</span></a></li>
+<li><a href="SGS.html#grafstrom2014"><span class="citation">(Grafström, Saarela, and Ene <span>2014</span>)</span></a></li>
+<li><a href="SGS.html#niemi2016"><span class="citation">(Niemi and Vauhkonen <span>2016</span>)</span></a></li>
+<li><a href="SGS.html#valbuena2017"><span class="citation">(Valbuena et al. <span>2017</span>)</span></a></li>
+<li><a href="SGS.html#mcroberts2017"><span class="citation">(McRoberts, Chen, and Walters <span>2017</span>)</span></a></li>
+<li><a href="SGS.html#malone2019"><span class="citation">(Malone, Minansy, and Brungard <span>2019</span>)</span></a></li>
+<li><a href="SGS.html#papa2020"><span class="citation">(Papa et al. <span>2020</span>)</span></a></li>
+<li><a href="SGS.html#ma2020"><span class="citation">(Ma et al. <span>2020</span>)</span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="dataprep.html"><a href="dataprep.html"><i class="fa fa-check"></i>Data Preparation</a></li>
+<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html"><i class="fa fa-check"></i>Principle Components</a><ul>
+<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#use-pca-model-to-get-pca-values-of-an-existing-set-of-plots"><i class="fa fa-check"></i>Use PCA model to get PCA values of an existing set of plots</a></li>
+<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#stratification"><i class="fa fa-check"></i>Stratification</a></li>
+<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#select-new-plots"><i class="fa fa-check"></i>Select new plots</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html"><i class="fa fa-check"></i>Stratification methods</a><ul>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#kmeans"><i class="fa fa-check"></i>K-means</a></li>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#clusterchallenge"><i class="fa fa-check"></i>How many clusters??</a></li>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#OSB"><i class="fa fa-check"></i>Optimum stratum boundaries</a></li>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#srs"><i class="fa fa-check"></i>Simple Random Sampling</a></li>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#using-2-variables-to-stratify"><i class="fa fa-check"></i>Using 2 variables to stratify</a></li>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#balanced-sampling"><i class="fa fa-check"></i>Balanced Sampling</a></li>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#lhs"><i class="fa fa-check"></i>Latin Hypercube Sampling</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="disc.html"><a href="disc.html"><i class="fa fa-check"></i>Discussion points</a><ul>
+<li class="chapter" data-level="" data-path="disc.html"><a href="disc.html#methods"><i class="fa fa-check"></i>Methods</a></li>
+<li class="chapter" data-level="" data-path="disc.html"><a href="disc.html#need-to-integrate-already-established-samples"><i class="fa fa-check"></i>Need to integrate already established samples</a></li>
+<li class="chapter" data-level="" data-path="disc.html"><a href="disc.html#algorithm-creation"><i class="fa fa-check"></i>Algorithm creation</a></li>
+<li class="chapter" data-level="" data-path="disc.html"><a href="disc.html#agenda-for-future"><i class="fa fa-check"></i>Agenda for future</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">SGS</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="strat" class="section level1 unnumbered">
+<h1>Stratification methods</h1>
+<p>The second method we outline is using k means stratification for consequent stratified sampling.</p>
+<div id="kmeans" class="section level2 unnumbered">
+<h2>K-means</h2>
+<p>Here is a standard way to apply unsupervised K-means and allocate each ALS cell to a cluster.</p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+</div>
+<div id="clusterchallenge" class="section level2 unnumbered">
+<h2>How many clusters??</h2>
+<p>This is a loaded questions. How many clusters to choose can depends on many reasons, and there are many ways to determine how many to use. A challenge with the K-means method is being objective about the number of strata to use and where to partition the data. I present a number of examples below. <span class="citation">(Papa et al. <a href="#ref-Papa2020" role="doc-biblioref">2020</a>)</span> used k-means clustering and outlined that they used the <em>Elbow method</em> to determine the number of clusters.</p>
+<p><img src="img/elbow_method.png" width="630" /></p>
+<p>Based on the figure above we see that we can choose 4 clusters based on the elbow method. Other methods also exist including the <em>Silhoutte method</em>.</p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-27-1.png" width="672" />
+Based on the figure above the Silhouette method suggests we use 2 clusters. We see quickly that its not entirely cut and dry how to choose cluster numbers, but we have methods to decide that. <strong>This is likely something that the user will need to give input on.</strong></p>
+<p>The <code>NbClust()</code> function from the <span class="citation">(Charrad et al. <a href="#ref-R-NbClust" role="doc-biblioref">2015</a>)</span> package is an additional method, though it takes a long time to run (especially on large datasets). This function</p>
+<blockquote>
+<p>provides 30 indices for determining the number of clusters and proposes to user the best clustering scheme from the different results obtained by varying all combinations of number of clusters, distance measures, and clustering methods.</p>
+</blockquote>
+</div>
+<div id="OSB" class="section level2 unnumbered">
+<h2>Optimum stratum boundaries</h2>
+<p>A method to address this is using optimal break methods like that of <code>strata.data()</code> from the <span class="citation">(Reddy and Khan <a href="#ref-R-stratifyR" role="doc-biblioref">2019</a>)</span> package. This method takes the population of candidate cells <code>v</code> and a fixed sample size <code>100</code> to compute the optimum stratum boundaries (OSB) for a given number of strata. Along with OSB it also provides the optimum sample sizes within strata directly from the data.</p>
+<p>In this example we specify that we would like data to be split into 4 strata and we iterate splits on the <code>avg</code> <code>cov</code> and <code>p99</code> variables. Some studies like <span class="citation">(Maltamo et al. <a href="#ref-Maltamo2011" role="doc-biblioref">2011</a>)</span> and <span class="citation">(Hawbaker et al. <a href="#ref-Hawbaker2009" role="doc-biblioref">2009</a>)</span> used multiple metrics to split on, while others like used only 1.</p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-32-1.png" width="672" />
+## Sampling within groups/strata {-}</p>
+<p>Once OSB are defined we can associate the groups with the data themselves and perform statistical tests to determine wherther groups are significantly difference from one another. <span class="citation">(Papa et al. <a href="#ref-Papa2020" role="doc-biblioref">2020</a>)</span> used ANOVA and Tukey post-hoc tests. First, we can change the resulting group labels from <code>cut()</code> to more understandable characters.</p>
+<pre><code>##                Df Sum Sq Mean Sq F value Pr(&gt;F)    
+## groups          3 532594  177531  117528 &lt;2e-16 ***
+## Residuals   29898  45162       2                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p><img src="SGS_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p>Once these strata are established we can begin to test a variety of sampling mechanisms.</p>
+</div>
+<div id="srs" class="section level2 unnumbered">
+<h2>Simple Random Sampling</h2>
+<pre><code>## # A tibble: 4 x 4
+##   groups     n  mean    sd
+##   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 A         61  3.31 1.07 
+## 2 B         50  7.42 1.12 
+## 3 C         69 11.8  1.42 
+## 4 D         18 15.5  0.925</code></pre>
+<pre><code>## # A tibble: 4 x 4
+##   groups     n  mean    sd
+##   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 A       9126  3.15 0.992
+## 2 B       7590  7.29 1.23 
+## 3 C      10404 11.9  1.41 
+## 4 D       2782 15.7  1.21</code></pre>
+<p>Visualizing the samples</p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-35-1.png" width="672" /><img src="SGS_files/figure-html/unnamed-chunk-35-2.png" width="672" /></p>
+</div>
+<div id="using-2-variables-to-stratify" class="section level2 unnumbered">
+<h2>Using 2 variables to stratify</h2>
+<p><img src="SGS_files/figure-html/unnamed-chunk-37-1.png" width="672" /><img src="SGS_files/figure-html/unnamed-chunk-37-2.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+</div>
+<div id="balanced-sampling" class="section level2 unnumbered">
+<h2>Balanced Sampling</h2>
+<p><span class="citation">(Grafström and Ringvall <a href="#ref-Grafstrom2013" role="doc-biblioref">2013</a>)</span> described the <span class="citation">(Grafström and Lisic <a href="#ref-R-BalancedSampling" role="doc-biblioref">2019</a>)</span> package, which implements a number of sampling methods that balance samples spatially and within auxilary variable space. The spatial balance is important given that we</p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-39-1.png" width="672" /><img src="SGS_files/figure-html/unnamed-chunk-39-2.png" width="672" /><img src="SGS_files/figure-html/unnamed-chunk-39-3.png" width="672" /><img src="SGS_files/figure-html/unnamed-chunk-39-4.png" width="672" /><img src="SGS_files/figure-html/unnamed-chunk-39-5.png" width="672" /><img src="SGS_files/figure-html/unnamed-chunk-39-6.png" width="672" /></p>
+<pre><code>## # A tibble: 3 x 4
+##   alg       n  mean    sd
+##   &lt;chr&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 lcube   200  8.26  4.32
+## 2 lmp1    200  8.26  4.51
+## 3 lmp2    200  8.22  4.50</code></pre>
+<pre><code>## # A tibble: 1 x 3
+##       n  mean    sd
+##   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 29902  8.40  4.40</code></pre>
+</div>
+<div id="lhs" class="section level2 unnumbered">
+<h2>Latin Hypercube Sampling</h2>
+<p>There are a number of different approaches to take with Latin Hypercube Sampling. The following code was derived from <span class="citation">(Malone, Minansy, and Brungard <a href="#ref-Malone2019" role="doc-biblioref">2019</a>)</span>, who present a method to boostrap sample number for hypercube sampling, followed by a few testing options to determine optimal sample numbers. This code was provided by the authors at <a href="https://bitbucket.org/brendo1001/clhc_sampling/downloads/" class="uri">https://bitbucket.org/brendo1001/clhc_sampling/downloads/</a> which i have manipulated to work with our dataset.</p>
+<p>After the loop has finished we are able to plot the ouputs of the bootstrapping to outline how the sample size influenced the deviation of population and sample statistics.
+<img src="SGS_files/figure-html/unnamed-chunk-42-1.png" width="672" /><img src="SGS_files/figure-html/unnamed-chunk-42-2.png" width="672" /><img src="SGS_files/figure-html/unnamed-chunk-42-3.png" width="672" /><img src="SGS_files/figure-html/unnamed-chunk-42-4.png" width="672" /><img src="SGS_files/figure-html/unnamed-chunk-42-5.png" width="672" /><img src="SGS_files/figure-html/unnamed-chunk-42-6.png" width="672" /><img src="SGS_files/figure-html/unnamed-chunk-42-7.png" width="672" /><img src="SGS_files/figure-html/unnamed-chunk-42-8.png" width="672" /></p>
+<p><img src="img/fitted.png" width="484" /></p>
+<p>After determining the disparity between samples and population we can optimize the number of samples we use based on the cumulative frequency distribution. We determined that the optimum number of samples was 119.</p>
+<p><img src="img/fitted_num.png" width="484" /></p>
+<pre><code>## 
+  |                                                                             
+  |                                                                       |   0%
+  |                                                                             
+  |========                                                               |  11%
+  |                                                                             
+  |================                                                       |  22%
+  |                                                                             
+  |========================                                               |  33%
+  |                                                                             
+  |================================                                       |  44%
+  |                                                                             
+  |=======================================                                |  56%
+  |                                                                             
+  |===============================================                        |  67%
+  |                                                                             
+  |=======================================================                |  78%
+  |                                                                             
+  |===============================================================        |  89%
+  |                                                                             
+  |=======================================================================| 100%</code></pre>
+<p><img src="SGS_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<p>This may look well and good.. But its important to look at WHERE the samples are being located to see if the algorithm was effective. See the image below showing that that we likely need to introduce a spatial aspect to the sampling. Not really sure how to do this just yet…</p>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-R-NbClust">
+<p>Charrad, Malika, Nadia Ghazzali, Veronique Boiteau, and Azam Niknafs. 2015. <em>NbClust: Determining the Best Number of Clusters in a Data Set</em>. <a href="https://sites.google.com/site/malikacharrad/research/nbclust-package">https://sites.google.com/site/malikacharrad/research/nbclust-package</a>.</p>
+</div>
+<div id="ref-R-BalancedSampling">
+<p>Grafström, Anton, and Jonathan Lisic. 2019. <em>BalancedSampling: Balanced and Spatially Balanced Sampling</em>. <a href="http://www.antongrafstrom.se/balancedsampling">http://www.antongrafstrom.se/balancedsampling</a>.</p>
+</div>
+<div id="ref-Grafstrom2013">
+<p>Grafström, Anton, and Anna Hedström Ringvall. 2013. “Improving forest field inventories by using remote sensing data in novel sampling designs.” <em>Canadian Journal of Forest Research</em> 43 (11): 1015–22. <a href="https://doi.org/10.1139/cjfr-2013-0123">https://doi.org/10.1139/cjfr-2013-0123</a>.</p>
+</div>
+<div id="ref-Hawbaker2009">
+<p>Hawbaker, Todd J., Nicholas S. Keuler, Adrian A. Lesak, Terje Gobakken, Kirk Contrucci, and Volker C. Radeloff. 2009. “Improved estimates of forest vegetation structure and biomass with a LiDAR-optimized sampling design.” <em>Journal of Geophysical Research: Biogeosciences</em> 114 (3): 1–11. <a href="https://doi.org/10.1029/2008JG000870">https://doi.org/10.1029/2008JG000870</a>.</p>
+</div>
+<div id="ref-Malone2019">
+<p>Malone, Brendan P, Budiman Minansy, and Colby Brungard. 2019. “Some methods to improve the utility of conditioned Latin hypercube sampling,” 1–17. <a href="https://doi.org/10.7717/peerj.6451">https://doi.org/10.7717/peerj.6451</a>.</p>
+</div>
+<div id="ref-Maltamo2011">
+<p>Maltamo, M., O. M. Bollandsås, E. Næsset, T. Gobakken, and P. Packalén. 2011. “Different plot selection strategies for field training data in ALS-assisted forest inventory.” <em>Forestry</em> 84 (1): 23–31. <a href="https://doi.org/10.1093/forestry/cpq039">https://doi.org/10.1093/forestry/cpq039</a>.</p>
+</div>
+<div id="ref-Papa2020">
+<p>Papa, Daniel de Almeida, Danilo Roberti Alves de Almeida, Carlos Alberto Silva, Evandro Orfanó Figueiredo, Scott C. Stark, Ruben Valbuena, Luiz Carlos Estraviz Rodriguez, and Marcus Vinício Neves d’Oliveira. 2020. “Evaluating tropical forest classification and field sampling stratification from lidar to reduce effort and enable landscape monitoring.” <em>Forest Ecology and Management</em> 457 (September 2019). <a href="https://doi.org/10.1016/j.foreco.2019.117634">https://doi.org/10.1016/j.foreco.2019.117634</a>.</p>
+</div>
+<div id="ref-R-stratifyR">
+<p>Reddy, Karuna G., and M. G. M. Khan. 2019. <em>StratifyR: Optimal Stratification of Univariate Populations</em>. <a href="https://CRAN.R-project.org/package=stratifyR">https://CRAN.R-project.org/package=stratifyR</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="princomp.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="disc.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["SGS.pdf", "SGS.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

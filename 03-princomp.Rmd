@@ -1,0 +1,249 @@
+# Principle Components {-#princomp}
+
+The first method we outline is using principle components analysis and sample selection from the [@R-RMFinventory] package. This vignette is mostly replicated from the one within that package by Martin Queinnec.
+
+```{r,echo=FALSE,warning=F,message=F}
+#read rds file of candidates
+#Load required libraries
+library(RMFinventory)
+library(raster)
+library(sf)
+library(tidyverse)
+library(spatstat)
+
+wall_poly_roads <- readRDS("dat/wall_poly_roads.rds")
+```
+
+```{r Get PCA model,warning=F,message=F}
+PCA <- RStoolbox::rasterPCA(wall_poly_roads, nComp = 2, spca = TRUE, maskCheck = FALSE)
+# nComp = 2, we return the two first principal components
+# spca = TRUE, since metrics have different ranges of values the fucntion will center and scale the metrics
+# maskCheck = FALSE, we don't check if some pixels have NA value in one or more layers. If not sure, set to TRUE
+
+# The output of rasterPCA is a list with an element model which contains the PCA model and an element map which contains the map of PCA values
+
+PCA_wall <- PCA$map
+plot(PCA_wall)
+
+PCA_model <- PCA$model
+```
+
+We can check the proportion of variance contained in each principal component: 
+
+```{r,warning=F,message=F}
+summary(PCA_model)
+```
+
+## Use PCA model to get PCA values of an existing set of plots {-}
+
+A network of 182 plots was already established in RMF. The objective of the structural guided sampling was to check if the existing plot network was covering the entire range of structural variability and if not, selecting new plots in underrepresented forest types. 
+
+We load the existing set of plots. All the ALS metrics that were calculated to make the PCA model have also been calculated at the plot-level. 
+
+Note: Make sure that the name of metrics used to get the PCA model correspond to the name of the plot-level metrics
+
+We can use the `predict` function to get PCA values of the existing set of plots and off the candidate cells 
+
+```{r,warning=F,message=F}
+# Plot-level
+plots_metrics <- st_read(system.file("extdata", "plots_metrics.shp", package = "RMFinventory"))
+
+plots_metrics_coords <- st_coordinates(plots_metrics)
+plots_metrics_df <- plots_metrics %>% st_drop_geometry()
+
+plots_PCA <- as.data.frame(predict(PCA_model, plots_metrics_df))[,c(1,2)]
+colnames(plots_PCA) <- c("PC1", "PC2")
+```
+
+
+```{r, eval = FALSE,warning=F,message=F}
+
+#Candidate cells
+
+# This is the sricpt that would be ran. Since candidates are just a subset of the wall to wall cells, we could also just mask the PCA_wall layer cells tha are not part of the candidate cells. 
+PCA_candidates <- raster::predict(wall_poly_roads, model = PCA_model, index = c(1,2),  filename = "dat/PCA_candidates.tif")
+```
+```{r, include = FALSE,warning=F,message=F}
+PCA_candidates <- raster::predict(object = wall_poly_roads, model = PCA_model,index = c(1,2))
+names(PCA_candidates) <- c("PC1", "PC2")
+
+#Also possible to mask wall to wall PCA using a candidate metrics layer
+#PCA_candidates <- raster::mask(PCA_wall, candidate_metrics$avg)
+```
+
+Once PCA values of all forested cells, candidate cells and existing plots have been calculated, it is useful to plot them to visualize their distribution.
+
+```{r,warning=F,message=F}
+# In the following steps we get raster cells values in a data.frame
+# With large raster object it can creates very large objects in memory
+df_PCA_wall <- as.data.frame(PCA_wall, na.rm = TRUE, xy = FALSE)
+df_PCA_candidates <- as.data.frame(PCA_candidates, na.rm = TRUE, xy = FALSE)
+
+## Function to calculate point density in scatterplot
+get_density <- function(x, y, ...) {
+  dens <- MASS::kde2d(x, y, ...)
+  ix <- findInterval(x, dens$x)
+  iy <- findInterval(y, dens$y)
+  ii <- cbind(ix, iy)
+  return(dens$z[ii])
+}
+
+#Calculate point density for scatterplot visualization
+df_PCA_candidates <- df_PCA_candidates %>%
+  mutate(dens = get_density(PC1, PC2, n = 300))
+
+# Get convex hulls 
+
+hulls_wall_idx <- chull(df_PCA_wall$PC1, df_PCA_wall$PC2)
+hulls_wall <- dplyr::slice(df_PCA_wall[,c("PC1","PC2")],hulls_wall_idx)
+
+hulls_cand_idx <- chull(df_PCA_candidates$PC1, df_PCA_candidates$PC2)
+hulls_cand <- dplyr::slice(df_PCA_candidates[,c("PC1","PC2")],hulls_cand_idx)
+
+ggplot(mapping = aes(x = PC1, y = PC2)) + 
+  geom_polygon(data = hulls_wall, colour = "#440154FF", fill ="#440154FF", alpha = 0.2) +
+  geom_polygon(data = hulls_cand, colour = "orange", fill = NA) + 
+  geom_point(data = df_PCA_candidates, aes(color = dens)) + 
+  scale_color_viridis_c() + 
+  geom_point(data = plots_PCA) + 
+  theme_bw() +
+  coord_equal() +
+  theme(panel.grid = element_blank(),
+        legend.position = "right")
+
+
+#Function to calculate point density in scatterplot
+get_density <- function(x, y, ...) {
+  dens <- MASS::kde2d(x, y, ...)
+  ix <- findInterval(x, dens$x)
+  iy <- findInterval(y, dens$y)
+  ii <- cbind(ix, iy)
+  return(dens$z[ii])
+}
+
+```
+
+## Stratification  {-}
+
+Once PCA values have been calculated we can stratify the PC1 / PC2 feature space. The approach chosen for the RMF was to stratify using equal intervals. 
+
+From the previous plot, we can decide to stratify the feature space into 7 equal interval on the PC1 axis and 5 intervals on the PC2 axis (7 x 5 grid). We can use the function `getPCAstrata` to automatically create the stratification: 
+
+```{r,warning=F,message=F}
+# Determine the number of breaks for the first and second features (PC1 and PC2) 
+strata <- RMFinventory::getPCAstrata(PCA_layer = PCA_candidates,
+                                  nbreaks = c(8, 6), #Since we want a 7 x 5 grid we need 8 x 6 breaks
+                                  summary = TRUE)
+
+
+#getPCAstrata returns a list of three objects
+
+strata_candidates <- strata$strata_layer
+strata_candidates
+plot(strata_candidates)
+
+breaks <- strata$breaks
+breaks
+
+strata$summary
+
+strata$matrix
+
+```
+
+We can use the breaks returned by the `getPCAstrata` function to get the strata of the existing set of plots:
+
+```{r,warning=F,message=F}
+strata <- getPCAstrata(PCA_layer = plots_PCA,
+                             breaks = breaks, # From the precedent call to getPCAstrata
+                             summary = TRUE)
+
+strata_plots <- strata$strata_layer
+strata_plots
+
+strata$summary
+```
+
+Make a new plots with break lines between strata
+
+```{r,warning=F,message=F}
+ggplot(mapping = aes(x = PC1, y = PC2)) + 
+  geom_polygon(data = hulls_wall, colour = "#440154FF", fill ="#440154FF", alpha = 0.2) +
+  geom_polygon(data = hulls_cand, colour = "orange", fill = NA) + 
+  geom_point(data = df_PCA_candidates, aes(color = dens)) + 
+  scale_color_viridis_c() + 
+  geom_point(data = plots_PCA, color = "red") + 
+  geom_vline(xintercept = breaks$PC1, linetype = "dashed") + 
+  geom_hline(yintercept = breaks$PC2, linetype = "dashed") + 
+  theme_bw() +
+  coord_equal() +
+  theme(panel.grid = element_blank(),
+        legend.position = "right")
+```
+
+## Select new plots {-}
+
+The function `sampleCells` that performs the sampling requires the number of cells to sample for each strata. This can be determined based on the previous feature space plots, total number of plots than can be selected, number of existing plots, how many of them should be re-measured etc. 
+
+The following figure illustrates the sampling process: 
+
+```{r , echo=FALSE, fig.cap="Sampling process diagram", out.width = '100%',warning=F,message=F}
+knitr::include_graphics(system.file("extdata","figures","Flow_RMF_sampling.png", package = "RMFinventory"))
+```
+
+```{r,warning=F,message=F}
+
+toSample <- read.csv(system.file("extdata","cells_to_sample.csv", package = "RMFinventory"), stringsAsFactors = F)
+toSample
+
+existing_plots <- data.frame(plotID = plots_metrics$plotID, 
+                             x = plots_metrics_coords[,1], 
+                             y = plots_metrics_coords[,2], 
+                             strata = strata_plots)
+existing_plots
+
+
+new_plots <- RMFinventory ::sampleCells(strata_layer = strata_candidates,
+                         matrix_strata = strata$matrix, 
+                         existing_sample = existing_plots, # You can provide a set of existing plots or output of previous call to sampleCells and these cells won't be sampled again.
+                         toSample = toSample, 
+                         mindist = 150, 
+                         message = T)
+
+# There might be a warning like this: 
+#no non-missing arguments to min; returning Infno non-missing arguments to max; returning -Inf
+# If think safe to ignore but need to look more into that
+new_plots 
+
+#Assign plotID to sampled plots
+new_plots <- new_plots %>%
+  mutate(plotID = ifelse(type == "New", paste0("S_", seq_len(n())), plotID))
+
+#Convert to sf object
+new_plots_sf <- st_as_sf(new_plots, coords = c("x", "y"))
+
+plot(strata_candidates)
+plot(st_geometry(new_plots_sf), add = T)
+```
+
+```{r,warning=F,message=F}
+#Get metrics and PCA of new plots
+new_plots_metrics <- raster::extract(wall_poly_roads, new_plots_sf) #could also get from point cloud directly
+new_plots_PCA <- as.data.frame(predict(PCA_model, new_plots_metrics))[,c(1,2)]
+colnames(new_plots_PCA) <- c("PC1", "PC2")
+
+
+ggplot(mapping = aes(x = PC1, y = PC2)) + 
+  geom_polygon(data = hulls_wall, colour = "#440154FF", fill ="#440154FF", alpha = 0.2) +
+  geom_polygon(data = hulls_cand, colour = "orange", fill = NA) + 
+  geom_point(data = df_PCA_candidates, aes(color = dens)) + 
+  scale_color_viridis_c() + 
+  geom_point(data = new_plots_PCA, color = "red") + 
+  geom_vline(xintercept = breaks$PC1, linetype = "dashed") + 
+  geom_hline(yintercept = breaks$PC2, linetype = "dashed") + 
+  theme_bw() +
+  coord_equal() +
+  theme(panel.grid = element_blank(),
+        legend.position = "right")
+```
+
