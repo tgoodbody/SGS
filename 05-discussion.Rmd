@@ -37,6 +37,10 @@ The [conditioned latin hypercube code](#lhs) provided does not introduce already
 
 With a basis established in the RMFinventory package, I have begun scripting some of the methods described in this brief overview of what I hope the package will entail. With guidance from Martin Q I have a good understanding of what I need to do to start to script the different methods together.
 
+```{r,echo=FALSE}
+knitr::include_graphics("img/alg_schematic.jpg")
+```
+
 ## Agenda for future {-}
 
 In terms of future steps I think it wise that we discuss the following:

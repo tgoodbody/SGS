@@ -791,26 +791,26 @@ Based on the figure above the Silhouette method suggests we use 2 clusters. We s
 <span id="cb88-6"><a href="strat.html#cb88-6"></a></span>
 <span id="cb88-7"><a href="strat.html#cb88-7"></a>ss &lt;-<span class="st"> </span><span class="kw">clhs</span>(df[,<span class="dv">3</span><span class="op">:</span><span class="dv">6</span>], <span class="dt">size =</span> <span class="dv">143</span>, <span class="dt">progress =</span> T, <span class="dt">iter =</span> <span class="dv">10</span>) <span class="co"># Do a conditioned latin hypercube sample</span></span></code></pre></div>
 <pre><code>## 
-  |                                                                        
-  |                                                                  |   0%
-  |                                                                        
-  |=======                                                           |  11%
-  |                                                                        
-  |===============                                                   |  22%
-  |                                                                        
-  |======================                                            |  33%
-  |                                                                        
-  |=============================                                     |  44%
-  |                                                                        
-  |=====================================                             |  56%
-  |                                                                        
-  |============================================                      |  67%
-  |                                                                        
-  |===================================================               |  78%
-  |                                                                        
-  |===========================================================       |  89%
-  |                                                                        
-  |==================================================================| 100%</code></pre>
+  |                                                                             
+  |                                                                       |   0%
+  |                                                                             
+  |========                                                               |  11%
+  |                                                                             
+  |================                                                       |  22%
+  |                                                                             
+  |========================                                               |  33%
+  |                                                                             
+  |================================                                       |  44%
+  |                                                                             
+  |=======================================                                |  56%
+  |                                                                             
+  |===============================================                        |  67%
+  |                                                                             
+  |=======================================================                |  78%
+  |                                                                             
+  |===============================================================        |  89%
+  |                                                                             
+  |=======================================================================| 100%</code></pre>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="strat.html#cb90-1"></a>s.df&lt;-<span class="st"> </span>df[ss,]</span>
 <span id="cb90-2"><a href="strat.html#cb90-2"></a></span>
 <span id="cb90-3"><a href="strat.html#cb90-3"></a>coords &lt;-<span class="st"> </span><span class="kw">st_as_sf</span>(s.df, <span class="dt">coords =</span> <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>,<span class="st">&quot;y&quot;</span>))</span>
