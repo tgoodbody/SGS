@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Principle Components | SGS</title>
-  <meta name="description" content="Principle Components | SGS" />
+  <title>Principal Components | Structurally Guided Sampling</title>
+  <meta name="description" content="Principal Components | Structurally Guided Sampling" />
   <meta name="generator" content="bookdown 0.21.5 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Principle Components | SGS" />
+  <meta property="og:title" content="Principal Components | Structurally Guided Sampling" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Principle Components | SGS" />
+  <meta name="twitter:title" content="Principal Components | Structurally Guided Sampling" />
   
   
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Tristan Goodbody" />
 
 
-<meta name="date" content="2021-03-11" />
+<meta name="date" content="2021-03-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="dataprep.html"/>
 <link rel="next" href="strat.html"/>
+<script src="libs/header-attrs-2.5.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,24 +51,23 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -87,7 +87,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -137,39 +137,58 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a></li>
-<li class="chapter" data-level="" data-path="SGS.html"><a href="SGS.html"><i class="fa fa-check"></i>Structurally Guided Sampling Review</a><ul>
-<li class="chapter" data-level="" data-path="SGS.html"><a href="SGS.html#stratapp"><i class="fa fa-check"></i>Stratification approaches</a><ul>
-<li><a href="SGS.html#hawbaker2009"><span class="citation">(Hawbaker et al. <span>2009</span>)</span></a></li>
-<li><a href="SGS.html#dalponte2011"><span class="citation">(Dalponte et al. <span>2011</span>)</span></a></li>
-<li><a href="SGS.html#maltamo2011"><span class="citation">(Maltamo et al. <span>2011</span>)</span></a></li>
-<li><a href="SGS.html#junttila2013"><span class="citation">(Junttila et al. <span>2013</span>)</span></a></li>
-<li><a href="SGS.html#valbuena2013"><span class="citation">(Valbuena et al. <span>2013</span>)</span></a></li>
-<li><a href="SGS.html#grafstrom2013"><span class="citation">(Grafström and Ringvall <span>2013</span>)</span></a></li>
-<li><a href="SGS.html#grafstrom2014"><span class="citation">(Grafström, Saarela, and Ene <span>2014</span>)</span></a></li>
-<li><a href="SGS.html#niemi2016"><span class="citation">(Niemi and Vauhkonen <span>2016</span>)</span></a></li>
-<li><a href="SGS.html#valbuena2017"><span class="citation">(Valbuena et al. <span>2017</span>)</span></a></li>
-<li><a href="SGS.html#mcroberts2017"><span class="citation">(McRoberts, Chen, and Walters <span>2017</span>)</span></a></li>
-<li><a href="SGS.html#malone2019"><span class="citation">(Malone, Minansy, and Brungard <span>2019</span>)</span></a></li>
-<li><a href="SGS.html#papa2020"><span class="citation">(Papa et al. <span>2020</span>)</span></a></li>
-<li><a href="SGS.html#ma2020"><span class="citation">(Ma et al. <span>2020</span>)</span></a></li>
+<li class="chapter" data-level="" data-path="SGS.html"><a href="SGS.html"><i class="fa fa-check"></i>Structurally Guided Sampling Review</a>
+<ul>
+<li class="chapter" data-level="" data-path="SGS.html"><a href="SGS.html#stratapp"><i class="fa fa-check"></i>Stratification approaches</a>
+<ul>
+<li><a href="SGS.html#hawbaker2009"><span class="citation">(<span>Hawbaker et al. 2009</span>)</span></a></li>
+<li><a href="SGS.html#dalponte2011"><span class="citation">(<span>Dalponte et al. 2011</span>)</span></a></li>
+<li><a href="SGS.html#maltamo2011"><span class="citation">(<span>Maltamo et al. 2011</span>)</span></a></li>
+<li><a href="SGS.html#junttila2013"><span class="citation">(<span>Junttila et al. 2013</span>)</span></a></li>
+<li><a href="SGS.html#valbuena2013"><span class="citation">(<span>Valbuena et al. 2013</span>)</span></a></li>
+<li><a href="SGS.html#grafstrom2013"><span class="citation">(<span>Grafström and Ringvall 2013</span>)</span></a></li>
+<li><a href="SGS.html#grafstrom2014"><span class="citation">(<span>Grafström, Saarela, and Ene 2014</span>)</span></a></li>
+<li><a href="SGS.html#niemi2016"><span class="citation">(<span>Niemi and Vauhkonen 2016</span>)</span></a></li>
+<li><a href="SGS.html#valbuena2017"><span class="citation">(<span>Valbuena et al. 2017</span>)</span></a></li>
+<li><a href="SGS.html#mcroberts2017"><span class="citation">(<span>McRoberts, Chen, and Walters 2017</span>)</span></a></li>
+<li><a href="SGS.html#malone2019"><span class="citation">(<span>Malone, Minansy, and Brungard 2019</span>)</span></a></li>
+<li><a href="SGS.html#papa2020"><span class="citation">(<span>Papa et al. 2020</span>)</span></a></li>
+<li><a href="SGS.html#ma2020"><span class="citation">(<span>Ma et al. 2020</span>)</span></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="dataprep.html"><a href="dataprep.html"><i class="fa fa-check"></i>Data Preparation</a></li>
-<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html"><i class="fa fa-check"></i>Principle Components</a><ul>
+<li class="chapter" data-level="" data-path="dataprep.html"><a href="dataprep.html"><i class="fa fa-check"></i>Data Preparation</a>
+<ul>
+<li class="chapter" data-level="" data-path="dataprep.html"><a href="dataprep.html#load-wall-to-wall-metrics"><i class="fa fa-check"></i>Load wall-to-wall metrics</a></li>
+<li class="chapter" data-level="" data-path="dataprep.html"><a href="dataprep.html#integrate-forest-inventory-layers"><i class="fa fa-check"></i>Integrate forest inventory layers</a></li>
+<li class="chapter" data-level="" data-path="dataprep.html"><a href="dataprep.html#prepare-road-buffers-for-future-masking"><i class="fa fa-check"></i>Prepare road buffers for future masking</a>
+<ul>
+<li class="chapter" data-level="" data-path="dataprep.html"><a href="dataprep.html#road-buffering-outputs"><i class="fa fa-check"></i>Road buffering outputs</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html"><i class="fa fa-check"></i>Principal Components</a>
+<ul>
 <li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#use-pca-model-to-get-pca-values-of-an-existing-set-of-plots"><i class="fa fa-check"></i>Use PCA model to get PCA values of an existing set of plots</a></li>
+<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#candidate-cells"><i class="fa fa-check"></i>Candidate cells</a></li>
 <li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#stratification"><i class="fa fa-check"></i>Stratification</a></li>
+<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#exist-plots"><i class="fa fa-check"></i>Derive strata for existing plots</a></li>
 <li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#select-new-plots"><i class="fa fa-check"></i>Select new plots</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html"><i class="fa fa-check"></i>Stratification methods</a><ul>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html"><i class="fa fa-check"></i>Other stratification methods</a>
+<ul>
 <li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#kmeans"><i class="fa fa-check"></i>K-means</a></li>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#clusterchallenge"><i class="fa fa-check"></i>How many clusters??</a></li>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#clusterchallenge"><i class="fa fa-check"></i>How many clusters?</a></li>
 <li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#OSB"><i class="fa fa-check"></i>Optimum stratum boundaries</a></li>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#sampling-within-groupsstrata"><i class="fa fa-check"></i>Sampling within groups/strata</a></li>
 <li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#srs"><i class="fa fa-check"></i>Simple Random Sampling</a></li>
 <li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#using-2-variables-to-stratify"><i class="fa fa-check"></i>Using 2 variables to stratify</a></li>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#non-stratified-sampling-methods"><i class="fa fa-check"></i>Non-stratified sampling methods</a>
+<ul>
 <li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#balanced-sampling"><i class="fa fa-check"></i>Balanced Sampling</a></li>
 <li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#lhs"><i class="fa fa-check"></i>Latin Hypercube Sampling</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="disc.html"><a href="disc.html"><i class="fa fa-check"></i>Discussion points</a><ul>
+</ul></li>
+<li class="chapter" data-level="" data-path="disc.html"><a href="disc.html"><i class="fa fa-check"></i>Discussion points</a>
+<ul>
 <li class="chapter" data-level="" data-path="disc.html"><a href="disc.html#methods"><i class="fa fa-check"></i>Methods</a></li>
 <li class="chapter" data-level="" data-path="disc.html"><a href="disc.html#need-to-integrate-already-established-samples"><i class="fa fa-check"></i>Need to integrate already established samples</a></li>
 <li class="chapter" data-level="" data-path="disc.html"><a href="disc.html#algorithm-creation"><i class="fa fa-check"></i>Algorithm creation</a></li>
@@ -188,7 +207,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">SGS</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Structurally Guided Sampling</a>
           </h1>
         </div>
 
@@ -197,209 +216,206 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="princomp" class="section level1 unnumbered">
-<h1>Principle Components</h1>
-<p>The first method we outline is using principle components analysis and sample selection from the <span class="citation">(it <a href="#ref-R-RMFinventory" role="doc-biblioref">2021</a>)</span> package. This vignette is mostly replicated from the one within that package by Martin Queinnec.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="princomp.html#cb15-1"></a>PCA &lt;-<span class="st"> </span>RStoolbox<span class="op">::</span><span class="kw">rasterPCA</span>(wall_poly_roads, <span class="dt">nComp =</span> <span class="dv">2</span>, <span class="dt">spca =</span> <span class="ot">TRUE</span>, <span class="dt">maskCheck =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb15-2"><a href="princomp.html#cb15-2"></a><span class="co"># nComp = 2, we return the two first principal components</span></span>
-<span id="cb15-3"><a href="princomp.html#cb15-3"></a><span class="co"># spca = TRUE, since metrics have different ranges of values the fucntion will center and scale the metrics</span></span>
-<span id="cb15-4"><a href="princomp.html#cb15-4"></a><span class="co"># maskCheck = FALSE, we don&#39;t check if some pixels have NA value in one or more layers. If not sure, set to TRUE</span></span>
-<span id="cb15-5"><a href="princomp.html#cb15-5"></a></span>
-<span id="cb15-6"><a href="princomp.html#cb15-6"></a><span class="co"># The output of rasterPCA is a list with an element model which contains the PCA model and an element map which contains the map of PCA values</span></span>
-<span id="cb15-7"><a href="princomp.html#cb15-7"></a></span>
-<span id="cb15-8"><a href="princomp.html#cb15-8"></a>PCA_wall &lt;-<span class="st"> </span>PCA<span class="op">$</span>map</span>
-<span id="cb15-9"><a href="princomp.html#cb15-9"></a><span class="kw">plot</span>(PCA_wall)</span></code></pre></div>
+<h1>Principal Components</h1>
+<p>The first method we outline is using principal components analysis. This vignette is replicated from the RMFInventory package by Martin Queinnec.</p>
+<p>The vignette using the following approach:</p>
+<ol style="list-style-type: decimal">
+<li>Extract principal components from ALS metrics</li>
+<li>Extract PCA values for an existing plot network - in this case 5 plots</li>
+<li>Visualize PCAs and where existing plots fall</li>
+<li>Stratify PCAs using defined break points</li>
+<li>Extract strata for existing plot networks - determine which strata plots fall into</li>
+<li>Mask candidate cells using road buffer - improve efficiency of samples</li>
+<li>Use the <code>sampleCells</code> algorithm to representatively select sample cells within strata</li>
+</ol>
+<p>We are using the same raster data from the <a href="dataprep.html#dataprep"><strong>??</strong></a> section.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="princomp.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(wall_poly<span class="sc">$</span>avg)</span></code></pre></div>
+<p><img src="SGS_files/figure-html/unnamed-chunk-148-1.png" width="672" /></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="princomp.html#cb17-1" aria-hidden="true" tabindex="-1"></a>PCA <span class="ot">&lt;-</span> RStoolbox<span class="sc">::</span><span class="fu">rasterPCA</span>(wall_poly, <span class="at">nComp =</span> <span class="dv">2</span>, <span class="at">spca =</span> <span class="cn">TRUE</span>, <span class="at">maskCheck =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb17-2"><a href="princomp.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># nComp = 2, we return the two first principal components</span></span>
+<span id="cb17-3"><a href="princomp.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># spca = TRUE, since metrics have different ranges of values the fucntion will center and scale the metrics</span></span>
+<span id="cb17-4"><a href="princomp.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># maskCheck = FALSE, we don&#39;t check if some pixels have NA value in one or more layers. If not sure, set to TRUE</span></span>
+<span id="cb17-5"><a href="princomp.html#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="princomp.html#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># The output of rasterPCA is a list with an element model which contains the PCA model and an element map which contains the map of PCA values</span></span>
+<span id="cb17-7"><a href="princomp.html#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="princomp.html#cb17-8" aria-hidden="true" tabindex="-1"></a>PCA_wall <span class="ot">&lt;-</span> PCA<span class="sc">$</span>map</span>
+<span id="cb17-9"><a href="princomp.html#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="princomp.html#cb17-10" aria-hidden="true" tabindex="-1"></a>df_PCA_wall <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(PCA_wall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>, <span class="at">xy =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb17-11"><a href="princomp.html#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="princomp.html#cb17-12" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">brewer.pal</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">name =</span> <span class="st">&quot;Spectral&quot;</span>)</span>
+<span id="cb17-13"><a href="princomp.html#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="princomp.html#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(PCA_wall,<span class="at">col=</span>pal)</span></code></pre></div>
 <p><img src="SGS_files/figure-html/Get%20PCA%20model-1.png" width="672" /></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="princomp.html#cb16-1"></a>PCA_model &lt;-<span class="st"> </span>PCA<span class="op">$</span>model</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="princomp.html#cb18-1" aria-hidden="true" tabindex="-1"></a>PCA_model <span class="ot">&lt;-</span> PCA<span class="sc">$</span>model</span></code></pre></div>
 <p>We can check the proportion of variance contained in each principal component:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="princomp.html#cb17-1"></a><span class="kw">summary</span>(PCA_model)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="princomp.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(PCA_model)</span></code></pre></div>
 <pre><code>## Importance of components:
-##                          Comp.1    Comp.2     Comp.3     Comp.4     Comp.5
-## Standard deviation     2.983183 1.2064618 1.13300103 0.85484659 0.51901897
-## Proportion of Variance 0.684568 0.1119654 0.09874549 0.05621252 0.02072159
-## Cumulative Proportion  0.684568 0.7965334 0.89527885 0.95149136 0.97221296
-##                            Comp.6      Comp.7     Comp.8      Comp.9
-## Standard deviation     0.41358876 0.325794942 0.21689690 0.140456117
-## Proportion of Variance 0.01315813 0.008164796 0.00361879 0.001517532
-## Cumulative Proportion  0.98537108 0.993535880 0.99715467 0.998672202
-##                             Comp.10      Comp.11      Comp.12      Comp.13
-## Standard deviation     0.0969461455 0.0732846305 0.0427731550 2.574170e-02
-## Proportion of Variance 0.0007229658 0.0004131259 0.0001407341 5.097195e-05
-## Cumulative Proportion  0.9993951681 0.9998082940 0.9999490281 1.000000e+00</code></pre>
+##                           Comp.1    Comp.2    Comp.3     Comp.4     Comp.5    Comp.6     Comp.7
+## Standard deviation     2.9333212 1.2809844 1.1476605 0.87050824 0.53135160 0.4227776 0.36171758
+## Proportion of Variance 0.6618749 0.1262247 0.1013173 0.05829112 0.02171804 0.0137493 0.01006459
+## Cumulative Proportion  0.6618749 0.7880996 0.8894169 0.94770797 0.96942602 0.9831753 0.99323990
+##                             Comp.8      Comp.9      Comp.10      Comp.11      Comp.12      Comp.13
+## Standard deviation     0.221817718 0.143761431 0.0973665642 0.0722469728 0.0513443058 2.597584e-02
+## Proportion of Variance 0.003784854 0.001589796 0.0007292498 0.0004015096 0.0002027875 5.190342e-05
+## Cumulative Proportion  0.997024754 0.998614550 0.9993437994 0.9997453091 0.9999480966 1.000000e+00</code></pre>
 <div id="use-pca-model-to-get-pca-values-of-an-existing-set-of-plots" class="section level2 unnumbered">
 <h2>Use PCA model to get PCA values of an existing set of plots</h2>
 <p>A network of 182 plots was already established in RMF. The objective of the structural guided sampling was to check if the existing plot network was covering the entire range of structural variability and if not, selecting new plots in underrepresented forest types.</p>
 <p>We load the existing set of plots. All the ALS metrics that were calculated to make the PCA model have also been calculated at the plot-level.</p>
 <p>Note: Make sure that the name of metrics used to get the PCA model correspond to the name of the plot-level metrics</p>
 <p>We can use the <code>predict</code> function to get PCA values of the existing set of plots and off the candidate cells</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="princomp.html#cb19-1"></a><span class="co"># Plot-level</span></span>
-<span id="cb19-2"><a href="princomp.html#cb19-2"></a>plots_metrics &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;plots_metrics.shp&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;RMFinventory&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="princomp.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot-level</span></span>
+<span id="cb21-2"><a href="princomp.html#cb21-2" aria-hidden="true" tabindex="-1"></a>plots_metrics <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;plots_metrics.shp&quot;</span>, <span class="at">package =</span> <span class="st">&quot;RMFinventory&quot;</span>))</span></code></pre></div>
 <pre><code>## Reading layer `plots_metrics&#39; from data source `G:\Programs\R-4.0.3\library\RMFinventory\extdata\plots_metrics.shp&#39; using driver `ESRI Shapefile&#39;
 ## Simple feature collection with 5 features and 14 fields
 ## geometry type:  POINT
 ## dimension:      XY
 ## bbox:           xmin: 432109.8 ymin: 5337921 xmax: 437372.2 ymax: 5342820
 ## projected CRS:  UTM_Zone_17_Northern_Hemisphere</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="princomp.html#cb21-1"></a>plots_metrics_coords &lt;-<span class="st"> </span><span class="kw">st_coordinates</span>(plots_metrics)</span>
-<span id="cb21-2"><a href="princomp.html#cb21-2"></a>plots_metrics_df &lt;-<span class="st"> </span>plots_metrics <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_drop_geometry</span>()</span>
-<span id="cb21-3"><a href="princomp.html#cb21-3"></a></span>
-<span id="cb21-4"><a href="princomp.html#cb21-4"></a>plots_PCA &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">predict</span>(PCA_model, plots_metrics_df))[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]</span>
-<span id="cb21-5"><a href="princomp.html#cb21-5"></a><span class="kw">colnames</span>(plots_PCA) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;PC1&quot;</span>, <span class="st">&quot;PC2&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="princomp.html#cb22-1"></a><span class="co">#Candidate cells</span></span>
-<span id="cb22-2"><a href="princomp.html#cb22-2"></a></span>
-<span id="cb22-3"><a href="princomp.html#cb22-3"></a><span class="co"># This is the sricpt that would be ran. Since candidates are just a subset of the wall to wall cells, we could also just mask the PCA_wall layer cells tha are not part of the candidate cells. </span></span>
-<span id="cb22-4"><a href="princomp.html#cb22-4"></a>PCA_candidates &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">predict</span>(wall_poly_roads, <span class="dt">model =</span> PCA_model, <span class="dt">index =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),  <span class="dt">filename =</span> <span class="st">&quot;dat/PCA_candidates.tif&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="princomp.html#cb23-1" aria-hidden="true" tabindex="-1"></a>plots_metrics_coords <span class="ot">&lt;-</span> <span class="fu">st_coordinates</span>(plots_metrics)</span>
+<span id="cb23-2"><a href="princomp.html#cb23-2" aria-hidden="true" tabindex="-1"></a>plots_metrics_df <span class="ot">&lt;-</span> plots_metrics <span class="sc">%&gt;%</span> <span class="fu">st_drop_geometry</span>()</span>
+<span id="cb23-3"><a href="princomp.html#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="princomp.html#cb23-4" aria-hidden="true" tabindex="-1"></a>plots_PCA <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">predict</span>(PCA_model, plots_metrics_df))[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]</span>
+<span id="cb23-5"><a href="princomp.html#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(plots_PCA) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;PC1&quot;</span>, <span class="st">&quot;PC2&quot;</span>)</span></code></pre></div>
+</div>
+<div id="candidate-cells" class="section level2 unnumbered">
+<h2>Candidate cells</h2>
+<p>We have produced the principal components for the wall-to-wall layers, but we also know that we want to limit plot selection based on road access. To do so we can use the PCA model from the wall-to-wall layer (as seen below), or we can simply use the the road buffered candidate ALS metrics as a mask.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="princomp.html#cb24-1" aria-hidden="true" tabindex="-1"></a>PCA_candidates <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">predict</span>(<span class="at">object =</span> wall_poly_roads, <span class="at">model =</span> PCA_model,<span class="at">index =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb24-2"><a href="princomp.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(PCA_candidates) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;PC1&quot;</span>, <span class="st">&quot;PC2&quot;</span>)</span>
+<span id="cb24-3"><a href="princomp.html#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="princomp.html#cb24-4" aria-hidden="true" tabindex="-1"></a>df_PCA_candidates <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(PCA_candidates, <span class="at">na.rm =</span> <span class="cn">TRUE</span>, <span class="at">xy =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>Once PCA values of all forested cells, candidate cells and existing plots have been calculated, it is useful to plot them to visualize their distribution.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="princomp.html#cb23-1"></a><span class="co"># In the following steps we get raster cells values in a data.frame</span></span>
-<span id="cb23-2"><a href="princomp.html#cb23-2"></a><span class="co"># With large raster object it can creates very large objects in memory</span></span>
-<span id="cb23-3"><a href="princomp.html#cb23-3"></a>df_PCA_wall &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(PCA_wall, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>, <span class="dt">xy =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb23-4"><a href="princomp.html#cb23-4"></a>df_PCA_candidates &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(PCA_candidates, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>, <span class="dt">xy =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb23-5"><a href="princomp.html#cb23-5"></a></span>
-<span id="cb23-6"><a href="princomp.html#cb23-6"></a><span class="co">## Function to calculate point density in scatterplot</span></span>
-<span id="cb23-7"><a href="princomp.html#cb23-7"></a>get_density &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, ...) {</span>
-<span id="cb23-8"><a href="princomp.html#cb23-8"></a>  dens &lt;-<span class="st"> </span>MASS<span class="op">::</span><span class="kw">kde2d</span>(x, y, ...)</span>
-<span id="cb23-9"><a href="princomp.html#cb23-9"></a>  ix &lt;-<span class="st"> </span><span class="kw">findInterval</span>(x, dens<span class="op">$</span>x)</span>
-<span id="cb23-10"><a href="princomp.html#cb23-10"></a>  iy &lt;-<span class="st"> </span><span class="kw">findInterval</span>(y, dens<span class="op">$</span>y)</span>
-<span id="cb23-11"><a href="princomp.html#cb23-11"></a>  ii &lt;-<span class="st"> </span><span class="kw">cbind</span>(ix, iy)</span>
-<span id="cb23-12"><a href="princomp.html#cb23-12"></a>  <span class="kw">return</span>(dens<span class="op">$</span>z[ii])</span>
-<span id="cb23-13"><a href="princomp.html#cb23-13"></a>}</span>
-<span id="cb23-14"><a href="princomp.html#cb23-14"></a></span>
-<span id="cb23-15"><a href="princomp.html#cb23-15"></a><span class="co">#Calculate point density for scatterplot visualization</span></span>
-<span id="cb23-16"><a href="princomp.html#cb23-16"></a>df_PCA_candidates &lt;-<span class="st"> </span>df_PCA_candidates <span class="op">%&gt;%</span></span>
-<span id="cb23-17"><a href="princomp.html#cb23-17"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dens =</span> <span class="kw">get_density</span>(PC1, PC2, <span class="dt">n =</span> <span class="dv">300</span>))</span>
-<span id="cb23-18"><a href="princomp.html#cb23-18"></a></span>
-<span id="cb23-19"><a href="princomp.html#cb23-19"></a><span class="co"># Get convex hulls </span></span>
-<span id="cb23-20"><a href="princomp.html#cb23-20"></a></span>
-<span id="cb23-21"><a href="princomp.html#cb23-21"></a>hulls_wall_idx &lt;-<span class="st"> </span><span class="kw">chull</span>(df_PCA_wall<span class="op">$</span>PC1, df_PCA_wall<span class="op">$</span>PC2)</span>
-<span id="cb23-22"><a href="princomp.html#cb23-22"></a>hulls_wall &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">slice</span>(df_PCA_wall[,<span class="kw">c</span>(<span class="st">&quot;PC1&quot;</span>,<span class="st">&quot;PC2&quot;</span>)],hulls_wall_idx)</span>
-<span id="cb23-23"><a href="princomp.html#cb23-23"></a></span>
-<span id="cb23-24"><a href="princomp.html#cb23-24"></a>hulls_cand_idx &lt;-<span class="st"> </span><span class="kw">chull</span>(df_PCA_candidates<span class="op">$</span>PC1, df_PCA_candidates<span class="op">$</span>PC2)</span>
-<span id="cb23-25"><a href="princomp.html#cb23-25"></a>hulls_cand &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">slice</span>(df_PCA_candidates[,<span class="kw">c</span>(<span class="st">&quot;PC1&quot;</span>,<span class="st">&quot;PC2&quot;</span>)],hulls_cand_idx)</span>
-<span id="cb23-26"><a href="princomp.html#cb23-26"></a></span>
-<span id="cb23-27"><a href="princomp.html#cb23-27"></a><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> PC1, <span class="dt">y =</span> PC2)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb23-28"><a href="princomp.html#cb23-28"></a><span class="st">  </span><span class="kw">geom_polygon</span>(<span class="dt">data =</span> hulls_wall, <span class="dt">colour =</span> <span class="st">&quot;#440154FF&quot;</span>, <span class="dt">fill =</span><span class="st">&quot;#440154FF&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.2</span>) <span class="op">+</span></span>
-<span id="cb23-29"><a href="princomp.html#cb23-29"></a><span class="st">  </span><span class="kw">geom_polygon</span>(<span class="dt">data =</span> hulls_cand, <span class="dt">colour =</span> <span class="st">&quot;orange&quot;</span>, <span class="dt">fill =</span> <span class="ot">NA</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb23-30"><a href="princomp.html#cb23-30"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> df_PCA_candidates, <span class="kw">aes</span>(<span class="dt">color =</span> dens)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb23-31"><a href="princomp.html#cb23-31"></a><span class="st">  </span><span class="kw">scale_color_viridis_c</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb23-32"><a href="princomp.html#cb23-32"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> plots_PCA) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb23-33"><a href="princomp.html#cb23-33"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
-<span id="cb23-34"><a href="princomp.html#cb23-34"></a><span class="st">  </span><span class="kw">coord_equal</span>() <span class="op">+</span></span>
-<span id="cb23-35"><a href="princomp.html#cb23-35"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid =</span> <span class="kw">element_blank</span>(),</span>
-<span id="cb23-36"><a href="princomp.html#cb23-36"></a>        <span class="dt">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="princomp.html#cb24-1"></a><span class="co">#Function to calculate point density in scatterplot</span></span>
-<span id="cb24-2"><a href="princomp.html#cb24-2"></a>get_density &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, ...) {</span>
-<span id="cb24-3"><a href="princomp.html#cb24-3"></a>  dens &lt;-<span class="st"> </span>MASS<span class="op">::</span><span class="kw">kde2d</span>(x, y, ...)</span>
-<span id="cb24-4"><a href="princomp.html#cb24-4"></a>  ix &lt;-<span class="st"> </span><span class="kw">findInterval</span>(x, dens<span class="op">$</span>x)</span>
-<span id="cb24-5"><a href="princomp.html#cb24-5"></a>  iy &lt;-<span class="st"> </span><span class="kw">findInterval</span>(y, dens<span class="op">$</span>y)</span>
-<span id="cb24-6"><a href="princomp.html#cb24-6"></a>  ii &lt;-<span class="st"> </span><span class="kw">cbind</span>(ix, iy)</span>
-<span id="cb24-7"><a href="princomp.html#cb24-7"></a>  <span class="kw">return</span>(dens<span class="op">$</span>z[ii])</span>
-<span id="cb24-8"><a href="princomp.html#cb24-8"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="princomp.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Function to calculate point density in scatter plot</span></span>
+<span id="cb25-2"><a href="princomp.html#cb25-2" aria-hidden="true" tabindex="-1"></a>get_density <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, ...) {</span>
+<span id="cb25-3"><a href="princomp.html#cb25-3" aria-hidden="true" tabindex="-1"></a>  dens <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">kde2d</span>(x, y, ...)</span>
+<span id="cb25-4"><a href="princomp.html#cb25-4" aria-hidden="true" tabindex="-1"></a>  ix <span class="ot">&lt;-</span> <span class="fu">findInterval</span>(x, dens<span class="sc">$</span>x)</span>
+<span id="cb25-5"><a href="princomp.html#cb25-5" aria-hidden="true" tabindex="-1"></a>  iy <span class="ot">&lt;-</span> <span class="fu">findInterval</span>(y, dens<span class="sc">$</span>y)</span>
+<span id="cb25-6"><a href="princomp.html#cb25-6" aria-hidden="true" tabindex="-1"></a>  ii <span class="ot">&lt;-</span> <span class="fu">cbind</span>(ix, iy)</span>
+<span id="cb25-7"><a href="princomp.html#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(dens<span class="sc">$</span>z[ii])</span>
+<span id="cb25-8"><a href="princomp.html#cb25-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb25-9"><a href="princomp.html#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="princomp.html#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculate point density for scatter plot visualization</span></span>
+<span id="cb25-11"><a href="princomp.html#cb25-11" aria-hidden="true" tabindex="-1"></a>df_PCA_candidates <span class="ot">&lt;-</span> df_PCA_candidates <span class="sc">%&gt;%</span></span>
+<span id="cb25-12"><a href="princomp.html#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dens =</span> <span class="fu">get_density</span>(PC1, PC2, <span class="at">n =</span> <span class="dv">300</span>))</span>
+<span id="cb25-13"><a href="princomp.html#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-14"><a href="princomp.html#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Get convex hulls </span></span>
+<span id="cb25-15"><a href="princomp.html#cb25-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-16"><a href="princomp.html#cb25-16" aria-hidden="true" tabindex="-1"></a>hulls_wall_idx <span class="ot">&lt;-</span> <span class="fu">chull</span>(df_PCA_wall<span class="sc">$</span>PC1, df_PCA_wall<span class="sc">$</span>PC2)</span>
+<span id="cb25-17"><a href="princomp.html#cb25-17" aria-hidden="true" tabindex="-1"></a>hulls_wall <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">slice</span>(df_PCA_wall[,<span class="fu">c</span>(<span class="st">&quot;PC1&quot;</span>,<span class="st">&quot;PC2&quot;</span>)],hulls_wall_idx)</span>
+<span id="cb25-18"><a href="princomp.html#cb25-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-19"><a href="princomp.html#cb25-19" aria-hidden="true" tabindex="-1"></a>hulls_cand_idx <span class="ot">&lt;-</span> <span class="fu">chull</span>(df_PCA_candidates<span class="sc">$</span>PC1, df_PCA_candidates<span class="sc">$</span>PC2)</span>
+<span id="cb25-20"><a href="princomp.html#cb25-20" aria-hidden="true" tabindex="-1"></a>hulls_cand <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">slice</span>(df_PCA_candidates[,<span class="fu">c</span>(<span class="st">&quot;PC1&quot;</span>,<span class="st">&quot;PC2&quot;</span>)],hulls_cand_idx)</span>
+<span id="cb25-21"><a href="princomp.html#cb25-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-22"><a href="princomp.html#cb25-22" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2)) <span class="sc">+</span> </span>
+<span id="cb25-23"><a href="princomp.html#cb25-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> hulls_wall, <span class="at">colour =</span> <span class="st">&quot;#440154FF&quot;</span>, <span class="at">fill =</span><span class="st">&quot;#440154FF&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb25-24"><a href="princomp.html#cb25-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> hulls_cand, <span class="at">colour =</span> <span class="st">&quot;orange&quot;</span>, <span class="at">fill =</span> <span class="cn">NA</span>) <span class="sc">+</span> </span>
+<span id="cb25-25"><a href="princomp.html#cb25-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> df_PCA_candidates, <span class="fu">aes</span>(<span class="at">color =</span> dens)) <span class="sc">+</span> </span>
+<span id="cb25-26"><a href="princomp.html#cb25-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_c</span>() <span class="sc">+</span> </span>
+<span id="cb25-27"><a href="princomp.html#cb25-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> plots_PCA, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb25-28"><a href="princomp.html#cb25-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb25-29"><a href="princomp.html#cb25-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb25-30"><a href="princomp.html#cb25-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb25-31"><a href="princomp.html#cb25-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
+<p><img src="SGS_files/figure-html/unnamed-chunk-152-1.png" width="672" /></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="princomp.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Function to calculate point density in scatterplot</span></span>
+<span id="cb26-2"><a href="princomp.html#cb26-2" aria-hidden="true" tabindex="-1"></a>get_density <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, ...) {</span>
+<span id="cb26-3"><a href="princomp.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  dens <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">kde2d</span>(x, y, ...)</span>
+<span id="cb26-4"><a href="princomp.html#cb26-4" aria-hidden="true" tabindex="-1"></a>  ix <span class="ot">&lt;-</span> <span class="fu">findInterval</span>(x, dens<span class="sc">$</span>x)</span>
+<span id="cb26-5"><a href="princomp.html#cb26-5" aria-hidden="true" tabindex="-1"></a>  iy <span class="ot">&lt;-</span> <span class="fu">findInterval</span>(y, dens<span class="sc">$</span>y)</span>
+<span id="cb26-6"><a href="princomp.html#cb26-6" aria-hidden="true" tabindex="-1"></a>  ii <span class="ot">&lt;-</span> <span class="fu">cbind</span>(ix, iy)</span>
+<span id="cb26-7"><a href="princomp.html#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(dens<span class="sc">$</span>z[ii])</span>
+<span id="cb26-8"><a href="princomp.html#cb26-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 <div id="stratification" class="section level2 unnumbered">
 <h2>Stratification</h2>
-<p>Once PCA values have been calculated we can stratify the PC1 / PC2 feature space. The approach chosen for the RMF was to stratify using equal intervals.</p>
-<p>From the previous plot, we can decide to stratify the feature space into 7 equal interval on the PC1 axis and 5 intervals on the PC2 axis (7 x 5 grid). We can use the function <code>getPCAstrata</code> to automatically create the stratification:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="princomp.html#cb25-1"></a><span class="co"># Determine the number of breaks for the first and second features (PC1 and PC2) </span></span>
-<span id="cb25-2"><a href="princomp.html#cb25-2"></a>strata &lt;-<span class="st"> </span>RMFinventory<span class="op">::</span><span class="kw">getPCAstrata</span>(<span class="dt">PCA_layer =</span> PCA_candidates,</span>
-<span id="cb25-3"><a href="princomp.html#cb25-3"></a>                                  <span class="dt">nbreaks =</span> <span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">6</span>), <span class="co">#Since we want a 7 x 5 grid we need 8 x 6 breaks</span></span>
-<span id="cb25-4"><a href="princomp.html#cb25-4"></a>                                  <span class="dt">summary =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb25-5"><a href="princomp.html#cb25-5"></a></span>
-<span id="cb25-6"><a href="princomp.html#cb25-6"></a></span>
-<span id="cb25-7"><a href="princomp.html#cb25-7"></a><span class="co">#getPCAstrata returns a list of three objects</span></span>
-<span id="cb25-8"><a href="princomp.html#cb25-8"></a></span>
-<span id="cb25-9"><a href="princomp.html#cb25-9"></a>strata_candidates &lt;-<span class="st"> </span>strata<span class="op">$</span>strata_layer</span>
-<span id="cb25-10"><a href="princomp.html#cb25-10"></a>strata_candidates</span></code></pre></div>
-<pre><code>## class      : RasterLayer 
-## dimensions : 277, 373, 103321  (nrow, ncol, ncell)
-## resolution : 20, 20  (x, y)
-## extent     : 431100, 438560, 5337700, 5343240  (xmin, xmax, ymin, ymax)
-## crs        : +proj=utm +zone=17 +ellps=GRS80 +units=m +no_defs 
-## source     : memory
-## names      : strata 
-## values     : 12, 75  (min, max)</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="princomp.html#cb27-1"></a><span class="kw">plot</span>(strata_candidates)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="princomp.html#cb28-1"></a>breaks &lt;-<span class="st"> </span>strata<span class="op">$</span>breaks</span>
-<span id="cb28-2"><a href="princomp.html#cb28-2"></a>breaks</span></code></pre></div>
+<p>Once PCA values have been calculated we can stratify the PC1 / PC2 feature space. The approach chosen was to stratify using equal intervals.</p>
+<p>From the previous plot of PCAs, we decided to stratify the feature space into 7 equal interval on the PC1 axis and 5 intervals on the PC2 axis - this makes a 7 x 5 grid - 35 unique strata. A challenge with this method as we will see is that many of these strata will be empty. To create the stratification we use the <code>getPCAstrata</code> function:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="princomp.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Determine the number of breaks for the first and second features (PC1 and PC2) </span></span>
+<span id="cb27-2"><a href="princomp.html#cb27-2" aria-hidden="true" tabindex="-1"></a>strata <span class="ot">&lt;-</span> RMFinventory<span class="sc">::</span><span class="fu">getPCAstrata</span>(<span class="at">PCA_layer =</span> PCA_candidates,</span>
+<span id="cb27-3"><a href="princomp.html#cb27-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">nbreaks =</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">6</span>), <span class="co">#Since we want a 7 x 5 grid we need 8 x 6 breaks</span></span>
+<span id="cb27-4"><a href="princomp.html#cb27-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">summary =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb27-5"><a href="princomp.html#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="princomp.html#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="princomp.html#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co">#getPCAstrata returns a list of three objects</span></span>
+<span id="cb27-8"><a href="princomp.html#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="princomp.html#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co">#raster</span></span>
+<span id="cb27-10"><a href="princomp.html#cb27-10" aria-hidden="true" tabindex="-1"></a>strata_candidates <span class="ot">&lt;-</span> strata<span class="sc">$</span>strata_layer</span>
+<span id="cb27-11"><a href="princomp.html#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-12"><a href="princomp.html#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="co">#breakpoints</span></span>
+<span id="cb27-13"><a href="princomp.html#cb27-13" aria-hidden="true" tabindex="-1"></a>breaks <span class="ot">&lt;-</span> strata<span class="sc">$</span>breaks</span>
+<span id="cb27-14"><a href="princomp.html#cb27-14" aria-hidden="true" tabindex="-1"></a>breaks</span></code></pre></div>
 <pre><code>## $PC1
-## [1] -5.3840455 -3.4519431 -1.5198408  0.4122616  2.3443639  4.2764663
-## [7]  6.2085686  8.1406710
+## [1] -6.32285334 -4.24769842 -2.17254349 -0.09738857  1.97776635  4.05292128  6.12807620  8.20323113
 ## 
 ## $PC2
-## [1] -4.1297172 -1.8145574  0.5006024  2.8157622  5.1309220  7.4460818</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="princomp.html#cb30-1"></a>strata<span class="op">$</span>summary</span></code></pre></div>
-<pre><code>## # A tibble: 35 x 3
-##    strata count    frac
-##    &lt;ord&gt;  &lt;dbl&gt;   &lt;dbl&gt;
-##  1 11         0 0      
-##  2 12      5467 0.183  
-##  3 13       130 0.00435
-##  4 14         0 0      
-##  5 15         0 0      
-##  6 21         0 0      
-##  7 22      3183 0.106  
-##  8 23      1619 0.0541 
-##  9 24         0 0      
-## 10 25         0 0      
-## # ... with 25 more rows</code></pre>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="princomp.html#cb32-1"></a>strata<span class="op">$</span>matrix</span></code></pre></div>
+## [1] -4.2217834 -1.9097285  0.4023263  2.7143812  5.0264361  7.3384910</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="princomp.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#strata matrix - determines strata values</span></span>
+<span id="cb29-2"><a href="princomp.html#cb29-2" aria-hidden="true" tabindex="-1"></a>strata<span class="sc">$</span>matrix</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7]
 ## [1,]   11   21   31   41   51   61   71
 ## [2,]   12   22   32   42   52   62   72
 ## [3,]   13   23   33   43   53   63   73
 ## [4,]   14   24   34   44   54   64   74
 ## [5,]   15   25   35   45   55   65   75</code></pre>
+<p>We see the matrix has 35 unique strata values numbered by the PC1 and PC2 breaks. Some of these strata have no candidate cells meaning that, in reality, we have fewer than 35 strata. To resolve this issue we can remove all strata with 0 candidate cells and rename strata for better visual interpretation.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="princomp.html#cb31-1" aria-hidden="true" tabindex="-1"></a>plot_candidates <span class="ot">&lt;-</span> strata_candidates</span>
+<span id="cb31-2"><a href="princomp.html#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="princomp.html#cb31-3" aria-hidden="true" tabindex="-1"></a>strata.df <span class="ot">&lt;-</span> strata<span class="sc">$</span>summary</span>
+<span id="cb31-4"><a href="princomp.html#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="princomp.html#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co">#this shows we have 27 unique strata out of the original 35.</span></span>
+<span id="cb31-6"><a href="princomp.html#cb31-6" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> strata.df <span class="sc">%&gt;%</span></span>
+<span id="cb31-7"><a href="princomp.html#cb31-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(count <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb31-8"><a href="princomp.html#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">strata1 =</span> <span class="fu">seq</span>(<span class="dv">1</span>,<span class="fu">length</span>(strata),<span class="dv">1</span>))</span>
+<span id="cb31-9"><a href="princomp.html#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="princomp.html#cb31-10" aria-hidden="true" tabindex="-1"></a>df.cand <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(plot_candidates<span class="sc">@</span>data<span class="sc">@</span>values)</span>
+<span id="cb31-11"><a href="princomp.html#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df.cand) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;strata&quot;</span>)</span>
+<span id="cb31-12"><a href="princomp.html#cb31-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-13"><a href="princomp.html#cb31-13" aria-hidden="true" tabindex="-1"></a>plot_candidates<span class="sc">@</span>data<span class="sc">@</span>values <span class="ot">&lt;-</span> g<span class="sc">$</span>strata1[<span class="fu">match</span>(df.cand<span class="sc">$</span>strata,g<span class="sc">$</span>strata)]</span>
+<span id="cb31-14"><a href="princomp.html#cb31-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-15"><a href="princomp.html#cb31-15" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">brewer.pal</span>(<span class="at">n=</span><span class="dv">27</span>,<span class="at">name=</span><span class="st">&quot;Spectral&quot;</span>)</span>
+<span id="cb31-16"><a href="princomp.html#cb31-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-17"><a href="princomp.html#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(plot_candidates,<span class="at">col =</span> pal)</span></code></pre></div>
+<p><img src="SGS_files/figure-html/unnamed-chunk-154-1.png" width="672" /></p>
+</div>
+<div id="exist-plots" class="section level2 unnumbered">
+<h2>Derive strata for existing plots</h2>
 <p>We can use the breaks returned by the <code>getPCAstrata</code> function to get the strata of the existing set of plots:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="princomp.html#cb34-1"></a>strata &lt;-<span class="st"> </span><span class="kw">getPCAstrata</span>(<span class="dt">PCA_layer =</span> plots_PCA,</span>
-<span id="cb34-2"><a href="princomp.html#cb34-2"></a>                             <span class="dt">breaks =</span> breaks, <span class="co"># From the precedent call to getPCAstrata</span></span>
-<span id="cb34-3"><a href="princomp.html#cb34-3"></a>                             <span class="dt">summary =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb34-4"><a href="princomp.html#cb34-4"></a></span>
-<span id="cb34-5"><a href="princomp.html#cb34-5"></a>strata_plots &lt;-<span class="st"> </span>strata<span class="op">$</span>strata_layer</span>
-<span id="cb34-6"><a href="princomp.html#cb34-6"></a>strata_plots</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="princomp.html#cb32-1" aria-hidden="true" tabindex="-1"></a>strata <span class="ot">&lt;-</span> <span class="fu">getPCAstrata</span>(<span class="at">PCA_layer =</span> plots_PCA,</span>
+<span id="cb32-2"><a href="princomp.html#cb32-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">breaks =</span> breaks, <span class="co"># From the precedent call to getPCAstrata</span></span>
+<span id="cb32-3"><a href="princomp.html#cb32-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">summary =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb32-4"><a href="princomp.html#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="princomp.html#cb32-5" aria-hidden="true" tabindex="-1"></a>strata_plots <span class="ot">&lt;-</span> strata<span class="sc">$</span>strata_layer</span>
+<span id="cb32-6"><a href="princomp.html#cb32-6" aria-hidden="true" tabindex="-1"></a>strata_plots</span></code></pre></div>
 <pre><code>## [1] 42 12 54 52 54
-## 35 Levels: 11 &lt; 12 &lt; 13 &lt; 14 &lt; 15 &lt; 21 &lt; 22 &lt; 23 &lt; 24 &lt; 25 &lt; 31 &lt; ... &lt; 75</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="princomp.html#cb36-1"></a>strata<span class="op">$</span>summary</span></code></pre></div>
-<pre><code>## # A tibble: 35 x 3
-##    strata count  frac
-##    &lt;ord&gt;  &lt;dbl&gt; &lt;dbl&gt;
-##  1 11         0   0  
-##  2 12         1   0.2
-##  3 13         0   0  
-##  4 14         0   0  
-##  5 15         0   0  
-##  6 21         0   0  
-##  7 22         0   0  
-##  8 23         0   0  
-##  9 24         0   0  
-## 10 25         0   0  
-## # ... with 25 more rows</code></pre>
+## 35 Levels: 11 &lt; 12 &lt; 13 &lt; 14 &lt; 15 &lt; 21 &lt; 22 &lt; 23 &lt; 24 &lt; 25 &lt; 31 &lt; 32 &lt; 33 &lt; 34 &lt; 35 &lt; 41 &lt; ... &lt; 75</code></pre>
 <p>Make a new plots with break lines between strata</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="princomp.html#cb38-1"></a><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> PC1, <span class="dt">y =</span> PC2)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb38-2"><a href="princomp.html#cb38-2"></a><span class="st">  </span><span class="kw">geom_polygon</span>(<span class="dt">data =</span> hulls_wall, <span class="dt">colour =</span> <span class="st">&quot;#440154FF&quot;</span>, <span class="dt">fill =</span><span class="st">&quot;#440154FF&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.2</span>) <span class="op">+</span></span>
-<span id="cb38-3"><a href="princomp.html#cb38-3"></a><span class="st">  </span><span class="kw">geom_polygon</span>(<span class="dt">data =</span> hulls_cand, <span class="dt">colour =</span> <span class="st">&quot;orange&quot;</span>, <span class="dt">fill =</span> <span class="ot">NA</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb38-4"><a href="princomp.html#cb38-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> df_PCA_candidates, <span class="kw">aes</span>(<span class="dt">color =</span> dens)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb38-5"><a href="princomp.html#cb38-5"></a><span class="st">  </span><span class="kw">scale_color_viridis_c</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb38-6"><a href="princomp.html#cb38-6"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> plots_PCA, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb38-7"><a href="princomp.html#cb38-7"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> breaks<span class="op">$</span>PC1, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb38-8"><a href="princomp.html#cb38-8"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> breaks<span class="op">$</span>PC2, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb38-9"><a href="princomp.html#cb38-9"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
-<span id="cb38-10"><a href="princomp.html#cb38-10"></a><span class="st">  </span><span class="kw">coord_equal</span>() <span class="op">+</span></span>
-<span id="cb38-11"><a href="princomp.html#cb38-11"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid =</span> <span class="kw">element_blank</span>(),</span>
-<span id="cb38-12"><a href="princomp.html#cb38-12"></a>        <span class="dt">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="princomp.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2)) <span class="sc">+</span> </span>
+<span id="cb34-2"><a href="princomp.html#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> hulls_wall, <span class="at">colour =</span> <span class="st">&quot;#440154FF&quot;</span>, <span class="at">fill =</span><span class="st">&quot;#440154FF&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb34-3"><a href="princomp.html#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> hulls_cand, <span class="at">colour =</span> <span class="st">&quot;orange&quot;</span>, <span class="at">fill =</span> <span class="cn">NA</span>) <span class="sc">+</span> </span>
+<span id="cb34-4"><a href="princomp.html#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> df_PCA_candidates, <span class="fu">aes</span>(<span class="at">color =</span> dens)) <span class="sc">+</span> </span>
+<span id="cb34-5"><a href="princomp.html#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_c</span>() <span class="sc">+</span> </span>
+<span id="cb34-6"><a href="princomp.html#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> plots_PCA, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb34-7"><a href="princomp.html#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> breaks<span class="sc">$</span>PC1, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb34-8"><a href="princomp.html#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> breaks<span class="sc">$</span>PC2, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb34-9"><a href="princomp.html#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb34-10"><a href="princomp.html#cb34-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb34-11"><a href="princomp.html#cb34-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb34-12"><a href="princomp.html#cb34-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
+<p><img src="SGS_files/figure-html/unnamed-chunk-156-1.png" width="672" /></p>
 </div>
 <div id="select-new-plots" class="section level2 unnumbered">
 <h2>Select new plots</h2>
 <p>The function <code>sampleCells</code> that performs the sampling requires the number of cells to sample for each strata. This can be determined based on the previous feature space plots, total number of plots than can be selected, number of existing plots, how many of them should be re-measured etc.</p>
 <p>The following figure illustrates the sampling process:</p>
-<div class="figure"><span id="fig:unnamed-chunk-25"></span>
+<div class="figure"><span id="fig:unnamed-chunk-157"></span>
 <img src="G:/Programs/R-4.0.3/library/RMFinventory/extdata/figures/Flow_RMF_sampling.png" alt="Sampling process diagram" width="100%" />
 <p class="caption">
 Figure 1: Sampling process diagram
 </p>
 </div>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="princomp.html#cb39-1"></a>toSample &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;cells_to_sample.csv&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;RMFinventory&quot;</span>), <span class="dt">stringsAsFactors =</span> F)</span>
-<span id="cb39-2"><a href="princomp.html#cb39-2"></a>toSample</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="princomp.html#cb35-1" aria-hidden="true" tabindex="-1"></a>toSample <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;cells_to_sample.csv&quot;</span>, <span class="at">package =</span> <span class="st">&quot;RMFinventory&quot;</span>), <span class="at">stringsAsFactors =</span> F)</span>
+<span id="cb35-2"><a href="princomp.html#cb35-2" aria-hidden="true" tabindex="-1"></a>toSample</span></code></pre></div>
 <pre><code>##    strata toSample
 ## 1      13        1
 ## 2      14        2
@@ -431,110 +447,181 @@ Figure 1: Sampling process diagram
 ## 28     73        1
 ## 29     74        1
 ## 30     75        0</code></pre>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="princomp.html#cb41-1"></a>existing_plots &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">plotID =</span> plots_metrics<span class="op">$</span>plotID, </span>
-<span id="cb41-2"><a href="princomp.html#cb41-2"></a>                             <span class="dt">x =</span> plots_metrics_coords[,<span class="dv">1</span>], </span>
-<span id="cb41-3"><a href="princomp.html#cb41-3"></a>                             <span class="dt">y =</span> plots_metrics_coords[,<span class="dv">2</span>], </span>
-<span id="cb41-4"><a href="princomp.html#cb41-4"></a>                             <span class="dt">strata =</span> strata_plots)</span>
-<span id="cb41-5"><a href="princomp.html#cb41-5"></a>existing_plots</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="princomp.html#cb37-1" aria-hidden="true" tabindex="-1"></a>df.cand <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(strata_candidates<span class="sc">@</span>data<span class="sc">@</span>values)</span>
+<span id="cb37-2"><a href="princomp.html#cb37-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">names</span>(df.cand) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;strata&quot;</span>)</span>
+<span id="cb37-3"><a href="princomp.html#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="princomp.html#cb37-4" aria-hidden="true" tabindex="-1"></a>ns <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co">#total number of desired samples</span></span>
+<span id="cb37-5"><a href="princomp.html#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="princomp.html#cb37-6" aria-hidden="true" tabindex="-1"></a>toSample <span class="ot">&lt;-</span> df.cand <span class="sc">%&gt;%</span></span>
+<span id="cb37-7"><a href="princomp.html#cb37-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb37-8"><a href="princomp.html#cb37-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">group_by</span>(strata) <span class="sc">%&gt;%</span></span>
+<span id="cb37-9"><a href="princomp.html#cb37-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">summarize</span>(<span class="at">n=</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb37-10"><a href="princomp.html#cb37-10" aria-hidden="true" tabindex="-1"></a> <span class="fu">mutate</span>(<span class="at">freq =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n), <span class="at">samps =</span> <span class="fu">as.integer</span>(freq<span class="sc">*</span>ns)) <span class="sc">%&gt;%</span></span>
+<span id="cb37-11"><a href="princomp.html#cb37-11" aria-hidden="true" tabindex="-1"></a> <span class="fu">mutate</span>(<span class="at">toSample =</span> <span class="fu">ifelse</span>(samps <span class="sc">==</span> <span class="dv">0</span>,<span class="dv">1</span>,samps)) <span class="sc">%&gt;%</span></span>
+<span id="cb37-12"><a href="princomp.html#cb37-12" aria-hidden="true" tabindex="-1"></a> dplyr<span class="sc">::</span><span class="fu">select</span>(strata,toSample) <span class="sc">%&gt;%</span></span>
+<span id="cb37-13"><a href="princomp.html#cb37-13" aria-hidden="true" tabindex="-1"></a> <span class="fu">as.data.frame</span>()</span>
+<span id="cb37-14"><a href="princomp.html#cb37-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-15"><a href="princomp.html#cb37-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-16"><a href="princomp.html#cb37-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-17"><a href="princomp.html#cb37-17" aria-hidden="true" tabindex="-1"></a>existing_plots <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">plotID =</span> plots_metrics<span class="sc">$</span>plotID, </span>
+<span id="cb37-18"><a href="princomp.html#cb37-18" aria-hidden="true" tabindex="-1"></a>                             <span class="at">x =</span> plots_metrics_coords[,<span class="dv">1</span>], </span>
+<span id="cb37-19"><a href="princomp.html#cb37-19" aria-hidden="true" tabindex="-1"></a>                             <span class="at">y =</span> plots_metrics_coords[,<span class="dv">2</span>], </span>
+<span id="cb37-20"><a href="princomp.html#cb37-20" aria-hidden="true" tabindex="-1"></a>                             <span class="at">strata =</span> strata_plots)</span>
+<span id="cb37-21"><a href="princomp.html#cb37-21" aria-hidden="true" tabindex="-1"></a>existing_plots</span></code></pre></div>
 <pre><code>##   plotID        x       y strata
 ## 1      1 432109.8 5340150     42
 ## 2      2 434310.2 5342820     12
 ## 3      3 435506.5 5340228     54
 ## 4      4 435478.0 5337921     52
 ## 5      5 437372.2 5342478     54</code></pre>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="princomp.html#cb43-1"></a>new_plots &lt;-<span class="st"> </span>RMFinventory <span class="op">::</span><span class="kw">sampleCells</span>(<span class="dt">strata_layer =</span> strata_candidates,</span>
-<span id="cb43-2"><a href="princomp.html#cb43-2"></a>                         <span class="dt">matrix_strata =</span> strata<span class="op">$</span>matrix, </span>
-<span id="cb43-3"><a href="princomp.html#cb43-3"></a>                         <span class="dt">existing_sample =</span> existing_plots, <span class="co"># You can provide a set of existing plots or output of previous call to sampleCells and these cells won&#39;t be sampled again.</span></span>
-<span id="cb43-4"><a href="princomp.html#cb43-4"></a>                         <span class="dt">toSample =</span> toSample, </span>
-<span id="cb43-5"><a href="princomp.html#cb43-5"></a>                         <span class="dt">mindist =</span> <span class="dv">150</span>, </span>
-<span id="cb43-6"><a href="princomp.html#cb43-6"></a>                         <span class="dt">message =</span> T)</span>
-<span id="cb43-7"><a href="princomp.html#cb43-7"></a></span>
-<span id="cb43-8"><a href="princomp.html#cb43-8"></a><span class="co"># There might be a warning like this: </span></span>
-<span id="cb43-9"><a href="princomp.html#cb43-9"></a><span class="co">#no non-missing arguments to min; returning Infno non-missing arguments to max; returning -Inf</span></span>
-<span id="cb43-10"><a href="princomp.html#cb43-10"></a><span class="co"># If think safe to ignore but need to look more into that</span></span>
-<span id="cb43-11"><a href="princomp.html#cb43-11"></a>new_plots </span></code></pre></div>
-<pre><code>##            x       y strata          cluster     type plotID
-## 1   438450.0 5339210     13 cluster extended      New     NA
-## 2   438230.0 5339710     22          cluster      New     NA
-## 3   438490.0 5339010     23          cluster      New     NA
-## 4   435350.0 5338630     23          cluster      New     NA
-## 5   434530.0 5339410     23          cluster      New     NA
-## 6   437990.0 5341250     32          cluster      New     NA
-## 7   434970.0 5339230     33 cluster extended      New     NA
-## 8   435430.0 5340070     33 cluster extended      New     NA
-## 9   438030.0 5338830     33 cluster extended      New     NA
-## 10  433410.0 5342950     33 cluster extended      New     NA
-## 11  432570.0 5339090     33 cluster extended      New     NA
-## 12  434390.0 5339190     34         isolated      New     NA
-## 13  435110.0 5339610     34         isolated      New     NA
-## 14  437490.0 5342910     34         isolated      New     NA
-## 15  433410.0 5342550     41 cluster extended      New     NA
-## 16  432109.8 5340150     42             &lt;NA&gt; Existing      1
-## 111 436490.0 5341690     42          cluster      New     NA
-## 121 433450.0 5342030     42          cluster      New     NA
-## 17  438250.0 5341310     43 cluster extended      New     NA
-## 21  437250.0 5342150     43 cluster extended      New     NA
-## 31  431230.0 5342710     43 cluster extended      New     NA
-## 41  438370.0 5341070     43 cluster extended      New     NA
-## 51  438290.0 5337930     43 cluster extended      New     NA
-## 18  435030.0 5338950     44         isolated      New     NA
-## 22  437410.0 5342590     44         isolated      New     NA
-## 32  434390.0 5339510     44         isolated      New     NA
-## 19  432510.0 5338850     51          cluster      New     NA
-## 42  435478.0 5337921     52             &lt;NA&gt; Existing      4
-## 110 436230.0 5341430     52          cluster      New     NA
-## 112 432850.0 5340310     52          cluster      New     NA
-## 113 431550.0 5342730     53          cluster      New     NA
-## 23  432190.0 5343210     53          cluster      New     NA
-## 33  433070.0 5339410     53 cluster extended      New     NA
-## 43  434330.0 5342950     53 cluster extended      New     NA
-## 34  435506.5 5340228     54             &lt;NA&gt; Existing      3
-## 52  437372.2 5342478     54             &lt;NA&gt; Existing      5
-## 114 432990.0 5339110     54 cluster extended      New     NA
-## 115 437190.0 5342170     54 cluster extended      New     NA
-## 122 437290.0 5342350     54 cluster extended      New     NA
-## 131 438390.0 5340810     54 cluster extended      New     NA
-## 141 432830.0 5338950     54 cluster extended      New     NA
-## 116 437290.0 5342430     55 cluster extended      New     NA
-## 24  435470.0 5340290     55 cluster extended      New     NA
-## 117 438330.0 5341010     62 cluster extended      New     NA
-## 118 431890.0 5338510     63 cluster extended      New     NA
-## 25  432730.0 5340070     63 cluster extended      New     NA
-## 119 432990.0 5339590     64 cluster extended      New     NA
-## 26  438150.0 5341910     64 cluster extended      New     NA
-## 120 437310.0 5342410     65 cluster extended      New     NA
-## 27  437950.0 5341590     65 cluster extended      New     NA
-## 123 432710.0 5341030     73 cluster extended      New     NA
-## 124 438450.0 5338710     74 cluster extended      New     NA</code></pre>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="princomp.html#cb45-1"></a><span class="co">#Assign plotID to sampled plots</span></span>
-<span id="cb45-2"><a href="princomp.html#cb45-2"></a>new_plots &lt;-<span class="st"> </span>new_plots <span class="op">%&gt;%</span></span>
-<span id="cb45-3"><a href="princomp.html#cb45-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">plotID =</span> <span class="kw">ifelse</span>(type <span class="op">==</span><span class="st"> &quot;New&quot;</span>, <span class="kw">paste0</span>(<span class="st">&quot;S_&quot;</span>, <span class="kw">seq_len</span>(<span class="kw">n</span>())), plotID))</span>
-<span id="cb45-4"><a href="princomp.html#cb45-4"></a></span>
-<span id="cb45-5"><a href="princomp.html#cb45-5"></a><span class="co">#Convert to sf object</span></span>
-<span id="cb45-6"><a href="princomp.html#cb45-6"></a>new_plots_sf &lt;-<span class="st"> </span><span class="kw">st_as_sf</span>(new_plots, <span class="dt">coords =</span> <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>))</span>
-<span id="cb45-7"><a href="princomp.html#cb45-7"></a></span>
-<span id="cb45-8"><a href="princomp.html#cb45-8"></a><span class="kw">plot</span>(strata_candidates)</span>
-<span id="cb45-9"><a href="princomp.html#cb45-9"></a><span class="kw">plot</span>(<span class="kw">st_geometry</span>(new_plots_sf), <span class="dt">add =</span> T)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="princomp.html#cb46-1"></a><span class="co">#Get metrics and PCA of new plots</span></span>
-<span id="cb46-2"><a href="princomp.html#cb46-2"></a>new_plots_metrics &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">extract</span>(wall_poly_roads, new_plots_sf) <span class="co">#could also get from point cloud directly</span></span>
-<span id="cb46-3"><a href="princomp.html#cb46-3"></a>new_plots_PCA &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">predict</span>(PCA_model, new_plots_metrics))[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]</span>
-<span id="cb46-4"><a href="princomp.html#cb46-4"></a><span class="kw">colnames</span>(new_plots_PCA) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;PC1&quot;</span>, <span class="st">&quot;PC2&quot;</span>)</span>
-<span id="cb46-5"><a href="princomp.html#cb46-5"></a></span>
-<span id="cb46-6"><a href="princomp.html#cb46-6"></a></span>
-<span id="cb46-7"><a href="princomp.html#cb46-7"></a><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> PC1, <span class="dt">y =</span> PC2)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb46-8"><a href="princomp.html#cb46-8"></a><span class="st">  </span><span class="kw">geom_polygon</span>(<span class="dt">data =</span> hulls_wall, <span class="dt">colour =</span> <span class="st">&quot;#440154FF&quot;</span>, <span class="dt">fill =</span><span class="st">&quot;#440154FF&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.2</span>) <span class="op">+</span></span>
-<span id="cb46-9"><a href="princomp.html#cb46-9"></a><span class="st">  </span><span class="kw">geom_polygon</span>(<span class="dt">data =</span> hulls_cand, <span class="dt">colour =</span> <span class="st">&quot;orange&quot;</span>, <span class="dt">fill =</span> <span class="ot">NA</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb46-10"><a href="princomp.html#cb46-10"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> df_PCA_candidates, <span class="kw">aes</span>(<span class="dt">color =</span> dens)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb46-11"><a href="princomp.html#cb46-11"></a><span class="st">  </span><span class="kw">scale_color_viridis_c</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb46-12"><a href="princomp.html#cb46-12"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> new_plots_PCA, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb46-13"><a href="princomp.html#cb46-13"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> breaks<span class="op">$</span>PC1, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb46-14"><a href="princomp.html#cb46-14"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> breaks<span class="op">$</span>PC2, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb46-15"><a href="princomp.html#cb46-15"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
-<span id="cb46-16"><a href="princomp.html#cb46-16"></a><span class="st">  </span><span class="kw">coord_equal</span>() <span class="op">+</span></span>
-<span id="cb46-17"><a href="princomp.html#cb46-17"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid =</span> <span class="kw">element_blank</span>(),</span>
-<span id="cb46-18"><a href="princomp.html#cb46-18"></a>        <span class="dt">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="princomp.html#cb39-1" aria-hidden="true" tabindex="-1"></a>new_plots <span class="ot">&lt;-</span> RMFinventory <span class="sc">::</span><span class="fu">sampleCells</span>(<span class="at">strata_layer =</span> strata_candidates,</span>
+<span id="cb39-2"><a href="princomp.html#cb39-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">matrix_strata =</span> strata<span class="sc">$</span>matrix, </span>
+<span id="cb39-3"><a href="princomp.html#cb39-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">existing_sample =</span> existing_plots, <span class="co"># You can provide a set of existing plots or output of previous call to sampleCells and these cells won&#39;t be sampled again.</span></span>
+<span id="cb39-4"><a href="princomp.html#cb39-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">toSample =</span> toSample, </span>
+<span id="cb39-5"><a href="princomp.html#cb39-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">mindist =</span> <span class="dv">150</span>, </span>
+<span id="cb39-6"><a href="princomp.html#cb39-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">message =</span> T)</span>
+<span id="cb39-7"><a href="princomp.html#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-8"><a href="princomp.html#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="co"># There might be a warning like this: </span></span>
+<span id="cb39-9"><a href="princomp.html#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="co">#no non-missing arguments to min; returning Infno non-missing arguments to max; returning -Inf</span></span>
+<span id="cb39-10"><a href="princomp.html#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="co"># If think safe to ignore but need to look more into that</span></span>
+<span id="cb39-11"><a href="princomp.html#cb39-11" aria-hidden="true" tabindex="-1"></a>new_plots </span></code></pre></div>
+<pre><code>##             x       y strata          cluster     type plotID
+## 2    434310.2 5342820     12             &lt;NA&gt; Existing      2
+## 1    435450.0 5342810     12          cluster      New     NA
+## 11   434810.0 5341950     12          cluster      New     NA
+## 12   437790.0 5342930     12          cluster      New     NA
+## 13   437550.0 5343090     12          cluster      New     NA
+## 14   433950.0 5341370     12          cluster      New     NA
+## 15   438150.0 5337770     12          cluster      New     NA
+## 16   434230.0 5342650     12          cluster      New     NA
+## 17   437590.0 5339270     12          cluster      New     NA
+## 18   437790.0 5338990     12          cluster      New     NA
+## 19   435430.0 5342590     12          cluster      New     NA
+## 110  436090.0 5342630     12          cluster      New     NA
+## 111  437810.0 5342710     12          cluster      New     NA
+## 112  435390.0 5342350     12          cluster      New     NA
+## 113  436070.0 5342470     12          cluster      New     NA
+## 114  438430.0 5337790     12          cluster      New     NA
+## 115  437550.0 5338990     12          cluster      New     NA
+## 116  438470.0 5339370     12          cluster      New     NA
+## 117  433470.0 5341150     13 cluster extended      New     NA
+## 118  433150.0 5343050     22          cluster      New     NA
+## 21   437910.0 5339590     22          cluster      New     NA
+## 3    438110.0 5339730     22          cluster      New     NA
+## 4    438190.0 5339550     22          cluster      New     NA
+## 5    435810.0 5342350     22          cluster      New     NA
+## 6    438170.0 5340970     22          cluster      New     NA
+## 7    435890.0 5339310     22          cluster      New     NA
+## 119  433350.0 5341430     23          cluster      New     NA
+## 22   434530.0 5339410     23          cluster      New     NA
+## 31   435370.0 5338630     23          cluster      New     NA
+## 41   435730.0 5338690     23          cluster      New     NA
+## 51   433230.0 5341670     23          cluster      New     NA
+## 61   438470.0 5339010     23          cluster      New     NA
+## 71   438270.0 5338490     23 cluster extended      New     NA
+## 120  435370.0 5340270     24         isolated      New     NA
+## 121  435210.0 5337950     31 cluster extended      New     NA
+## 122  437950.0 5341210     32          cluster      New     NA
+## 23   432070.0 5342810     32          cluster      New     NA
+## 32   436450.0 5339890     32          cluster      New     NA
+## 42   437870.0 5339190     32          cluster      New     NA
+## 52   438090.0 5340950     32          cluster      New     NA
+## 62   435190.0 5337870     32          cluster      New     NA
+## 72   435950.0 5342730     32          cluster      New     NA
+## 8    434730.0 5342650     32          cluster      New     NA
+## 9    431990.0 5342650     32          cluster      New     NA
+## 10   432670.0 5342290     32          cluster      New     NA
+## 123  435870.0 5342930     33          cluster      New     NA
+## 24   434430.0 5338230     33 cluster extended      New     NA
+## 33   433390.0 5342910     33 cluster extended      New     NA
+## 43   435570.0 5343170     33 cluster extended      New     NA
+## 53   437870.0 5341810     33 cluster extended      New     NA
+## 124  434990.0 5338970     34 cluster extended      New     NA
+## 125  432750.0 5339570     41 cluster extended      New     NA
+## 126  432109.8 5340150     42             &lt;NA&gt; Existing      1
+## 1110 435290.0 5337850     42          cluster      New     NA
+## 127  435470.0 5338050     42          cluster      New     NA
+## 131  437610.0 5342330     42          cluster      New     NA
+## 141  438330.0 5337850     42          cluster      New     NA
+## 151  432230.0 5341430     42          cluster      New     NA
+## 161  433250.0 5342650     42          cluster      New     NA
+## 171  432990.0 5342910     42          cluster      New     NA
+## 181  433450.0 5342030     42          cluster      New     NA
+## 191  431890.0 5342530     42          cluster      New     NA
+## 1101 433630.0 5342230     42          cluster      New     NA
+## 1111 432990.0 5342090     42          cluster      New     NA
+## 1121 432970.0 5342390     42          cluster      New     NA
+## 1131 432550.0 5342090     42          cluster      New     NA
+## 1141 437070.0 5341470     42          cluster      New     NA
+## 128  435350.0 5338230     43 cluster extended      New     NA
+## 25   438510.0 5338130     43 cluster extended      New     NA
+## 34   431970.0 5337910     43 cluster extended      New     NA
+## 44   437330.0 5341950     43 cluster extended      New     NA
+## 54   434750.0 5343190     43 cluster extended      New     NA
+## 129  437270.0 5342210     44 cluster extended      New     NA
+## 130  435370.0 5340290     45         isolated      New     NA
+## 132  434130.0 5341550     51          cluster      New     NA
+## 26   432330.0 5339330     51          cluster      New     NA
+## 35   438270.0 5338850     51          cluster      New     NA
+## 45   435478.0 5337921     52             &lt;NA&gt; Existing      4
+## 133  436470.0 5341310     52          cluster      New     NA
+## 1112 431790.0 5342750     52          cluster      New     NA
+## 1210 432650.0 5340810     52          cluster      New     NA
+## 134  434250.0 5337870     52          cluster      New     NA
+## 142  436350.0 5340430     52          cluster      New     NA
+## 152  434090.0 5337910     52          cluster      New     NA
+## 162  436610.0 5341430     52          cluster      New     NA
+## 172  436410.0 5341130     52          cluster      New     NA
+## 182  432830.0 5340310     52          cluster      New     NA
+## 192  431790.0 5343130     52          cluster      New     NA
+## 1102 438250.0 5340210     52          cluster      New     NA
+## 1113 436190.0 5339910     52          cluster      New     NA
+## 1122 436550.0 5341730     52          cluster      New     NA
+## 135  431570.0 5342730     53          cluster      New     NA
+## 27   431870.0 5342910     53          cluster      New     NA
+## 36   432190.0 5343210     53          cluster      New     NA
+## 46   431330.0 5342750     53          cluster      New     NA
+## 55   432770.0 5339150     53 cluster extended      New     NA
+## 37   435506.5 5340228     54             &lt;NA&gt; Existing      3
+## 56   437372.2 5342478     54             &lt;NA&gt; Existing      5
+## 136  437250.0 5342230     54 cluster extended      New     NA
+## 137  435430.0 5340250     55 cluster extended      New     NA
+## 138  437330.0 5342690     61         isolated      New     NA
+## 139  431710.0 5338410     62 cluster extended      New     NA
+## 140  431950.0 5343090     63 cluster extended      New     NA
+## 143  435490.0 5340270     64 cluster extended      New     NA
+## 144  436590.0 5342970     65 cluster extended      New     NA
+## 145  432950.0 5339690     73 cluster extended      New     NA
+## 146  438450.0 5338670     74 cluster extended      New     NA
+## 147  438470.0 5338690     75 cluster extended      New     NA</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="princomp.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Assign plotID to sampled plots</span></span>
+<span id="cb41-2"><a href="princomp.html#cb41-2" aria-hidden="true" tabindex="-1"></a>new_plots <span class="ot">&lt;-</span> new_plots <span class="sc">%&gt;%</span></span>
+<span id="cb41-3"><a href="princomp.html#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">plotID =</span> <span class="fu">ifelse</span>(type <span class="sc">==</span> <span class="st">&quot;New&quot;</span>, <span class="fu">paste0</span>(<span class="st">&quot;S_&quot;</span>, <span class="fu">seq_len</span>(<span class="fu">n</span>())), plotID))</span>
+<span id="cb41-4"><a href="princomp.html#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-5"><a href="princomp.html#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Convert to sf object</span></span>
+<span id="cb41-6"><a href="princomp.html#cb41-6" aria-hidden="true" tabindex="-1"></a>new_plots_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(new_plots, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>))</span>
+<span id="cb41-7"><a href="princomp.html#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-8"><a href="princomp.html#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(strata_candidates)</span>
+<span id="cb41-9"><a href="princomp.html#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(new_plots_sf), <span class="at">add =</span> T)</span></code></pre></div>
+<p><img src="SGS_files/figure-html/unnamed-chunk-158-1.png" width="672" /></p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="princomp.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Get metrics and PCA of new plots</span></span>
+<span id="cb42-2"><a href="princomp.html#cb42-2" aria-hidden="true" tabindex="-1"></a>new_plots_metrics <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">extract</span>(wall_poly, new_plots_sf) <span class="co">#could also get from point cloud directly</span></span>
+<span id="cb42-3"><a href="princomp.html#cb42-3" aria-hidden="true" tabindex="-1"></a>new_plots_PCA <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">predict</span>(PCA_model, new_plots_metrics))[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]</span>
+<span id="cb42-4"><a href="princomp.html#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(new_plots_PCA) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;PC1&quot;</span>, <span class="st">&quot;PC2&quot;</span>)</span>
+<span id="cb42-5"><a href="princomp.html#cb42-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-6"><a href="princomp.html#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2)) <span class="sc">+</span> </span>
+<span id="cb42-7"><a href="princomp.html#cb42-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> hulls_wall, <span class="at">colour =</span> <span class="st">&quot;#440154FF&quot;</span>, <span class="at">fill =</span><span class="st">&quot;#440154FF&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb42-8"><a href="princomp.html#cb42-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> hulls_cand, <span class="at">colour =</span> <span class="st">&quot;orange&quot;</span>, <span class="at">fill =</span> <span class="cn">NA</span>) <span class="sc">+</span> </span>
+<span id="cb42-9"><a href="princomp.html#cb42-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> df_PCA_candidates, <span class="fu">aes</span>(<span class="at">color =</span> dens)) <span class="sc">+</span> </span>
+<span id="cb42-10"><a href="princomp.html#cb42-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_c</span>() <span class="sc">+</span> </span>
+<span id="cb42-11"><a href="princomp.html#cb42-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> new_plots_PCA, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb42-12"><a href="princomp.html#cb42-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> breaks<span class="sc">$</span>PC1, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb42-13"><a href="princomp.html#cb42-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> breaks<span class="sc">$</span>PC2, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb42-14"><a href="princomp.html#cb42-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb42-15"><a href="princomp.html#cb42-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb42-16"><a href="princomp.html#cb42-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb42-17"><a href="princomp.html#cb42-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
+<p><img src="SGS_files/figure-html/unnamed-chunk-159-1.png" width="672" /></p>
 
 <style type="text/css">
 pre {
@@ -545,12 +632,6 @@ pre[class] {
   max-height: 100px;
 }
 </style>
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-R-RMFinventory">
-<p>it, Who wrote. 2021. <em>RMFinventory: What the Package Does (Title Case)</em>.</p>
 </div>
 </div>
             </section>

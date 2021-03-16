@@ -12,9 +12,9 @@ pre[class] {
 }
 ```
 
-# Stratification methods {-#strat}
+# Other stratification methods {#strat .unnumbered}
 
-The second method we outline is using k means stratification for consequent stratified sampling. 
+The second method we outline is using k means stratification for consequent stratified sampling.
 
 ```{r,echo=FALSE,warning=F,message=F}
 #read rds file of candidates
@@ -35,13 +35,16 @@ library(manipulate)
 library(clhs)
 library(entropy)
 library(ptinpoly)
+library(RColorBrewer)
 
-wall_poly_roads <- readRDS("dat/wall_poly_roads.rds")
+wall_poly <- readRDS("dat/wall_poly.RDS")
+wall_poly_roads <- readRDS("dat/wall_poly_roads.RDS")
+
+rast_dt_wall <- readRDS("dat/rast_dt_wall.RDS")
 rast_dt <- readRDS("dat/rast_dt.RDS")
 ```
 
-
-## K-means {-#kmeans}
+## K-means {#kmeans .unnumbered}
 
 Here is a standard way to apply unsupervised K-means and allocate each ALS cell to a cluster.
 
@@ -50,10 +53,10 @@ Here is a standard way to apply unsupervised K-means and allocate each ALS cell 
 set.seed(123)
 
 # Extract values for Kmeans
-v <- rast_dt
+v <- rast_dt_wall
 
 ## determine index of each cell so to map values correctly without NA's
-idx <- 1:ncell(wall_poly_roads)
+idx <- 1:ncell(wall_poly)
 idx <- idx[-unique(which(is.na(v), arr.ind=TRUE)[,1])]  
 
 ############################
@@ -62,12 +65,12 @@ idx <- idx[-unique(which(is.na(v), arr.ind=TRUE)[,1])]
 
 #### DETERMINE OPTIMAL NUMBER OF CLUSTERS?????
 #Apply K means - center and scale values and remove NA's
-E <- kmeans(na.omit(scale(v,center = T,scale=T)), 2)
+E <- kmeans(na.omit(scale(v,center = T,scale=T)), 4)
 
 clusters <- E$cluster
 
 # create empty raster from original candidate dimentions
-r.empty <- wall_poly_roads[[1]]
+r.empty <- wall_poly[[1]]
 r.empty[] <- NA
 
 # add cluster values to corresponding index and re-name
@@ -75,14 +78,17 @@ r.empty[idx] <- clusters
 names(r.empty) <- c("clusters")
 
 #combine clusters with original structural metrics
-wall_poly_roads[[14]] <- r.empty
+wall_poly[[14]] <- r.empty
 
-plot(wall_poly_roads$clusters)
+
+pal <- brewer.pal(n = 4, name = "Spectral")
+plot(wall_poly$clusters,col=pal)
 
 ```
 
-## How many clusters?? {-#clusterchallenge}
-This is a loaded questions. How many clusters to choose can depends on many reasons, and there are many ways to determine how many to use. A challenge with the K-means method is being objective about the number of strata to use and where to partition the data. I present a number of examples below. [@Papa2020] used k-means clustering and outlined that they used the _Elbow method_ to determine the number of clusters.
+## How many clusters? {#clusterchallenge .unnumbered}
+
+This is a loaded questions. How many clusters to choose can depends on many reasons, and there are many ways to determine how many to use. A challenge with the K-means method is being objective about the number of strata to use and where to partition the data. I present a number of examples below. [@Papa2020] used k-means clustering and outlined that they used the *Elbow method* to determine the number of clusters.
 
 ```{r,eval=F}
 #Elbow Method for finding the optimal number of clusters
@@ -100,18 +106,11 @@ fviz_nbclust(as.data.frame(na.omit(scale(v))), kmeans, method = "wss") +
 knitr::include_graphics("img/elbow_method.png")
 ```
 
-Based on the figure above we see that we can choose 4 clusters based on the elbow method. Other methods also exist including the _Silhoutte method_.
+Based on the figure above we see that we can choose 4 clusters based on the elbow method. There are ***many*** methods that can be used. We see quickly that its not entirely cut and dry how to choose cluster numbers, but we have methods to decide that. **This is likely something that the user will need to give input on.**
 
-```{r,warning=F,message=F}
-# Silhouette method
-fviz_nbclust(as.data.frame(na.omit(scale(v))), kmeans, method = "silhouette") +
-  labs(subtitle = "Silhouette method")
-```
-Based on the figure above the Silhouette method suggests we use 2 clusters. We see quickly that its not entirely cut and dry how to choose cluster numbers, but we have methods to decide that. **This is likely something that the user will need to give input on.**
+The `NbClust()` function from the [@R-NbClust] package is an additional method, though it takes a long time to run (especially on large datasets). This function:
 
-The `NbClust()` function from the [@R-NbClust] package is an additional method, though it takes a long time to run (especially on large datasets). This function
-
->provides 30 indices for determining the number of clusters and proposes to user the best clustering scheme from the different results obtained by varying all combinations of number of clusters, distance measures, and clustering methods.
+> provides 30 indices for determining the number of clusters and proposes to user the best clustering scheme from the different results obtained by varying all combinations of number of clusters, distance measures, and clustering methods.
 
 ```{r,eval=F}
 nb <- NbClust(data, diss=NULL, distance = "euclidean", 
@@ -119,11 +118,11 @@ nb <- NbClust(data, diss=NULL, distance = "euclidean",
               index = "all", alphaBeale = 0.1)
 ```
 
+## Optimum stratum boundaries {#OSB .unnumbered}
 
-## Optimum stratum boundaries {-#OSB}
 A method to address this is using optimal break methods like that of `strata.data()` from the [@R-stratifyR] package. This method takes the population of candidate cells `v` and a fixed sample size `100` to compute the optimum stratum boundaries (OSB) for a given number of strata. Along with OSB it also provides the optimum sample sizes within strata directly from the data.
 
-In this example we specify that we would like data to be split into 4 strata and we iterate splits on the `avg` `cov` and `p99` variables. Some studies like [@Maltamo2011] and [@Hawbaker2009] used multiple metrics to split on, while others like  used only 1.
+In this example we specify that we would like data to be split into 4 strata and we iterate splits on the `avg` `cov` and `p99` variables. Some studies like [@Maltamo2011] and [@Hawbaker2009] used multiple metrics to split on, while others like used only 1.
 
 ```{r,message=F,warning=F}
 #prepare data
@@ -132,7 +131,7 @@ o_val <- v %>%
   as.data.frame()
 ```
 
-``````{r,eval=F}
+```{r,eval=F}
 ##########################################
 ####### OPTIMAL CLUSTERING BREAKS ########
 ##########################################
@@ -169,7 +168,8 @@ ggplot(o_val,aes(avg))+
   geom_vline(xintercept = breaks$avg, linetype = "dashed")
 
 ```
-## Sampling within groups/strata {-}
+
+## Sampling within groups/strata {.unnumbered}
 
 Once OSB are defined we can associate the groups with the data themselves and perform statistical tests to determine wherther groups are significantly difference from one another. [@Papa2020] used ANOVA and Tukey post-hoc tests. First, we can change the resulting group labels from `cut()` to more understandable characters.
 
@@ -197,14 +197,16 @@ o_val %>%
 
 ```
 
-Once these strata are established we can begin to test a variety of sampling mechanisms. 
+Once these strata are established we can begin to test a variety of sampling mechanisms.
 
-## Simple Random Sampling {-#srs}
+## Simple Random Sampling {#srs .unnumbered}
+
 ```{r,warning=F,message=F}
 ns <- 200 #total number of desired samples
-samples <- o_val %>% group_by(groups) %>% summarize(n= n()) %>% mutate(freq = n / sum(n),
-                                                            plot_tot = as.integer(freq*ns))
-
+samples <- o_val %>% 
+  group_by(groups) %>% 
+  summarize(n= n()) %>% 
+  mutate(freq = n / sum(n), plot_tot = as.integer(freq*ns))
 
 df_sample <- o_val %>%
   group_by(groups) %>% 
@@ -224,7 +226,9 @@ df_sample %>% group_by(groups) %>% dplyr::select(avg,groups) %>% summarise(
 )
 
 #population summary statistics
-o_val %>% group_by(groups) %>% dplyr::select(avg,groups) %>% summarise(
+o_val %>% group_by(groups) %>% 
+  dplyr::select(avg,groups) %>% 
+  summarise(
   n = n(),
   mean = mean(avg),
   sd = sd(avg)
@@ -237,19 +241,20 @@ Visualizing the samples
 ```{r,warning=F,message=F}
 coords <- st_as_sf(df_sample, coords = c("x","y"))
 
-plot(wall_poly_roads$avg)
+plot(wall_poly$avg)
 plot(st_geometry(coords),add=T)
 
 ggplot(mapping = aes(x=avg,y=std))+
   geom_point(data = o_val, aes(color = groups))+
   geom_point(data = df_sample, pch=21, fill = "red",colour="black")+
   theme_bw() +
+  ylim(0,15) +
   coord_equal() +
   theme(panel.grid = element_blank(),
         legend.position = "right")
 ```
 
-## Using 2 variables to stratify {-}
+## Using 2 variables to stratify {.unnumbered}
 
 ```{r,echo=F}
 #define groups within splitting variable
@@ -325,7 +330,6 @@ p + geom_rect(data=coordsgrps$data[[1]],aes(xmin=min(avg),xmax=max(avg),ymin=min
 
 ```
 
-
 ```{r,warning=F,message=F}
 grps <- o_val$id
 
@@ -341,7 +345,24 @@ plot(clusters)
 plot(st_geometry(coords),add=T)
 ```
 
-## Balanced Sampling {-}
+## Non-stratified sampling methods {.unnumbered}
+
+Some sampling methods such as the BalancedSampling approaches and Latin Hypercube Sampling do not require prior stratification. In order to sample these we present these methods on only candidate samples within the road buffer subsets.
+
+```{r,warning=FALSE,message=FALSE}
+#prepare data
+set.seed(123)
+
+# Extract values for Kmeans
+v <- rast_dt
+
+o_val <- v %>% 
+  na.omit() %>% 
+  as.data.frame()
+```
+
+
+### Balanced Sampling {.unnumbered}
 
 [@Grafstrom2013] described the [@R-BalancedSampling] package, which implements a number of sampling methods that balance samples spatially and within auxilary variable space. The spatial balance is important given that we
 
@@ -353,7 +374,7 @@ set.seed(123);
 N = nrow(o_val); # population size
 n = 200; # sample size
 p = rep(n/N,N);# inclusion probabilities
-X = as.matrix(dplyr::select(o_val,-groups_m,-id)) # matrix of auxiliary variables
+X = as.matrix(o_val) # matrix of auxiliary variables
 
 
 s1 = lpm1(p,X); # select sample 
@@ -402,9 +423,9 @@ o_val %>% dplyr::select(avg) %>% summarise(
 
 ```
 
-## Latin Hypercube Sampling {-#lhs}
+### Latin Hypercube Sampling {#lhs .unnumbered}
 
-There are a number of different approaches to take with Latin Hypercube Sampling. The following code was derived from [@Malone2019], who present a method to boostrap sample number for hypercube sampling, followed by a few testing options to determine optimal sample numbers. This code was provided by the authors at https://bitbucket.org/brendo1001/clhc_sampling/downloads/ which i have manipulated to work with our dataset.
+There are a number of different approaches to take with Latin Hypercube Sampling. The following code was derived from [@Malone2019], who present a method to boostrap sample number for hypercube sampling, followed by a few testing options to determine optimal sample numbers. This code was provided by the authors at <https://bitbucket.org/brendo1001/clhc_sampling/downloads/> which i have manipulated to work with our dataset.
 
 ```{r,eval=F}
 ####################################################################
@@ -607,6 +628,7 @@ cseq<- seq(10,500,10) # cLHC sample size
 ```
 
 After the loop has finished we are able to plot the ouputs of the bootstrapping to outline how the sample size influenced the deviation of population and sample statistics.
+
 ```{r,warning=F,message=F}
 #######################################################  
 #plot some outputs
@@ -657,6 +679,7 @@ knitr::include_graphics("img/fitted.png")
 ```
 
 After determining the disparity between samples and population we can optimize the number of samples we use based on the cumulative frequency distribution. We determined that the optimum number of samples was 119.
+
 ```{r,eval=F}
 #Apply fit
 xx<- seq(1, 500,1)
@@ -695,8 +718,6 @@ knitr::include_graphics("img/fitted_num.png")
 ```{r}
 set.seed(2021)
 
-rast_dt <- readRDS("dat/rast_dt.RDS")
-
 df <- rast_dt %>% dplyr::select(x,y,avg,std,cov,p99) %>% na.omit() %>% as.data.frame()
 
 ss <- clhs(df[,3:6], size = 143, progress = T, iter = 10) # Do a conditioned latin hypercube sample
@@ -710,4 +731,3 @@ plot(st_geometry(coords),add=T)
 ```
 
 This may look well and good.. But its important to look at WHERE the samples are being located to see if the algorithm was effective. See the image below showing that that we likely need to introduce a spatial aspect to the sampling. Not really sure how to do this just yet...
-

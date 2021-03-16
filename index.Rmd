@@ -1,5 +1,5 @@
 --- 
-title: "SGS"
+title: "Structurally Guided Sampling"
 author: "Tristan Goodbody"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -14,14 +14,14 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Overview {-#overview}
 
-This document is a brief introduction to the structurally guided sampling project. Herein i provide a:
+This document is a brief introduction to the structurally guided sampling project being undertaken by the IRSS Lab at the UBC Faculty fo Forestry. Herein we provide details related to:
 
 * Literature review about [SGS](#SGS)
 
 * Overview of how [data has been prepared](#dataprep)
 
-* Work done in the RMFinventory package using [principle components](#princomp)
+* Work done in the RMFInventory package using [principle components](#princomp)
 
-* Potential methods to apply using [stratification and sampling methods](strat)
+* Potential methods to apply using [stratification and sampling methods](#strat)
 
 * Points to [discuss](#disc) for how the project should evolve 
