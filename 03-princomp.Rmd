@@ -43,7 +43,7 @@ wall_poly_roads <- readRDS("dat/wall_poly_roads.RDS")
 # names(wall_poly) <- c("avg", "cov", "std","p10", "p20","p50","p70","p95", "p99","d0","d2","d4","dns")
 ```
 
-We are using the same raster data from the \@ref(dataprep) section.
+We are using the same raster data from the [dataprep](#dataprep) section.
 
 ```{r}
 plot(wall_poly$avg)
