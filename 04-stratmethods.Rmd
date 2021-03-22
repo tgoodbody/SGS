@@ -287,7 +287,8 @@ o_val %>%
   stat_eye()
 
 ```
-### SRS Road Masked  {-}
+
+### SRS 2 Variable Road Masked {.unnumbered}
 
 ```{r,message=F,warning=F}
 ns <- 200 #total number of desired samples
@@ -422,7 +423,8 @@ p + geom_rect(data=coordsgrps$data[[1]],aes(xmin=min(avg),xmax=max(avg),ymin=min
 
 ```
 
-### 2 Variable Road Masked  {-}
+### 2 Variable Road Masked {.unnumbered}
+
 ```{r,warning=F,message=F}
 ## With road masking
 
@@ -501,6 +503,7 @@ p + geom_rect(data=coordsgrps$data[[1]],aes(xmin=min(avg),xmax=max(avg),ymin=min
     geom_rect(data=coordsgrps$data[[12]],aes(xmin=min(avg),xmax=max(avg),ymin=min(std),ymax=max(std)),colour="black",fill=NA)
 
 ```
+
 ```{r}
 # Convert dataframe back to raster to show classes
 spg <- o_val
@@ -534,7 +537,6 @@ o_val <- v %>%
   na.omit() %>% 
   as.data.frame()
 ```
-
 
 ### Balanced Sampling {.unnumbered}
 
