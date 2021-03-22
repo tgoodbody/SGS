@@ -42,6 +42,9 @@ wall_poly_roads <- readRDS("dat/wall_poly_roads.RDS")
 
 rast_dt_wall <- readRDS("dat/rast_dt_wall.RDS")
 rast_dt <- readRDS("dat/rast_dt.RDS")
+
+rast_dt_wall <- rast_dt_wall %>% filter(is.na(std) | std < 20)
+rast_dt <- rast_dt %>% filter(is.na(std) | std < 20)
 ```
 
 ## K-means {#kmeans .unnumbered}
@@ -202,6 +205,91 @@ Once these strata are established we can begin to test a variety of sampling mec
 ## Simple Random Sampling {#srs .unnumbered}
 
 ```{r,warning=F,message=F}
+## Without road masking
+
+ns <- 200 #total number of desired samples
+samples <- o_val %>% 
+  group_by(groups) %>% 
+  summarize(n= n()) %>% 
+  mutate(freq = n / sum(n), plot_tot = as.integer(freq*ns))
+
+df_sample <- o_val %>%
+  group_by(groups) %>% 
+  arrange(groups) %>%
+  nest() %>%            
+  ungroup() %>% 
+  mutate(n = samples$plot_tot) %>% 
+  mutate(samp = map2(data, n, sample_n)) %>% 
+  dplyr::select(-data) %>%
+  unnest(samp)
+
+# sample summary statistics
+df_sample %>% group_by(groups) %>% dplyr::select(avg,groups) %>% summarise(
+  n = n(),
+  mean = mean(avg),
+  sd = sd(avg)
+)
+
+#population summary statistics
+o_val %>% group_by(groups) %>% 
+  dplyr::select(avg,groups) %>% 
+  summarise(
+  n = n(),
+  mean = mean(avg),
+  sd = sd(avg)
+)
+
+```
+
+```{r,warning=F,message=F}
+coords <- st_as_sf(df_sample, coords = c("x","y"))
+
+plot(wall_poly$avg)
+plot(st_geometry(coords),add=T)
+
+ggplot(mapping = aes(x=avg,y=std))+
+  geom_point(data = o_val, aes(color = groups))+
+  geom_point(data = df_sample, pch=21, fill = "red",colour="black")+
+  theme_bw() +
+  ylim(0,15) +
+  coord_equal() +
+  theme(panel.grid = element_blank(),
+        legend.position = "right")
+```
+
+```{r,echo=F}
+# Extract values for Kmeans
+v <- rast_dt
+
+#prepare data
+o_val <- v %>% 
+  na.omit() %>% 
+  as.data.frame()
+
+#define groups within splitting variable
+split_osb <- c(-Inf,breaks$avg[1:3],Inf)
+
+grps <- cut(o_val$avg,split_osb)
+
+o_val$groups <- as.factor(grps)
+
+#convert groups to A | B | C | D
+o_val <- o_val %>% mutate(groups = case_when(groups == "(-Inf,5.1]"~"A",
+                 groups == "(5.1,9.33]"~"B",
+                 groups == "(9.33,14.4]"~"C",
+                 groups == "(14.4, Inf]"~"D"))
+
+# Statistical testing
+summary(mod1 <- aov(avg~groups,data=o_val))
+
+o_val %>%
+  ggplot(aes(groups,avg,fill=groups)) +
+  stat_eye()
+
+```
+### SRS Road Masked  {-}
+
+```{r,message=F,warning=F}
 ns <- 200 #total number of desired samples
 samples <- o_val %>% 
   group_by(groups) %>% 
@@ -241,7 +329,7 @@ Visualizing the samples
 ```{r,warning=F,message=F}
 coords <- st_as_sf(df_sample, coords = c("x","y"))
 
-plot(wall_poly$avg)
+plot(wall_poly_roads$avg)
 plot(st_geometry(coords),add=T)
 
 ggplot(mapping = aes(x=avg,y=std))+
@@ -256,7 +344,15 @@ ggplot(mapping = aes(x=avg,y=std))+
 
 ## Using 2 variables to stratify {.unnumbered}
 
-```{r,echo=F}
+```{r,warning=F,message=F}
+## Without road masking
+# Extract values for Kmeans
+v <- rast_dt_wall 
+
+o_val <- v %>% 
+  na.omit() %>% 
+  as.data.frame()
+
 #define groups within splitting variable
 split_osb <- c(-Inf,breaks$avg[1:3],Inf)
 
@@ -270,9 +366,85 @@ o_val <- o_val %>% mutate(groups = case_when(groups == "(-Inf,5.1]"~1,
                  groups == "(9.33,14.4]"~3,
                  groups == "(14.4, Inf]"~4))
 
+o_val <- o_val %>% 
+  group_by(groups) %>% 
+  mutate(groups2 = ntile(std,3)) %>% 
+  unite("groups_m",groups,groups2) %>%
+  mutate(id = group_indices(., groups_m))
+
+ns <- 200 #total number of desired samples
+samples <- o_val %>% 
+  group_by(groups_m) %>% 
+  summarize(n= n()) %>% 
+  mutate(freq = n / sum(n),plot_tot = as.integer(freq*ns))
+
+samp <- o_val %>%
+  group_by(groups_m) %>% 
+  arrange(groups_m) %>%
+  nest() %>%            
+  ungroup() %>% 
+  mutate(n = samples$plot_tot) %>% 
+  mutate(samp = map2(data, n, sample_n)) %>% 
+  dplyr::select(-data) %>%
+  unnest(samp)
+
+coords <- st_as_sf(samp, coords = c("x","y"))
+
+plot(wall_poly$avg)
+plot(st_geometry(coords),add=T)
+
+p <- ggplot(mapping = aes(x=avg,y=std))+
+  geom_point(data = o_val, aes(color = groups_m))+
+  geom_point(data = samp, pch=21, fill = "red",colour="black")+
+  theme_bw() +
+  coord_equal() +
+  theme(panel.grid = element_blank(),
+        legend.position = "right")
+
+coordsgrps <- o_val %>%
+  group_by(groups_m) %>% 
+  arrange(groups_m) %>%
+  nest() %>%            
+  ungroup()
+
+p + geom_rect(data=coordsgrps$data[[1]],aes(xmin=min(avg),xmax=max(avg),ymin=min(std),ymax=max(std)),colour="black",fill=NA)+
+    geom_rect(data=coordsgrps$data[[2]],aes(xmin=min(avg),xmax=max(avg),ymin=min(std),ymax=max(std)),colour="black",fill=NA)+
+    geom_rect(data=coordsgrps$data[[3]],aes(xmin=min(avg),xmax=max(avg),ymin=min(std),ymax=max(std)),colour="black",fill=NA)+
+    geom_rect(data=coordsgrps$data[[4]],aes(xmin=min(avg),xmax=max(avg),ymin=min(std),ymax=max(std)),colour="black",fill=NA)+
+    geom_rect(data=coordsgrps$data[[5]],aes(xmin=min(avg),xmax=max(avg),ymin=min(std),ymax=max(std)),colour="black",fill=NA)+
+    geom_rect(data=coordsgrps$data[[6]],aes(xmin=min(avg),xmax=max(avg),ymin=min(std),ymax=max(std)),colour="black",fill=NA)+
+    geom_rect(data=coordsgrps$data[[7]],aes(xmin=min(avg),xmax=max(avg),ymin=min(std),ymax=max(std)),colour="black",fill=NA)+
+    geom_rect(data=coordsgrps$data[[8]],aes(xmin=min(avg),xmax=max(avg),ymin=min(std),ymax=max(std)),colour="black",fill=NA)+
+    geom_rect(data=coordsgrps$data[[9]],aes(xmin=min(avg),xmax=max(avg),ymin=min(std),ymax=max(std)),colour="black",fill=NA)+
+    geom_rect(data=coordsgrps$data[[10]],aes(xmin=min(avg),xmax=max(avg),ymin=min(std),ymax=max(std)),colour="black",fill=NA)+
+    geom_rect(data=coordsgrps$data[[11]],aes(xmin=min(avg),xmax=max(avg),ymin=min(std),ymax=max(std)),colour="black",fill=NA)+
+    geom_rect(data=coordsgrps$data[[12]],aes(xmin=min(avg),xmax=max(avg),ymin=min(std),ymax=max(std)),colour="black",fill=NA)
+
 ```
 
+### 2 Variable Road Masked  {-}
 ```{r,warning=F,message=F}
+## With road masking
+
+# Extract values for Kmeans
+v <- rast_dt
+
+o_val <- v %>% 
+  na.omit() %>% 
+  as.data.frame()
+
+#define groups within splitting variable
+split_osb <- c(-Inf,breaks$avg[1:3],Inf)
+
+grps <- cut(o_val$avg,split_osb)
+
+o_val$groups <- as.character(grps)
+
+#convert groups to A | B | C | D
+o_val <- o_val %>% mutate(groups = case_when(groups == "(-Inf,5.1]"~1,
+                 groups == "(5.1,9.33]"~2,
+                 groups == "(9.33,14.4]"~3,
+                 groups == "(14.4, Inf]"~4))
 
 o_val <- o_val %>% 
   group_by(groups) %>% 
@@ -329,20 +501,22 @@ p + geom_rect(data=coordsgrps$data[[1]],aes(xmin=min(avg),xmax=max(avg),ymin=min
     geom_rect(data=coordsgrps$data[[12]],aes(xmin=min(avg),xmax=max(avg),ymin=min(std),ymax=max(std)),colour="black",fill=NA)
 
 ```
+```{r}
+# Convert dataframe back to raster to show classes
+spg <- o_val
+coordinates(spg) <- ~ x + y
 
-```{r,warning=F,message=F}
-grps <- o_val$id
+# coerce to SpatialPixelsDataFrame
+gridded(spg) <- TRUE
 
-# create empty raster from original candidate dimentions
-clusters <- wall_poly_roads[[1]]
-clusters[] <- NA
+# coerce to raster
+rasterDF <- raster(spg, "id")
 
-# add cluster values to corresponding index and re-name
-clusters[idx] <- grps
-names(clusters) <- c("clusters")
-
-plot(clusters)
+#plot
+pal <- brewer.pal(n = 12, name = "Spectral")
+plot(rasterDF,col=pal)
 plot(st_geometry(coords),add=T)
+
 ```
 
 ## Non-stratified sampling methods {.unnumbered}

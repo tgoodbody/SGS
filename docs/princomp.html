@@ -24,7 +24,7 @@
 <meta name="author" content="Tristan Goodbody" />
 
 
-<meta name="date" content="2021-03-16" />
+<meta name="date" content="2021-03-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -180,7 +180,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#OSB"><i class="fa fa-check"></i>Optimum stratum boundaries</a></li>
 <li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#sampling-within-groupsstrata"><i class="fa fa-check"></i>Sampling within groups/strata</a></li>
 <li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#srs"><i class="fa fa-check"></i>Simple Random Sampling</a></li>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#using-2-variables-to-stratify"><i class="fa fa-check"></i>Using 2 variables to stratify</a></li>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#using-2-variables-to-stratify"><i class="fa fa-check"></i>Using 2 variables to stratify</a>
+<ul>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#variable-road-masked"><i class="fa fa-check"></i>2 Variable Road Masked</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#non-stratified-sampling-methods"><i class="fa fa-check"></i>Non-stratified sampling methods</a>
 <ul>
 <li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#balanced-sampling"><i class="fa fa-check"></i>Balanced Sampling</a></li>
@@ -230,7 +233,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>We are using the same raster data from the <a href="dataprep.html#dataprep"><strong>??</strong></a> section.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="princomp.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(wall_poly<span class="sc">$</span>avg)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-148-1.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-195-1.png" width="672" /></p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="princomp.html#cb17-1" aria-hidden="true" tabindex="-1"></a>PCA <span class="ot">&lt;-</span> RStoolbox<span class="sc">::</span><span class="fu">rasterPCA</span>(wall_poly, <span class="at">nComp =</span> <span class="dv">2</span>, <span class="at">spca =</span> <span class="cn">TRUE</span>, <span class="at">maskCheck =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb17-2"><a href="princomp.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># nComp = 2, we return the two first principal components</span></span>
 <span id="cb17-3"><a href="princomp.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># spca = TRUE, since metrics have different ranges of values the fucntion will center and scale the metrics</span></span>
@@ -308,16 +311,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb25-20"><a href="princomp.html#cb25-20" aria-hidden="true" tabindex="-1"></a>hulls_cand <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">slice</span>(df_PCA_candidates[,<span class="fu">c</span>(<span class="st">&quot;PC1&quot;</span>,<span class="st">&quot;PC2&quot;</span>)],hulls_cand_idx)</span>
 <span id="cb25-21"><a href="princomp.html#cb25-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-22"><a href="princomp.html#cb25-22" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2)) <span class="sc">+</span> </span>
-<span id="cb25-23"><a href="princomp.html#cb25-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> hulls_wall, <span class="at">colour =</span> <span class="st">&quot;#440154FF&quot;</span>, <span class="at">fill =</span><span class="st">&quot;#440154FF&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb25-24"><a href="princomp.html#cb25-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> hulls_cand, <span class="at">colour =</span> <span class="st">&quot;orange&quot;</span>, <span class="at">fill =</span> <span class="cn">NA</span>) <span class="sc">+</span> </span>
-<span id="cb25-25"><a href="princomp.html#cb25-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> df_PCA_candidates, <span class="fu">aes</span>(<span class="at">color =</span> dens)) <span class="sc">+</span> </span>
-<span id="cb25-26"><a href="princomp.html#cb25-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_c</span>() <span class="sc">+</span> </span>
-<span id="cb25-27"><a href="princomp.html#cb25-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> plots_PCA, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb25-28"><a href="princomp.html#cb25-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb25-29"><a href="princomp.html#cb25-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
-<span id="cb25-30"><a href="princomp.html#cb25-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb25-31"><a href="princomp.html#cb25-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-152-1.png" width="672" /></p>
+<span id="cb25-23"><a href="princomp.html#cb25-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> hulls_cand, <span class="at">colour =</span> <span class="st">&quot;orange&quot;</span>, <span class="at">fill =</span> <span class="cn">NA</span>) <span class="sc">+</span> </span>
+<span id="cb25-24"><a href="princomp.html#cb25-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> df_PCA_candidates, <span class="fu">aes</span>(<span class="at">color =</span> dens)) <span class="sc">+</span> </span>
+<span id="cb25-25"><a href="princomp.html#cb25-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_c</span>() <span class="sc">+</span> </span>
+<span id="cb25-26"><a href="princomp.html#cb25-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> plots_PCA, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb25-27"><a href="princomp.html#cb25-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb25-28"><a href="princomp.html#cb25-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb25-29"><a href="princomp.html#cb25-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb25-30"><a href="princomp.html#cb25-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
+<p><img src="SGS_files/figure-html/unnamed-chunk-199-1.png" width="672" /></p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="princomp.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Function to calculate point density in scatterplot</span></span>
 <span id="cb26-2"><a href="princomp.html#cb26-2" aria-hidden="true" tabindex="-1"></a>get_density <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, ...) {</span>
 <span id="cb26-3"><a href="princomp.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  dens <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">kde2d</span>(x, y, ...)</span>
@@ -376,7 +378,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb31-15"><a href="princomp.html#cb31-15" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">brewer.pal</span>(<span class="at">n=</span><span class="dv">27</span>,<span class="at">name=</span><span class="st">&quot;Spectral&quot;</span>)</span>
 <span id="cb31-16"><a href="princomp.html#cb31-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-17"><a href="princomp.html#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(plot_candidates,<span class="at">col =</span> pal)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-154-1.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-201-1.png" width="672" /></p>
 </div>
 <div id="exist-plots" class="section level2 unnumbered">
 <h2>Derive strata for existing plots</h2>
@@ -391,24 +393,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 35 Levels: 11 &lt; 12 &lt; 13 &lt; 14 &lt; 15 &lt; 21 &lt; 22 &lt; 23 &lt; 24 &lt; 25 &lt; 31 &lt; 32 &lt; 33 &lt; 34 &lt; 35 &lt; 41 &lt; ... &lt; 75</code></pre>
 <p>Make a new plots with break lines between strata</p>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="princomp.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2)) <span class="sc">+</span> </span>
-<span id="cb34-2"><a href="princomp.html#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> hulls_wall, <span class="at">colour =</span> <span class="st">&quot;#440154FF&quot;</span>, <span class="at">fill =</span><span class="st">&quot;#440154FF&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb34-3"><a href="princomp.html#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> hulls_cand, <span class="at">colour =</span> <span class="st">&quot;orange&quot;</span>, <span class="at">fill =</span> <span class="cn">NA</span>) <span class="sc">+</span> </span>
-<span id="cb34-4"><a href="princomp.html#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> df_PCA_candidates, <span class="fu">aes</span>(<span class="at">color =</span> dens)) <span class="sc">+</span> </span>
-<span id="cb34-5"><a href="princomp.html#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_c</span>() <span class="sc">+</span> </span>
-<span id="cb34-6"><a href="princomp.html#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> plots_PCA, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb34-7"><a href="princomp.html#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> breaks<span class="sc">$</span>PC1, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb34-8"><a href="princomp.html#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> breaks<span class="sc">$</span>PC2, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb34-9"><a href="princomp.html#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb34-10"><a href="princomp.html#cb34-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
-<span id="cb34-11"><a href="princomp.html#cb34-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb34-12"><a href="princomp.html#cb34-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-156-1.png" width="672" /></p>
+<span id="cb34-2"><a href="princomp.html#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> hulls_cand, <span class="at">colour =</span> <span class="st">&quot;orange&quot;</span>, <span class="at">fill =</span> <span class="cn">NA</span>) <span class="sc">+</span> </span>
+<span id="cb34-3"><a href="princomp.html#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> df_PCA_candidates, <span class="fu">aes</span>(<span class="at">color =</span> dens)) <span class="sc">+</span> </span>
+<span id="cb34-4"><a href="princomp.html#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_c</span>() <span class="sc">+</span> </span>
+<span id="cb34-5"><a href="princomp.html#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> plots_PCA, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb34-6"><a href="princomp.html#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> breaks<span class="sc">$</span>PC1, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb34-7"><a href="princomp.html#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> breaks<span class="sc">$</span>PC2, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb34-8"><a href="princomp.html#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb34-9"><a href="princomp.html#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb34-10"><a href="princomp.html#cb34-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb34-11"><a href="princomp.html#cb34-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
+<p><img src="SGS_files/figure-html/unnamed-chunk-203-1.png" width="672" /></p>
 </div>
 <div id="select-new-plots" class="section level2 unnumbered">
 <h2>Select new plots</h2>
 <p>The function <code>sampleCells</code> that performs the sampling requires the number of cells to sample for each strata. This can be determined based on the previous feature space plots, total number of plots than can be selected, number of existing plots, how many of them should be re-measured etc.</p>
 <p>The following figure illustrates the sampling process:</p>
-<div class="figure"><span id="fig:unnamed-chunk-157"></span>
+<div class="figure"><span id="fig:unnamed-chunk-204"></span>
 <img src="G:/Programs/R-4.0.3/library/RMFinventory/extdata/figures/Flow_RMF_sampling.png" alt="Sampling process diagram" width="100%" />
 <p class="caption">
 Figure 1: Sampling process diagram
@@ -487,113 +488,113 @@ Figure 1: Sampling process diagram
 <span id="cb39-11"><a href="princomp.html#cb39-11" aria-hidden="true" tabindex="-1"></a>new_plots </span></code></pre></div>
 <pre><code>##             x       y strata          cluster     type plotID
 ## 2    434310.2 5342820     12             &lt;NA&gt; Existing      2
-## 1    435450.0 5342810     12          cluster      New     NA
-## 11   434810.0 5341950     12          cluster      New     NA
-## 12   437790.0 5342930     12          cluster      New     NA
-## 13   437550.0 5343090     12          cluster      New     NA
-## 14   433950.0 5341370     12          cluster      New     NA
-## 15   438150.0 5337770     12          cluster      New     NA
-## 16   434230.0 5342650     12          cluster      New     NA
-## 17   437590.0 5339270     12          cluster      New     NA
-## 18   437790.0 5338990     12          cluster      New     NA
-## 19   435430.0 5342590     12          cluster      New     NA
-## 110  436090.0 5342630     12          cluster      New     NA
-## 111  437810.0 5342710     12          cluster      New     NA
-## 112  435390.0 5342350     12          cluster      New     NA
-## 113  436070.0 5342470     12          cluster      New     NA
-## 114  438430.0 5337790     12          cluster      New     NA
-## 115  437550.0 5338990     12          cluster      New     NA
-## 116  438470.0 5339370     12          cluster      New     NA
-## 117  433470.0 5341150     13 cluster extended      New     NA
-## 118  433150.0 5343050     22          cluster      New     NA
-## 21   437910.0 5339590     22          cluster      New     NA
-## 3    438110.0 5339730     22          cluster      New     NA
-## 4    438190.0 5339550     22          cluster      New     NA
-## 5    435810.0 5342350     22          cluster      New     NA
-## 6    438170.0 5340970     22          cluster      New     NA
-## 7    435890.0 5339310     22          cluster      New     NA
-## 119  433350.0 5341430     23          cluster      New     NA
-## 22   434530.0 5339410     23          cluster      New     NA
-## 31   435370.0 5338630     23          cluster      New     NA
-## 41   435730.0 5338690     23          cluster      New     NA
-## 51   433230.0 5341670     23          cluster      New     NA
-## 61   438470.0 5339010     23          cluster      New     NA
-## 71   438270.0 5338490     23 cluster extended      New     NA
-## 120  435370.0 5340270     24         isolated      New     NA
+## 1    433930.0 5340770     12          cluster      New     NA
+## 11   437970.0 5342410     12          cluster      New     NA
+## 12   434510.0 5341730     12          cluster      New     NA
+## 13   437670.0 5342850     12          cluster      New     NA
+## 14   434130.0 5343210     12          cluster      New     NA
+## 15   436070.0 5342530     12          cluster      New     NA
+## 16   433650.0 5340950     12          cluster      New     NA
+## 17   435350.0 5342350     12          cluster      New     NA
+## 18   437910.0 5342930     12          cluster      New     NA
+## 19   437610.0 5342510     12          cluster      New     NA
+## 110  438510.0 5337830     12          cluster      New     NA
+## 111  435410.0 5342510     12          cluster      New     NA
+## 112  434330.0 5339150     12          cluster      New     NA
+## 113  434230.0 5342650     12          cluster      New     NA
+## 114  437650.0 5339190     12          cluster      New     NA
+## 115  435250.0 5342170     12          cluster      New     NA
+## 116  438190.0 5339350     12          cluster      New     NA
+## 117  433490.0 5340950     13 cluster extended      New     NA
+## 118  437970.0 5340210     22          cluster      New     NA
+## 21   438170.0 5339550     22          cluster      New     NA
+## 3    438070.0 5341050     22          cluster      New     NA
+## 4    435990.0 5339650     22          cluster      New     NA
+## 5    438030.0 5339370     22          cluster      New     NA
+## 6    433950.0 5342990     22          cluster      New     NA
+## 7    437930.0 5341310     22          cluster      New     NA
+## 119  434530.0 5339430     23          cluster      New     NA
+## 22   435710.0 5338670     23          cluster      New     NA
+## 31   435350.0 5338650     23          cluster      New     NA
+## 41   433350.0 5341430     23          cluster      New     NA
+## 51   438490.0 5339010     23          cluster      New     NA
+## 61   433230.0 5341670     23          cluster      New     NA
+## 71   435550.0 5343150     23 cluster extended      New     NA
+## 120  435030.0 5338830     24         isolated      New     NA
 ## 121  435210.0 5337950     31 cluster extended      New     NA
-## 122  437950.0 5341210     32          cluster      New     NA
-## 23   432070.0 5342810     32          cluster      New     NA
-## 32   436450.0 5339890     32          cluster      New     NA
-## 42   437870.0 5339190     32          cluster      New     NA
-## 52   438090.0 5340950     32          cluster      New     NA
-## 62   435190.0 5337870     32          cluster      New     NA
-## 72   435950.0 5342730     32          cluster      New     NA
-## 8    434730.0 5342650     32          cluster      New     NA
-## 9    431990.0 5342650     32          cluster      New     NA
-## 10   432670.0 5342290     32          cluster      New     NA
+## 122  434710.0 5342590     32          cluster      New     NA
+## 23   438030.0 5341250     32          cluster      New     NA
+## 32   437870.0 5339210     32          cluster      New     NA
+## 42   432210.0 5342890     32          cluster      New     NA
+## 52   432030.0 5342850     32          cluster      New     NA
+## 62   435950.0 5342730     32          cluster      New     NA
+## 72   431810.0 5342550     32          cluster      New     NA
+## 8    435530.0 5341990     32          cluster      New     NA
+## 9    436450.0 5339870     32          cluster      New     NA
+## 10   432350.0 5338970     32          cluster      New     NA
 ## 123  435870.0 5342930     33          cluster      New     NA
-## 24   434430.0 5338230     33 cluster extended      New     NA
-## 33   433390.0 5342910     33 cluster extended      New     NA
-## 43   435570.0 5343170     33 cluster extended      New     NA
-## 53   437870.0 5341810     33 cluster extended      New     NA
+## 24   436130.0 5342290     33 cluster extended      New     NA
+## 33   432850.0 5342310     33 cluster extended      New     NA
+## 43   436970.0 5341810     33 cluster extended      New     NA
+## 53   435970.0 5339250     33 cluster extended      New     NA
 ## 124  434990.0 5338970     34 cluster extended      New     NA
-## 125  432750.0 5339570     41 cluster extended      New     NA
+## 125  432550.0 5340350     41 cluster extended      New     NA
 ## 126  432109.8 5340150     42             &lt;NA&gt; Existing      1
-## 1110 435290.0 5337850     42          cluster      New     NA
-## 127  435470.0 5338050     42          cluster      New     NA
-## 131  437610.0 5342330     42          cluster      New     NA
-## 141  438330.0 5337850     42          cluster      New     NA
-## 151  432230.0 5341430     42          cluster      New     NA
-## 161  433250.0 5342650     42          cluster      New     NA
-## 171  432990.0 5342910     42          cluster      New     NA
-## 181  433450.0 5342030     42          cluster      New     NA
-## 191  431890.0 5342530     42          cluster      New     NA
-## 1101 433630.0 5342230     42          cluster      New     NA
-## 1111 432990.0 5342090     42          cluster      New     NA
-## 1121 432970.0 5342390     42          cluster      New     NA
-## 1131 432550.0 5342090     42          cluster      New     NA
-## 1141 437070.0 5341470     42          cluster      New     NA
-## 128  435350.0 5338230     43 cluster extended      New     NA
-## 25   438510.0 5338130     43 cluster extended      New     NA
-## 34   431970.0 5337910     43 cluster extended      New     NA
-## 44   437330.0 5341950     43 cluster extended      New     NA
-## 54   434750.0 5343190     43 cluster extended      New     NA
-## 129  437270.0 5342210     44 cluster extended      New     NA
-## 130  435370.0 5340290     45         isolated      New     NA
-## 132  434130.0 5341550     51          cluster      New     NA
-## 26   432330.0 5339330     51          cluster      New     NA
+## 1110 433250.0 5342650     42          cluster      New     NA
+## 127  435290.0 5337830     42          cluster      New     NA
+## 131  432990.0 5342090     42          cluster      New     NA
+## 141  431870.0 5342510     42          cluster      New     NA
+## 151  437590.0 5342410     42          cluster      New     NA
+## 161  435490.0 5338010     42          cluster      New     NA
+## 171  433610.0 5342230     42          cluster      New     NA
+## 181  438350.0 5337870     42          cluster      New     NA
+## 191  434350.0 5338250     42          cluster      New     NA
+## 1101 437070.0 5341470     42          cluster      New     NA
+## 1111 432170.0 5343050     42          cluster      New     NA
+## 1121 432230.0 5341430     42          cluster      New     NA
+## 1131 433010.0 5342930     42          cluster      New     NA
+## 1141 432990.0 5342390     42          cluster      New     NA
+## 128  433150.0 5342910     43 cluster extended      New     NA
+## 25   432350.0 5341850     43 cluster extended      New     NA
+## 34   436370.0 5341030     43 cluster extended      New     NA
+## 44   434730.0 5339390     43 cluster extended      New     NA
+## 54   436430.0 5342890     43 cluster extended      New     NA
+## 129  431590.0 5342770     44 cluster extended      New     NA
+## 130  434390.0 5339510     45         isolated      New     NA
+## 132  432330.0 5339350     51          cluster      New     NA
+## 26   434130.0 5341570     51          cluster      New     NA
 ## 35   438270.0 5338850     51          cluster      New     NA
 ## 45   435478.0 5337921     52             &lt;NA&gt; Existing      4
-## 133  436470.0 5341310     52          cluster      New     NA
-## 1112 431790.0 5342750     52          cluster      New     NA
-## 1210 432650.0 5340810     52          cluster      New     NA
-## 134  434250.0 5337870     52          cluster      New     NA
-## 142  436350.0 5340430     52          cluster      New     NA
-## 152  434090.0 5337910     52          cluster      New     NA
-## 162  436610.0 5341430     52          cluster      New     NA
-## 172  436410.0 5341130     52          cluster      New     NA
-## 182  432830.0 5340310     52          cluster      New     NA
-## 192  431790.0 5343130     52          cluster      New     NA
-## 1102 438250.0 5340210     52          cluster      New     NA
-## 1113 436190.0 5339910     52          cluster      New     NA
-## 1122 436550.0 5341730     52          cluster      New     NA
-## 135  431570.0 5342730     53          cluster      New     NA
-## 27   431870.0 5342910     53          cluster      New     NA
-## 36   432190.0 5343210     53          cluster      New     NA
-## 46   431330.0 5342750     53          cluster      New     NA
-## 55   432770.0 5339150     53 cluster extended      New     NA
+## 133  436430.0 5341250     52          cluster      New     NA
+## 1112 436230.0 5341350     52          cluster      New     NA
+## 1210 431910.0 5343010     52          cluster      New     NA
+## 134  436590.0 5341430     52          cluster      New     NA
+## 142  436350.0 5340510     52          cluster      New     NA
+## 152  432650.0 5340810     52          cluster      New     NA
+## 162  436210.0 5341090     52          cluster      New     NA
+## 172  436550.0 5341670     52          cluster      New     NA
+## 182  436230.0 5339870     52          cluster      New     NA
+## 192  438250.0 5340210     52          cluster      New     NA
+## 1102 436890.0 5341650     52          cluster      New     NA
+## 1113 436370.0 5341090     52          cluster      New     NA
+## 1122 432850.0 5340310     52          cluster      New     NA
+## 135  431870.0 5342910     53          cluster      New     NA
+## 27   431670.0 5342790     53          cluster      New     NA
+## 36   431330.0 5342750     53          cluster      New     NA
+## 46   432190.0 5343210     53          cluster      New     NA
+## 55   431510.0 5342810     53          cluster      New     NA
 ## 37   435506.5 5340228     54             &lt;NA&gt; Existing      3
 ## 56   437372.2 5342478     54             &lt;NA&gt; Existing      5
-## 136  437250.0 5342230     54 cluster extended      New     NA
-## 137  435430.0 5340250     55 cluster extended      New     NA
-## 138  437330.0 5342690     61         isolated      New     NA
-## 139  431710.0 5338410     62 cluster extended      New     NA
-## 140  431950.0 5343090     63 cluster extended      New     NA
-## 143  435490.0 5340270     64 cluster extended      New     NA
-## 144  436590.0 5342970     65 cluster extended      New     NA
-## 145  432950.0 5339690     73 cluster extended      New     NA
-## 146  438450.0 5338670     74 cluster extended      New     NA
-## 147  438470.0 5338690     75 cluster extended      New     NA</code></pre>
+## 136  438130.0 5341950     54 cluster extended      New     NA
+## 137  437310.0 5342370     55 cluster extended      New     NA
+## 138  431870.0 5338470     61         isolated      New     NA
+## 139  431670.0 5338330     62 cluster extended      New     NA
+## 140  438410.0 5340830     63 cluster extended      New     NA
+## 143  438130.0 5341870     64 cluster extended      New     NA
+## 144  437370.0 5342510     65 cluster extended      New     NA
+## 145  432710.0 5341030     73 cluster extended      New     NA
+## 146  434370.0 5339570     74 cluster extended      New     NA
+## 147  438450.0 5338690     75 cluster extended      New     NA</code></pre>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="princomp.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Assign plotID to sampled plots</span></span>
 <span id="cb41-2"><a href="princomp.html#cb41-2" aria-hidden="true" tabindex="-1"></a>new_plots <span class="ot">&lt;-</span> new_plots <span class="sc">%&gt;%</span></span>
 <span id="cb41-3"><a href="princomp.html#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">plotID =</span> <span class="fu">ifelse</span>(type <span class="sc">==</span> <span class="st">&quot;New&quot;</span>, <span class="fu">paste0</span>(<span class="st">&quot;S_&quot;</span>, <span class="fu">seq_len</span>(<span class="fu">n</span>())), plotID))</span>
@@ -603,25 +604,24 @@ Figure 1: Sampling process diagram
 <span id="cb41-7"><a href="princomp.html#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb41-8"><a href="princomp.html#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(strata_candidates)</span>
 <span id="cb41-9"><a href="princomp.html#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(new_plots_sf), <span class="at">add =</span> T)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-158-1.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-205-1.png" width="672" /></p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="princomp.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Get metrics and PCA of new plots</span></span>
 <span id="cb42-2"><a href="princomp.html#cb42-2" aria-hidden="true" tabindex="-1"></a>new_plots_metrics <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">extract</span>(wall_poly, new_plots_sf) <span class="co">#could also get from point cloud directly</span></span>
 <span id="cb42-3"><a href="princomp.html#cb42-3" aria-hidden="true" tabindex="-1"></a>new_plots_PCA <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">predict</span>(PCA_model, new_plots_metrics))[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]</span>
 <span id="cb42-4"><a href="princomp.html#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(new_plots_PCA) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;PC1&quot;</span>, <span class="st">&quot;PC2&quot;</span>)</span>
 <span id="cb42-5"><a href="princomp.html#cb42-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-6"><a href="princomp.html#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2)) <span class="sc">+</span> </span>
-<span id="cb42-7"><a href="princomp.html#cb42-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> hulls_wall, <span class="at">colour =</span> <span class="st">&quot;#440154FF&quot;</span>, <span class="at">fill =</span><span class="st">&quot;#440154FF&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb42-8"><a href="princomp.html#cb42-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> hulls_cand, <span class="at">colour =</span> <span class="st">&quot;orange&quot;</span>, <span class="at">fill =</span> <span class="cn">NA</span>) <span class="sc">+</span> </span>
-<span id="cb42-9"><a href="princomp.html#cb42-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> df_PCA_candidates, <span class="fu">aes</span>(<span class="at">color =</span> dens)) <span class="sc">+</span> </span>
-<span id="cb42-10"><a href="princomp.html#cb42-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_c</span>() <span class="sc">+</span> </span>
-<span id="cb42-11"><a href="princomp.html#cb42-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> new_plots_PCA, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb42-12"><a href="princomp.html#cb42-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> breaks<span class="sc">$</span>PC1, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb42-13"><a href="princomp.html#cb42-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> breaks<span class="sc">$</span>PC2, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb42-14"><a href="princomp.html#cb42-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb42-15"><a href="princomp.html#cb42-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
-<span id="cb42-16"><a href="princomp.html#cb42-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb42-17"><a href="princomp.html#cb42-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-159-1.png" width="672" /></p>
+<span id="cb42-7"><a href="princomp.html#cb42-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> hulls_cand, <span class="at">colour =</span> <span class="st">&quot;orange&quot;</span>, <span class="at">fill =</span> <span class="cn">NA</span>) <span class="sc">+</span> </span>
+<span id="cb42-8"><a href="princomp.html#cb42-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> df_PCA_candidates, <span class="fu">aes</span>(<span class="at">color =</span> dens)) <span class="sc">+</span> </span>
+<span id="cb42-9"><a href="princomp.html#cb42-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_c</span>() <span class="sc">+</span> </span>
+<span id="cb42-10"><a href="princomp.html#cb42-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> new_plots_PCA, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb42-11"><a href="princomp.html#cb42-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> breaks<span class="sc">$</span>PC1, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb42-12"><a href="princomp.html#cb42-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> breaks<span class="sc">$</span>PC2, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb42-13"><a href="princomp.html#cb42-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb42-14"><a href="princomp.html#cb42-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb42-15"><a href="princomp.html#cb42-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb42-16"><a href="princomp.html#cb42-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
+<p><img src="SGS_files/figure-html/unnamed-chunk-206-1.png" width="672" /></p>
 
 <style type="text/css">
 pre {

@@ -24,7 +24,7 @@
 <meta name="author" content="Tristan Goodbody" />
 
 
-<meta name="date" content="2021-03-16" />
+<meta name="date" content="2021-03-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -180,7 +180,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#OSB"><i class="fa fa-check"></i>Optimum stratum boundaries</a></li>
 <li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#sampling-within-groupsstrata"><i class="fa fa-check"></i>Sampling within groups/strata</a></li>
 <li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#srs"><i class="fa fa-check"></i>Simple Random Sampling</a></li>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#using-2-variables-to-stratify"><i class="fa fa-check"></i>Using 2 variables to stratify</a></li>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#using-2-variables-to-stratify"><i class="fa fa-check"></i>Using 2 variables to stratify</a>
+<ul>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#variable-road-masked"><i class="fa fa-check"></i>2 Variable Road Masked</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#non-stratified-sampling-methods"><i class="fa fa-check"></i>Non-stratified sampling methods</a>
 <ul>
 <li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#balanced-sampling"><i class="fa fa-check"></i>Balanced Sampling</a></li>
@@ -224,103 +227,111 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Utilize spatial forest inventory layer to isolate regions of interest for sampling</li>
 <li>Create internal and external road buffer for future access buffering</li>
 </ol>
-<pre><code>## [1] &quot;as.data.table&quot;</code></pre>
 <div id="load-wall-to-wall-metrics" class="section level2 unnumbered">
 <h2>Load wall-to-wall metrics</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="dataprep.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Load required libraries</span></span>
-<span id="cb2-2"><a href="dataprep.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RMFinventory)</span>
-<span id="cb2-3"><a href="dataprep.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
-<span id="cb2-4"><a href="dataprep.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb2-5"><a href="dataprep.html#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="dataprep.html#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="do">### Raster DATa</span></span>
-<span id="cb2-7"><a href="dataprep.html#cb2-7" aria-hidden="true" tabindex="-1"></a>wall_metrics <span class="ot">&lt;-</span> <span class="fu">brick</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;wall_metrics_small.tif&quot;</span>, <span class="at">package =</span> <span class="st">&quot;RMFinventory&quot;</span>))</span>
-<span id="cb2-8"><a href="dataprep.html#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(wall_metrics) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;avg&quot;</span>, <span class="st">&quot;cov&quot;</span>, <span class="st">&quot;std&quot;</span>,<span class="st">&quot;p10&quot;</span>, <span class="st">&quot;p20&quot;</span>,<span class="st">&quot;p50&quot;</span>,<span class="st">&quot;p70&quot;</span>,<span class="st">&quot;p95&quot;</span>, <span class="st">&quot;p99&quot;</span>,<span class="st">&quot;d0&quot;</span>,<span class="st">&quot;d2&quot;</span>,<span class="st">&quot;d4&quot;</span>,<span class="st">&quot;dns&quot;</span>)</span>
-<span id="cb2-9"><a href="dataprep.html#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="dataprep.html#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Coordinate system of wall-to-wall raster</span></span>
-<span id="cb2-11"><a href="dataprep.html#cb2-11" aria-hidden="true" tabindex="-1"></a>wall_crs <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">crs</span>(wall_metrics)</span>
-<span id="cb2-12"><a href="dataprep.html#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="dataprep.html#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot</span></span>
-<span id="cb2-14"><a href="dataprep.html#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(wall_metrics<span class="sc">$</span>avg)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="dataprep.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Load required libraries</span></span>
+<span id="cb1-2"><a href="dataprep.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RMFinventory)</span>
+<span id="cb1-3"><a href="dataprep.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
+<span id="cb1-4"><a href="dataprep.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-5"><a href="dataprep.html#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="dataprep.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="do">### Raster DATa</span></span>
+<span id="cb1-7"><a href="dataprep.html#cb1-7" aria-hidden="true" tabindex="-1"></a>wall_metrics <span class="ot">&lt;-</span> <span class="fu">brick</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>,<span class="st">&quot;wall_metrics_small.tif&quot;</span>, <span class="at">package =</span> <span class="st">&quot;RMFinventory&quot;</span>))</span>
+<span id="cb1-8"><a href="dataprep.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(wall_metrics) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;avg&quot;</span>, <span class="st">&quot;cov&quot;</span>, <span class="st">&quot;std&quot;</span>,<span class="st">&quot;p10&quot;</span>, <span class="st">&quot;p20&quot;</span>,<span class="st">&quot;p50&quot;</span>,<span class="st">&quot;p70&quot;</span>,<span class="st">&quot;p95&quot;</span>, <span class="st">&quot;p99&quot;</span>,<span class="st">&quot;d0&quot;</span>,<span class="st">&quot;d2&quot;</span>,<span class="st">&quot;d4&quot;</span>,<span class="st">&quot;dns&quot;</span>)</span>
+<span id="cb1-9"><a href="dataprep.html#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="dataprep.html#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Coordinate system of wall-to-wall raster</span></span>
+<span id="cb1-11"><a href="dataprep.html#cb1-11" aria-hidden="true" tabindex="-1"></a>wall_crs <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">crs</span>(wall_metrics)</span>
+<span id="cb1-12"><a href="dataprep.html#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="dataprep.html#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot</span></span>
+<span id="cb1-14"><a href="dataprep.html#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(wall_metrics<span class="sc">$</span>avg)</span></code></pre></div>
+<p><img src="SGS_files/figure-html/unnamed-chunk-187-1.png" width="672" /></p>
 <p>Here we see the wall-to-wall coverage of ALS for our study area. We must be cognizant that some of the area within this coverage is not appropriate or desired from an inventory sampling perspective. This requires forest managers or data users to know which areas should be included/excluded for future stratification and/or sampling protocols.</p>
 </div>
 <div id="integrate-forest-inventory-layers" class="section level2 unnumbered">
 <h2>Integrate forest inventory layers</h2>
 <p>To filter areas we use the following approach where spatial forest inventory layers are used to mask wall-to-wall metrics to isolate regions for sampling.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="dataprep.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">### forest polygons</span></span>
-<span id="cb3-2"><a href="dataprep.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#read forest polygon shapefile</span></span>
-<span id="cb3-3"><a href="dataprep.html#cb3-3" aria-hidden="true" tabindex="-1"></a>poly <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata/inventory_polygons&quot;</span>,<span class="st">&quot;inventory_polygons.shp&quot;</span>, <span class="at">package =</span> <span class="st">&quot;RMFinventory&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="dataprep.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">### forest polygons</span></span>
+<span id="cb2-2"><a href="dataprep.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#read forest polygon shapefile</span></span>
+<span id="cb2-3"><a href="dataprep.html#cb2-3" aria-hidden="true" tabindex="-1"></a>poly <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata/inventory_polygons&quot;</span>,<span class="st">&quot;inventory_polygons.shp&quot;</span>, <span class="at">package =</span> <span class="st">&quot;RMFinventory&quot;</span>))</span></code></pre></div>
 <pre><code>## Reading layer `inventory_polygons&#39; from data source `G:\Programs\R-4.0.3\library\RMFinventory\extdata\inventory_polygons\inventory_polygons.shp&#39; using driver `ESRI Shapefile&#39;
 ## Simple feature collection with 632 features and 111 fields
 ## geometry type:  MULTIPOLYGON
 ## dimension:      XY
 ## bbox:           xmin: 431100 ymin: 5337700 xmax: 438560 ymax: 5343240
 ## projected CRS:  UTM_Zone_17_Northern_Hemisphere</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="dataprep.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Match CRS of wall-to-wall raster layer</span></span>
-<span id="cb5-2"><a href="dataprep.html#cb5-2" aria-hidden="true" tabindex="-1"></a>poly <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(poly, wall_crs<span class="sc">@</span>projargs)</span>
-<span id="cb5-3"><a href="dataprep.html#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="dataprep.html#cb5-4" aria-hidden="true" tabindex="-1"></a>poly_subset <span class="ot">&lt;-</span> poly[poly<span class="sc">$</span>POLYTYPE <span class="sc">==</span> <span class="st">&quot;FOR&quot;</span> <span class="sc">&amp;</span> poly<span class="sc">$</span>OWNER <span class="sc">==</span> <span class="dv">1</span>, ]</span>
-<span id="cb5-5"><a href="dataprep.html#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(poly_subset), <span class="at">axes =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="dataprep.html#cb6-1" aria-hidden="true" tabindex="-1"></a>poly_subset <span class="ot">&lt;-</span> <span class="fu">st_union</span>(poly_subset)</span>
-<span id="cb6-2"><a href="dataprep.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(poly_subset), <span class="at">axes =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="dataprep.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Transform to SpatialPolygonDataFrame object for compatibility with the raster package</span></span>
-<span id="cb7-2"><a href="dataprep.html#cb7-2" aria-hidden="true" tabindex="-1"></a>poly_subset <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">as_Spatial</span>(poly_subset)</span>
-<span id="cb7-3"><a href="dataprep.html#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="dataprep.html#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Mask wall-to-wall layer</span></span>
-<span id="cb7-5"><a href="dataprep.html#cb7-5" aria-hidden="true" tabindex="-1"></a>wall_poly <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">mask</span>(wall_metrics, <span class="at">mask =</span> poly_subset)</span>
-<span id="cb7-6"><a href="dataprep.html#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(wall_poly<span class="sc">$</span>avg)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-6-3.png" width="672" /></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="dataprep.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Convert raster into data table for tabular representation of candidates</span></span>
-<span id="cb8-2"><a href="dataprep.html#cb8-2" aria-hidden="true" tabindex="-1"></a>rast_dt_wall <span class="ot">&lt;-</span> <span class="fu">as.data.table.raster</span>(wall_poly,<span class="at">xy=</span>T)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="dataprep.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Match CRS of wall-to-wall raster layer</span></span>
+<span id="cb4-2"><a href="dataprep.html#cb4-2" aria-hidden="true" tabindex="-1"></a>poly <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(poly, wall_crs<span class="sc">@</span>projargs)</span>
+<span id="cb4-3"><a href="dataprep.html#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="dataprep.html#cb4-4" aria-hidden="true" tabindex="-1"></a>poly_subset <span class="ot">&lt;-</span> poly[poly<span class="sc">$</span>POLYTYPE <span class="sc">==</span> <span class="st">&quot;FOR&quot;</span> <span class="sc">&amp;</span> poly<span class="sc">$</span>OWNER <span class="sc">==</span> <span class="dv">1</span>, ]</span>
+<span id="cb4-5"><a href="dataprep.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(poly_subset), <span class="at">axes =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="SGS_files/figure-html/unnamed-chunk-188-1.png" width="672" /></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="dataprep.html#cb5-1" aria-hidden="true" tabindex="-1"></a>poly_subset <span class="ot">&lt;-</span> <span class="fu">st_union</span>(poly_subset)</span>
+<span id="cb5-2"><a href="dataprep.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(poly_subset), <span class="at">axes =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="SGS_files/figure-html/unnamed-chunk-188-2.png" width="672" /></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="dataprep.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Transform to SpatialPolygonDataFrame object for compatibility with the raster package</span></span>
+<span id="cb6-2"><a href="dataprep.html#cb6-2" aria-hidden="true" tabindex="-1"></a>poly_subset <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">as_Spatial</span>(poly_subset)</span>
+<span id="cb6-3"><a href="dataprep.html#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="dataprep.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Mask wall-to-wall layer</span></span>
+<span id="cb6-5"><a href="dataprep.html#cb6-5" aria-hidden="true" tabindex="-1"></a>wall_poly <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">mask</span>(wall_metrics, <span class="at">mask =</span> poly_subset)</span>
+<span id="cb6-6"><a href="dataprep.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(wall_poly<span class="sc">$</span>avg)</span></code></pre></div>
+<p><img src="SGS_files/figure-html/unnamed-chunk-188-3.png" width="672" /></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="dataprep.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Convert raster into data table for tabular representation of candidates</span></span>
+<span id="cb7-2"><a href="dataprep.html#cb7-2" aria-hidden="true" tabindex="-1"></a>rast_dt_wall <span class="ot">&lt;-</span> <span class="fu">as.data.table.raster</span>(wall_poly,<span class="at">xy=</span>T)</span></code></pre></div>
 <p>We have masked regions based on ownership and forest type, leaving forested areas that are suitable for stratification and sampling.</p>
 </div>
 <div id="prepare-road-buffers-for-future-masking" class="section level2 unnumbered">
 <h2>Prepare road buffers for future masking</h2>
 <p>Access is an important consideration for forest development, and in the case of inventory sampling could be leveraged to reduce operational costs and improve efficiency of measurement campaigns. For this reason we also present a method to use available road network layers to generate internal and external road buffers to isolate candidate ALS pixels based on distance from road.</p>
 <p>This process implies that managers have a specified minimum and maximum distance from road centerlines within which sampling can be conducted.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="dataprep.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="do">### roads</span></span>
-<span id="cb9-2"><a href="dataprep.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#read roads shapefile</span></span>
-<span id="cb9-3"><a href="dataprep.html#cb9-3" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata/roads&quot;</span>,<span class="st">&quot;roads.shp&quot;</span>, <span class="at">package =</span> <span class="st">&quot;RMFinventory&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="dataprep.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="do">### roads</span></span>
+<span id="cb8-2"><a href="dataprep.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#read roads shapefile</span></span>
+<span id="cb8-3"><a href="dataprep.html#cb8-3" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata/roads&quot;</span>,<span class="st">&quot;roads.shp&quot;</span>, <span class="at">package =</span> <span class="st">&quot;RMFinventory&quot;</span>))</span></code></pre></div>
 <pre><code>## Reading layer `roads&#39; from data source `G:\Programs\R-4.0.3\library\RMFinventory\extdata\roads\roads.shp&#39; using driver `ESRI Shapefile&#39;
 ## Simple feature collection with 167 features and 36 fields
 ## geometry type:  MULTILINESTRING
 ## dimension:      XY
 ## bbox:           xmin: 431100 ymin: 5337700 xmax: 438560 ymax: 5343240
 ## projected CRS:  UTM_Zone_17_Northern_Hemisphere</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="dataprep.html#cb11-1" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(roads, wall_crs<span class="sc">@</span>projargs)</span>
-<span id="cb11-2"><a href="dataprep.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(roads[<span class="st">&quot;RDTYPE&quot;</span>])</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="dataprep.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select only suitable road types</span></span>
-<span id="cb12-2"><a href="dataprep.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Highway (H), Municipal (M), Primary (P), Branch (B), Clay/mineral surface haul (C) and roads accessed when dry or frozen (d) , graveled (g), industrial grade road (i), highway or municipal road(r), yearly accessible (y)</span></span>
-<span id="cb12-3"><a href="dataprep.html#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="dataprep.html#cb12-4" aria-hidden="true" tabindex="-1"></a>roads_subset <span class="ot">&lt;-</span> roads[roads<span class="sc">$</span>RDTYPE <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;H&quot;</span>, <span class="st">&quot;M&quot;</span>, <span class="st">&quot;P&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>) <span class="sc">&amp;</span></span>
-<span id="cb12-5"><a href="dataprep.html#cb12-5" aria-hidden="true" tabindex="-1"></a>                        roads<span class="sc">$</span>RDMOD <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;d&quot;</span>, <span class="st">&quot;g&quot;</span>, <span class="st">&quot;i&quot;</span>, <span class="st">&quot;r&quot;</span>, <span class="st">&quot;y&quot;</span>), ]</span>
-<span id="cb12-6"><a href="dataprep.html#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="dataprep.html#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Dissolve roads layer to work with only 1 feature</span></span>
-<span id="cb12-8"><a href="dataprep.html#cb12-8" aria-hidden="true" tabindex="-1"></a>roads_subset <span class="ot">&lt;-</span> <span class="fu">st_union</span>(roads_subset)</span>
-<span id="cb12-9"><a href="dataprep.html#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(roads_subset))</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="dataprep.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create buffers of 30 m and 200 m</span></span>
-<span id="cb13-2"><a href="dataprep.html#cb13-2" aria-hidden="true" tabindex="-1"></a>roads_buffer_30m <span class="ot">&lt;-</span> <span class="fu">st_buffer</span>(roads_subset, <span class="at">dist =</span> <span class="dv">30</span>)</span>
-<span id="cb13-3"><a href="dataprep.html#cb13-3" aria-hidden="true" tabindex="-1"></a>roads_buffer_200m <span class="ot">&lt;-</span> <span class="fu">st_buffer</span>(roads_subset, <span class="at">dist =</span> <span class="dv">200</span>)</span>
-<span id="cb13-4"><a href="dataprep.html#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="dataprep.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Take the symetrical difference between buffers to keep only roads &gt;- 30 m AND &lt;= 200 m</span></span>
-<span id="cb13-6"><a href="dataprep.html#cb13-6" aria-hidden="true" tabindex="-1"></a>roads_buffer <span class="ot">&lt;-</span> <span class="fu">st_sym_difference</span>(roads_buffer_200m, roads_buffer_30m)</span>
-<span id="cb13-7"><a href="dataprep.html#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(roads_buffer))</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-7-3.png" width="672" /></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="dataprep.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Transform to SpatialPolygonDataFrame object for compatibility with the raster package</span></span>
-<span id="cb14-2"><a href="dataprep.html#cb14-2" aria-hidden="true" tabindex="-1"></a>roads_buffer <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">as_Spatial</span>(roads_buffer)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="dataprep.html#cb10-1" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(roads, wall_crs<span class="sc">@</span>projargs)</span>
+<span id="cb10-2"><a href="dataprep.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(roads[<span class="st">&quot;RDTYPE&quot;</span>])</span></code></pre></div>
+<p><img src="SGS_files/figure-html/unnamed-chunk-189-1.png" width="672" /></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="dataprep.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select only suitable road types</span></span>
+<span id="cb11-2"><a href="dataprep.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Highway (H), Municipal (M), Primary (P), Branch (B), Clay/mineral surface haul (C) and roads accessed when dry or frozen (d) , graveled (g), industrial grade road (i), highway or municipal road(r), yearly accessible (y)</span></span>
+<span id="cb11-3"><a href="dataprep.html#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="dataprep.html#cb11-4" aria-hidden="true" tabindex="-1"></a>roads_subset <span class="ot">&lt;-</span> roads[roads<span class="sc">$</span>RDTYPE <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;H&quot;</span>, <span class="st">&quot;M&quot;</span>, <span class="st">&quot;P&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>) <span class="sc">&amp;</span></span>
+<span id="cb11-5"><a href="dataprep.html#cb11-5" aria-hidden="true" tabindex="-1"></a>                        roads<span class="sc">$</span>RDMOD <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;d&quot;</span>, <span class="st">&quot;g&quot;</span>, <span class="st">&quot;i&quot;</span>, <span class="st">&quot;r&quot;</span>, <span class="st">&quot;y&quot;</span>), ]</span>
+<span id="cb11-6"><a href="dataprep.html#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="dataprep.html#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Dissolve roads layer to work with only 1 feature</span></span>
+<span id="cb11-8"><a href="dataprep.html#cb11-8" aria-hidden="true" tabindex="-1"></a>roads_subset <span class="ot">&lt;-</span> <span class="fu">st_union</span>(roads_subset)</span>
+<span id="cb11-9"><a href="dataprep.html#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(roads_subset))</span></code></pre></div>
+<p><img src="SGS_files/figure-html/unnamed-chunk-189-2.png" width="672" /></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="dataprep.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create buffers of 30 m and 200 m</span></span>
+<span id="cb12-2"><a href="dataprep.html#cb12-2" aria-hidden="true" tabindex="-1"></a>roads_buffer_30m <span class="ot">&lt;-</span> <span class="fu">st_buffer</span>(roads_subset, <span class="at">dist =</span> <span class="dv">30</span>)</span>
+<span id="cb12-3"><a href="dataprep.html#cb12-3" aria-hidden="true" tabindex="-1"></a>roads_buffer_200m <span class="ot">&lt;-</span> <span class="fu">st_buffer</span>(roads_subset, <span class="at">dist =</span> <span class="dv">200</span>)</span>
+<span id="cb12-4"><a href="dataprep.html#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="dataprep.html#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Take the symetrical difference between buffers to keep only roads &gt;- 30 m AND &lt;= 200 m</span></span>
+<span id="cb12-6"><a href="dataprep.html#cb12-6" aria-hidden="true" tabindex="-1"></a>roads_buffer <span class="ot">&lt;-</span> <span class="fu">st_sym_difference</span>(roads_buffer_200m, roads_buffer_30m)</span>
+<span id="cb12-7"><a href="dataprep.html#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(roads_buffer))</span></code></pre></div>
+<p><img src="SGS_files/figure-html/unnamed-chunk-189-3.png" width="672" /></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="dataprep.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Transform to SpatialPolygonDataFrame object for compatibility with the raster package</span></span>
+<span id="cb13-2"><a href="dataprep.html#cb13-2" aria-hidden="true" tabindex="-1"></a>roads_buffer <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">as_Spatial</span>(roads_buffer)</span></code></pre></div>
 <div id="road-buffering-outputs" class="section level3 unnumbered">
 <h3>Road buffering outputs</h3>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="dataprep.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Mask wall-to-wall layer</span></span>
-<span id="cb15-2"><a href="dataprep.html#cb15-2" aria-hidden="true" tabindex="-1"></a>wall_poly_roads <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">mask</span>(wall_poly, <span class="at">mask =</span> roads_buffer)</span>
-<span id="cb15-3"><a href="dataprep.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(wall_poly_roads<span class="sc">$</span>avg)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="dataprep.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Convert raster into data table for tabular representation of candidates</span></span>
-<span id="cb16-2"><a href="dataprep.html#cb16-2" aria-hidden="true" tabindex="-1"></a>rast_dt <span class="ot">&lt;-</span> <span class="fu">as.data.table.raster</span>(wall_poly_roads,<span class="at">xy=</span>T)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="dataprep.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Mask wall-to-wall layer</span></span>
+<span id="cb14-2"><a href="dataprep.html#cb14-2" aria-hidden="true" tabindex="-1"></a>wall_poly_roads <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">mask</span>(wall_poly, <span class="at">mask =</span> roads_buffer)</span>
+<span id="cb14-3"><a href="dataprep.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(wall_poly_roads<span class="sc">$</span>avg)</span></code></pre></div>
+<p><img src="SGS_files/figure-html/unnamed-chunk-190-1.png" width="672" /></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="dataprep.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Convert raster into data table for tabular representation of candidates</span></span>
+<span id="cb15-2"><a href="dataprep.html#cb15-2" aria-hidden="true" tabindex="-1"></a>rast_dt <span class="ot">&lt;-</span> <span class="fu">as.data.table.raster</span>(wall_poly_roads,<span class="at">xy=</span>T)</span></code></pre></div>
 
+<style type="text/css">
+pre {
+  max-height: 300px;
+  overflow-y: auto;
+}
+pre[class] {
+  max-height: 100px;
+}
+</style>
 </div>
 </div>
 </div>

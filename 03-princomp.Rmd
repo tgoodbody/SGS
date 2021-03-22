@@ -131,7 +131,6 @@ hulls_cand_idx <- chull(df_PCA_candidates$PC1, df_PCA_candidates$PC2)
 hulls_cand <- dplyr::slice(df_PCA_candidates[,c("PC1","PC2")],hulls_cand_idx)
 
 ggplot(mapping = aes(x = PC1, y = PC2)) + 
-  geom_polygon(data = hulls_wall, colour = "#440154FF", fill ="#440154FF", alpha = 0.2) +
   geom_polygon(data = hulls_cand, colour = "orange", fill = NA) + 
   geom_point(data = df_PCA_candidates, aes(color = dens)) + 
   scale_color_viridis_c() + 
@@ -219,7 +218,6 @@ Make a new plots with break lines between strata
 
 ```{r,warning=F,message=F}
 ggplot(mapping = aes(x = PC1, y = PC2)) + 
-  geom_polygon(data = hulls_wall, colour = "#440154FF", fill ="#440154FF", alpha = 0.2) +
   geom_polygon(data = hulls_cand, colour = "orange", fill = NA) + 
   geom_point(data = df_PCA_candidates, aes(color = dens)) + 
   scale_color_viridis_c() + 
@@ -300,7 +298,6 @@ new_plots_PCA <- as.data.frame(predict(PCA_model, new_plots_metrics))[,c(1,2)]
 colnames(new_plots_PCA) <- c("PC1", "PC2")
 
 ggplot(mapping = aes(x = PC1, y = PC2)) + 
-  geom_polygon(data = hulls_wall, colour = "#440154FF", fill ="#440154FF", alpha = 0.2) +
   geom_polygon(data = hulls_cand, colour = "orange", fill = NA) + 
   geom_point(data = df_PCA_candidates, aes(color = dens)) + 
   scale_color_viridis_c() + 
