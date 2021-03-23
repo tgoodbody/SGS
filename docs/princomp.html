@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Principal Components | Structurally Guided Sampling</title>
-  <meta name="description" content="Principal Components | Structurally Guided Sampling" />
+  <title>Principal Components | Approaches to structurally guided sampling</title>
+  <meta name="description" content="Principal Components | Approaches to structurally guided sampling" />
   <meta name="generator" content="bookdown 0.21.5 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Principal Components | Structurally Guided Sampling" />
+  <meta property="og:title" content="Principal Components | Approaches to structurally guided sampling" />
   <meta property="og:type" content="book" />
   
   
@@ -16,15 +16,15 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Principal Components | Structurally Guided Sampling" />
+  <meta name="twitter:title" content="Principal Components | Approaches to structurally guided sampling" />
   
   
   
 
-<meta name="author" content="Tristan Goodbody" />
+<meta name="author" content="Tristan Goodbody, Nicholas Coops, Martin Queinnec" />
 
 
-<meta name="date" content="2021-03-22" />
+<meta name="date" content="2021-03-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -136,7 +136,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Approaches to Structurally Guided Sampling</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#description"><i class="fa fa-check"></i>Project description</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#workplan"><i class="fa fa-check"></i>Work plan</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="SGS.html"><a href="SGS.html"><i class="fa fa-check"></i>Structurally Guided Sampling Review</a>
 <ul>
 <li class="chapter" data-level="" data-path="SGS.html"><a href="SGS.html#stratapp"><i class="fa fa-check"></i>Stratification approaches</a>
@@ -167,7 +171,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html"><i class="fa fa-check"></i>Principal Components</a>
 <ul>
-<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#use-pca-model-to-get-pca-values-of-an-existing-set-of-plots"><i class="fa fa-check"></i>Use PCA model to get PCA values of an existing set of plots</a></li>
+<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#use-pca-model-to-get-pcs-of-an-existing-set-of-plots"><i class="fa fa-check"></i>Use PCA model to get PCs of an existing set of plots</a></li>
 <li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#candidate-cells"><i class="fa fa-check"></i>Candidate cells</a></li>
 <li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#stratification"><i class="fa fa-check"></i>Stratification</a></li>
 <li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#exist-plots"><i class="fa fa-check"></i>Derive strata for existing plots</a></li>
@@ -179,7 +183,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#clusterchallenge"><i class="fa fa-check"></i>How many clusters?</a></li>
 <li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#OSB"><i class="fa fa-check"></i>Optimum stratum boundaries</a></li>
 <li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#sampling-within-groupsstrata"><i class="fa fa-check"></i>Sampling within groups/strata</a></li>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#srs"><i class="fa fa-check"></i>Simple Random Sampling</a></li>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#srs"><i class="fa fa-check"></i>Simple Random Sampling</a>
+<ul>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#srs-2-variable-road-masked"><i class="fa fa-check"></i>SRS 2 Variable Road Masked</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#using-2-variables-to-stratify"><i class="fa fa-check"></i>Using 2 variables to stratify</a>
 <ul>
 <li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#variable-road-masked"><i class="fa fa-check"></i>2 Variable Road Masked</a></li>
@@ -210,7 +217,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Structurally Guided Sampling</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Approaches to structurally guided sampling</a>
           </h1>
         </div>
 
@@ -220,20 +227,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="princomp" class="section level1 unnumbered">
 <h1>Principal Components</h1>
-<p>The first method we outline is using principal components analysis. This vignette is replicated from the RMFInventory package by Martin Queinnec.</p>
-<p>The vignette using the following approach:</p>
+<p>The first method we outline is using principal components analysis. This vignette is replicated from the <a href="%5Bhttps://github.com/mqueinnec/RMFinventory/">RMFInventory package</a>](<a href="https://github.com/mqueinnec/RMFinventory/" class="uri">https://github.com/mqueinnec/RMFinventory/</a>)) by Martin Queinnec.</p>
+<p>The vignette uses the following approach:</p>
 <ol style="list-style-type: decimal">
-<li>Extract principal components from ALS metrics</li>
+<li>Extract principal components (PCs) from ALS metrics</li>
 <li>Extract PCA values for an existing plot network - in this case 5 plots</li>
-<li>Visualize PCAs and where existing plots fall</li>
-<li>Stratify PCAs using defined break points</li>
+<li>Visualize PCs and where existing plots fall</li>
+<li>Stratify PCs using defined break points</li>
 <li>Extract strata for existing plot networks - determine which strata plots fall into</li>
 <li>Mask candidate cells using road buffer - improve efficiency of samples</li>
 <li>Use the <code>sampleCells</code> algorithm to representatively select sample cells within strata</li>
 </ol>
 <p>We are using the same raster data from the <a href="dataprep.html#dataprep">dataprep</a> section.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="princomp.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(wall_poly<span class="sc">$</span>avg)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="princomp.html#cb17-1" aria-hidden="true" tabindex="-1"></a>PCA <span class="ot">&lt;-</span> RStoolbox<span class="sc">::</span><span class="fu">rasterPCA</span>(wall_poly, <span class="at">nComp =</span> <span class="dv">2</span>, <span class="at">spca =</span> <span class="cn">TRUE</span>, <span class="at">maskCheck =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb17-2"><a href="princomp.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># nComp = 2, we return the two first principal components</span></span>
 <span id="cb17-3"><a href="princomp.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># spca = TRUE, since metrics have different ranges of values the fucntion will center and scale the metrics</span></span>
@@ -261,12 +268,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Standard deviation     0.221817718 0.143761431 0.0973665642 0.0722469728 0.0513443058 2.597584e-02
 ## Proportion of Variance 0.003784854 0.001589796 0.0007292498 0.0004015096 0.0002027875 5.190342e-05
 ## Cumulative Proportion  0.997024754 0.998614550 0.9993437994 0.9997453091 0.9999480966 1.000000e+00</code></pre>
-<div id="use-pca-model-to-get-pca-values-of-an-existing-set-of-plots" class="section level2 unnumbered">
-<h2>Use PCA model to get PCA values of an existing set of plots</h2>
+<div id="use-pca-model-to-get-pcs-of-an-existing-set-of-plots" class="section level2 unnumbered">
+<h2>Use PCA model to get PCs of an existing set of plots</h2>
 <p>A network of 182 plots was already established in RMF. The objective of the structural guided sampling was to check if the existing plot network was covering the entire range of structural variability and if not, selecting new plots in underrepresented forest types.</p>
 <p>We load the existing set of plots. All the ALS metrics that were calculated to make the PCA model have also been calculated at the plot-level.</p>
+<blockquote>
 <p>Note: Make sure that the name of metrics used to get the PCA model correspond to the name of the plot-level metrics</p>
-<p>We can use the <code>predict</code> function to get PCA values of the existing set of plots and off the candidate cells</p>
+</blockquote>
+<p>We can use the <code>predict</code> function to get PC values of the existing set of plots and off the candidate cells</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="princomp.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot-level</span></span>
 <span id="cb21-2"><a href="princomp.html#cb21-2" aria-hidden="true" tabindex="-1"></a>plots_metrics <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;plots_metrics.shp&quot;</span>, <span class="at">package =</span> <span class="st">&quot;RMFinventory&quot;</span>))</span></code></pre></div>
 <pre><code>## Reading layer `plots_metrics&#39; from data source `G:\Programs\R-4.0.3\library\RMFinventory\extdata\plots_metrics.shp&#39; using driver `ESRI Shapefile&#39;
@@ -319,7 +328,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb25-28"><a href="princomp.html#cb25-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
 <span id="cb25-29"><a href="princomp.html#cb25-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb25-30"><a href="princomp.html#cb25-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="princomp.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Function to calculate point density in scatterplot</span></span>
 <span id="cb26-2"><a href="princomp.html#cb26-2" aria-hidden="true" tabindex="-1"></a>get_density <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, ...) {</span>
 <span id="cb26-3"><a href="princomp.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  dens <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">kde2d</span>(x, y, ...)</span>
@@ -331,8 +340,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="stratification" class="section level2 unnumbered">
 <h2>Stratification</h2>
-<p>Once PCA values have been calculated we can stratify the PC1 / PC2 feature space. The approach chosen was to stratify using equal intervals.</p>
-<p>From the previous plot of PCAs, we decided to stratify the feature space into 7 equal interval on the PC1 axis and 5 intervals on the PC2 axis - this makes a 7 x 5 grid - 35 unique strata. A challenge with this method as we will see is that many of these strata will be empty. To create the stratification we use the <code>getPCAstrata</code> function:</p>
+<p>Once PCA values have been calculated we can stratify the PC1 / PC2 feature space. The approach chosen was to stratify using <strong>equal intervals</strong>. There are many methods that could be applied, which is one of the major components of this project - see <a href="strat.html#strat">other stratification methods</a>.</p>
+<p>From the previous plot of PCs, we decided to stratify the feature space into 7 equal interval on the PC1 axis and 5 intervals on the PC2 axis - this makes a 7 x 5 grid - 35 unique strata. A challenge with this method as we will see is that many of these strata will be empty. To create the stratification we use the <code>getPCAstrata</code> function:</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="princomp.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Determine the number of breaks for the first and second features (PC1 and PC2) </span></span>
 <span id="cb27-2"><a href="princomp.html#cb27-2" aria-hidden="true" tabindex="-1"></a>strata <span class="ot">&lt;-</span> RMFinventory<span class="sc">::</span><span class="fu">getPCAstrata</span>(<span class="at">PCA_layer =</span> PCA_candidates,</span>
 <span id="cb27-3"><a href="princomp.html#cb27-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">nbreaks =</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">6</span>), <span class="co">#Since we want a 7 x 5 grid we need 8 x 6 breaks</span></span>
@@ -378,7 +387,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb31-15"><a href="princomp.html#cb31-15" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">brewer.pal</span>(<span class="at">n=</span><span class="dv">27</span>,<span class="at">name=</span><span class="st">&quot;Spectral&quot;</span>)</span>
 <span id="cb31-16"><a href="princomp.html#cb31-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-17"><a href="princomp.html#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(plot_candidates,<span class="at">col =</span> pal)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 </div>
 <div id="exist-plots" class="section level2 unnumbered">
 <h2>Derive strata for existing plots</h2>
@@ -391,7 +400,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb32-6"><a href="princomp.html#cb32-6" aria-hidden="true" tabindex="-1"></a>strata_plots</span></code></pre></div>
 <pre><code>## [1] 42 12 54 52 54
 ## 35 Levels: 11 &lt; 12 &lt; 13 &lt; 14 &lt; 15 &lt; 21 &lt; 22 &lt; 23 &lt; 24 &lt; 25 &lt; 31 &lt; 32 &lt; 33 &lt; 34 &lt; 35 &lt; 41 &lt; ... &lt; 75</code></pre>
-<p>Make a new plots with break lines between strata</p>
+<p>Make new plots with break lines between strata</p>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="princomp.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2)) <span class="sc">+</span> </span>
 <span id="cb34-2"><a href="princomp.html#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> hulls_cand, <span class="at">colour =</span> <span class="st">&quot;orange&quot;</span>, <span class="at">fill =</span> <span class="cn">NA</span>) <span class="sc">+</span> </span>
 <span id="cb34-3"><a href="princomp.html#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> df_PCA_candidates, <span class="fu">aes</span>(<span class="at">color =</span> dens)) <span class="sc">+</span> </span>
@@ -403,13 +412,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb34-9"><a href="princomp.html#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
 <span id="cb34-10"><a href="princomp.html#cb34-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb34-11"><a href="princomp.html#cb34-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 </div>
 <div id="select-new-plots" class="section level2 unnumbered">
 <h2>Select new plots</h2>
 <p>The function <code>sampleCells</code> that performs the sampling requires the number of cells to sample for each strata. This can be determined based on the previous feature space plots, total number of plots than can be selected, number of existing plots, how many of them should be re-measured etc.</p>
 <p>The following figure illustrates the sampling process:</p>
-<div class="figure"><span id="fig:unnamed-chunk-26"></span>
+<div class="figure"><span id="fig:unnamed-chunk-29"></span>
 <img src="G:/Programs/R-4.0.3/library/RMFinventory/extdata/figures/Flow_RMF_sampling.png" alt="Sampling process diagram" width="100%" />
 <p class="caption">
 Figure 1: Sampling process diagram
@@ -604,7 +613,7 @@ Figure 1: Sampling process diagram
 <span id="cb41-7"><a href="princomp.html#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb41-8"><a href="princomp.html#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(strata_candidates)</span>
 <span id="cb41-9"><a href="princomp.html#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(new_plots_sf), <span class="at">add =</span> T)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="princomp.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Get metrics and PCA of new plots</span></span>
 <span id="cb42-2"><a href="princomp.html#cb42-2" aria-hidden="true" tabindex="-1"></a>new_plots_metrics <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">extract</span>(wall_poly, new_plots_sf) <span class="co">#could also get from point cloud directly</span></span>
 <span id="cb42-3"><a href="princomp.html#cb42-3" aria-hidden="true" tabindex="-1"></a>new_plots_PCA <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">predict</span>(PCA_model, new_plots_metrics))[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]</span>
@@ -621,7 +630,8 @@ Figure 1: Sampling process diagram
 <span id="cb42-14"><a href="princomp.html#cb42-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
 <span id="cb42-15"><a href="princomp.html#cb42-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb42-16"><a href="princomp.html#cb42-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p><img src="img/IRSS_Logos_2016_backwhite-03.png" width="50%" style="display: block; margin: auto;" /></p>
 
 <style type="text/css">
 pre {

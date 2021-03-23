@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Structurally Guided Sampling</title>
-  <meta name="description" content="Structurally Guided Sampling" />
-  <meta name="generator" content="bookdown #bookdown:version# and GitBook 2.6.7" />
+  <title>Structurally Guided Sampling Review | Approaches to structurally guided sampling</title>
+  <meta name="description" content="Structurally Guided Sampling Review | Approaches to structurally guided sampling" />
+  <meta name="generator" content="bookdown 0.21.5 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Structurally Guided Sampling" />
+  <meta property="og:title" content="Structurally Guided Sampling Review | Approaches to structurally guided sampling" />
   <meta property="og:type" content="book" />
   
   
@@ -16,23 +16,23 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Structurally Guided Sampling" />
+  <meta name="twitter:title" content="Structurally Guided Sampling Review | Approaches to structurally guided sampling" />
   
   
   
 
-<meta name="author" content="Tristan Goodbody" />
+<meta name="author" content="Tristan Goodbody, Nicholas Coops, Martin Queinnec" />
 
 
-<meta name="date" content="2021-03-22" />
+<meta name="date" content="2021-03-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<!--bookdown:link_prev-->
-<!--bookdown:link_next-->
+<link rel="prev" href="index.html"/>
+<link rel="next" href="dataprep.html"/>
 <script src="libs/header-attrs-2.5.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -42,15 +42,15 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+
+
+
+
+
+
+
+
+
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
@@ -127,88 +127,89 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<!--bookdown:title:start-->
-<div id="header">
-<h1 class="title">Structurally Guided Sampling</h1>
-<p class="author"><em>Tristan Goodbody</em></p>
-<p class="date"><em>2021-03-22</em></p>
-</div>
-<!--bookdown:title:end-->
-
-<!--bookdown:toc:start-->
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
 
     <div class="book-summary">
       <nav role="navigation">
-<!--bookdown:toc2:start-->
+
+<ul class="summary">
+<li><a href="./">Approaches to Structurally Guided Sampling</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a>
 <ul>
-<li><a href="#overview">Overview</a></li>
-<li><a href="#SGS">Structurally Guided Sampling Review</a>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#description"><i class="fa fa-check"></i>Project description</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#workplan"><i class="fa fa-check"></i>Work plan</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="SGS.html"><a href="SGS.html"><i class="fa fa-check"></i>Structurally Guided Sampling Review</a>
 <ul>
-<li><a href="#stratapp">Stratification approaches</a>
+<li class="chapter" data-level="" data-path="SGS.html"><a href="SGS.html#stratapp"><i class="fa fa-check"></i>Stratification approaches</a>
 <ul>
-<li><a href="#hawbaker2009"><span class="citation">(<span>Hawbaker et al. 2009</span>)</span></a></li>
-<li><a href="#dalponte2011"><span class="citation">(<span>Dalponte et al. 2011</span>)</span></a></li>
-<li><a href="#maltamo2011"><span class="citation">(<span>Maltamo et al. 2011</span>)</span></a></li>
-<li><a href="#junttila2013"><span class="citation">(<span>Junttila et al. 2013</span>)</span></a></li>
-<li><a href="#valbuena2013"><span class="citation">(<span>Valbuena et al. 2013</span>)</span></a></li>
-<li><a href="#grafstrom2013"><span class="citation">(<span>Grafström and Ringvall 2013</span>)</span></a></li>
-<li><a href="#grafstrom2014"><span class="citation">(<span>Grafström, Saarela, and Ene 2014</span>)</span></a></li>
-<li><a href="#niemi2016"><span class="citation">(<span>Niemi and Vauhkonen 2016</span>)</span></a></li>
-<li><a href="#valbuena2017"><span class="citation">(<span>Valbuena et al. 2017</span>)</span></a></li>
-<li><a href="#mcroberts2017"><span class="citation">(<span>McRoberts, Chen, and Walters 2017</span>)</span></a></li>
-<li><a href="#malone2019"><span class="citation">(<span>Malone, Minansy, and Brungard 2019</span>)</span></a></li>
-<li><a href="#papa2020"><span class="citation">(<span>Papa et al. 2020</span>)</span></a></li>
-<li><a href="#ma2020"><span class="citation">(<span>Ma et al. 2020</span>)</span></a></li>
+<li><a href="SGS.html#hawbaker2009"><span class="citation">(<span>Hawbaker et al. 2009</span>)</span></a></li>
+<li><a href="SGS.html#dalponte2011"><span class="citation">(<span>Dalponte et al. 2011</span>)</span></a></li>
+<li><a href="SGS.html#maltamo2011"><span class="citation">(<span>Maltamo et al. 2011</span>)</span></a></li>
+<li><a href="SGS.html#junttila2013"><span class="citation">(<span>Junttila et al. 2013</span>)</span></a></li>
+<li><a href="SGS.html#valbuena2013"><span class="citation">(<span>Valbuena et al. 2013</span>)</span></a></li>
+<li><a href="SGS.html#grafstrom2013"><span class="citation">(<span>Grafström and Ringvall 2013</span>)</span></a></li>
+<li><a href="SGS.html#grafstrom2014"><span class="citation">(<span>Grafström, Saarela, and Ene 2014</span>)</span></a></li>
+<li><a href="SGS.html#niemi2016"><span class="citation">(<span>Niemi and Vauhkonen 2016</span>)</span></a></li>
+<li><a href="SGS.html#valbuena2017"><span class="citation">(<span>Valbuena et al. 2017</span>)</span></a></li>
+<li><a href="SGS.html#mcroberts2017"><span class="citation">(<span>McRoberts, Chen, and Walters 2017</span>)</span></a></li>
+<li><a href="SGS.html#malone2019"><span class="citation">(<span>Malone, Minansy, and Brungard 2019</span>)</span></a></li>
+<li><a href="SGS.html#papa2020"><span class="citation">(<span>Papa et al. 2020</span>)</span></a></li>
+<li><a href="SGS.html#ma2020"><span class="citation">(<span>Ma et al. 2020</span>)</span></a></li>
 </ul></li>
 </ul></li>
-<li><a href="#dataprep">Data Preparation</a>
+<li class="chapter" data-level="" data-path="dataprep.html"><a href="dataprep.html"><i class="fa fa-check"></i>Data Preparation</a>
 <ul>
-<li><a href="#load-wall-to-wall-metrics">Load wall-to-wall metrics</a></li>
-<li><a href="#integrate-forest-inventory-layers">Integrate forest inventory layers</a></li>
-<li><a href="#prepare-road-buffers-for-future-masking">Prepare road buffers for future masking</a>
+<li class="chapter" data-level="" data-path="dataprep.html"><a href="dataprep.html#load-wall-to-wall-metrics"><i class="fa fa-check"></i>Load wall-to-wall metrics</a></li>
+<li class="chapter" data-level="" data-path="dataprep.html"><a href="dataprep.html#integrate-forest-inventory-layers"><i class="fa fa-check"></i>Integrate forest inventory layers</a></li>
+<li class="chapter" data-level="" data-path="dataprep.html"><a href="dataprep.html#prepare-road-buffers-for-future-masking"><i class="fa fa-check"></i>Prepare road buffers for future masking</a>
 <ul>
-<li><a href="#road-buffering-outputs">Road buffering outputs</a></li>
+<li class="chapter" data-level="" data-path="dataprep.html"><a href="dataprep.html#road-buffering-outputs"><i class="fa fa-check"></i>Road buffering outputs</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#princomp">Principal Components</a>
+<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html"><i class="fa fa-check"></i>Principal Components</a>
 <ul>
-<li><a href="#use-pca-model-to-get-pca-values-of-an-existing-set-of-plots">Use PCA model to get PCA values of an existing set of plots</a></li>
-<li><a href="#candidate-cells">Candidate cells</a></li>
-<li><a href="#stratification">Stratification</a></li>
-<li><a href="#exist-plots">Derive strata for existing plots</a></li>
-<li><a href="#select-new-plots">Select new plots</a></li>
+<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#use-pca-model-to-get-pcs-of-an-existing-set-of-plots"><i class="fa fa-check"></i>Use PCA model to get PCs of an existing set of plots</a></li>
+<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#candidate-cells"><i class="fa fa-check"></i>Candidate cells</a></li>
+<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#stratification"><i class="fa fa-check"></i>Stratification</a></li>
+<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#exist-plots"><i class="fa fa-check"></i>Derive strata for existing plots</a></li>
+<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#select-new-plots"><i class="fa fa-check"></i>Select new plots</a></li>
 </ul></li>
-<li><a href="#strat">Other stratification methods</a>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html"><i class="fa fa-check"></i>Other stratification methods</a>
 <ul>
-<li><a href="#kmeans">K-means</a></li>
-<li><a href="#clusterchallenge">How many clusters?</a></li>
-<li><a href="#OSB">Optimum stratum boundaries</a></li>
-<li><a href="#sampling-within-groupsstrata">Sampling within groups/strata</a></li>
-<li><a href="#srs">Simple Random Sampling</a>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#kmeans"><i class="fa fa-check"></i>K-means</a></li>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#clusterchallenge"><i class="fa fa-check"></i>How many clusters?</a></li>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#OSB"><i class="fa fa-check"></i>Optimum stratum boundaries</a></li>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#sampling-within-groupsstrata"><i class="fa fa-check"></i>Sampling within groups/strata</a></li>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#srs"><i class="fa fa-check"></i>Simple Random Sampling</a>
 <ul>
-<li><a href="#srs-2-variable-road-masked">SRS 2 Variable Road Masked</a></li>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#srs-2-variable-road-masked"><i class="fa fa-check"></i>SRS 2 Variable Road Masked</a></li>
 </ul></li>
-<li><a href="#using-2-variables-to-stratify">Using 2 variables to stratify</a>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#using-2-variables-to-stratify"><i class="fa fa-check"></i>Using 2 variables to stratify</a>
 <ul>
-<li><a href="#variable-road-masked">2 Variable Road Masked</a></li>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#variable-road-masked"><i class="fa fa-check"></i>2 Variable Road Masked</a></li>
 </ul></li>
-<li><a href="#non-stratified-sampling-methods">Non-stratified sampling methods</a>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#non-stratified-sampling-methods"><i class="fa fa-check"></i>Non-stratified sampling methods</a>
 <ul>
-<li><a href="#balanced-sampling">Balanced Sampling</a></li>
-<li><a href="#lhs">Latin Hypercube Sampling</a></li>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#balanced-sampling"><i class="fa fa-check"></i>Balanced Sampling</a></li>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#lhs"><i class="fa fa-check"></i>Latin Hypercube Sampling</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#disc">Discussion points</a>
+<li class="chapter" data-level="" data-path="disc.html"><a href="disc.html"><i class="fa fa-check"></i>Discussion points</a>
 <ul>
-<li><a href="#methods">Methods</a></li>
-<li><a href="#need-to-integrate-already-established-samples">Need to integrate already established samples</a></li>
-<li><a href="#algorithm-creation">Algorithm creation</a></li>
-<li><a href="#agenda-for-future">Agenda for future</a></li>
+<li class="chapter" data-level="" data-path="disc.html"><a href="disc.html#methods"><i class="fa fa-check"></i>Methods</a></li>
+<li class="chapter" data-level="" data-path="disc.html"><a href="disc.html#need-to-integrate-already-established-samples"><i class="fa fa-check"></i>Need to integrate already established samples</a></li>
+<li class="chapter" data-level="" data-path="disc.html"><a href="disc.html#algorithm-creation"><i class="fa fa-check"></i>Algorithm creation</a></li>
+<li class="chapter" data-level="" data-path="disc.html"><a href="disc.html#agenda-for-future"><i class="fa fa-check"></i>Agenda for future</a></li>
 </ul></li>
-<li><a href="#references">References</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
 </ul>
-<!--bookdown:toc2:end-->
+
       </nav>
     </div>
 
@@ -216,7 +217,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Structurally Guided Sampling</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Approaches to structurally guided sampling</a>
           </h1>
         </div>
 
@@ -224,114 +225,161 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<!--bookdown:toc:end-->
-<!--bookdown:body:start-->
-<div id="overview" class="section level1 unnumbered">
-<h1 class="unnumbered">Overview</h1>
-<p>This document is a brief introduction to the structurally guided sampling project being undertaken by the IRSS Lab at the UBC Faculty fo Forestry. Herein we provide details related to:</p>
-<ul>
-<li><p>Literature review about <a href="#SGS">SGS</a></p></li>
-<li><p>Overview of how <a href="#dataprep">data has been prepared</a></p></li>
-<li><p>Work done in the RMFInventory package using <a href="#princomp">principle components</a></p></li>
-<li><p>Potential methods to apply using <a href="#strat">stratification and sampling methods</a></p></li>
-<li><p>Points to <a href="#disc">discuss</a> for how the project should evolve</p></li>
-</ul>
-<!--chapter:end:index.Rmd-->
-</div>
 <div id="SGS" class="section level1 unnumbered">
-<h1 class="unnumbered">Structurally Guided Sampling Review</h1>
-<p>Placeholder</p>
+<h1>Structurally Guided Sampling Review</h1>
+<p><span class="citation">(<a href="#ref-McRoberts2012" role="doc-biblioref">McRoberts, Gobakken, and Næsset 2012</a>)</span> outline the essence of structurally guided sampling:</p>
+<blockquote>
+<p>Stratified estimation is a statistical technique that can be used to increase the precision of estimates without increasing sample sizes. The essence of stratified estimation is to aggregate observations of the response variable into groups or strata that are more homogeneous than the population as a whole. The population mean and its variance are estimated as weighted means ofwithin-strata means and variances where the weights are based on strata sizes. If the stratification is accomplished prior to sampling and the within-stratum variances are known or can be easily estimated, then greater precision may be achieved by selecting within-strata sampling intensities to be proportional to within-strata variances (Cochran, 1977).</p>
+</blockquote>
+<p>Studies including <span class="citation">(<a href="#ref-Leiterer2015" role="doc-biblioref">Leiterer et al. 2015</a>)</span> and <span class="citation">(<a href="#ref-Kane2010" role="doc-biblioref">Kane et al. 2010</a>)</span> suggest that the information in the ALS data may be condensed to a few metrics. Many of the studies reviewed seem to adopt this by selecting a low number of metrics which they use to stratify the landscape and consequently sample within.<span class="citation">(<a href="#ref-Fedrigo2018" role="doc-biblioref">Fedrigo et al. 2018</a>)</span> further outlined:</p>
+<blockquote>
+<p><em>“Lidar metrics may be useful for forest stand classification if they differentiate classes of interest (Wulder et al., 2008). The separation of the data into vertical layers allows metrics to be derived for specific forest strata, which may increase the discrimination of multi-strata stand types. The selection of breaks that define these strata can be based on field knowledge or identified statistically from lidar profiles (Lefsky et al., 1999; Zhang et al., 2011).”</em></p>
+</blockquote>
+<p>An additional note of interest is that a great deal of research in the field of digital soil mapping can be applied to structurally guided sampling. Studies including <span class="citation">(<a href="#ref-Carre2007" role="doc-biblioref">Carré, McBratney, and Minasny 2007</a>)</span>, <span class="citation">(<a href="#ref-Ma2020" role="doc-biblioref">Ma et al. 2020</a>)</span>, and <span class="citation">(<a href="#ref-Malone2019" role="doc-biblioref">Malone, Minansy, and Brungard 2019</a>)</span> were invaluable for understanding how to use auxiliary variables to determine effective sampling protocols - especially in the context of Latin Hypercube Sampling.</p>
 <div id="stratapp" class="section level2 unnumbered">
-<h2 class="unnumbered">Stratification approaches</h2>
+<h2>Stratification approaches</h2>
 <div id="hawbaker2009" class="section level3 unnumbered">
-<h3 class="unnumbered"><span class="citation">(<a href="#ref-Hawbaker2009" role="doc-biblioref">Hawbaker et al. 2009</a>)</span></h3>
+<h3><span class="citation">(<a href="#ref-Hawbaker2009" role="doc-biblioref">Hawbaker et al. 2009</a>)</span></h3>
+<p>Used ALS mean and SD to stratify. They first separated by forest type, within which 10 strata were derived using mean height. Within each height stratum, 3 additional sub-strata were created using SD. This produced a total of 30 stratifications where one coniferous forest and two deciduous forest locations were randomly selected. They compared samples taken from strata with a random sample finding that:</p>
+<blockquote>
+<p>Prediction errors from models constructed using a random sample were up to 68% larger than those from the models built with a stratified sample. The stratified sample included a greater range of variability than the random sample.</p>
+</blockquote>
+<p><img src="img/Hawbaker2009_Fig1.png" width="464" /></p>
 </div>
 <div id="dalponte2011" class="section level3 unnumbered">
-<h3 class="unnumbered"><span class="citation">(<a href="#ref-Dalponte2011" role="doc-biblioref">Dalponte et al. 2011</a>)</span></h3>
+<h3><span class="citation">(<a href="#ref-Dalponte2011" role="doc-biblioref">Dalponte et al. 2011</a>)</span></h3>
+<p>They analyzed 2 aspects of ground reference data collection.</p>
+<ol style="list-style-type: decimal">
+<li>The positioning error of the ground plots</li>
+<li>The optimal number of training plots.</li>
+</ol>
+<p>They had a large collection of samples (&gt;700) and systematically analyzed how the reduction of sample numbers influenced accuracy of attribute estimates.</p>
+<p>They tested the effect of error in estimate related to distance the center point of the plot was moved - displacement error.</p>
+<blockquote>
+<p>The decrease was at a minimum when the displacement was less than 5 m, while it was considerable over 10 m.</p>
+</blockquote>
+<p>They performed both random downsampling and stratified downsampling to determine effect of varying sample sizes, using methods from <span class="citation">(<a href="#ref-Hawbaker2009" role="doc-biblioref">Hawbaker et al. 2009</a>)</span> and <span class="citation">(<a href="#ref-Maltamo2011" role="doc-biblioref">Maltamo et al. 2011</a>)</span> for stratified downsampling approaches.</p>
+<p>They found that:</p>
+<blockquote>
+<p>Comparing the results obtained with the proposed stratified sampling method and the other three methods considered, one can see that the proposed stratified sampling method was the one that provided the best results for both sets.</p>
+</blockquote>
+<blockquote>
+<p>The new protocol allowed us to obtain promising results for the considered dataset: using only 53 training plots, instead of 534 in the original dataset, we obtained the same results for the validation set.</p>
+</blockquote>
 </div>
 <div id="maltamo2011" class="section level3 unnumbered">
-<h3 class="unnumbered"><span class="citation">(<a href="#ref-Maltamo2011" role="doc-biblioref">Maltamo et al. 2011</a>)</span></h3>
+<h3><span class="citation">(<a href="#ref-Maltamo2011" role="doc-biblioref">Maltamo et al. 2011</a>)</span></h3>
+<p>Divided P90 into 12 even parts. A near equal number of sample plots were systematically chosen within each of these 12 parts according to the range of VEG (ratio of vegetation points and ground points). To representatively sample the 12 parts and to cover the extremes, selection intensity was higher in the p90 range range with the lowest number of previously established plots. The use of ALS data as <em>a-priori</em> information provided the most accurate results.</p>
+<p>They also provide this important statement:</p>
+<blockquote>
+<p><em>“One should keep in mind that in real world applications, some given ALS variables will have to be used for selection of plots regardless of which and how many biophysical properties the inventory aims at estimating. Thus, some ALS variables will work better for certain biophysical properties than for others. An appropriate way of choosing suitable ALS variables could be to select them according to the relative importance of the biophysical properties to be estimated.”</em></p>
+</blockquote>
 </div>
 <div id="junttila2013" class="section level3 unnumbered">
-<h3 class="unnumbered"><span class="citation">(<a href="#ref-Junttila2013" role="doc-biblioref">Junttila et al. 2013</a>)</span></h3>
+<h3><span class="citation">(<a href="#ref-Junttila2013" role="doc-biblioref">Junttila et al. 2013</a>)</span></h3>
+<p>Used a number of approaches including a <em>space filling design</em>, which attempts to sample uniformly across a feature space. The <code>Maximin</code> design attempts to cover a feature space as uniformly as possible given a fixed number of sample points. It maximizes the minimum distance between plots.</p>
+<blockquote>
+<p>The results indicate that choosing the plots in a way that ensures ample coverage of both spatial and feature space variability improves the performance of the corresponding models, and that adequate coverage of the variability in the feature space is the most important condition that should be met by the set of plots collected.</p>
+</blockquote>
+<p><img src="img/Juntilla2013_Fig6.png" width="560" /></p>
 </div>
 <div id="valbuena2013" class="section level3 unnumbered">
-<h3 class="unnumbered"><span class="citation">(<a href="#ref-Valbuena2013" role="doc-biblioref">Valbuena et al. 2013</a>)</span></h3>
+<h3><span class="citation">(<a href="#ref-Valbuena2013" role="doc-biblioref">Valbuena et al. 2013</a>)</span></h3>
+<p>Used the cover metric to provide an idea of the density of each forest area. They justified that cover influenced the relation between other metrics and the forest response and, therefore, it was included in all the models computed.</p>
 </div>
 <div id="grafstrom2013" class="section level3 unnumbered">
-<h3 class="unnumbered"><span class="citation">(<a href="#ref-Grafstrom2013" role="doc-biblioref">Grafström and Ringvall 2013</a>)</span></h3>
+<h3><span class="citation">(<a href="#ref-Grafstrom2013" role="doc-biblioref">Grafström and Ringvall 2013</a>)</span></h3>
+<p>Presents the <span class="citation">(<a href="#ref-R-BalancedSampling" role="doc-biblioref">Grafström and Lisic 2019</a>)</span> package. Their manuscript implemented comparisons between simple random sampling (SRS) and:</p>
 <div id="local-pivotal-method-with-x-and-y-coordinates-lpm-xy" class="section level4 unnumbered">
-<h4 class="unnumbered">Local pivotal method with x and y coordinates (LPM-xy)</h4>
+<h4>Local pivotal method with x and y coordinates (LPM-xy)</h4>
+<blockquote>
+<p>to make sure the sample is well spread geographically. The Euclidean distance is used without standardization because the spatial coordinates are on the same scale.</p>
+</blockquote>
 </div>
 <div id="local-pivotal-method-lpm" class="section level4 unnumbered">
-<h4 class="unnumbered">Local pivotal method (LPM)</h4>
+<h4>Local pivotal method (LPM)</h4>
+<blockquote>
+<p>XY and four selected ALS variables as auxiliary variables. The samples are well spread geographically and well spread in the four ALS variables. The distance function (eq. (3)) is used.</p>
+</blockquote>
 </div>
 <div id="cube-method-cm" class="section level4 unnumbered">
-<h4 class="unnumbered">Cube method (CM)</h4>
+<h4>Cube method (CM)</h4>
+<blockquote>
+<p>The samples are balanced on the four ALS variables. The x and y coordinates are not used for this method, because it does not make sense to balance on geographical coordinates.</p>
+</blockquote>
 </div>
 <div id="local-cube-method-lcm" class="section level4 unnumbered">
-<h4 class="unnumbered">Local cube method (LCM)</h4>
+<h4>Local cube method (LCM)</h4>
+<blockquote>
+<p>The samples are balanced on the four ALS variables and the x and y coordinates are used to make sure the sample is well spread geographically. The Euclidean distance is used in the geographical space.</p>
+</blockquote>
+<p>They found that spreading the sample well in geographical space is important. Spreading the sample well in all auxiliary variables (LPM) and using the HT estimator was in all cases a more efficient strategy than SRS followed by a calibration estimator.</p>
+<p>Spreading the sample well is more efficient than balancing (or SRS followed by calibration) if the relationship between the target and the auxiliary variables is nonlinear, which is why it performs better (see Tables 2 and 3 in their manuscript).</p>
+<blockquote>
+<p><em>“The final order of the designs combined with the calibration estimator was (from best to worst) LCM, LPM, LPM-xy, CM, and SRS. We get the best results when using the information both in the design and the estimator. Hence, we can conclude that using auxiliary information in the design is very important.”</em></p>
+</blockquote>
+<p>All three designs, LCM, LPM, and CM, had very good design effects. The reduction of the variance of the HT estimator was for the main target variable volume up to 75% compared with SRS.</p>
 </div>
 </div>
 <div id="grafstrom2014" class="section level3 unnumbered">
-<h3 class="unnumbered"><span class="citation">(<a href="#ref-Grafstrom2014" role="doc-biblioref">Grafström, Saarela, and Ene 2014</a>)</span></h3>
+<h3><span class="citation">(<a href="#ref-Grafstrom2014" role="doc-biblioref">Grafström, Saarela, and Ene 2014</a>)</span></h3>
+<p>Continuation of previous study highlighting value of sampling methods.</p>
+<blockquote>
+<p>A possible drawback of the LPM compared with more simple methods such as systematic random sampling is that sample se- lection is computationally intensive for large populations. This is a problem because the population size (number of pixels) tends to be rather large in forest applications with auxiliary data from, e.g., airborne LiDAR, making it practically impossible to apply the LPM as it is. To deal with this problem, we introduce a new rapid suboptimal implementation ofthe LPM that can be applied to large populations.</p>
+</blockquote>
+<blockquote>
+<p>With the LPM, there is no stratification or other difficult design choices; we only need to define distance. Modelling is not really necessary, which means no complicated formulas. Yet this is a very competitive strategy in many cases. It has the advantage of being intuitive and simple, which should not be underrated. It also allows us to keep the traditional design-based approach, while still taking advantage of powerful auxiliary information.</p>
+</blockquote>
+<blockquote>
+<p>With the LPM, there is no stratification or other difficult design choices; we only need to define distance. Modelling is not really necessary, which means no complicated formulas. Yet this is a very competitive strategy in many cases. It has the advantage of being intuitive and simple, which should not be underrated. It also allows us to keep the traditional design-based approach, while still taking advantage of powerful auxiliary information.</p>
+</blockquote>
 </div>
 <div id="niemi2016" class="section level3 unnumbered">
-<h3 class="unnumbered"><span class="citation">(<a href="#ref-Niemi2016" role="doc-biblioref">Niemi and Vauhkonen 2016</a>)</span></h3>
+<h3><span class="citation">(<a href="#ref-Niemi2016" role="doc-biblioref">Niemi and Vauhkonen 2016</a>)</span></h3>
+<p>Used ALS textural CHM metrics (HIST,PATCH,GLCM,LBP) for pre-stratification of the inventory area. They tested the strength of the relationship between metrics and central attributes of forest growing stock (Vol,BA,Diam). It was found that the dispersion of the clusters derived in an <strong>unsupervised</strong> mode could be used as an indicator for prioritizing the plots to be measured as the sample to form the reference data for the wall-to-wall models.</p>
 </div>
 <div id="valbuena2017" class="section level3 unnumbered">
-<h3 class="unnumbered"><span class="citation">(<a href="#ref-Valbuena2017" role="doc-biblioref">Valbuena et al. 2017</a>)</span></h3>
+<h3><span class="citation">(<a href="#ref-Valbuena2017" role="doc-biblioref">Valbuena et al. 2017</a>)</span></h3>
+<p>Used a rule based method to stratify forest areas using Lmoments including Lcv and Lskew.</p>
 </div>
 <div id="mcroberts2017" class="section level3 unnumbered">
-<h3 class="unnumbered"><span class="citation">(<a href="#ref-McRoberts2017" role="doc-biblioref">McRoberts, Chen, and Walters 2017</a>)</span></h3>
+<h3><span class="citation">(<a href="#ref-McRoberts2017" role="doc-biblioref">McRoberts, Chen, and Walters 2017</a>)</span></h3>
+<p>Modeling inventory attributes with ALS metrics. BA was considered as an <em>“integrator of all the response variables”</em> and was used as the basis for constructing strata using a linear model. Predictions of BA were then scaled by the largest BA prediction,multiplied by 100, then assigned 1 of 100 potential strata. Strata were then aggregated these into 4,6,8 strata with approximately equal proportion of study area.</p>
+<blockquote>
+<p>Stratifications that are most effective with respect to minimizing variances are based on variables that are closely related to the response variable or variables of interest. When multiple response variables are to be estimated simultaneously, the same stratification must be used for all response variables to ensure compatibility.</p>
+</blockquote>
+<p>Results showed they were able to:
+&gt;Reduce sampling intensity by up to 35% without losing accuracy in the estimators. Relative to the simple random sampling estimators that used no stratification, use of four strata decreased SEs by 29.0%–38.1%, depending on the response variable; relative to four strata, use of six strata reduced SEs by 2.3%–7.3%; and relative to six strata, use of eight strata reduced SEs by no more than 4% and for two response variables actually increased SEs.</p>
+<blockquote>
+<p>From an operational perspective, the results of the study suggest that multivariate, airborne laser scanning-assisted inventories could be fairly easily implemented, subject to availability of the airborne laser scanning data.</p>
+</blockquote>
 </div>
 <div id="malone2019" class="section level3 unnumbered">
-<h3 class="unnumbered"><span class="citation">(<a href="#ref-Malone2019" role="doc-biblioref">Malone, Minansy, and Brungard 2019</a>)</span></h3>
+<h3><span class="citation">(<a href="#ref-Malone2019" role="doc-biblioref">Malone, Minansy, and Brungard 2019</a>)</span></h3>
+<p>They provide an indepth description of how to implement and improve the outputs of Latin Hypercube Sampling, providing a <a href="https://bitbucket.org/brendo1001/clhc_sampling/downloads/">coded example</a> of how to incorporate already acquired samples across the landscape. They specify a method to bootstrap sample size followed by the application of multiple methods to determine the optimal sample number to use based on auxiliary data.</p>
 </div>
 <div id="papa2020" class="section level3 unnumbered">
-<h3 class="unnumbered"><span class="citation">(<a href="#ref-Papa2020" role="doc-biblioref">Papa et al. 2020</a>)</span></h3>
+<h3><span class="citation">(<a href="#ref-Papa2020" role="doc-biblioref">Papa et al. 2020</a>)</span></h3>
+<p>Compared simple random sampling to stratified sampling within strata groups. Used hierarchical cluster analysis for formation of strata. Clusters were used for sub-sampling. The number of clusters was established by the <a href="strat.html#clusterchallenge">Elbow method</a>. Clusters were validated with an ANOVA post-hoc Tukey test.</p>
+<p>Varying size of metric cells (1, 0.5, 0.25 ha) were tested. The stratified sampling was simulated by using weighting distributed by strata, so that each segment was the same sample size, whereas no weighting was used for the simulation in the case of the simple random sampling.</p>
+<blockquote>
+<p>For each level of sampling size (number of plots in the inventory), 1000 iterations were performed, and their mean and standard deviation were summarized in order to produce a graph of relative uncertainty (standard error/global mean) as a function of sample intensity (proportion of total area sampled, in %).</p>
+</blockquote>
+<p><img src="img/Papa2020_Fig3.png" width="934" /></p>
+<p><img src="img/Papa2020_Fig4.png" width="964" /></p>
 </div>
 <div id="ma2020" class="section level3 unnumbered">
-<h3 class="unnumbered"><span class="citation">(<a href="#ref-Ma2020" role="doc-biblioref">Ma et al. 2020</a>)</span></h3>
-<!--chapter:end:01-LitReview.Rmd-->
-</div>
-</div>
-</div>
-<div id="dataprep" class="section level1 unnumbered">
-<h1 class="unnumbered">Data Preparation</h1>
-<p>Placeholder</p>
-<div id="load-wall-to-wall-metrics" class="section level2 unnumbered">
-<h2 class="unnumbered">Load wall-to-wall metrics</h2>
-</div>
-<div id="integrate-forest-inventory-layers" class="section level2 unnumbered">
-<h2 class="unnumbered">Integrate forest inventory layers</h2>
-</div>
-<div id="prepare-road-buffers-for-future-masking" class="section level2 unnumbered">
-<h2 class="unnumbered">Prepare road buffers for future masking</h2>
-<div id="road-buffering-outputs" class="section level3 unnumbered">
-<h3 class="unnumbered">Road buffering outputs</h3>
-<!--chapter:end:02-dataprep.Rmd-->
-</div>
-</div>
-</div>
-<div id="princomp" class="section level1 unnumbered">
-<h1 class="unnumbered">Principal Components</h1>
-<p>Placeholder</p>
-<div id="use-pca-model-to-get-pca-values-of-an-existing-set-of-plots" class="section level2 unnumbered">
-<h2 class="unnumbered">Use PCA model to get PCA values of an existing set of plots</h2>
-</div>
-<div id="candidate-cells" class="section level2 unnumbered">
-<h2 class="unnumbered">Candidate cells</h2>
-</div>
-<div id="stratification" class="section level2 unnumbered">
-<h2 class="unnumbered">Stratification</h2>
-</div>
-<div id="exist-plots" class="section level2 unnumbered">
-<h2 class="unnumbered">Derive strata for existing plots</h2>
-</div>
-<div id="select-new-plots" class="section level2 unnumbered">
-<h2 class="unnumbered">Select new plots</h2>
-<!--chapter:end:03-princomp.Rmd-->
+<h3><span class="citation">(<a href="#ref-Ma2020" role="doc-biblioref">Ma et al. 2020</a>)</span></h3>
+<p>They compare Latin Hypercube Sampling and feature space coverage sampling for predicting soil classes. They detail specific functions to use for Latin Hypercube Sampling and feature space coverage sampling. Sampling pools of varying sizes are compared to simple random sampling in a number of modeling approaches. Final results indicated that:</p>
+<blockquote>
+<p>1)In both study areas the median overall accuracy with FSCS washigher than those with CLHS and SRS over all sample sizes and crossall three prediction methods. The median overall accuracy with CLHS was only marginally larger than with SRS.
+2)There was a significant negative correlation betweenMSSSDandoverall accuracy, whereas no such correlation was found betweenO1 + O3and overall accuracy.•The coefficient of variation in overall accuracy among samples se-lected using FSCS was smaller than these using CLHS and SRS at thesame sample sizes.
+3)With CLHS the variation in overall accuracy among samples waslarge, so that there is a serious risk that a particular sample mightlead to a low overall accuracy.
+4)FSCS-RF is the most accurate combination of sampling and predic-tion for both study areas</p>
+</blockquote>
+<p>Results indicated that feature space coverage sampling could be a viable method for locating samples.</p>
+<p><img src="img/IRSS_Logos_2016_backwhite-03.png" width="50%" style="display: block; margin: auto;" /></p>
+
 <style type="text/css">
 pre {
   max-height: 300px;
@@ -343,843 +391,17 @@ pre[class] {
 </style>
 </div>
 </div>
-<div id="strat" class="section level1 unnumbered">
-<h1 class="unnumbered">Other stratification methods</h1>
-<p>The second method we outline is using k means stratification for consequent stratified sampling.</p>
-<div id="kmeans" class="section level2 unnumbered">
-<h2 class="unnumbered">K-means</h2>
-<p>Here is a standard way to apply unsupervised K-means and allocate each ALS cell to a cluster.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">### K MEANS </span><span class="al">###</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract values for Kmeans</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> rast_dt_wall</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="do">## determine index of each cell so to map values correctly without NA&#39;s</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncell</span>(wall_poly)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> idx[<span class="sc">-</span><span class="fu">unique</span>(<span class="fu">which</span>(<span class="fu">is.na</span>(v), <span class="at">arr.ind=</span><span class="cn">TRUE</span>)[,<span class="dv">1</span>])]  </span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="do">############################</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="do">#### K MEANS CLUSTERING ####</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">############################</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="do">#### DETERMINE OPTIMAL NUMBER OF CLUSTERS?????</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#Apply K means - center and scale values and remove NA&#39;s</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>E <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(<span class="fu">na.omit</span>(<span class="fu">scale</span>(v,<span class="at">center =</span> T,<span class="at">scale=</span>T)), <span class="dv">4</span>)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>clusters <span class="ot">&lt;-</span> E<span class="sc">$</span>cluster</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># create empty raster from original candidate dimentions</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>r.empty <span class="ot">&lt;-</span> wall_poly[[<span class="dv">1</span>]]</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>r.empty[] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co"># add cluster values to corresponding index and re-name</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>r.empty[idx] <span class="ot">&lt;-</span> clusters</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(r.empty) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;clusters&quot;</span>)</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co">#combine clusters with original structural metrics</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>wall_poly[[<span class="dv">14</span>]] <span class="ot">&lt;-</span> r.empty</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">brewer.pal</span>(<span class="at">n =</span> <span class="dv">4</span>, <span class="at">name =</span> <span class="st">&quot;Spectral&quot;</span>)</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(wall_poly<span class="sc">$</span>clusters,<span class="at">col=</span>pal)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
-<div id="clusterchallenge" class="section level2 unnumbered">
-<h2 class="unnumbered">How many clusters?</h2>
-<p>This is a loaded questions. How many clusters to choose can depends on many reasons, and there are many ways to determine how many to use. A challenge with the K-means method is being objective about the number of strata to use and where to partition the data. I present a number of examples below. <span class="citation">(<a href="#ref-Papa2020" role="doc-biblioref">Papa et al. 2020</a>)</span> used k-means clustering and outlined that they used the <em>Elbow method</em> to determine the number of clusters.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Elbow Method for finding the optimal number of clusters</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># data &lt;- as.data.frame(na.omit(scale(v)))</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Elbow method</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_nbclust</span>(<span class="fu">as.data.frame</span>(<span class="fu">na.omit</span>(<span class="fu">scale</span>(v))), kmeans, <span class="at">method =</span> <span class="st">&quot;wss&quot;</span>) <span class="sc">+</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">4</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="co"># add line for better visualisation</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">&quot;Elbow method&quot;</span>) <span class="co"># add subtitle</span></span></code></pre></div>
-<p><img src="img/elbow_method.png" width="630" /></p>
-<p>Based on the figure above we see that we can choose 4 clusters based on the elbow method. There are <strong><em>many</em></strong> methods that can be used. We see quickly that its not entirely cut and dry how to choose cluster numbers, but we have methods to decide that. <strong>This is likely something that the user will need to give input on.</strong></p>
-<p>The <code>NbClust()</code> function from the <span class="citation">(<a href="#ref-R-NbClust" role="doc-biblioref">Charrad et al. 2015</a>)</span> package is an additional method, though it takes a long time to run (especially on large datasets). This function:</p>
-<blockquote>
-<p>provides 30 indices for determining the number of clusters and proposes to user the best clustering scheme from the different results obtained by varying all combinations of number of clusters, distance measures, and clustering methods.</p>
-</blockquote>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>nb <span class="ot">&lt;-</span> <span class="fu">NbClust</span>(data, <span class="at">diss=</span><span class="cn">NULL</span>, <span class="at">distance =</span> <span class="st">&quot;euclidean&quot;</span>, </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">min.nc=</span><span class="dv">2</span>, <span class="at">max.nc=</span><span class="dv">12</span>, <span class="at">method =</span> <span class="st">&quot;kmeans&quot;</span>, </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">index =</span> <span class="st">&quot;all&quot;</span>, <span class="at">alphaBeale =</span> <span class="fl">0.1</span>)</span></code></pre></div>
-</div>
-<div id="OSB" class="section level2 unnumbered">
-<h2 class="unnumbered">Optimum stratum boundaries</h2>
-<p>A method to address this is using optimal break methods like that of <code>strata.data()</code> from the <span class="citation">(<a href="#ref-R-stratifyR" role="doc-biblioref">Reddy and Khan 2019</a>)</span> package. This method takes the population of candidate cells <code>v</code> and a fixed sample size <code>100</code> to compute the optimum stratum boundaries (OSB) for a given number of strata. Along with OSB it also provides the optimum sample sizes within strata directly from the data.</p>
-<p>In this example we specify that we would like data to be split into 4 strata and we iterate splits on the <code>avg</code> <code>cov</code> and <code>p99</code> variables. Some studies like <span class="citation">(<a href="#ref-Maltamo2011" role="doc-biblioref">Maltamo et al. 2011</a>)</span> and <span class="citation">(<a href="#ref-Hawbaker2009" role="doc-biblioref">Hawbaker et al. 2009</a>)</span> used multiple metrics to split on, while others like used only 1.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#prepare data</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>o_val <span class="ot">&lt;-</span> v <span class="sc">%&gt;%</span> </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">##########################################</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">####### OPTIMAL CLUSTERING BREAKS ########</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="do">##########################################</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="do">##### Sampling within clusters</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>OSB <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">10</span>)){</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#1 - average height</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">#2 - covariance</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">#10 - p99 height</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">strata.data</span>(o_val[,i], <span class="at">h =</span> <span class="dv">4</span>, <span class="at">n=</span><span class="dv">100</span>) </span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  k <span class="ot">&lt;-</span> <span class="fu">names</span>(o_val[<span class="dv">1</span>])</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  breaks <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(res<span class="sc">$</span>OSB)</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(breaks)<span class="ot">=</span>k</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  OSB[[i]] <span class="ot">&lt;-</span> breaks</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>breaks <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">as.data.frame</span>(OSB[[<span class="dv">1</span>]]),<span class="fu">as.data.frame</span>(OSB[[<span class="dv">2</span>]]),<span class="fu">as.data.frame</span>(OSB[[<span class="dv">10</span>]]))</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(breaks) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;avg&quot;</span>,<span class="st">&quot;cov&quot;</span>,<span class="st">&quot;p99&quot;</span>)</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(breaks,<span class="st">&quot;dat/breaks.RDS&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(o_val,<span class="fu">aes</span>(avg))<span class="sc">+</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()<span class="sc">+</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> breaks<span class="sc">$</span>avg, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-</div>
-<div id="sampling-within-groupsstrata" class="section level2 unnumbered">
-<h2 class="unnumbered">Sampling within groups/strata</h2>
-<p>Once OSB are defined we can associate the groups with the data themselves and perform statistical tests to determine wherther groups are significantly difference from one another. <span class="citation">(<a href="#ref-Papa2020" role="doc-biblioref">Papa et al. 2020</a>)</span> used ANOVA and Tukey post-hoc tests. First, we can change the resulting group labels from <code>cut()</code> to more understandable characters.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#define groups within splitting variable</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>split_osb <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>,breaks<span class="sc">$</span>avg[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>],<span class="cn">Inf</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>grps <span class="ot">&lt;-</span> <span class="fu">cut</span>(o_val<span class="sc">$</span>avg,split_osb)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>o_val<span class="sc">$</span>groups <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(grps)</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#convert groups to A | B | C | D</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>o_val <span class="ot">&lt;-</span> o_val <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">groups =</span> <span class="fu">case_when</span>(groups <span class="sc">==</span> <span class="st">&quot;(-Inf,5.1]&quot;</span><span class="sc">~</span><span class="st">&quot;A&quot;</span>,</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>                 groups <span class="sc">==</span> <span class="st">&quot;(5.1,9.33]&quot;</span><span class="sc">~</span><span class="st">&quot;B&quot;</span>,</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                 groups <span class="sc">==</span> <span class="st">&quot;(9.33,14.4]&quot;</span><span class="sc">~</span><span class="st">&quot;C&quot;</span>,</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>                 groups <span class="sc">==</span> <span class="st">&quot;(14.4, Inf]&quot;</span><span class="sc">~</span><span class="st">&quot;D&quot;</span>))</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Statistical testing</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1 <span class="ot">&lt;-</span> <span class="fu">aov</span>(avg<span class="sc">~</span>groups,<span class="at">data=</span>o_val))</span></code></pre></div>
-<pre><code>##                Df  Sum Sq Mean Sq F value Pr(&gt;F)    
-## groups          3 1290629  430210  266539 &lt;2e-16 ***
-## Residuals   87230  140794       2                   
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>o_val <span class="sc">%&gt;%</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(groups,avg,<span class="at">fill=</span>groups)) <span class="sc">+</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_eye</span>()</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<p>Once these strata are established we can begin to test a variety of sampling mechanisms.</p>
-</div>
-<div id="srs" class="section level2 unnumbered">
-<h2 class="unnumbered">Simple Random Sampling</h2>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Without road masking</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>ns <span class="ot">&lt;-</span> <span class="dv">200</span> <span class="co">#total number of desired samples</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> o_val <span class="sc">%&gt;%</span> </span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(groups) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">freq =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n), <span class="at">plot_tot =</span> <span class="fu">as.integer</span>(freq<span class="sc">*</span>ns))</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>df_sample <span class="ot">&lt;-</span> o_val <span class="sc">%&gt;%</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(groups) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(groups) <span class="sc">%&gt;%</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>() <span class="sc">%&gt;%</span>            </span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n =</span> samples<span class="sc">$</span>plot_tot) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">samp =</span> <span class="fu">map2</span>(data, n, sample_n)) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>data) <span class="sc">%&gt;%</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(samp)</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="co"># sample summary statistics</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>df_sample <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(groups) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(avg,groups) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">n</span>(),</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> <span class="fu">mean</span>(avg),</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fu">sd</span>(avg)</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<pre><code>## # A tibble: 4 x 4
-##   groups     n  mean    sd
-##   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 A         41  3.34 1.00 
-## 2 B         60  7.20 1.12 
-## 3 C         79 11.7  1.39 
-## 4 D         18 15.9  0.883</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#population summary statistics</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>o_val <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(groups) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(avg,groups) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">n</span>(),</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> <span class="fu">mean</span>(avg),</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fu">sd</span>(avg)</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<pre><code>## # A tibble: 4 x 4
-##   groups     n  mean    sd
-##   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 A      17933  3.30  1.05
-## 2 B      26395  7.36  1.23
-## 3 C      34626 11.8   1.41
-## 4 D       8280 15.7   1.23</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(df_sample, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;x&quot;</span>,<span class="st">&quot;y&quot;</span>))</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(wall_poly<span class="sc">$</span>avg)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(coords),<span class="at">add=</span>T)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>avg,<span class="at">y=</span>std))<span class="sc">+</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> o_val, <span class="fu">aes</span>(<span class="at">color =</span> groups))<span class="sc">+</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> df_sample, <span class="at">pch=</span><span class="dv">21</span>, <span class="at">fill =</span> <span class="st">&quot;red&quot;</span>,<span class="at">colour=</span><span class="st">&quot;black&quot;</span>)<span class="sc">+</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">15</span>) <span class="sc">+</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-15-2.png" width="672" /></p>
-<pre><code>##                Df Sum Sq Mean Sq F value Pr(&gt;F)    
-## groups          3 532594  177531  117528 &lt;2e-16 ***
-## Residuals   29898  45162       2                   
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<p><img src="SGS_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
-<div id="srs-2-variable-road-masked" class="section level3 unnumbered">
-<h3 class="unnumbered">SRS 2 Variable Road Masked</h3>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ns <span class="ot">&lt;-</span> <span class="dv">200</span> <span class="co">#total number of desired samples</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> o_val <span class="sc">%&gt;%</span> </span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(groups) <span class="sc">%&gt;%</span> </span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">freq =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n), <span class="at">plot_tot =</span> <span class="fu">as.integer</span>(freq<span class="sc">*</span>ns))</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>df_sample <span class="ot">&lt;-</span> o_val <span class="sc">%&gt;%</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(groups) <span class="sc">%&gt;%</span> </span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(groups) <span class="sc">%&gt;%</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>() <span class="sc">%&gt;%</span>            </span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n =</span> samples<span class="sc">$</span>plot_tot) <span class="sc">%&gt;%</span> </span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">samp =</span> <span class="fu">map2</span>(data, n, sample_n)) <span class="sc">%&gt;%</span> </span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>data) <span class="sc">%&gt;%</span></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(samp)</span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="co"># sample summary statistics</span></span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>df_sample <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(groups) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(avg,groups) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">n</span>(),</span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> <span class="fu">mean</span>(avg),</span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fu">sd</span>(avg)</span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<pre><code>## # A tibble: 4 x 4
-##   groups     n  mean    sd
-##   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 A         61  2.88 0.875
-## 2 B         50  6.96 1.20 
-## 3 C         69 11.8  1.44 
-## 4 D         18 15.6  0.961</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#population summary statistics</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>o_val <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(groups) <span class="sc">%&gt;%</span> </span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(avg,groups) <span class="sc">%&gt;%</span> </span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">n</span>(),</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> <span class="fu">mean</span>(avg),</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fu">sd</span>(avg)</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<pre><code>## # A tibble: 4 x 4
-##   groups     n  mean    sd
-##   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 A       9126  3.15 0.992
-## 2 B       7590  7.29 1.23 
-## 3 C      10404 11.9  1.41 
-## 4 D       2782 15.7  1.21</code></pre>
-<p>Visualizing the samples</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(df_sample, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;x&quot;</span>,<span class="st">&quot;y&quot;</span>))</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(wall_poly_roads<span class="sc">$</span>avg)</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(coords),<span class="at">add=</span>T)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>avg,<span class="at">y=</span>std))<span class="sc">+</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> o_val, <span class="fu">aes</span>(<span class="at">color =</span> groups))<span class="sc">+</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> df_sample, <span class="at">pch=</span><span class="dv">21</span>, <span class="at">fill =</span> <span class="st">&quot;red&quot;</span>,<span class="at">colour=</span><span class="st">&quot;black&quot;</span>)<span class="sc">+</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">15</span>) <span class="sc">+</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-18-2.png" width="672" /></p>
-</div>
-</div>
-<div id="using-2-variables-to-stratify" class="section level2 unnumbered">
-<h2 class="unnumbered">Using 2 variables to stratify</h2>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Without road masking</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract values for Kmeans</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> rast_dt_wall </span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>o_val <span class="ot">&lt;-</span> v <span class="sc">%&gt;%</span> </span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="co">#define groups within splitting variable</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>split_osb <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>,breaks<span class="sc">$</span>avg[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>],<span class="cn">Inf</span>)</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>grps <span class="ot">&lt;-</span> <span class="fu">cut</span>(o_val<span class="sc">$</span>avg,split_osb)</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>o_val<span class="sc">$</span>groups <span class="ot">&lt;-</span> <span class="fu">as.character</span>(grps)</span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="co">#convert groups to A | B | C | D</span></span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>o_val <span class="ot">&lt;-</span> o_val <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">groups =</span> <span class="fu">case_when</span>(groups <span class="sc">==</span> <span class="st">&quot;(-Inf,5.1]&quot;</span><span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>                 groups <span class="sc">==</span> <span class="st">&quot;(5.1,9.33]&quot;</span><span class="sc">~</span><span class="dv">2</span>,</span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>                 groups <span class="sc">==</span> <span class="st">&quot;(9.33,14.4]&quot;</span><span class="sc">~</span><span class="dv">3</span>,</span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>                 groups <span class="sc">==</span> <span class="st">&quot;(14.4, Inf]&quot;</span><span class="sc">~</span><span class="dv">4</span>))</span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>o_val <span class="ot">&lt;-</span> o_val <span class="sc">%&gt;%</span> </span>
-<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(groups) <span class="sc">%&gt;%</span> </span>
-<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">groups2 =</span> <span class="fu">ntile</span>(std,<span class="dv">3</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(<span class="st">&quot;groups_m&quot;</span>,groups,groups2) <span class="sc">%&gt;%</span></span>
-<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">group_indices</span>(., groups_m))</span>
-<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>ns <span class="ot">&lt;-</span> <span class="dv">200</span> <span class="co">#total number of desired samples</span></span>
-<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> o_val <span class="sc">%&gt;%</span> </span>
-<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(groups_m) <span class="sc">%&gt;%</span> </span>
-<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">freq =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n),<span class="at">plot_tot =</span> <span class="fu">as.integer</span>(freq<span class="sc">*</span>ns))</span>
-<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>samp <span class="ot">&lt;-</span> o_val <span class="sc">%&gt;%</span></span>
-<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(groups_m) <span class="sc">%&gt;%</span> </span>
-<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(groups_m) <span class="sc">%&gt;%</span></span>
-<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>() <span class="sc">%&gt;%</span>            </span>
-<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n =</span> samples<span class="sc">$</span>plot_tot) <span class="sc">%&gt;%</span> </span>
-<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">samp =</span> <span class="fu">map2</span>(data, n, sample_n)) <span class="sc">%&gt;%</span> </span>
-<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>data) <span class="sc">%&gt;%</span></span>
-<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(samp)</span>
-<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(samp, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;x&quot;</span>,<span class="st">&quot;y&quot;</span>))</span>
-<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(wall_poly<span class="sc">$</span>avg)</span>
-<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(coords),<span class="at">add=</span>T)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>avg,<span class="at">y=</span>std))<span class="sc">+</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> o_val, <span class="fu">aes</span>(<span class="at">color =</span> groups_m))<span class="sc">+</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> samp, <span class="at">pch=</span><span class="dv">21</span>, <span class="at">fill =</span> <span class="st">&quot;red&quot;</span>,<span class="at">colour=</span><span class="st">&quot;black&quot;</span>)<span class="sc">+</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>coordsgrps <span class="ot">&lt;-</span> o_val <span class="sc">%&gt;%</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(groups_m) <span class="sc">%&gt;%</span> </span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(groups_m) <span class="sc">%&gt;%</span></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>() <span class="sc">%&gt;%</span>            </span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_rect</span>(<span class="at">data=</span>coordsgrps<span class="sc">$</span>data[[<span class="dv">1</span>]],<span class="fu">aes</span>(<span class="at">xmin=</span><span class="fu">min</span>(avg),<span class="at">xmax=</span><span class="fu">max</span>(avg),<span class="at">ymin=</span><span class="fu">min</span>(std),<span class="at">ymax=</span><span class="fu">max</span>(std)),<span class="at">colour=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="at">data=</span>coordsgrps<span class="sc">$</span>data[[<span class="dv">2</span>]],<span class="fu">aes</span>(<span class="at">xmin=</span><span class="fu">min</span>(avg),<span class="at">xmax=</span><span class="fu">max</span>(avg),<span class="at">ymin=</span><span class="fu">min</span>(std),<span class="at">ymax=</span><span class="fu">max</span>(std)),<span class="at">colour=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="at">data=</span>coordsgrps<span class="sc">$</span>data[[<span class="dv">3</span>]],<span class="fu">aes</span>(<span class="at">xmin=</span><span class="fu">min</span>(avg),<span class="at">xmax=</span><span class="fu">max</span>(avg),<span class="at">ymin=</span><span class="fu">min</span>(std),<span class="at">ymax=</span><span class="fu">max</span>(std)),<span class="at">colour=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="at">data=</span>coordsgrps<span class="sc">$</span>data[[<span class="dv">4</span>]],<span class="fu">aes</span>(<span class="at">xmin=</span><span class="fu">min</span>(avg),<span class="at">xmax=</span><span class="fu">max</span>(avg),<span class="at">ymin=</span><span class="fu">min</span>(std),<span class="at">ymax=</span><span class="fu">max</span>(std)),<span class="at">colour=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="at">data=</span>coordsgrps<span class="sc">$</span>data[[<span class="dv">5</span>]],<span class="fu">aes</span>(<span class="at">xmin=</span><span class="fu">min</span>(avg),<span class="at">xmax=</span><span class="fu">max</span>(avg),<span class="at">ymin=</span><span class="fu">min</span>(std),<span class="at">ymax=</span><span class="fu">max</span>(std)),<span class="at">colour=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="at">data=</span>coordsgrps<span class="sc">$</span>data[[<span class="dv">6</span>]],<span class="fu">aes</span>(<span class="at">xmin=</span><span class="fu">min</span>(avg),<span class="at">xmax=</span><span class="fu">max</span>(avg),<span class="at">ymin=</span><span class="fu">min</span>(std),<span class="at">ymax=</span><span class="fu">max</span>(std)),<span class="at">colour=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="at">data=</span>coordsgrps<span class="sc">$</span>data[[<span class="dv">7</span>]],<span class="fu">aes</span>(<span class="at">xmin=</span><span class="fu">min</span>(avg),<span class="at">xmax=</span><span class="fu">max</span>(avg),<span class="at">ymin=</span><span class="fu">min</span>(std),<span class="at">ymax=</span><span class="fu">max</span>(std)),<span class="at">colour=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="at">data=</span>coordsgrps<span class="sc">$</span>data[[<span class="dv">8</span>]],<span class="fu">aes</span>(<span class="at">xmin=</span><span class="fu">min</span>(avg),<span class="at">xmax=</span><span class="fu">max</span>(avg),<span class="at">ymin=</span><span class="fu">min</span>(std),<span class="at">ymax=</span><span class="fu">max</span>(std)),<span class="at">colour=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="at">data=</span>coordsgrps<span class="sc">$</span>data[[<span class="dv">9</span>]],<span class="fu">aes</span>(<span class="at">xmin=</span><span class="fu">min</span>(avg),<span class="at">xmax=</span><span class="fu">max</span>(avg),<span class="at">ymin=</span><span class="fu">min</span>(std),<span class="at">ymax=</span><span class="fu">max</span>(std)),<span class="at">colour=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="at">data=</span>coordsgrps<span class="sc">$</span>data[[<span class="dv">10</span>]],<span class="fu">aes</span>(<span class="at">xmin=</span><span class="fu">min</span>(avg),<span class="at">xmax=</span><span class="fu">max</span>(avg),<span class="at">ymin=</span><span class="fu">min</span>(std),<span class="at">ymax=</span><span class="fu">max</span>(std)),<span class="at">colour=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="at">data=</span>coordsgrps<span class="sc">$</span>data[[<span class="dv">11</span>]],<span class="fu">aes</span>(<span class="at">xmin=</span><span class="fu">min</span>(avg),<span class="at">xmax=</span><span class="fu">max</span>(avg),<span class="at">ymin=</span><span class="fu">min</span>(std),<span class="at">ymax=</span><span class="fu">max</span>(std)),<span class="at">colour=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="at">data=</span>coordsgrps<span class="sc">$</span>data[[<span class="dv">12</span>]],<span class="fu">aes</span>(<span class="at">xmin=</span><span class="fu">min</span>(avg),<span class="at">xmax=</span><span class="fu">max</span>(avg),<span class="at">ymin=</span><span class="fu">min</span>(std),<span class="at">ymax=</span><span class="fu">max</span>(std)),<span class="at">colour=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="cn">NA</span>)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-19-2.png" width="672" /></p>
-<div id="variable-road-masked" class="section level3 unnumbered">
-<h3 class="unnumbered">2 Variable Road Masked</h3>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="do">## With road masking</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract values for Kmeans</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> rast_dt</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>o_val <span class="ot">&lt;-</span> v <span class="sc">%&gt;%</span> </span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co">#define groups within splitting variable</span></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>split_osb <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>,breaks<span class="sc">$</span>avg[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>],<span class="cn">Inf</span>)</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>grps <span class="ot">&lt;-</span> <span class="fu">cut</span>(o_val<span class="sc">$</span>avg,split_osb)</span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>o_val<span class="sc">$</span>groups <span class="ot">&lt;-</span> <span class="fu">as.character</span>(grps)</span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="co">#convert groups to A | B | C | D</span></span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>o_val <span class="ot">&lt;-</span> o_val <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">groups =</span> <span class="fu">case_when</span>(groups <span class="sc">==</span> <span class="st">&quot;(-Inf,5.1]&quot;</span><span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>                 groups <span class="sc">==</span> <span class="st">&quot;(5.1,9.33]&quot;</span><span class="sc">~</span><span class="dv">2</span>,</span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>                 groups <span class="sc">==</span> <span class="st">&quot;(9.33,14.4]&quot;</span><span class="sc">~</span><span class="dv">3</span>,</span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>                 groups <span class="sc">==</span> <span class="st">&quot;(14.4, Inf]&quot;</span><span class="sc">~</span><span class="dv">4</span>))</span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>o_val <span class="ot">&lt;-</span> o_val <span class="sc">%&gt;%</span> </span>
-<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(groups) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">groups2 =</span> <span class="fu">ntile</span>(std,<span class="dv">3</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(<span class="st">&quot;groups_m&quot;</span>,groups,groups2) <span class="sc">%&gt;%</span></span>
-<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">group_indices</span>(., groups_m))</span>
-<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>ns <span class="ot">&lt;-</span> <span class="dv">200</span> <span class="co">#total number of desired samples</span></span>
-<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> o_val <span class="sc">%&gt;%</span> </span>
-<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(groups_m) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n=</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">freq =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n),<span class="at">plot_tot =</span> <span class="fu">as.integer</span>(freq<span class="sc">*</span>ns))</span>
-<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a>samp <span class="ot">&lt;-</span> o_val <span class="sc">%&gt;%</span></span>
-<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(groups_m) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(groups_m) <span class="sc">%&gt;%</span></span>
-<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>() <span class="sc">%&gt;%</span>            </span>
-<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n =</span> samples<span class="sc">$</span>plot_tot) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">samp =</span> <span class="fu">map2</span>(data, n, sample_n)) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>data) <span class="sc">%&gt;%</span></span>
-<span id="cb25-43"><a href="#cb25-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(samp)</span>
-<span id="cb25-44"><a href="#cb25-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-45"><a href="#cb25-45" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(samp, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;x&quot;</span>,<span class="st">&quot;y&quot;</span>))</span>
-<span id="cb25-46"><a href="#cb25-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-47"><a href="#cb25-47" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(wall_poly_roads<span class="sc">$</span>avg)</span>
-<span id="cb25-48"><a href="#cb25-48" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(coords),<span class="at">add=</span>T)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>avg,<span class="at">y=</span>std))<span class="sc">+</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> o_val, <span class="fu">aes</span>(<span class="at">color =</span> groups_m))<span class="sc">+</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> samp, <span class="at">pch=</span><span class="dv">21</span>, <span class="at">fill =</span> <span class="st">&quot;red&quot;</span>,<span class="at">colour=</span><span class="st">&quot;black&quot;</span>)<span class="sc">+</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>)</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>coordsgrps <span class="ot">&lt;-</span> o_val <span class="sc">%&gt;%</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(groups_m) <span class="sc">%&gt;%</span> </span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(groups_m) <span class="sc">%&gt;%</span></span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>() <span class="sc">%&gt;%</span>            </span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_rect</span>(<span class="at">data=</span>coordsgrps<span class="sc">$</span>data[[<span class="dv">1</span>]],<span class="fu">aes</span>(<span class="at">xmin=</span><span class="fu">min</span>(avg),<span class="at">xmax=</span><span class="fu">max</span>(avg),<span class="at">ymin=</span><span class="fu">min</span>(std),<span class="at">ymax=</span><span class="fu">max</span>(std)),<span class="at">colour=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="at">data=</span>coordsgrps<span class="sc">$</span>data[[<span class="dv">2</span>]],<span class="fu">aes</span>(<span class="at">xmin=</span><span class="fu">min</span>(avg),<span class="at">xmax=</span><span class="fu">max</span>(avg),<span class="at">ymin=</span><span class="fu">min</span>(std),<span class="at">ymax=</span><span class="fu">max</span>(std)),<span class="at">colour=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="at">data=</span>coordsgrps<span class="sc">$</span>data[[<span class="dv">3</span>]],<span class="fu">aes</span>(<span class="at">xmin=</span><span class="fu">min</span>(avg),<span class="at">xmax=</span><span class="fu">max</span>(avg),<span class="at">ymin=</span><span class="fu">min</span>(std),<span class="at">ymax=</span><span class="fu">max</span>(std)),<span class="at">colour=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="at">data=</span>coordsgrps<span class="sc">$</span>data[[<span class="dv">4</span>]],<span class="fu">aes</span>(<span class="at">xmin=</span><span class="fu">min</span>(avg),<span class="at">xmax=</span><span class="fu">max</span>(avg),<span class="at">ymin=</span><span class="fu">min</span>(std),<span class="at">ymax=</span><span class="fu">max</span>(std)),<span class="at">colour=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="at">data=</span>coordsgrps<span class="sc">$</span>data[[<span class="dv">5</span>]],<span class="fu">aes</span>(<span class="at">xmin=</span><span class="fu">min</span>(avg),<span class="at">xmax=</span><span class="fu">max</span>(avg),<span class="at">ymin=</span><span class="fu">min</span>(std),<span class="at">ymax=</span><span class="fu">max</span>(std)),<span class="at">colour=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="at">data=</span>coordsgrps<span class="sc">$</span>data[[<span class="dv">6</span>]],<span class="fu">aes</span>(<span class="at">xmin=</span><span class="fu">min</span>(avg),<span class="at">xmax=</span><span class="fu">max</span>(avg),<span class="at">ymin=</span><span class="fu">min</span>(std),<span class="at">ymax=</span><span class="fu">max</span>(std)),<span class="at">colour=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="at">data=</span>coordsgrps<span class="sc">$</span>data[[<span class="dv">7</span>]],<span class="fu">aes</span>(<span class="at">xmin=</span><span class="fu">min</span>(avg),<span class="at">xmax=</span><span class="fu">max</span>(avg),<span class="at">ymin=</span><span class="fu">min</span>(std),<span class="at">ymax=</span><span class="fu">max</span>(std)),<span class="at">colour=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="at">data=</span>coordsgrps<span class="sc">$</span>data[[<span class="dv">8</span>]],<span class="fu">aes</span>(<span class="at">xmin=</span><span class="fu">min</span>(avg),<span class="at">xmax=</span><span class="fu">max</span>(avg),<span class="at">ymin=</span><span class="fu">min</span>(std),<span class="at">ymax=</span><span class="fu">max</span>(std)),<span class="at">colour=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="at">data=</span>coordsgrps<span class="sc">$</span>data[[<span class="dv">9</span>]],<span class="fu">aes</span>(<span class="at">xmin=</span><span class="fu">min</span>(avg),<span class="at">xmax=</span><span class="fu">max</span>(avg),<span class="at">ymin=</span><span class="fu">min</span>(std),<span class="at">ymax=</span><span class="fu">max</span>(std)),<span class="at">colour=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="at">data=</span>coordsgrps<span class="sc">$</span>data[[<span class="dv">10</span>]],<span class="fu">aes</span>(<span class="at">xmin=</span><span class="fu">min</span>(avg),<span class="at">xmax=</span><span class="fu">max</span>(avg),<span class="at">ymin=</span><span class="fu">min</span>(std),<span class="at">ymax=</span><span class="fu">max</span>(std)),<span class="at">colour=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="at">data=</span>coordsgrps<span class="sc">$</span>data[[<span class="dv">11</span>]],<span class="fu">aes</span>(<span class="at">xmin=</span><span class="fu">min</span>(avg),<span class="at">xmax=</span><span class="fu">max</span>(avg),<span class="at">ymin=</span><span class="fu">min</span>(std),<span class="at">ymax=</span><span class="fu">max</span>(std)),<span class="at">colour=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_rect</span>(<span class="at">data=</span>coordsgrps<span class="sc">$</span>data[[<span class="dv">12</span>]],<span class="fu">aes</span>(<span class="at">xmin=</span><span class="fu">min</span>(avg),<span class="at">xmax=</span><span class="fu">max</span>(avg),<span class="at">ymin=</span><span class="fu">min</span>(std),<span class="at">ymax=</span><span class="fu">max</span>(std)),<span class="at">colour=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="cn">NA</span>)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-20-2.png" width="672" /></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert dataframe back to raster to show classes</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>spg <span class="ot">&lt;-</span> o_val</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coordinates</span>(spg) <span class="ot">&lt;-</span> <span class="er">~</span> x <span class="sc">+</span> y</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># coerce to SpatialPixelsDataFrame</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="fu">gridded</span>(spg) <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co"># coerce to raster</span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>rasterDF <span class="ot">&lt;-</span> <span class="fu">raster</span>(spg, <span class="st">&quot;id&quot;</span>)</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="co">#plot</span></span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">brewer.pal</span>(<span class="at">n =</span> <span class="dv">12</span>, <span class="at">name =</span> <span class="st">&quot;Spectral&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning in brewer.pal(n = 12, name = &quot;Spectral&quot;): n too large, allowed maximum for palette Spectral is 11
-## Returning the palette you asked for with that many colors</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rasterDF,<span class="at">col=</span>pal)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(coords),<span class="at">add=</span>T)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
-</div>
-</div>
-<div id="non-stratified-sampling-methods" class="section level2 unnumbered">
-<h2 class="unnumbered">Non-stratified sampling methods</h2>
-<p>Some sampling methods such as the BalancedSampling approaches and Latin Hypercube Sampling do not require prior stratification. In order to sample these we present these methods on only candidate samples within the road buffer subsets.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#prepare data</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract values for Kmeans</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> rast_dt</span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>o_val <span class="ot">&lt;-</span> v <span class="sc">%&gt;%</span> </span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span></code></pre></div>
-<div id="balanced-sampling" class="section level3 unnumbered">
-<h3 class="unnumbered">Balanced Sampling</h3>
-<p><span class="citation">(<a href="#ref-Grafstrom2013" role="doc-biblioref">Grafström and Ringvall 2013</a>)</span> described the <span class="citation">(<a href="#ref-R-BalancedSampling" role="doc-biblioref">Grafström and Lisic 2019</a>)</span> package, which implements a number of sampling methods that balance samples spatially and within auxilary variable space. The spatial balance is important given that we</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(BalancedSampling)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 1</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>);</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="fu">nrow</span>(o_val); <span class="co"># population size</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">200</span>; <span class="co"># sample size</span></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>p <span class="ot">=</span> <span class="fu">rep</span>(n<span class="sc">/</span>N,N);<span class="co"># inclusion probabilities</span></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>X <span class="ot">=</span> <span class="fu">as.matrix</span>(o_val) <span class="co"># matrix of auxiliary variables</span></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>s1 <span class="ot">=</span> <span class="fu">lpm1</span>(p,X); <span class="co"># select sample </span></span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X[,<span class="dv">3</span>],X[,<span class="dv">5</span>]); <span class="co"># plot population</span></span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(X[s1,<span class="dv">3</span>],X[s1,<span class="dv">5</span>], <span class="at">pch=</span><span class="dv">19</span>,<span class="at">col=</span><span class="st">&quot;red&quot;</span>); <span class="co"># plot sample</span></span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X[,<span class="dv">1</span>],X[,<span class="dv">2</span>]); <span class="co"># plot population</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(X[s1,<span class="dv">1</span>],X[s1,<span class="dv">2</span>], <span class="at">pch=</span><span class="dv">19</span>,<span class="at">col=</span><span class="st">&quot;red&quot;</span>); <span class="co"># plot sample</span></span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-23-2.png" width="672" /></p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>s2 <span class="ot">=</span> <span class="fu">lpm2</span>(p,X); <span class="co"># select sample </span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X[,<span class="dv">3</span>],X[,<span class="dv">5</span>]); <span class="co"># plot population</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(X[s2,<span class="dv">3</span>],X[s2,<span class="dv">5</span>], <span class="at">pch=</span><span class="dv">19</span>,<span class="at">col=</span><span class="st">&quot;red&quot;</span>); <span class="co"># plot sample</span></span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-23-3.png" width="672" /></p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X[,<span class="dv">1</span>],X[,<span class="dv">2</span>]); <span class="co"># plot population</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(X[s2,<span class="dv">1</span>],X[s2,<span class="dv">2</span>], <span class="at">pch=</span><span class="dv">19</span>,<span class="at">col=</span><span class="st">&quot;red&quot;</span>); <span class="co"># plot sample</span></span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-23-4.png" width="672" /></p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>s3 <span class="ot">=</span> <span class="fu">lcube</span>(p,X,<span class="fu">cbind</span>(p));</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X[,<span class="dv">1</span>],X[,<span class="dv">2</span>]); <span class="co"># plot population</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(X[s3,<span class="dv">1</span>],X[s3,<span class="dv">2</span>], <span class="at">pch=</span><span class="dv">19</span>,<span class="at">col=</span><span class="st">&quot;red&quot;</span>); <span class="co"># plot sample</span></span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-23-5.png" width="672" /></p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X[,<span class="dv">3</span>],X[,<span class="dv">5</span>]); <span class="co"># plot population</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(X[s3,<span class="dv">3</span>],X[s3,<span class="dv">5</span>], <span class="at">pch=</span><span class="dv">19</span>,<span class="at">col=</span><span class="st">&quot;red&quot;</span>); <span class="co"># plot sample</span></span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-23-6.png" width="672" /></p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>sampls1 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(X[s1,]) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">alg =</span> <span class="st">&quot;lmp1&quot;</span>)</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>sampls2 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(X[s2,]) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">alg =</span> <span class="st">&quot;lmp2&quot;</span>)</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>sampls3 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(X[s3,]) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">alg =</span> <span class="st">&quot;lcube&quot;</span>)</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>samps <span class="ot">&lt;-</span> <span class="fu">rbind</span>(sampls1,sampls2,sampls3)</span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>samps <span class="sc">%&gt;%</span> </span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(alg) <span class="sc">%&gt;%</span></span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(avg) <span class="sc">%&gt;%</span> </span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">n</span>(),</span>
-<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> <span class="fu">mean</span>(avg),</span>
-<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fu">sd</span>(avg)</span>
-<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<pre><code>## # A tibble: 3 x 4
-##   alg       n  mean    sd
-##   &lt;chr&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 lcube   200  8.26  4.32
-## 2 lmp1    200  8.26  4.51
-## 3 lmp2    200  8.22  4.50</code></pre>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>o_val <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(avg) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">n</span>(),</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> <span class="fu">mean</span>(avg),</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fu">sd</span>(avg)</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<pre><code>##       n     mean       sd
-## 1 29902 8.396322 4.395713</code></pre>
-</div>
-<div id="lhs" class="section level3 unnumbered">
-<h3 class="unnumbered">Latin Hypercube Sampling</h3>
-<p>There are a number of different approaches to take with Latin Hypercube Sampling. The following code was derived from <span class="citation">(<a href="#ref-Malone2019" role="doc-biblioref">Malone, Minansy, and Brungard 2019</a>)</span>, who present a method to boostrap sample number for hypercube sampling, followed by a few testing options to determine optimal sample numbers. This code was provided by the authors at <a href="https://bitbucket.org/brendo1001/clhc_sampling/downloads/" class="uri">https://bitbucket.org/brendo1001/clhc_sampling/downloads/</a> which i have manipulated to work with our dataset.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="do">####################################################################</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Data analysis for the population data</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Principal components of the population (the is for tests 1 and 2)</span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>pca1 <span class="ot">=</span> <span class="fu">prcomp</span>(df[,<span class="dv">3</span><span class="sc">:</span><span class="dv">6</span>],<span class="at">scale=</span><span class="cn">TRUE</span>, <span class="at">center=</span><span class="cn">TRUE</span>)</span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>scores_pca1 <span class="ot">=</span> <span class="fu">as.data.frame</span>(pca1<span class="sc">$</span>x)</span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="fu">screeplot</span>(pca1) <span class="do">## plot the variances explained by each component</span></span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca1)</span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca1)</span>
-<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="co"># retreive the loadings</span></span>
-<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>pca1.load<span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>,<span class="at">ncol=</span><span class="dv">4</span>,<span class="at">nrow=</span><span class="dv">4</span> )</span>
-<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>){</span>
-<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>  pca1.load[i,]<span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">t</span>(pca1<span class="sc">$</span>rotation[i,]))}</span>
-<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a><span class="co">#Quantiles of the population (this is for test 3)</span></span>
-<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of bins</span></span>
-<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a>nb<span class="ot">&lt;-</span> <span class="dv">25</span></span>
-<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a><span class="co">#quantile matrix (of the covariate data)</span></span>
-<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a>q.mat<span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow=</span>(nb<span class="sc">+</span><span class="dv">1</span>), <span class="at">ncol=</span> <span class="dv">4</span>)</span>
-<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a>j<span class="ot">=</span><span class="dv">1</span></span>
-<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(df)){ <span class="co">#note the index start here</span></span>
-<span id="cb41-25"><a href="#cb41-25" aria-hidden="true" tabindex="-1"></a>  <span class="co">#get a quantile matrix together of the covariates</span></span>
-<span id="cb41-26"><a href="#cb41-26" aria-hidden="true" tabindex="-1"></a>  ran1<span class="ot">&lt;-</span> <span class="fu">max</span>(df[,i]) <span class="sc">-</span> <span class="fu">min</span>(df[,i])</span>
-<span id="cb41-27"><a href="#cb41-27" aria-hidden="true" tabindex="-1"></a>  step1<span class="ot">&lt;-</span> ran1<span class="sc">/</span>nb </span>
-<span id="cb41-28"><a href="#cb41-28" aria-hidden="true" tabindex="-1"></a>  q.mat[,j]<span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(df[,i]), <span class="at">to =</span> <span class="fu">max</span>(df[,i]), <span class="at">by =</span>step1)</span>
-<span id="cb41-29"><a href="#cb41-29" aria-hidden="true" tabindex="-1"></a>  j<span class="ot">&lt;-</span> j<span class="sc">+</span><span class="dv">1</span>}</span>
-<span id="cb41-30"><a href="#cb41-30" aria-hidden="true" tabindex="-1"></a>q.mat</span>
-<span id="cb41-31"><a href="#cb41-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-32"><a href="#cb41-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-33"><a href="#cb41-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-34"><a href="#cb41-34" aria-hidden="true" tabindex="-1"></a><span class="co">#covariate data hypercube (this is for test 4)</span></span>
-<span id="cb41-35"><a href="#cb41-35" aria-hidden="true" tabindex="-1"></a><span class="do">## This takes a while to do so only do it once if you can </span></span>
-<span id="cb41-36"><a href="#cb41-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-37"><a href="#cb41-37" aria-hidden="true" tabindex="-1"></a>cov.mat<span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span>, <span class="at">nrow=</span>nb, <span class="at">ncol=</span><span class="dv">4</span>)</span>
-<span id="cb41-38"><a href="#cb41-38" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(df)){ <span class="co"># the number of pixels</span></span>
-<span id="cb41-39"><a href="#cb41-39" aria-hidden="true" tabindex="-1"></a>  cntj<span class="ot">&lt;-</span> <span class="dv">1</span> </span>
-<span id="cb41-40"><a href="#cb41-40" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(df)){ <span class="co">#for each column</span></span>
-<span id="cb41-41"><a href="#cb41-41" aria-hidden="true" tabindex="-1"></a>    dd<span class="ot">&lt;-</span> df[i,j]  </span>
-<span id="cb41-42"><a href="#cb41-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nb){  <span class="co">#for each quantile</span></span>
-<span id="cb41-43"><a href="#cb41-43" aria-hidden="true" tabindex="-1"></a>      kl<span class="ot">&lt;-</span> q.mat[k, cntj] </span>
-<span id="cb41-44"><a href="#cb41-44" aria-hidden="true" tabindex="-1"></a>      ku<span class="ot">&lt;-</span> q.mat[k<span class="sc">+</span><span class="dv">1</span>, cntj] </span>
-<span id="cb41-45"><a href="#cb41-45" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (dd <span class="sc">&gt;=</span> kl <span class="sc">&amp;</span> dd <span class="sc">&lt;=</span> ku){cov.mat[k, cntj]<span class="ot">&lt;-</span> cov.mat[k, cntj] <span class="sc">+</span> <span class="dv">1</span>} </span>
-<span id="cb41-46"><a href="#cb41-46" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb41-47"><a href="#cb41-47" aria-hidden="true" tabindex="-1"></a>    cntj<span class="ot">&lt;-</span> cntj<span class="sc">+</span><span class="dv">1</span></span>
-<span id="cb41-48"><a href="#cb41-48" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb41-49"><a href="#cb41-49" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb41-50"><a href="#cb41-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-51"><a href="#cb41-51" aria-hidden="true" tabindex="-1"></a>cov.mat</span>
-<span id="cb41-52"><a href="#cb41-52" aria-hidden="true" tabindex="-1"></a><span class="do">####################################################################</span></span>
-<span id="cb41-53"><a href="#cb41-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-54"><a href="#cb41-54" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="fu">system.file</span>(<span class="st">&quot;extdata/roads&quot;</span>,<span class="st">&quot;roads.shp&quot;</span>, <span class="at">package =</span> <span class="st">&quot;RMFinventory&quot;</span>))</span>
-<span id="cb41-55"><a href="#cb41-55" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(roads, wall_crs<span class="sc">@</span>projargs)</span>
-<span id="cb41-56"><a href="#cb41-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-57"><a href="#cb41-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-58"><a href="#cb41-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-59"><a href="#cb41-59" aria-hidden="true" tabindex="-1"></a><span class="do">#######################################################################</span></span>
-<span id="cb41-60"><a href="#cb41-60" aria-hidden="true" tabindex="-1"></a><span class="co">#How many samples do we need?</span></span>
-<span id="cb41-61"><a href="#cb41-61" aria-hidden="true" tabindex="-1"></a><span class="co">#beginning of algorithm</span></span>
-<span id="cb41-62"><a href="#cb41-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-63"><a href="#cb41-63" aria-hidden="true" tabindex="-1"></a><span class="co">#initial settings</span></span>
-<span id="cb41-64"><a href="#cb41-64" aria-hidden="true" tabindex="-1"></a>cseq<span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">10</span>,<span class="dv">500</span>,<span class="dv">10</span>) <span class="co"># cLHC sample size</span></span>
-<span id="cb41-65"><a href="#cb41-65" aria-hidden="true" tabindex="-1"></a>its<span class="ot">&lt;-</span><span class="dv">10</span>  <span class="co"># number internal iterations with each sample size number</span></span>
-<span id="cb41-66"><a href="#cb41-66" aria-hidden="true" tabindex="-1"></a>mat.seq<span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>,<span class="at">ncol=</span><span class="dv">8</span>,<span class="at">nrow=</span><span class="fu">length</span>(cseq)) <span class="co">#empty matix for outputs</span></span>
-<span id="cb41-67"><a href="#cb41-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-68"><a href="#cb41-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-69"><a href="#cb41-69" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (w <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(cseq)){ <span class="co"># for every sample number configuration....</span></span>
-<span id="cb41-70"><a href="#cb41-70" aria-hidden="true" tabindex="-1"></a>  s.size<span class="ot">=</span>cseq[w]  <span class="co"># sample size</span></span>
-<span id="cb41-71"><a href="#cb41-71" aria-hidden="true" tabindex="-1"></a>  mat.f<span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>,<span class="at">ncol=</span><span class="dv">8</span>,<span class="at">nrow=</span>its ) <span class="co"># placement for iteration outputs</span></span>
-<span id="cb41-72"><a href="#cb41-72" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb41-73"><a href="#cb41-73" aria-hidden="true" tabindex="-1"></a>  <span class="co">#internal loop</span></span>
-<span id="cb41-74"><a href="#cb41-74" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>its){ <span class="co">#Note that this takes quite a while to run to completion</span></span>
-<span id="cb41-75"><a href="#cb41-75" aria-hidden="true" tabindex="-1"></a>    <span class="cf">repeat</span>{</span>
-<span id="cb41-76"><a href="#cb41-76" aria-hidden="true" tabindex="-1"></a>      ss <span class="ot">&lt;-</span> <span class="fu">clhs</span>(df[,<span class="dv">3</span><span class="sc">:</span><span class="dv">6</span>], <span class="at">size =</span> s.size, <span class="at">progress =</span> T, <span class="at">iter =</span> <span class="dv">100</span>) <span class="co"># Do a conditioned latin hypercube sample</span></span>
-<span id="cb41-77"><a href="#cb41-77" aria-hidden="true" tabindex="-1"></a>      s.df<span class="ot">&lt;-</span> df[ss,]</span>
-<span id="cb41-78"><a href="#cb41-78" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (<span class="fu">sum</span>(<span class="fu">duplicated</span>(s.df) <span class="sc">|</span> <span class="fu">duplicated</span>(s.df[<span class="fu">nrow</span>(s.df)<span class="sc">:</span><span class="dv">1</span>, ])[<span class="fu">nrow</span>(s.df)<span class="sc">:</span><span class="dv">1</span>]) <span class="sc">&lt;</span> <span class="dv">2</span>)</span>
-<span id="cb41-79"><a href="#cb41-79" aria-hidden="true" tabindex="-1"></a>        {<span class="cf">break</span>}}</span>
-<span id="cb41-80"><a href="#cb41-80" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb41-81"><a href="#cb41-81" aria-hidden="true" tabindex="-1"></a>    <span class="co">#principal component of sample</span></span>
-<span id="cb41-82"><a href="#cb41-82" aria-hidden="true" tabindex="-1"></a>    pca.s <span class="ot">=</span> <span class="fu">prcomp</span>(s.df[,<span class="dv">3</span><span class="sc">:</span><span class="dv">6</span>],<span class="at">scale=</span><span class="cn">TRUE</span>, <span class="at">center=</span><span class="cn">TRUE</span>)</span>
-<span id="cb41-83"><a href="#cb41-83" aria-hidden="true" tabindex="-1"></a>    scores_pca1 <span class="ot">=</span> <span class="fu">as.data.frame</span>(pca.s<span class="sc">$</span>x)</span>
-<span id="cb41-84"><a href="#cb41-84" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb41-85"><a href="#cb41-85" aria-hidden="true" tabindex="-1"></a>    <span class="co"># plot the first 2 principal components and convex hull </span></span>
-<span id="cb41-86"><a href="#cb41-86" aria-hidden="true" tabindex="-1"></a>    rand.tr<span class="ot">&lt;-</span><span class="fu">tri.mesh</span>(scores_pca1[,<span class="dv">1</span>],scores_pca1[,<span class="dv">2</span>])</span>
-<span id="cb41-87"><a href="#cb41-87" aria-hidden="true" tabindex="-1"></a>    rand.ch<span class="ot">&lt;-</span><span class="fu">convex.hull</span>(rand.tr, <span class="at">plot.it=</span>F) <span class="co">#convex hull</span></span>
-<span id="cb41-88"><a href="#cb41-88" aria-hidden="true" tabindex="-1"></a>    pr_poly <span class="ot">=</span> <span class="fu">cbind</span>(<span class="at">x=</span><span class="fu">c</span>(rand.ch<span class="sc">$</span>x),<span class="at">y=</span><span class="fu">c</span>(rand.ch<span class="sc">$</span>y)) <span class="co"># save the convext hull vertices</span></span>
-<span id="cb41-89"><a href="#cb41-89" aria-hidden="true" tabindex="-1"></a>    <span class="co">#plot(scores_pca1[,1], scores_pca1[,2], xlab=&quot;PCA 1&quot;, ylab=&quot;PCA 2&quot;, xlim=c(min(scores_pca1[,1:2]), max(scores_pca1[,1:2])),ylim=c(min(scores_pca1[,1:2]), max(scores_pca1[,1:2])))</span></span>
-<span id="cb41-90"><a href="#cb41-90" aria-hidden="true" tabindex="-1"></a>    <span class="co">#lines(c(rand.ch$x,rand.ch$x[1]), c(rand.ch$y,rand.ch$y[1]),col=&quot;red&quot;,lwd=1) # draw the convex hull(domain of prediction)</span></span>
-<span id="cb41-91"><a href="#cb41-91" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb41-92"><a href="#cb41-92" aria-hidden="true" tabindex="-1"></a>    <span class="do">#### First Test:</span></span>
-<span id="cb41-93"><a href="#cb41-93" aria-hidden="true" tabindex="-1"></a>    <span class="co">#points in polygons routine</span></span>
-<span id="cb41-94"><a href="#cb41-94" aria-hidden="true" tabindex="-1"></a>    <span class="co"># PCA prjection</span></span>
-<span id="cb41-95"><a href="#cb41-95" aria-hidden="true" tabindex="-1"></a>    PCA_projection<span class="ot">&lt;-</span> <span class="fu">predict</span>(pca.s, df[,<span class="dv">3</span><span class="sc">:</span><span class="dv">6</span>]) <span class="co"># Project population onto sample PC</span></span>
-<span id="cb41-96"><a href="#cb41-96" aria-hidden="true" tabindex="-1"></a>    newScores <span class="ot">=</span> <span class="fu">cbind</span>(<span class="at">x=</span>PCA_projection[,<span class="dv">1</span>],<span class="at">y=</span>PCA_projection[,<span class="dv">2</span>]) <span class="co"># PC scores of projected population</span></span>
-<span id="cb41-97"><a href="#cb41-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-98"><a href="#cb41-98" aria-hidden="true" tabindex="-1"></a>    <span class="co">#plot the polygon and all points to be checked</span></span>
-<span id="cb41-99"><a href="#cb41-99" aria-hidden="true" tabindex="-1"></a>    <span class="co">#plot(newScores,xlab=&quot;PCA 1&quot;, ylab=&quot;PCA 2&quot;, xlim=c(min(newScores[,1:2]), max(newScores[,1:2])),ylim=c(min(newScores[,1:2]), max(newScores[,1:2])),col=&#39;black&#39;, main=&#39;convex hull of ss&#39;)</span></span>
-<span id="cb41-100"><a href="#cb41-100" aria-hidden="true" tabindex="-1"></a>    <span class="co"># polygon(pr_poly,col=&#39;#99999990&#39;)</span></span>
-<span id="cb41-101"><a href="#cb41-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-102"><a href="#cb41-102" aria-hidden="true" tabindex="-1"></a>    <span class="co">#create check which points fall within the polygon</span></span>
-<span id="cb41-103"><a href="#cb41-103" aria-hidden="true" tabindex="-1"></a>    specMatch <span class="ot">=</span> <span class="fu">pip2d</span>(pr_poly,newScores)</span>
-<span id="cb41-104"><a href="#cb41-104" aria-hidden="true" tabindex="-1"></a>    specMatch <span class="ot">=</span> specMatch <span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb41-105"><a href="#cb41-105" aria-hidden="true" tabindex="-1"></a>    mat.f[j,<span class="dv">7</span>]<span class="ot">&lt;-</span> <span class="fu">sum</span>(specMatch)<span class="sc">/</span><span class="fu">length</span>(specMatch)<span class="sc">*</span><span class="dv">100</span> <span class="co"># propertion of new spectra the fall within the convex hull</span></span>
-<span id="cb41-106"><a href="#cb41-106" aria-hidden="true" tabindex="-1"></a>    <span class="co"># points(specMatch[which(specMatch==0),1:2],pch=&#39;X&#39;, col=&#39;red&#39;)</span></span>
-<span id="cb41-107"><a href="#cb41-107" aria-hidden="true" tabindex="-1"></a>    <span class="do">##</span><span class="re">END</span><span class="do"> points in polygons##</span></span>
-<span id="cb41-108"><a href="#cb41-108" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb41-109"><a href="#cb41-109" aria-hidden="true" tabindex="-1"></a>    <span class="do">#### Second Test:</span></span>
-<span id="cb41-110"><a href="#cb41-110" aria-hidden="true" tabindex="-1"></a>    <span class="co">#similarity of the 2 matrices (PCA Similarity Factor; Krzanowski (1979))</span></span>
-<span id="cb41-111"><a href="#cb41-111" aria-hidden="true" tabindex="-1"></a>    <span class="co"># retreive the loadings for the samples</span></span>
-<span id="cb41-112"><a href="#cb41-112" aria-hidden="true" tabindex="-1"></a>    pca.s.load<span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>,<span class="at">ncol=</span><span class="dv">4</span>,<span class="at">nrow=</span><span class="dv">4</span> )</span>
-<span id="cb41-113"><a href="#cb41-113" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>){</span>
-<span id="cb41-114"><a href="#cb41-114" aria-hidden="true" tabindex="-1"></a>      pca.s.load[i,]<span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">t</span>(pca.s<span class="sc">$</span>rotation[i,]))</span>
-<span id="cb41-115"><a href="#cb41-115" aria-hidden="true" tabindex="-1"></a>      }</span>
-<span id="cb41-116"><a href="#cb41-116" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb41-117"><a href="#cb41-117" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Perfrom the Krznowski 1979 calculation</span></span>
-<span id="cb41-118"><a href="#cb41-118" aria-hidden="true" tabindex="-1"></a>    ps1<span class="ot">&lt;-</span> pca1.load[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]  </span>
-<span id="cb41-119"><a href="#cb41-119" aria-hidden="true" tabindex="-1"></a>    ps2<span class="ot">&lt;-</span> pca.s.load[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
-<span id="cb41-120"><a href="#cb41-120" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb41-121"><a href="#cb41-121" aria-hidden="true" tabindex="-1"></a>    ps1.t<span class="ot">&lt;-</span> <span class="fu">t</span>(ps1) <span class="co">#transpose</span></span>
-<span id="cb41-122"><a href="#cb41-122" aria-hidden="true" tabindex="-1"></a>    ps2.t<span class="ot">&lt;-</span> <span class="fu">t</span>(ps2) <span class="co">#transpose</span></span>
-<span id="cb41-123"><a href="#cb41-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-124"><a href="#cb41-124" aria-hidden="true" tabindex="-1"></a>    S<span class="ot">&lt;-</span> ps1.t <span class="sc">%*%</span> ps2 <span class="sc">%*%</span> ps2.t <span class="sc">%*%</span> ps1</span>
-<span id="cb41-125"><a href="#cb41-125" aria-hidden="true" tabindex="-1"></a>    mat.f[j,<span class="dv">1</span>]<span class="ot">&lt;-</span><span class="fu">sum</span>(<span class="fu">diag</span>(S))<span class="sc">/</span><span class="dv">2</span></span>
-<span id="cb41-126"><a href="#cb41-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-127"><a href="#cb41-127" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Third Test:</span></span>
-<span id="cb41-128"><a href="#cb41-128" aria-hidden="true" tabindex="-1"></a>    <span class="co">#comparison of quantiles</span></span>
-<span id="cb41-129"><a href="#cb41-129" aria-hidden="true" tabindex="-1"></a>    df.q2<span class="fl">.1</span><span class="ot">&lt;-</span><span class="fu">quantile</span>(s.df[,<span class="dv">3</span>], <span class="at">probs =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.25</span>),<span class="at">names =</span> F, <span class="at">type =</span> <span class="dv">7</span>)</span>
-<span id="cb41-130"><a href="#cb41-130" aria-hidden="true" tabindex="-1"></a>    df.q1<span class="fl">.1</span><span class="ot">&lt;-</span><span class="fu">quantile</span>(df[,<span class="dv">3</span>], <span class="at">probs =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.25</span>),<span class="at">names =</span> F, <span class="at">type =</span> <span class="dv">7</span>)</span>
-<span id="cb41-131"><a href="#cb41-131" aria-hidden="true" tabindex="-1"></a>    mat.f[j,<span class="dv">2</span>]<span class="ot">&lt;-</span><span class="fu">sqrt</span>((df.q1<span class="fl">.1</span>[<span class="dv">1</span>]<span class="sc">-</span>df.q2<span class="fl">.1</span>[<span class="dv">1</span>])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (df.q1<span class="fl">.1</span>[<span class="dv">2</span>]<span class="sc">-</span>df.q2<span class="fl">.1</span>[<span class="dv">2</span>])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (df.q1<span class="fl">.1</span>[<span class="dv">3</span>]<span class="sc">-</span>df.q2<span class="fl">.1</span>[<span class="dv">3</span>])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (df.q1<span class="fl">.1</span>[<span class="dv">4</span>]<span class="sc">-</span>df.q2<span class="fl">.1</span>[<span class="dv">4</span>])<span class="sc">^</span><span class="dv">2</span> )</span>
-<span id="cb41-132"><a href="#cb41-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-133"><a href="#cb41-133" aria-hidden="true" tabindex="-1"></a>    df.q2<span class="fl">.2</span><span class="ot">&lt;-</span><span class="fu">quantile</span>(s.df[,<span class="dv">4</span>], <span class="at">probs =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.25</span>),<span class="at">names =</span> F, <span class="at">type =</span> <span class="dv">7</span>)</span>
-<span id="cb41-134"><a href="#cb41-134" aria-hidden="true" tabindex="-1"></a>    df.q1<span class="fl">.2</span><span class="ot">&lt;-</span><span class="fu">quantile</span>(df[,<span class="dv">4</span>], <span class="at">probs =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.25</span>),<span class="at">names =</span> F, <span class="at">type =</span> <span class="dv">7</span>)</span>
-<span id="cb41-135"><a href="#cb41-135" aria-hidden="true" tabindex="-1"></a>    mat.f[j,<span class="dv">3</span>]<span class="ot">&lt;-</span><span class="fu">sqrt</span>((df.q1<span class="fl">.2</span>[<span class="dv">1</span>]<span class="sc">-</span>df.q2<span class="fl">.2</span>[<span class="dv">1</span>])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (df.q1<span class="fl">.2</span>[<span class="dv">2</span>]<span class="sc">-</span>df.q2<span class="fl">.2</span>[<span class="dv">2</span>])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (df.q1<span class="fl">.2</span>[<span class="dv">3</span>]<span class="sc">-</span>df.q2<span class="fl">.2</span>[<span class="dv">3</span>])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (df.q1<span class="fl">.2</span>[<span class="dv">4</span>]<span class="sc">-</span>df.q2<span class="fl">.2</span>[<span class="dv">4</span>])<span class="sc">^</span><span class="dv">2</span> )</span>
-<span id="cb41-136"><a href="#cb41-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-137"><a href="#cb41-137" aria-hidden="true" tabindex="-1"></a>    df.q2<span class="fl">.3</span><span class="ot">&lt;-</span><span class="fu">quantile</span>(s.df[,<span class="dv">5</span>], <span class="at">probs =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.25</span>),<span class="at">names =</span> F, <span class="at">type =</span> <span class="dv">7</span>)</span>
-<span id="cb41-138"><a href="#cb41-138" aria-hidden="true" tabindex="-1"></a>    df.q1<span class="fl">.3</span><span class="ot">&lt;-</span><span class="fu">quantile</span>(df[,<span class="dv">5</span>], <span class="at">probs =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.25</span>),<span class="at">names =</span> F, <span class="at">type =</span> <span class="dv">7</span>)</span>
-<span id="cb41-139"><a href="#cb41-139" aria-hidden="true" tabindex="-1"></a>    mat.f[j,<span class="dv">4</span>]<span class="ot">&lt;-</span><span class="fu">sqrt</span>((df.q1<span class="fl">.3</span>[<span class="dv">1</span>]<span class="sc">-</span>df.q2<span class="fl">.3</span>[<span class="dv">1</span>])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (df.q1<span class="fl">.3</span>[<span class="dv">2</span>]<span class="sc">-</span>df.q2<span class="fl">.3</span>[<span class="dv">2</span>])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (df.q1<span class="fl">.3</span>[<span class="dv">3</span>]<span class="sc">-</span>df.q2<span class="fl">.3</span>[<span class="dv">3</span>])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (df.q1<span class="fl">.3</span>[<span class="dv">4</span>]<span class="sc">-</span>df.q2<span class="fl">.3</span>[<span class="dv">4</span>])<span class="sc">^</span><span class="dv">2</span> )</span>
-<span id="cb41-140"><a href="#cb41-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-141"><a href="#cb41-141" aria-hidden="true" tabindex="-1"></a>    df.q2<span class="fl">.4</span><span class="ot">&lt;-</span><span class="fu">quantile</span>(s.df[,<span class="dv">6</span>], <span class="at">probs =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.25</span>),<span class="at">names =</span> F, <span class="at">type =</span> <span class="dv">7</span>)</span>
-<span id="cb41-142"><a href="#cb41-142" aria-hidden="true" tabindex="-1"></a>    df.q1<span class="fl">.4</span><span class="ot">&lt;-</span><span class="fu">quantile</span>(df[,<span class="dv">6</span>], <span class="at">probs =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.25</span>),<span class="at">names =</span> F, <span class="at">type =</span> <span class="dv">7</span>)</span>
-<span id="cb41-143"><a href="#cb41-143" aria-hidden="true" tabindex="-1"></a>    mat.f[j,<span class="dv">5</span>]<span class="ot">&lt;-</span><span class="fu">sqrt</span>((df.q1<span class="fl">.4</span>[<span class="dv">1</span>]<span class="sc">-</span>df.q2<span class="fl">.4</span>[<span class="dv">1</span>])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (df.q1<span class="fl">.4</span>[<span class="dv">2</span>]<span class="sc">-</span>df.q2<span class="fl">.4</span>[<span class="dv">2</span>])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (df.q1<span class="fl">.4</span>[<span class="dv">3</span>]<span class="sc">-</span>df.q2<span class="fl">.4</span>[<span class="dv">3</span>])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (df.q1<span class="fl">.4</span>[<span class="dv">4</span>]<span class="sc">-</span>df.q2<span class="fl">.4</span>[<span class="dv">4</span>])<span class="sc">^</span><span class="dv">2</span> )</span>
-<span id="cb41-144"><a href="#cb41-144" aria-hidden="true" tabindex="-1"></a>    mat.f[j,<span class="dv">6</span>]<span class="ot">&lt;-</span><span class="fu">mean</span>(mat.f[j,<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>]) <span class="co"># take the mean distance</span></span>
-<span id="cb41-145"><a href="#cb41-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-146"><a href="#cb41-146" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Fourth test: Kullback-Leibler (KL) divergence</span></span>
-<span id="cb41-147"><a href="#cb41-147" aria-hidden="true" tabindex="-1"></a>    <span class="do">####Compare whole study area covariate space with the selected sample</span></span>
-<span id="cb41-148"><a href="#cb41-148" aria-hidden="true" tabindex="-1"></a>    <span class="co">#sample data hypercube (essentially the same script as for the grid data but just doing it on the sample data)</span></span>
-<span id="cb41-149"><a href="#cb41-149" aria-hidden="true" tabindex="-1"></a>    h.mat<span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span>, <span class="at">nrow=</span>nb, <span class="at">ncol=</span><span class="dv">4</span>)</span>
-<span id="cb41-150"><a href="#cb41-150" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb41-151"><a href="#cb41-151" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (ii <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(s.df)){ <span class="co"># the number of observations</span></span>
-<span id="cb41-152"><a href="#cb41-152" aria-hidden="true" tabindex="-1"></a>      cntj<span class="ot">&lt;-</span> <span class="dv">1</span> </span>
-<span id="cb41-153"><a href="#cb41-153" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span> (jj <span class="cf">in</span> <span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(s.df)){ <span class="co">#for each column</span></span>
-<span id="cb41-154"><a href="#cb41-154" aria-hidden="true" tabindex="-1"></a>        dd<span class="ot">&lt;-</span> s.df[ii,jj]  </span>
-<span id="cb41-155"><a href="#cb41-155" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> (kk <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nb){  <span class="co">#for each quantile</span></span>
-<span id="cb41-156"><a href="#cb41-156" aria-hidden="true" tabindex="-1"></a>          kl<span class="ot">&lt;-</span> q.mat[kk, cntj] </span>
-<span id="cb41-157"><a href="#cb41-157" aria-hidden="true" tabindex="-1"></a>          ku<span class="ot">&lt;-</span> q.mat[kk<span class="sc">+</span><span class="dv">1</span>, cntj] </span>
-<span id="cb41-158"><a href="#cb41-158" aria-hidden="true" tabindex="-1"></a>          <span class="cf">if</span> (dd <span class="sc">&gt;=</span> kl <span class="sc">&amp;</span> dd <span class="sc">&lt;=</span> ku){h.mat[kk, cntj]<span class="ot">&lt;-</span> h.mat[kk, cntj] <span class="sc">+</span> <span class="dv">1</span>}</span>
-<span id="cb41-159"><a href="#cb41-159" aria-hidden="true" tabindex="-1"></a>          }</span>
-<span id="cb41-160"><a href="#cb41-160" aria-hidden="true" tabindex="-1"></a>        cntj<span class="ot">&lt;-</span> cntj<span class="sc">+</span><span class="dv">1</span>}}</span>
-<span id="cb41-161"><a href="#cb41-161" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb41-162"><a href="#cb41-162" aria-hidden="true" tabindex="-1"></a>    <span class="co">#h.mat </span></span>
-<span id="cb41-163"><a href="#cb41-163" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Kullback-Leibler (KL) divergence</span></span>
-<span id="cb41-164"><a href="#cb41-164" aria-hidden="true" tabindex="-1"></a>    klo<span class="fl">.1</span><span class="ot">&lt;-</span> <span class="fu">KL.empirical</span>(<span class="fu">c</span>(cov.mat[,<span class="dv">1</span>]), <span class="fu">c</span>(h.mat[,<span class="dv">1</span>])) <span class="co">#1</span></span>
-<span id="cb41-165"><a href="#cb41-165" aria-hidden="true" tabindex="-1"></a>    klo<span class="fl">.2</span><span class="ot">&lt;-</span> <span class="fu">KL.empirical</span>(<span class="fu">c</span>(cov.mat[,<span class="dv">2</span>]), <span class="fu">c</span>(h.mat[,<span class="dv">2</span>])) <span class="co">#2</span></span>
-<span id="cb41-166"><a href="#cb41-166" aria-hidden="true" tabindex="-1"></a>    klo<span class="fl">.3</span><span class="ot">&lt;-</span> <span class="fu">KL.empirical</span>(<span class="fu">c</span>(cov.mat[,<span class="dv">3</span>]), <span class="fu">c</span>(h.mat[,<span class="dv">3</span>])) <span class="co">#3</span></span>
-<span id="cb41-167"><a href="#cb41-167" aria-hidden="true" tabindex="-1"></a>    klo<span class="fl">.4</span><span class="ot">&lt;-</span> <span class="fu">KL.empirical</span>(<span class="fu">c</span>(cov.mat[,<span class="dv">4</span>]), <span class="fu">c</span>(h.mat[,<span class="dv">4</span>])) <span class="co">#4</span></span>
-<span id="cb41-168"><a href="#cb41-168" aria-hidden="true" tabindex="-1"></a>    klo<span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">c</span>(klo<span class="fl">.1</span>, klo<span class="fl">.2</span>,klo<span class="fl">.3</span>,klo<span class="fl">.4</span>))</span>
-<span id="cb41-169"><a href="#cb41-169" aria-hidden="true" tabindex="-1"></a>    mat.f[j,<span class="dv">8</span>]<span class="ot">&lt;-</span> klo  <span class="co"># value of 0 means no divergence</span></span>
-<span id="cb41-170"><a href="#cb41-170" aria-hidden="true" tabindex="-1"></a>    } </span>
-<span id="cb41-171"><a href="#cb41-171" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb41-172"><a href="#cb41-172" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb41-173"><a href="#cb41-173" aria-hidden="true" tabindex="-1"></a>  <span class="co">#arrange outputs</span></span>
-<span id="cb41-174"><a href="#cb41-174" aria-hidden="true" tabindex="-1"></a>  mat.seq[w,<span class="dv">1</span>]<span class="ot">&lt;-</span><span class="fu">mean</span>(mat.f[,<span class="dv">6</span>])</span>
-<span id="cb41-175"><a href="#cb41-175" aria-hidden="true" tabindex="-1"></a>  mat.seq[w,<span class="dv">2</span>]<span class="ot">&lt;-</span><span class="fu">sd</span>(mat.f[,<span class="dv">6</span>])</span>
-<span id="cb41-176"><a href="#cb41-176" aria-hidden="true" tabindex="-1"></a>  mat.seq[w,<span class="dv">3</span>]<span class="ot">&lt;-</span><span class="fu">min</span>(mat.f[,<span class="dv">1</span>])</span>
-<span id="cb41-177"><a href="#cb41-177" aria-hidden="true" tabindex="-1"></a>  mat.seq[w,<span class="dv">4</span>]<span class="ot">&lt;-</span><span class="fu">max</span>(mat.f[,<span class="dv">1</span>])</span>
-<span id="cb41-178"><a href="#cb41-178" aria-hidden="true" tabindex="-1"></a>  mat.seq[w,<span class="dv">5</span>]<span class="ot">&lt;-</span><span class="fu">mean</span>(mat.f[,<span class="dv">7</span>])</span>
-<span id="cb41-179"><a href="#cb41-179" aria-hidden="true" tabindex="-1"></a>  mat.seq[w,<span class="dv">6</span>]<span class="ot">&lt;-</span><span class="fu">sd</span>(mat.f[,<span class="dv">7</span>])</span>
-<span id="cb41-180"><a href="#cb41-180" aria-hidden="true" tabindex="-1"></a>  mat.seq[w,<span class="dv">7</span>]<span class="ot">&lt;-</span><span class="fu">mean</span>(mat.f[,<span class="dv">8</span>])</span>
-<span id="cb41-181"><a href="#cb41-181" aria-hidden="true" tabindex="-1"></a>  mat.seq[w,<span class="dv">8</span>]<span class="ot">&lt;-</span><span class="fu">sd</span>(mat.f[,<span class="dv">8</span>])</span>
-<span id="cb41-182"><a href="#cb41-182" aria-hidden="true" tabindex="-1"></a>  } <span class="do">## </span><span class="re">END</span><span class="do"> of LOOP</span></span>
-<span id="cb41-183"><a href="#cb41-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-184"><a href="#cb41-184" aria-hidden="true" tabindex="-1"></a>  dat.seq<span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">cbind</span>(cseq,mat.seq))</span>
-<span id="cb41-185"><a href="#cb41-185" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(dat.seq)<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;samp_nos&quot;</span>, <span class="st">&quot;mean_dist&quot;</span>,<span class="st">&quot;sd_dist&quot;</span>, <span class="st">&quot;min_S&quot;</span>, <span class="st">&quot;max_S&quot;</span>, <span class="st">&quot;mean_PIP&quot;</span>,<span class="st">&quot;sd_PIP&quot;</span>, <span class="st">&quot;mean_KL&quot;</span>,<span class="st">&quot;sd_KL&quot;</span>)</span>
-<span id="cb41-186"><a href="#cb41-186" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb41-187"><a href="#cb41-187" aria-hidden="true" tabindex="-1"></a><span class="do">##########################################################</span></span></code></pre></div>
-<p>After the loop has finished we are able to plot the ouputs of the bootstrapping to outline how the sample size influenced the deviation of population and sample statistics.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="do">#######################################################  </span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co">#plot some outputs</span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cseq,mat.seq[,<span class="dv">1</span>], <span class="at">xlab=</span><span class="st">&quot;number of samples&quot;</span>, <span class="at">ylab=</span> <span class="st">&quot;similarity between covariates (entire field) with covariates (sample)&quot;</span>,<span class="at">main=</span><span class="st">&quot;Population and sample similarity&quot;</span>)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cseq,mat.seq[,<span class="dv">2</span>],<span class="at">xlab=</span><span class="st">&quot;number of samples&quot;</span>, <span class="at">ylab=</span> <span class="st">&quot;standard deviation similarity between covariates (entire field) with covariates (sample)&quot;</span>,<span class="at">main=</span><span class="st">&quot;Population and sample similarity (sd)&quot;</span>)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-26-2.png" width="672" /></p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cseq,mat.seq[,<span class="dv">3</span>])</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-26-3.png" width="672" /></p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cseq,mat.seq[,<span class="dv">4</span>])</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-26-4.png" width="672" /></p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cseq,mat.seq[,<span class="dv">5</span>],<span class="at">xlab=</span><span class="st">&quot;number of samples&quot;</span>, <span class="at">ylab=</span> <span class="st">&quot;percentage of total covariate variance of population account for in sample&quot;</span>,<span class="at">main=</span><span class="st">&quot;Population and sample similarity&quot;</span>)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-26-5.png" width="672" /></p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cseq,mat.seq[,<span class="dv">6</span>],<span class="at">xlab=</span><span class="st">&quot;number of samples&quot;</span>, <span class="at">ylab=</span> <span class="st">&quot;standard deviation of percentage of total covariate variance of population account for in sample&quot;</span>,<span class="at">main=</span><span class="st">&quot;Population and sample similarity&quot;</span>)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-26-6.png" width="672" /></p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cseq,mat.seq[,<span class="dv">7</span>],<span class="at">xlab=</span><span class="st">&quot;number of samples&quot;</span>, <span class="at">ylab=</span> <span class="st">&quot;KL divergence&quot;</span>)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-26-7.png" width="672" /></p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cseq,mat.seq[,<span class="dv">8</span>],<span class="at">xlab=</span><span class="st">&quot;number of samples&quot;</span>, <span class="at">ylab=</span> <span class="st">&quot;standard deviation of percentage of total covariate variance of population account for in sample&quot;</span>,<span class="at">main=</span><span class="st">&quot;Population and sample similarity&quot;</span>)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-26-8.png" width="672" /></p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="do">##########################################################</span></span></code></pre></div>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="do">##########################################################</span></span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="co"># make an exponetial decay function (of the KL divergence)</span></span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span> dat.seq<span class="sc">$</span>samp_nos</span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="dv">1</span><span class="sc">-</span> (dat.seq<span class="sc">$</span>mean_PIP<span class="sc">-</span><span class="fu">min</span>(dat.seq<span class="sc">$</span>mean_PIP))<span class="sc">/</span>(<span class="fu">max</span>(dat.seq<span class="sc">$</span>mean_PIP)<span class="sc">-</span><span class="fu">min</span>(dat.seq<span class="sc">$</span>mean_PIP)) <span class="co">#PIP</span></span>
-<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Parametise Exponential decay function</span></span>
-<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">xlab=</span><span class="st">&quot;sample number&quot;</span>, <span class="at">ylab=</span> <span class="st">&quot;1 - PC similarity&quot;</span>)          <span class="co"># Initial plot of the data</span></span>
-<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>start <span class="ot">&lt;-</span> <span class="fu">list</span>()     <span class="co"># Initialize an empty list for the starting values</span></span>
-<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a><span class="co">#fit 1</span></span>
-<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a><span class="fu">manipulate</span>(</span>
-<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(x, y)</span>
-<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a>  k <span class="ot">&lt;-</span> kk; b0 <span class="ot">&lt;-</span> b00; b1 <span class="ot">&lt;-</span> b10</span>
-<span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">curve</span>(k<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>b1<span class="sc">*</span>x) <span class="sc">+</span> b0, <span class="at">add=</span><span class="cn">TRUE</span>)</span>
-<span id="cb51-17"><a href="#cb51-17" aria-hidden="true" tabindex="-1"></a>  start <span class="ot">&lt;&lt;-</span> <span class="fu">list</span>(<span class="at">k=</span>k, <span class="at">b0=</span>b0, <span class="at">b1=</span>b1)</span>
-<span id="cb51-18"><a href="#cb51-18" aria-hidden="true" tabindex="-1"></a>},</span>
-<span id="cb51-19"><a href="#cb51-19" aria-hidden="true" tabindex="-1"></a><span class="at">kk=</span><span class="fu">slider</span>(<span class="dv">0</span>, <span class="dv">5</span>, <span class="at">step =</span> <span class="fl">0.01</span>,  <span class="at">initial =</span> <span class="dv">2</span>),</span>
-<span id="cb51-20"><a href="#cb51-20" aria-hidden="true" tabindex="-1"></a><span class="at">b10=</span><span class="fu">slider</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">step =</span> <span class="fl">0.000001</span>, <span class="at">initial =</span> <span class="fl">0.01</span>),</span>
-<span id="cb51-21"><a href="#cb51-21" aria-hidden="true" tabindex="-1"></a><span class="at">b00=</span><span class="fu">slider</span>(<span class="dv">0</span>,<span class="dv">1</span> , <span class="at">step=</span><span class="fl">0.000001</span>,<span class="at">initial=</span> <span class="fl">0.01</span>))</span>
-<span id="cb51-22"><a href="#cb51-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-23"><a href="#cb51-23" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">nls</span>(y <span class="sc">~</span> k<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>b1<span class="sc">*</span>x) <span class="sc">+</span> b0, <span class="at">start =</span> start)</span>
-<span id="cb51-24"><a href="#cb51-24" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit1) </span>
-<span id="cb51-25"><a href="#cb51-25" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x, <span class="fu">fitted</span>(fit1), <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="img/fitted.png" width="484" /></p>
-<p>After determining the disparity between samples and population we can optimize the number of samples we use based on the cumulative frequency distribution. We determined that the optimum number of samples was 119.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Apply fit</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>xx<span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">500</span>,<span class="dv">1</span>)</span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(xx, <span class="fu">predict</span>(fit1,<span class="fu">list</span>(<span class="at">x=</span>xx)))</span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>jj<span class="ot">&lt;-</span> <span class="fu">predict</span>(fit1,<span class="fu">list</span>(<span class="at">x=</span>xx))</span>
-<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>normalized <span class="ot">=</span> <span class="dv">1</span><span class="sc">-</span> (jj<span class="sc">-</span><span class="fu">min</span>(jj))<span class="sc">/</span>(<span class="fu">max</span>(jj)<span class="sc">-</span><span class="fu">min</span>(jj))</span>
-<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span> xx</span>
-<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>y<span class="ot">&lt;-</span> normalized</span>
-<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">xlab=</span><span class="st">&quot;sample number&quot;</span>, <span class="at">ylab=</span> <span class="st">&quot;normalised PIP&quot;</span>, <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">lwd=</span><span class="dv">2</span>)          <span class="co"># Initial plot of the data</span></span>
-<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a>x1<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">500</span>)</span>
-<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a>y1<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.95</span>, <span class="fl">0.95</span>)</span>
-<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x1,y1, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
-<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-17"><a href="#cb52-17" aria-hidden="true" tabindex="-1"></a>num <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(xx,normalized) <span class="sc">%&gt;%</span> </span>
-<span id="cb52-18"><a href="#cb52-18" aria-hidden="true" tabindex="-1"></a>       <span class="fu">filter</span>(<span class="fu">abs</span>(normalized <span class="sc">-</span> <span class="fl">0.95</span>) <span class="sc">==</span> <span class="fu">min</span>(<span class="fu">abs</span>(normalized <span class="sc">-</span> <span class="fl">0.95</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb52-19"><a href="#cb52-19" aria-hidden="true" tabindex="-1"></a>       dplyr<span class="sc">::</span><span class="fu">select</span>(xx) <span class="sc">%&gt;%</span></span>
-<span id="cb52-20"><a href="#cb52-20" aria-hidden="true" tabindex="-1"></a>       <span class="fu">pull</span>()</span>
-<span id="cb52-21"><a href="#cb52-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-22"><a href="#cb52-22" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&quot;your optimum sample size is: &quot;</span>,num)</span>
-<span id="cb52-23"><a href="#cb52-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-24"><a href="#cb52-24" aria-hidden="true" tabindex="-1"></a>x2<span class="ot">&lt;-</span> <span class="fu">c</span>(num, num); y2<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb52-25"><a href="#cb52-25" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x2,y2, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
-<span id="cb52-26"><a href="#cb52-26" aria-hidden="true" tabindex="-1"></a><span class="do">#############################################################################</span></span>
-<span id="cb52-27"><a href="#cb52-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-28"><a href="#cb52-28" aria-hidden="true" tabindex="-1"></a><span class="do">##</span><span class="re">END</span></span></code></pre></div>
-<p><img src="img/fitted_num.png" width="484" /></p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> rast_dt <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(x,y,avg,std,cov,p99) <span class="sc">%&gt;%</span> <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>ss <span class="ot">&lt;-</span> <span class="fu">clhs</span>(df[,<span class="dv">3</span><span class="sc">:</span><span class="dv">6</span>], <span class="at">size =</span> <span class="dv">143</span>, <span class="at">progress =</span> T, <span class="at">iter =</span> <span class="dv">10</span>) <span class="co"># Do a conditioned latin hypercube sample</span></span></code></pre></div>
-<pre><code>## 
-  |                                                                            
-  |                                                                      |   0%
-  |                                                                            
-  |========                                                              |  11%
-  |                                                                            
-  |================                                                      |  22%
-  |                                                                            
-  |=======================                                               |  33%
-  |                                                                            
-  |===============================                                       |  44%
-  |                                                                            
-  |=======================================                               |  56%
-  |                                                                            
-  |===============================================                       |  67%
-  |                                                                            
-  |======================================================                |  78%
-  |                                                                            
-  |==============================================================        |  89%
-  |                                                                            
-  |======================================================================| 100%</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>s.df<span class="ot">&lt;-</span> df[ss,]</span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(s.df, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;x&quot;</span>,<span class="st">&quot;y&quot;</span>))</span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(wall_poly_roads<span class="sc">$</span>avg)</span>
-<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(coords),<span class="at">add=</span>T)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
-<p>This may look well and good.. But its important to look at WHERE the samples are being located to see if the algorithm was effective. See the image below showing that that we likely need to introduce a spatial aspect to the sampling. Not really sure how to do this just yet…</p>
-<!--chapter:end:04-stratmethods.Rmd-->
-</div>
-</div>
-</div>
-<div id="disc" class="section level1 unnumbered">
-<h1 class="unnumbered">Discussion points</h1>
-<p>Placeholder</p>
-<div id="methods" class="section level2 unnumbered">
-<h2 class="unnumbered">Methods</h2>
-</div>
-<div id="need-to-integrate-already-established-samples" class="section level2 unnumbered">
-<h2 class="unnumbered">Need to integrate already established samples</h2>
-</div>
-<div id="algorithm-creation" class="section level2 unnumbered">
-<h2 class="unnumbered">Algorithm creation</h2>
-</div>
-<div id="agenda-for-future" class="section level2 unnumbered">
-<h2 class="unnumbered">Agenda for future</h2>
-<!--chapter:end:05-discussion.Rmd-->
-</div>
-</div>
-<div id="references" class="section level1 unnumbered">
-<h1 class="unnumbered">References</h1>
-<!--chapter:end:06-references.Rmd-->
+<h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-R-NbClust" class="csl-entry">
-Charrad, Malika, Nadia Ghazzali, Veronique Boiteau, and Azam Niknafs. 2015. <em>NbClust: Determining the Best Number of Clusters in a Data Set</em>. <a href="https://sites.google.com/site/malikacharrad/research/nbclust-package">https://sites.google.com/site/malikacharrad/research/nbclust-package</a>.
+<div id="ref-Carre2007" class="csl-entry">
+Carré, F., Alex B. McBratney, and B. Minasny. 2007. <span>“<span class="nocase">Estimation and potential improvement of the quality of legacy soil samples for digital soil mapping</span>.”</span> <em>Geoderma</em> 141 (1-2): 1–14. <a href="https://doi.org/10.1016/j.geoderma.2007.01.018">https://doi.org/10.1016/j.geoderma.2007.01.018</a>.
 </div>
 <div id="ref-Dalponte2011" class="csl-entry">
 Dalponte, Michele, Cristina Martinez, Mirco Rodeghiero, and Damiano Gianelle. 2011. <span>“<span class="nocase">The role of ground reference data collection in the prediction of stem volume with LiDAR data in mountain areas</span>.”</span> <em>ISPRS Journal of Photogrammetry and Remote Sensing</em> 66 (6): 787–97. <a href="https://doi.org/10.1016/j.isprsjprs.2011.09.003">https://doi.org/10.1016/j.isprsjprs.2011.09.003</a>.
+</div>
+<div id="ref-Fedrigo2018" class="csl-entry">
+Fedrigo, Melissa, Glenn J. Newnham, Nicholas C. Coops, Darius S. Culvenor, Douglas K. Bolton, and Craig R. Nitschke. 2018. <span>“<span class="nocase">Predicting temperate forest stand types using only structural profiles from discrete return airborne lidar</span>.”</span> <em>ISPRS Journal of Photogrammetry and Remote Sensing</em> 136: 106–19. <a href="https://doi.org/10.1016/j.isprsjprs.2017.11.018">https://doi.org/10.1016/j.isprsjprs.2017.11.018</a>.
 </div>
 <div id="ref-R-BalancedSampling" class="csl-entry">
 Grafström, Anton, and Jonathan Lisic. 2019. <em>BalancedSampling: Balanced and Spatially Balanced Sampling</em>. <a href="http://www.antongrafstrom.se/balancedsampling">http://www.antongrafstrom.se/balancedsampling</a>.
@@ -1196,6 +418,12 @@ Hawbaker, Todd J., Nicholas S. Keuler, Adrian A. Lesak, Terje Gobakken, Kirk Con
 <div id="ref-Junttila2013" class="csl-entry">
 Junttila, Virpi, Andrew O. Finley, John B. Bradford, and Tuomo Kauranne. 2013. <span>“<span class="nocase">Strategies for minimizing sample size for use in airborne LiDAR-based forest inventory</span>.”</span> <em>Forest Ecology and Management</em> 292: 75–85. <a href="https://doi.org/10.1016/j.foreco.2012.12.019">https://doi.org/10.1016/j.foreco.2012.12.019</a>.
 </div>
+<div id="ref-Kane2010" class="csl-entry">
+Kane, van R., Robert J. McGaughey, Jonathan D. Bakker, Rolf F. Gersonde, James A. Lutz, and Jerry F. Franklin. 2010. <span>“<span class="nocase">Comparisons between field- and LiDAR-based measures of stand structural complexity</span>.”</span> <em>Canadian Journal of Forest Research</em> 40 (4): 761–73. <a href="https://doi.org/10.1139/X10-024">https://doi.org/10.1139/X10-024</a>.
+</div>
+<div id="ref-Leiterer2015" class="csl-entry">
+Leiterer, Reik, Reinhard Furrer, Michael E. Schaepman, and Felix Morsdorf. 2015. <span>“<span class="nocase">Forest canopy-structure characterization: A data-driven approach</span>.”</span> <em>Forest Ecology and Management</em> 358: 48–61. <a href="https://doi.org/10.1016/j.foreco.2015.09.003">https://doi.org/10.1016/j.foreco.2015.09.003</a>.
+</div>
 <div id="ref-Ma2020" class="csl-entry">
 Ma, Tianwu, Dick J Brus, A-xing Zhu, Lei Zhang, and Thomas Scholten. 2020. <span>“<span class="nocase">Geoderma Comparison of conditioned Latin hypercube and feature space coverage sampling for predicting soil classes using simulation from soil maps</span>.”</span> <em>Geoderma</em> 370 (April): 114366. <a href="https://doi.org/10.1016/j.geoderma.2020.114366">https://doi.org/10.1016/j.geoderma.2020.114366</a>.
 </div>
@@ -1208,14 +436,14 @@ Maltamo, M., O. M. Bollandsås, E. Næsset, T. Gobakken, and P. Packalén. 2011.
 <div id="ref-McRoberts2017" class="csl-entry">
 McRoberts, Ronald E., Qi Chen, and Brian F. Walters. 2017. <span>“<span class="nocase">Multivariate inference for forest inventories using auxiliary airborne laser scanning data</span>.”</span> <em>Forest Ecology and Management</em> 401: 295–303. <a href="https://doi.org/10.1016/j.foreco.2017.07.017">https://doi.org/10.1016/j.foreco.2017.07.017</a>.
 </div>
+<div id="ref-McRoberts2012" class="csl-entry">
+McRoberts, Ronald E., Terje Gobakken, and Erik Næsset. 2012. <span>“<span class="nocase">Post-stratified estimation of forest area and growing stock volume using lidar-based stratifications</span>.”</span> <em>Remote Sensing of Environment</em> 125: 157–66. <a href="https://doi.org/10.1016/j.rse.2012.07.002">https://doi.org/10.1016/j.rse.2012.07.002</a>.
+</div>
 <div id="ref-Niemi2016" class="csl-entry">
 Niemi, Mikko T., and Jari Vauhkonen. 2016. <span>“<span class="nocase">Extracting canopy surface texture from airborne laser scanning data for the supervised and unsupervised prediction of area-based forest characteristics</span>.”</span> <em>Remote Sensing</em> 8 (7): 1–21. <a href="https://doi.org/10.3390/rs8070582">https://doi.org/10.3390/rs8070582</a>.
 </div>
 <div id="ref-Papa2020" class="csl-entry">
 Papa, Daniel de Almeida, Danilo Roberti Alves de Almeida, Carlos Alberto Silva, Evandro Orfanó Figueiredo, Scott C. Stark, Ruben Valbuena, Luiz Carlos Estraviz Rodriguez, and Marcus Vinício Neves d’Oliveira. 2020. <span>“<span class="nocase">Evaluating tropical forest classification and field sampling stratification from lidar to reduce effort and enable landscape monitoring</span>.”</span> <em>Forest Ecology and Management</em> 457 (September 2019). <a href="https://doi.org/10.1016/j.foreco.2019.117634">https://doi.org/10.1016/j.foreco.2019.117634</a>.
-</div>
-<div id="ref-R-stratifyR" class="csl-entry">
-Reddy, Karuna G., and M. G. M. Khan. 2019. <em>stratifyR: Optimal Stratification of Univariate Populations</em>. <a href="https://CRAN.R-project.org/package=stratifyR">https://CRAN.R-project.org/package=stratifyR</a>.
 </div>
 <div id="ref-Valbuena2017" class="csl-entry">
 Valbuena, Rubén, Matti Maltamo, Lauri Mehtätalo, and Petteri Packalen. 2017. <span>“<span class="nocase">Key structural features of Boreal forests may be detected directly using L-moments from airborne lidar data</span>.”</span> <em>Remote Sensing of Environment</em> 194: 437–46. <a href="https://doi.org/10.1016/j.rse.2016.10.024">https://doi.org/10.1016/j.rse.2016.10.024</a>.
@@ -1224,18 +452,61 @@ Valbuena, Rubén, Matti Maltamo, Lauri Mehtätalo, and Petteri Packalen. 2017. <
 Valbuena, Rubén, Petteri Packalen, Lauri Mehtätalo, Antonio García-Abril, and Matti Maltamo. 2013. <span>“<span class="nocase">Characterizing forest structural types and shelterwood dynamics from Lorenz-based indicators predicted by airborne laser scanning</span>.”</span> <em>Canadian Journal of Forest Research</em> 43 (11): 1063–74. <a href="https://doi.org/10.1139/cjfr-2013-0147">https://doi.org/10.1139/cjfr-2013-0147</a>.
 </div>
 </div>
-</div>
-<!--bookdown:body:end-->
             </section>
 
           </div>
         </div>
       </div>
-<!--bookdown:link_prev-->
-<!--bookdown:link_next-->
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="dataprep.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<!--bookdown:config-->
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["SGS.pdf", "SGS.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
 
 </body>
 

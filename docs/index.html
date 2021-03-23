@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Structurally Guided Sampling</title>
-  <meta name="description" content="Structurally Guided Sampling" />
+  <title>Approaches to structurally guided sampling</title>
+  <meta name="description" content="Approaches to structurally guided sampling" />
   <meta name="generator" content="bookdown 0.21.5 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Structurally Guided Sampling" />
+  <meta property="og:title" content="Approaches to structurally guided sampling" />
   <meta property="og:type" content="book" />
   
   
@@ -16,15 +16,15 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Structurally Guided Sampling" />
+  <meta name="twitter:title" content="Approaches to structurally guided sampling" />
   
   
   
 
-<meta name="author" content="Tristan Goodbody" />
+<meta name="author" content="Tristan Goodbody, Nicholas Coops, Martin Queinnec" />
 
 
-<meta name="date" content="2021-03-22" />
+<meta name="date" content="2021-03-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -136,7 +136,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Approaches to Structurally Guided Sampling</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#description"><i class="fa fa-check"></i>Project description</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#workplan"><i class="fa fa-check"></i>Work plan</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="SGS.html"><a href="SGS.html"><i class="fa fa-check"></i>Structurally Guided Sampling Review</a>
 <ul>
 <li class="chapter" data-level="" data-path="SGS.html"><a href="SGS.html#stratapp"><i class="fa fa-check"></i>Stratification approaches</a>
@@ -167,7 +171,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html"><i class="fa fa-check"></i>Principal Components</a>
 <ul>
-<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#use-pca-model-to-get-pca-values-of-an-existing-set-of-plots"><i class="fa fa-check"></i>Use PCA model to get PCA values of an existing set of plots</a></li>
+<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#use-pca-model-to-get-pcs-of-an-existing-set-of-plots"><i class="fa fa-check"></i>Use PCA model to get PCs of an existing set of plots</a></li>
 <li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#candidate-cells"><i class="fa fa-check"></i>Candidate cells</a></li>
 <li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#stratification"><i class="fa fa-check"></i>Stratification</a></li>
 <li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#exist-plots"><i class="fa fa-check"></i>Derive strata for existing plots</a></li>
@@ -179,7 +183,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#clusterchallenge"><i class="fa fa-check"></i>How many clusters?</a></li>
 <li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#OSB"><i class="fa fa-check"></i>Optimum stratum boundaries</a></li>
 <li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#sampling-within-groupsstrata"><i class="fa fa-check"></i>Sampling within groups/strata</a></li>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#srs"><i class="fa fa-check"></i>Simple Random Sampling</a></li>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#srs"><i class="fa fa-check"></i>Simple Random Sampling</a>
+<ul>
+<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#srs-2-variable-road-masked"><i class="fa fa-check"></i>SRS 2 Variable Road Masked</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#using-2-variables-to-stratify"><i class="fa fa-check"></i>Using 2 variables to stratify</a>
 <ul>
 <li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#variable-road-masked"><i class="fa fa-check"></i>2 Variable Road Masked</a></li>
@@ -210,7 +217,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Structurally Guided Sampling</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Approaches to structurally guided sampling</a>
           </h1>
         </div>
 
@@ -219,21 +226,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">Structurally Guided Sampling</h1>
-<p class="author"><em>Tristan Goodbody</em></p>
-<p class="date"><em>2021-03-22</em></p>
+<h1 class="title">Approaches to structurally guided sampling</h1>
+<p class="author"><em>Tristan Goodbody, Nicholas Coops, Martin Queinnec</em></p>
+<p class="date"><em>2021-03-23</em></p>
 </div>
 <div id="overview" class="section level1 unnumbered">
 <h1>Overview</h1>
-<p>This document is a brief introduction to the structurally guided sampling project being undertaken by the IRSS Lab at the UBC Faculty fo Forestry. Herein we provide details related to:</p>
+<p>This document is a brief introduction to the structurally guided sampling project being undertaken by the Integrated Remote Sensing Studio at the UBC Faculty fo Forestry. Herein we provide details related to:</p>
 <ul>
 <li><p>Literature review about <a href="SGS.html#SGS">SGS</a></p></li>
 <li><p>Overview of how <a href="dataprep.html#dataprep">data has been prepared</a></p></li>
-<li><p>Work done in the RMFInventory package using <a href="princomp.html#princomp">principle components</a></p></li>
+<li><p>Work done in the <a href="https://github.com/mqueinnec/RMFinventory/">RMFInventory package</a> using <a href="princomp.html#princomp">principle components</a></p></li>
 <li><p>Potential methods to apply using <a href="strat.html#strat">stratification and sampling methods</a></p></li>
 <li><p>Points to <a href="disc.html#disc">discuss</a> for how the project should evolve</p></li>
 </ul>
+<div id="description" class="section level2 unnumbered">
+<h2>Project description</h2>
+<p>The objective of this project is to develop a toolkit to allow forest managers and Provincial forest staff to utilize structurally guided sampling (SGS) approaches to optimize plot placement as well as assess the importance of existing plots within a conventional plot network.</p>
+<p>With the availability of Provincial-wide LIDAR data over Ontario, Québec, Alberta, and the maritimes, managers have a wealth of information to guide inventory plot placement. Establishing plots and measuring tree inventory information is costly in terms of labor, travel and safety. Minimizing the number of plots required to establish an accurate forest inventory is a key management objective. SGS offers the opportunity to examine what stand structures exist and, through stratification, where plots should be located to capture that variation in order to develop an accurate Enhanced Forest Inventory (EFI). Currently, inventory plots are placed according to pre-defined manually interpreted strata, which may result in over-sampling particular structural types while at the same time have little or no plots representing other structural types. This can result in poor prediction of EFI forest attributes. Using a SGS approach allows us to revolutionize plot network design in terms of the number, and location of, plots within a plot network.</p>
+</div>
+<div id="workplan" class="section level2 unnumbered">
+<h2>Work plan</h2>
+<ol style="list-style-type: decimal">
+<li>Literature review on state of the art SGS approaches</li>
+<li>Algorithm development for optimal structural class definition</li>
+<li>Plot location algorithm based on critical factors
+<ul>
+<li>Optimum number of structural classes</li>
+<li>Optimal number of samples</li>
+<li>Integration of existing plot networks</li>
+<li>Minimum distance between plots</li>
+</ul></li>
+<li>Integrate algorithms into an R package.</li>
+</ol>
+<p><img src="img/IRSS_Logos_2016_backwhite-03.png" width="50%" style="display: block; margin: auto;" /></p>
 
+</div>
 </div>
             </section>
 
