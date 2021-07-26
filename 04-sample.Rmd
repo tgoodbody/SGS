@@ -1,0 +1,282 @@
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{css, echo=FALSE}
+pre {
+  max-height: 500px;
+  overflow-y: auto;
+}
+pre[class] {
+  max-height: 500px;
+}
+```
+
+```{r,warning=F,message=F,echo=FALSE}
+library(sgsR)
+library(terra)
+
+#--- Load mraster and access files ---#
+r <- system.file("extdata", "wall_metrics_small.tif", package = "sgsR")
+
+#--- load the mraster using the terra package ---#
+mraster <- terra::rast(r)
+
+a <- system.file("extdata", "roads.shp", package = "sgsR")
+
+#--- load the access vector using the sf package ---#
+access <- sf::st_read(a)
+
+#--- apply kmeans algorithm to metrics raster ---#
+sraster <- strat_kmeans(mraster = mraster, 
+                        nStrata = 4) # algorithm will plot output
+
+#--- apply kmeans algorithm to metrics raster ---#
+existing <- sample_srs(raster = mraster, # use sraster as input for sampling
+                       nSamp = 200, # request 200 samples be taken
+                       mindist = 100) # algorithm will plot output
+
+```
+
+# `sample_*` functions {#sample .unnumbered}
+
+A total of 5 `sample` functions currently exist in the package:
+
+-   `sample_srs` - simple random sampling
+
+-   `sample_grid`- sample principal components on input `mraster`
+
+-   `sample_strat` - sample the number of samples needed for represntative sample within a `sraster`
+
+-   `sample_clhs` - appy the adapted Hypercube Evaluation of a Legacy Sample (ahels) algorithm to existing samples
+
+-   `sample_balanced` - apply count of observations algorithm to existing samples
+
+## Access {.unnumbered}
+
+A feature of the `sample_*` functions that may be of interest is the ability to define `access`. Users can supply a road access network (must be lines) as access aswell as define buffers around access where samples should be excluded and included. 
+
+Important additional parameter when `access` is provided are:
+
+* `buff_inner` - An inner buffer that defines the distance from `access` where samples cannot be takes (i.e. if you do not want samples within 50 m of your `access` layer set `buff_inner = 50`). 
+
+* `buff_outer` - Maximum distance samples can be located from `access` (i.e. if you dont want samples more than 200 meters from a road set `buff_inner = 200`)
+
+## `sample_srs` {.unnumbered}
+We provided a very simple example of using the `sample_srs` function when we were preparing our input data. We provide some addition examples below. 
+
+::: {.box-content .vig-content}
+::: {.box-title .vig-content-top}
+### Input raster {.unnumbered}
+:::
+Notice that the input for `sample_srs` is `raster`. This means that an `sraster` or an `mraster` can be supplied.
+:::
+ 
+```{r,warning=F,message=F} 
+#--- perform simple random sampling ---#
+sample_srs(raster = sraster, # input sraster
+           nSamp = 200, # number of desired samples
+           plot = TRUE) # plot
+```
+
+```{r,warning=F,message=F} 
+sample_srs(raster = mraster, # input mraster
+           nSamp = 200, # number of desired samples
+           access = access, # define access road network
+           mindist = 200, # minimum distance samples must be apart from one another
+           buff_inner = 50, # inner buffer - no samples within this distance from road
+           buff_outer = 200, # outer buffer - no samples further than this distance from road
+           plot = TRUE) # plot
+```
+
+```{r,warning=F,message=F} 
+sample_srs(raster = sraster, # input
+           nSamp = 200, # number of desired samples
+           access = access, # define access road network
+           buff_inner = 50, # inner buffer - no samples within this distance from road
+           buff_outer = 200, # outer buffer - no samples further than this distance from road
+           plot = TRUE, # plot
+           filename = tempfile(fileext = ".shp")) # write output samples to file
+```
+
+## `sample_grid` {.unnumbered}
+
+The `sample_grid` function applies regular grid sampling across an area where the `gridsize` parameter defined distance between samples.
+
+```{r,warning=F,message=F} 
+#--- perform grid sampling ---#
+sample_grid(raster = sraster, # input sraster
+            gridsize = 200, # grid distance
+            plot = TRUE)
+```
+
+```{r,warning=F,message=F} 
+sample_grid(raster = sraster, # input sraster
+            gridsize = 100, # grid distance
+            access = access, # define access road network
+            buff_inner = 50, # inner buffer - no samples within this distance from road
+            buff_outer = 200) # outer buffer - no samples further than this distance from road
+```
+
+```{r,warning=F,message=F} 
+sample_grid(raster = mraster, # input mraster
+            gridsize = 200, # grid distance
+            access = access, # define access road network
+            buff_inner = 100, # inner buffer - no samples within this distance from road
+            buff_outer = 400, # outer buffer - no samples further than this distance from road
+            filename = tempfile(fileext = ".shp"), # write output samples to file
+            plot = TRUE) # plot
+```
+
+## `sample_strat` {.unnumbered}
+
+The `sample_strat` function contains a hierarchical sampling algorithm originally developped my Martin Queinnec. The algorithm uses a moving window (`wrow` and `wcol` parameters) to filter the input `sraster` for locations where stratum pixels are grouped rather than disperesed individually accross the landscape.
+
+The sampling is performed in 2 stages:
+
+* **Rule 1** - Sample within grouped stratum pixels
+
+* **Rule 2** - If no more samples exist to satisfy desired sampling count, individual stratum pixels are sampled.
+
+The rule applied to a select a particular sample is defined in the `rule` attribute of output samples. We give a few examples below:
+
+```{r,warning=F,message=F} 
+#--- perform stratified sampling random sampling ---#
+sample_strat(sraster = sraster, # input sraster
+             nSamp = 200, # desired sample number
+             plot = TRUE) # plot
+```
+
+In some cases, a user may wish to included an existing sample dataset within the algorithm. In order to adjust the total number of samples needed per stratum, we can use the utility function `extract_strata`. This function takes an input `sraster` and the `existing` sample dataset and extracts the stratum for each sample. These samples can then be input into the `sample_strat` function which adjusts total requred sample per class based on representation in `existing`.
+
+```{r,warning=F,message=F} 
+ #--- extract strata values to existing samples ---#              
+ e.sr <- extract_strata(sraster = sraster, # input sraster
+                        existing = existing) # existing samples to add strata value to
+
+ e.sr
+```
+::: {.box-content .vig-content}
+::: {.box-title .vig-content-top}
+### Existing strata {.unnumbered}
+:::
+Notice that `e.sr` now has an attribute named strata. If that parameter is not there, `sample_strat` will give an error.
+:::
+
+```{r,warning=F,message=F} 
+sample_strat(sraster = sraster, # input sraster
+             nSamp = 200, # desired sample number
+             access = access, # define access road network
+             existing = e.sr, # existing samples with strata values
+             mindist = 200, # minimum distance samples must be apart from one another
+             buff_inner = 50, # inner buffer - no samples within this distance from road
+             buff_outer = 200, # outer buffer - no samples further than this distance from road
+             plot = TRUE) # plot
+```
+Notice that the sample outputs have `type` and `rule` attributes which outline whether samples are `existing` or `new` and whether `rule1` or `rule2` were used to select individual samples.
+
+
+::: {.box-content .vig-content}
+::: {.box-title .vig-content-top}
+### `include` parameter {.unnumbered}
+:::
+The `include` parameter determines whether existing samples should be included in the total of samples defined by `nSamp`. By defaults `include = FALSE`.
+:::
+
+```{r,warning=F,message=F} 
+sample_strat(sraster = sraster, # input
+             nSamp = 200, # desired sample number
+             access = access, # define access road network
+             existing = e.sr, # existing samples with strata values
+             include = TRUE, # include existing plots in nSamp total
+             buff_inner = 50, # inner buffer - no samples within this distance from road
+             buff_outer = 200, # outer buffer - no samples further than this distance from road
+             filename = tempfile(fileext = ".shp"), # write output samples to file
+             plot = TRUE) # plot
+```
+
+## `sample_clhs` {.unnumbered}
+
+The `sample_clhs` functions implements conditioned latin hypercube (clhs) sampling functionality.  A number of other functions in the `sgsR` package help to provide guidance on clhs sampling including `calculate_lhsPop` and `calculate_lhsOpt`. Be sure to check out those functions for better understanding of how many samples should be taken.
+
+Syntax for the function is similar to others shown above, though parameters like `iter`, which define the number of interations within the Metropolis-Hastings process are important to consider. In these examples we use a low `iter` value because it takes less time to run, but default values within the `clhs` package are 10,000.
+
+```{r,warning=F,message=F} 
+sample_clhs(mraster = mraster, # input
+            nSamp = 200, # desired sample number
+            plot = TRUE, # plot 
+            iter = 100) # number of iterations
+```
+
+
+```{r,warning=F,message=F} 
+sample_clhs(mraster = mraster, # input
+            nSamp = 400, # desired sample number
+            existing = existing, # existing samples
+            iter = 100, # number of iterations
+            details = TRUE) # clhs details
+```
+
+```{r,warning=F,message=F} 
+sample_clhs(mraster = mraster, # input
+            nSamp = 300, # desired sample number
+            iter = 100, # number of iterations
+            existing = existing, # existing samples
+            access = access, # define access road network
+            buff_inner = 100,
+            buff_outer = 300, 
+            plot = TRUE)
+```
+
+
+::: {.box-content .vig-content}
+::: {.box-title .vig-content-top}
+### `cost` parameter {.unnumbered}
+:::
+The `cost` parameter determines defines a covariate to be used to constrain the clhs sampling. This could be any number of variables. An example could be the distance a pixel is from road access (see example below), terrain slope, etc.
+:::
+
+```{r,warning=F,message=F} 
+#--- cost constrained examples ---#
+#--- calculate distance to access layer for each pixel in mr ---#
+mr.c <- calculate_distance(raster = mraster, # input
+                           access = access,
+                           plot = TRUE) # define access road network
+
+```
+
+```{r,warning=F,message=F} 
+sample_clhs(mraster = mr.c, # input
+            nSamp = 250, # desired sample number
+            iter = 100, # number of iterations
+            cost = "dist2access", # cost parameter - name defined in calculate_distance()
+            plot = TRUE) # plot
+```
+
+```{r,warning=F,message=F} 
+sample_clhs(mraster = mr.c, # input
+            nSamp = 250, # desired sample number
+            existing = existing, 
+            iter = 100, # number of iterations
+            cost = "dist2access", # cost parameter - name defined in calculate_distance()
+            plot = TRUE) # plot
+```
+
+## `sample_balanced` {.unnumbered}
+
+The `sample_balanced` algorithm performs the balanced sampling methodology from the `stratifyR` and `SamplingBigData` packagse. These functions can take a bit longer to run so be patient!
+
+```{r,warning=F,message=F} 
+sample_balanced(mraster = mraster, 
+                nSamp = 200, 
+                plot = TRUE)
+```
+
+```{r,warning=F,message=F} 
+sample_balanced(mraster = mraster, 
+                nSamp = 100, 
+                algorithm = "lcube",
+                access = access, 
+                buff_inner = 50, 
+                buff_outer = 200)
+```

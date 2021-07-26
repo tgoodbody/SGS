@@ -14,14 +14,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Overview {-#overview}
 
-This document is a brief introduction to the structurally guided sampling project being undertaken by the IRSS Lab at the UBC Faculty fo Forestry. Herein we provide details related to:
+This document is description of the structurally guided sampling project being undertaken by the IRSS Lab at the UBC Faculty fo Forestry. Herein we provide details related to:
 
 * Literature review about [SGS](#SGS)
 
-* Overview of how [data has been prepared](#dataprep)
+* [Describe package fundamentals](#fund)
 
-* Work done in the RMFInventory package using [principle components](#princomp)
+* Overview of [stratification algorithms](#strat)
 
-* Potential methods to apply using [stratification and sampling methods](#strat)
+* Overview of [sampling algorithms](#sample)
 
-* Points to [discuss](#disc) for how the project should evolve 
+* Overview of [calculate algorithms](#calc)
+ 

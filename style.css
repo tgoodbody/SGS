@@ -12,3 +12,29 @@ pre {
 pre code {
   white-space: inherit;
 }
+#box-text {
+  padding: 0px 20px 0px 20px;
+  text-align: justify;
+}
+
+.box-title {
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 0.125em;
+  padding: 1px 0px 1px 0px;
+  border-radius: 25px 25px 0px 0px;
+  margin-bottom: 10px;
+}
+
+.box-content {
+  border-radius: 25px;
+  padding-bottom: 15px;
+}
+
+.vig-content {
+  background-color: #ffedc2;
+}
+
+.vig-content-top {
+  background-color: #FFD166;
+}

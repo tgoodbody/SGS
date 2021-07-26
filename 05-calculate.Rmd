@@ -1,0 +1,58 @@
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{css, echo=FALSE}
+pre {
+  max-height: 500px;
+  overflow-y: auto;
+}
+pre[class] {
+  max-height: 500px;
+}
+```
+
+```{r,warning=F,message=F,echo=FALSE}
+library(sgsR)
+library(terra)
+
+#--- Load mraster and access files ---#
+r <- system.file("extdata", "wall_metrics_small.tif", package = "sgsR")
+
+#--- load the mraster using the terra package ---#
+mraster <- terra::rast(r)
+
+a <- system.file("extdata", "roads.shp", package = "sgsR")
+
+#--- load the access vector using the sf package ---#
+access <- sf::st_read(a)
+
+#--- apply kmeans algorithm to metrics raster ---#
+sraster <- strat_kmeans(mraster = mraster, 
+                        nStrata = 4) # algorithm will plot output
+
+#--- apply kmeans algorithm to metrics raster ---#
+existing <- sample_srs(raster = mraster, # use sraster as input for sampling
+                       nSamp = 200, # request 200 samples be taken
+                       mindist = 100) # algorithm will plot output
+
+```
+
+
+# `calculate_*` functions {#calc .unnumbered}
+
+A total of 7 `calculate` functions currently exist in the package:
+
+-   `calculate_distance` - per pixel distance to closes access vector
+
+-   `calculate_pcomp`- calculate principal components on input `mraster`
+
+-   `calculate_reqSamples` - calculate the number of samples needed for represntative sample within a `sraster`
+
+-   `calculate_ahels` - appy the adapted Hypercube Evaluation of a Legacy Sample (ahels) algorithm to existing samples
+
+-   `calculate_coobs` - apply count of observations algorithm to existing samples
+
+-   `calculate_lhsPop` - calculate population covariate statistics for latin hypercube sampling
+
+-   `calculate_lhsOpt` - calculate optimal latin hypercube sampling paramters including sample number

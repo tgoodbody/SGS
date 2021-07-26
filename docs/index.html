@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Approaches to structurally guided sampling</title>
-  <meta name="description" content="Approaches to structurally guided sampling" />
-  <meta name="generator" content="bookdown 0.21.5 and GitBook 2.6.7" />
+  <title>Structurally Guided Sampling</title>
+  <meta name="description" content="Structurally Guided Sampling" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Approaches to structurally guided sampling" />
+  <meta property="og:title" content="Structurally Guided Sampling" />
   <meta property="og:type" content="book" />
   
   
@@ -16,15 +16,15 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Approaches to structurally guided sampling" />
+  <meta name="twitter:title" content="Structurally Guided Sampling" />
   
   
   
 
-<meta name="author" content="Tristan Goodbody, Nicholas Coops, Martin Queinnec" />
+<meta name="author" content="Tristan Goodbody" />
 
 
-<meta name="date" content="2021-03-23" />
+<meta name="date" content="2021-07-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 
 <link rel="next" href="SGS.html"/>
-<script src="libs/header-attrs-2.5.3/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -120,6 +120,29 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -136,11 +159,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Approaches to Structurally Guided Sampling</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a>
-<ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#description"><i class="fa fa-check"></i>Project description</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#workplan"><i class="fa fa-check"></i>Work plan</a></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a></li>
 <li class="chapter" data-level="" data-path="SGS.html"><a href="SGS.html"><i class="fa fa-check"></i>Structurally Guided Sampling Review</a>
 <ul>
 <li class="chapter" data-level="" data-path="SGS.html"><a href="SGS.html#stratapp"><i class="fa fa-check"></i>Stratification approaches</a>
@@ -160,50 +179,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="SGS.html#ma2020"><span class="citation">(<span>Ma et al. 2020</span>)</span></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="dataprep.html"><a href="dataprep.html"><i class="fa fa-check"></i>Data Preparation</a>
+<li><a href="fund.html#fund"><code>sgsR</code> fundamentals</a>
 <ul>
-<li class="chapter" data-level="" data-path="dataprep.html"><a href="dataprep.html#load-wall-to-wall-metrics"><i class="fa fa-check"></i>Load wall-to-wall metrics</a></li>
-<li class="chapter" data-level="" data-path="dataprep.html"><a href="dataprep.html#integrate-forest-inventory-layers"><i class="fa fa-check"></i>Integrate forest inventory layers</a></li>
-<li class="chapter" data-level="" data-path="dataprep.html"><a href="dataprep.html#prepare-road-buffers-for-future-masking"><i class="fa fa-check"></i>Prepare road buffers for future masking</a>
+<li class="chapter" data-level="" data-path="fund.html"><a href="fund.html"><i class="fa fa-check"></i>Algorithm structure</a></li>
+<li class="chapter" data-level="" data-path="fund.html"><a href="fund.html#example-data"><i class="fa fa-check"></i>Example data</a>
 <ul>
-<li class="chapter" data-level="" data-path="dataprep.html"><a href="dataprep.html#road-buffering-outputs"><i class="fa fa-check"></i>Road buffering outputs</a></li>
+<li class="chapter" data-level="" data-path="fund.html"><a href="fund.html#rast"><i class="fa fa-check"></i>Raster data</a></li>
+<li class="chapter" data-level="" data-path="fund.html"><a href="fund.html#vect"><i class="fa fa-check"></i>Road access data</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="fund.html"><a href="fund.html#additional-example-data"><i class="fa fa-check"></i>Additional example data</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html"><i class="fa fa-check"></i>Principal Components</a>
+<li><a href="strat.html#strat"><code>strat_*</code> functions</a>
 <ul>
-<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#use-pca-model-to-get-pcs-of-an-existing-set-of-plots"><i class="fa fa-check"></i>Use PCA model to get PCs of an existing set of plots</a></li>
-<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#candidate-cells"><i class="fa fa-check"></i>Candidate cells</a></li>
-<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#stratification"><i class="fa fa-check"></i>Stratification</a></li>
-<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#exist-plots"><i class="fa fa-check"></i>Derive strata for existing plots</a></li>
-<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#select-new-plots"><i class="fa fa-check"></i>Select new plots</a></li>
+<li><a href="strat.html#strat_kmeans"><code>strat_kmeans</code></a></li>
+<li><a href="strat.html#strat_pcomp"><code>strat_pcomp</code></a></li>
+<li><a href="strat.html#strat_breaks"><code>strat_breaks</code></a></li>
+<li><a href="strat.html#strat_quantiles"><code>strat_quantiles</code></a></li>
+<li><a href="strat.html#strat_osb"><code>strat_osb</code></a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html"><i class="fa fa-check"></i>Other stratification methods</a>
+<li><a href="sample.html#sample"><code>sample_*</code> functions</a>
 <ul>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#kmeans"><i class="fa fa-check"></i>K-means</a></li>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#clusterchallenge"><i class="fa fa-check"></i>How many clusters?</a></li>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#OSB"><i class="fa fa-check"></i>Optimum stratum boundaries</a></li>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#sampling-within-groupsstrata"><i class="fa fa-check"></i>Sampling within groups/strata</a></li>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#srs"><i class="fa fa-check"></i>Simple Random Sampling</a>
-<ul>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#srs-2-variable-road-masked"><i class="fa fa-check"></i>SRS 2 Variable Road Masked</a></li>
+<li class="chapter" data-level="" data-path="sample.html"><a href="sample.html"><i class="fa fa-check"></i>Access</a></li>
+<li><a href="sample.html#sample_srs"><code>sample_srs</code></a></li>
+<li><a href="sample.html#sample_grid"><code>sample_grid</code></a></li>
+<li><a href="sample.html#sample_strat"><code>sample_strat</code></a></li>
+<li><a href="sample.html#sample_clhs"><code>sample_clhs</code></a></li>
+<li><a href="sample.html#sample_balanced"><code>sample_balanced</code></a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#using-2-variables-to-stratify"><i class="fa fa-check"></i>Using 2 variables to stratify</a>
-<ul>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#variable-road-masked"><i class="fa fa-check"></i>2 Variable Road Masked</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#non-stratified-sampling-methods"><i class="fa fa-check"></i>Non-stratified sampling methods</a>
-<ul>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#balanced-sampling"><i class="fa fa-check"></i>Balanced Sampling</a></li>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#lhs"><i class="fa fa-check"></i>Latin Hypercube Sampling</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="disc.html"><a href="disc.html"><i class="fa fa-check"></i>Discussion points</a>
-<ul>
-<li class="chapter" data-level="" data-path="disc.html"><a href="disc.html#methods"><i class="fa fa-check"></i>Methods</a></li>
-<li class="chapter" data-level="" data-path="disc.html"><a href="disc.html#need-to-integrate-already-established-samples"><i class="fa fa-check"></i>Need to integrate already established samples</a></li>
-<li class="chapter" data-level="" data-path="disc.html"><a href="disc.html#algorithm-creation"><i class="fa fa-check"></i>Algorithm creation</a></li>
-<li class="chapter" data-level="" data-path="disc.html"><a href="disc.html#agenda-for-future"><i class="fa fa-check"></i>Agenda for future</a></li>
-</ul></li>
+<li><a href="calc.html#calc"><code>calculate_*</code> functions</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -217,7 +220,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Approaches to structurally guided sampling</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Structurally Guided Sampling</a>
           </h1>
         </div>
 
@@ -226,42 +229,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">Approaches to structurally guided sampling</h1>
-<p class="author"><em>Tristan Goodbody, Nicholas Coops, Martin Queinnec</em></p>
-<p class="date"><em>2021-03-23</em></p>
+<h1 class="title">Structurally Guided Sampling</h1>
+<p class="author"><em>Tristan Goodbody</em></p>
+<p class="date" style="margin-top: 1.5em;"><em>2021-07-26</em></p>
 </div>
 <div id="overview" class="section level1 unnumbered">
 <h1>Overview</h1>
-<p>This document is a brief introduction to the structurally guided sampling project being undertaken by the Integrated Remote Sensing Studio at the UBC Faculty fo Forestry. Herein we provide details related to:</p>
+<p>This document is description of the structurally guided sampling project being undertaken by the IRSS Lab at the UBC Faculty fo Forestry. Herein we provide details related to:</p>
 <ul>
 <li><p>Literature review about <a href="SGS.html#SGS">SGS</a></p></li>
-<li><p>Overview of how <a href="dataprep.html#dataprep">data has been prepared</a></p></li>
-<li><p>Work done in the <a href="https://github.com/mqueinnec/RMFinventory/">RMFInventory package</a> using <a href="princomp.html#princomp">principal components</a></p></li>
-<li><p>Potential methods to apply using <a href="strat.html#strat">stratification and sampling methods</a></p></li>
-<li><p>Points to <a href="disc.html#disc">discuss</a> for how the project should evolve</p></li>
+<li><p><a href="fund.html#fund">Describe package fundamentals</a></p></li>
+<li><p>Overview of <a href="strat.html#strat">stratification algorithms</a></p></li>
+<li><p>Overview of <a href="sample.html#sample">sampling algorithms</a></p></li>
+<li><p>Overview of <a href="calc.html#calc">calculate algorithms</a></p></li>
 </ul>
-<div id="description" class="section level2 unnumbered">
-<h2>Project description</h2>
-<p>The objective of this project is to develop a toolkit to allow forest managers and Provincial forest staff to utilize structurally guided sampling (SGS) approaches to optimize plot placement as well as assess the importance of existing plots within a conventional plot network.</p>
-<p>With the availability of Provincial-wide LIDAR data over Ontario, Québec, Alberta, and the maritimes, managers have a wealth of information to guide inventory plot placement. Establishing plots and measuring tree inventory information is costly in terms of labor, travel and safety. Minimizing the number of plots required to establish an accurate forest inventory is a key management objective. SGS offers the opportunity to examine what stand structures exist and, through stratification, where plots should be located to capture that variation in order to develop an accurate Enhanced Forest Inventory (EFI). Currently, inventory plots are placed according to pre-defined manually interpreted strata, which may result in over-sampling particular structural types while at the same time have little or no plots representing other structural types. This can result in poor prediction of EFI forest attributes. Using a SGS approach allows us to revolutionize plot network design in terms of the number, and location of, plots within a plot network.</p>
-</div>
-<div id="workplan" class="section level2 unnumbered">
-<h2>Work plan</h2>
-<ol style="list-style-type: decimal">
-<li>Literature review on state of the art SGS approaches</li>
-<li>Algorithm development for optimal structural class definition</li>
-<li>Plot location algorithm based on critical factors
-<ul>
-<li>Optimum number of structural classes</li>
-<li>Optimal number of samples</li>
-<li>Integration of existing plot networks</li>
-<li>Minimum distance between plots</li>
-</ul></li>
-<li>Integrate algorithms into an R package.</li>
-</ol>
-<p><img src="img/IRSS_Logos_2016_backwhite-03.png" width="50%" style="display: block; margin: auto;" /></p>
 
-</div>
 </div>
             </section>
 
@@ -292,6 +274,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -319,6 +302,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

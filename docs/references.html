@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>References | Approaches to structurally guided sampling</title>
-  <meta name="description" content="References | Approaches to structurally guided sampling" />
-  <meta name="generator" content="bookdown 0.21.5 and GitBook 2.6.7" />
+  <title>References | Structurally Guided Sampling</title>
+  <meta name="description" content="References | Structurally Guided Sampling" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="References | Approaches to structurally guided sampling" />
+  <meta property="og:title" content="References | Structurally Guided Sampling" />
   <meta property="og:type" content="book" />
   
   
@@ -16,24 +16,24 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | Approaches to structurally guided sampling" />
+  <meta name="twitter:title" content="References | Structurally Guided Sampling" />
   
   
   
 
-<meta name="author" content="Tristan Goodbody, Nicholas Coops, Martin Queinnec" />
+<meta name="author" content="Tristan Goodbody" />
 
 
-<meta name="date" content="2021-03-23" />
+<meta name="date" content="2021-07-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="disc.html"/>
+<link rel="prev" href="calc.html"/>
 
-<script src="libs/header-attrs-2.5.3/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -120,6 +120,29 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -136,11 +159,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Approaches to Structurally Guided Sampling</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a>
-<ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#description"><i class="fa fa-check"></i>Project description</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#workplan"><i class="fa fa-check"></i>Work plan</a></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a></li>
 <li class="chapter" data-level="" data-path="SGS.html"><a href="SGS.html"><i class="fa fa-check"></i>Structurally Guided Sampling Review</a>
 <ul>
 <li class="chapter" data-level="" data-path="SGS.html"><a href="SGS.html#stratapp"><i class="fa fa-check"></i>Stratification approaches</a>
@@ -160,50 +179,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="SGS.html#ma2020"><span class="citation">(<span>Ma et al. 2020</span>)</span></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="dataprep.html"><a href="dataprep.html"><i class="fa fa-check"></i>Data Preparation</a>
+<li><a href="fund.html#fund"><code>sgsR</code> fundamentals</a>
 <ul>
-<li class="chapter" data-level="" data-path="dataprep.html"><a href="dataprep.html#load-wall-to-wall-metrics"><i class="fa fa-check"></i>Load wall-to-wall metrics</a></li>
-<li class="chapter" data-level="" data-path="dataprep.html"><a href="dataprep.html#integrate-forest-inventory-layers"><i class="fa fa-check"></i>Integrate forest inventory layers</a></li>
-<li class="chapter" data-level="" data-path="dataprep.html"><a href="dataprep.html#prepare-road-buffers-for-future-masking"><i class="fa fa-check"></i>Prepare road buffers for future masking</a>
+<li class="chapter" data-level="" data-path="fund.html"><a href="fund.html"><i class="fa fa-check"></i>Algorithm structure</a></li>
+<li class="chapter" data-level="" data-path="fund.html"><a href="fund.html#example-data"><i class="fa fa-check"></i>Example data</a>
 <ul>
-<li class="chapter" data-level="" data-path="dataprep.html"><a href="dataprep.html#road-buffering-outputs"><i class="fa fa-check"></i>Road buffering outputs</a></li>
+<li class="chapter" data-level="" data-path="fund.html"><a href="fund.html#rast"><i class="fa fa-check"></i>Raster data</a></li>
+<li class="chapter" data-level="" data-path="fund.html"><a href="fund.html#vect"><i class="fa fa-check"></i>Road access data</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="fund.html"><a href="fund.html#additional-example-data"><i class="fa fa-check"></i>Additional example data</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html"><i class="fa fa-check"></i>Principal Components</a>
+<li><a href="strat.html#strat"><code>strat_*</code> functions</a>
 <ul>
-<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#use-pca-model-to-get-pcs-of-an-existing-set-of-plots"><i class="fa fa-check"></i>Use PCA model to get PCs of an existing set of plots</a></li>
-<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#candidate-cells"><i class="fa fa-check"></i>Candidate cells</a></li>
-<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#stratification"><i class="fa fa-check"></i>Stratification</a></li>
-<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#exist-plots"><i class="fa fa-check"></i>Derive strata for existing plots</a></li>
-<li class="chapter" data-level="" data-path="princomp.html"><a href="princomp.html#select-new-plots"><i class="fa fa-check"></i>Select new plots</a></li>
+<li><a href="strat.html#strat_kmeans"><code>strat_kmeans</code></a></li>
+<li><a href="strat.html#strat_pcomp"><code>strat_pcomp</code></a></li>
+<li><a href="strat.html#strat_breaks"><code>strat_breaks</code></a></li>
+<li><a href="strat.html#strat_quantiles"><code>strat_quantiles</code></a></li>
+<li><a href="strat.html#strat_osb"><code>strat_osb</code></a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html"><i class="fa fa-check"></i>Other stratification methods</a>
+<li><a href="sample.html#sample"><code>sample_*</code> functions</a>
 <ul>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#kmeans"><i class="fa fa-check"></i>K-means</a></li>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#clusterchallenge"><i class="fa fa-check"></i>How many clusters?</a></li>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#OSB"><i class="fa fa-check"></i>Optimum stratum boundaries</a></li>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#sampling-within-groupsstrata"><i class="fa fa-check"></i>Sampling within groups/strata</a></li>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#srs"><i class="fa fa-check"></i>Simple Random Sampling</a>
-<ul>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#srs-2-variable-road-masked"><i class="fa fa-check"></i>SRS 2 Variable Road Masked</a></li>
+<li class="chapter" data-level="" data-path="sample.html"><a href="sample.html"><i class="fa fa-check"></i>Access</a></li>
+<li><a href="sample.html#sample_srs"><code>sample_srs</code></a></li>
+<li><a href="sample.html#sample_grid"><code>sample_grid</code></a></li>
+<li><a href="sample.html#sample_strat"><code>sample_strat</code></a></li>
+<li><a href="sample.html#sample_clhs"><code>sample_clhs</code></a></li>
+<li><a href="sample.html#sample_balanced"><code>sample_balanced</code></a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#using-2-variables-to-stratify"><i class="fa fa-check"></i>Using 2 variables to stratify</a>
-<ul>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#variable-road-masked"><i class="fa fa-check"></i>2 Variable Road Masked</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#non-stratified-sampling-methods"><i class="fa fa-check"></i>Non-stratified sampling methods</a>
-<ul>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#balanced-sampling"><i class="fa fa-check"></i>Balanced Sampling</a></li>
-<li class="chapter" data-level="" data-path="strat.html"><a href="strat.html#lhs"><i class="fa fa-check"></i>Latin Hypercube Sampling</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="disc.html"><a href="disc.html"><i class="fa fa-check"></i>Discussion points</a>
-<ul>
-<li class="chapter" data-level="" data-path="disc.html"><a href="disc.html#methods"><i class="fa fa-check"></i>Methods</a></li>
-<li class="chapter" data-level="" data-path="disc.html"><a href="disc.html#need-to-integrate-already-established-samples"><i class="fa fa-check"></i>Need to integrate already established samples</a></li>
-<li class="chapter" data-level="" data-path="disc.html"><a href="disc.html#algorithm-creation"><i class="fa fa-check"></i>Algorithm creation</a></li>
-<li class="chapter" data-level="" data-path="disc.html"><a href="disc.html#agenda-for-future"><i class="fa fa-check"></i>Agenda for future</a></li>
-</ul></li>
+<li><a href="calc.html#calc"><code>calculate_*</code> functions</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -217,7 +220,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Approaches to structurally guided sampling</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Structurally Guided Sampling</a>
           </h1>
         </div>
 
@@ -231,9 +234,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div class="csl-entry">
 Carré, F., Alex B. McBratney, and B. Minasny. 2007. <span>“<span class="nocase">Estimation and potential improvement of the quality of legacy soil samples for digital soil mapping</span>.”</span> <em>Geoderma</em> 141 (1-2): 1–14. <a href="https://doi.org/10.1016/j.geoderma.2007.01.018">https://doi.org/10.1016/j.geoderma.2007.01.018</a>.
-</div>
-<div class="csl-entry">
-Charrad, Malika, Nadia Ghazzali, Veronique Boiteau, and Azam Niknafs. 2015. <em>NbClust: Determining the Best Number of Clusters in a Data Set</em>. <a href="https://sites.google.com/site/malikacharrad/research/nbclust-package">https://sites.google.com/site/malikacharrad/research/nbclust-package</a>.
 </div>
 <div class="csl-entry">
 Dalponte, Michele, Cristina Martinez, Mirco Rodeghiero, and Damiano Gianelle. 2011. <span>“<span class="nocase">The role of ground reference data collection in the prediction of stem volume with LiDAR data in mountain areas</span>.”</span> <em>ISPRS Journal of Photogrammetry and Remote Sensing</em> 66 (6): 787–97. <a href="https://doi.org/10.1016/j.isprsjprs.2011.09.003">https://doi.org/10.1016/j.isprsjprs.2011.09.003</a>.
@@ -284,9 +284,6 @@ Niemi, Mikko T., and Jari Vauhkonen. 2016. <span>“<span class="nocase">Extract
 Papa, Daniel de Almeida, Danilo Roberti Alves de Almeida, Carlos Alberto Silva, Evandro Orfanó Figueiredo, Scott C. Stark, Ruben Valbuena, Luiz Carlos Estraviz Rodriguez, and Marcus Vinício Neves d’Oliveira. 2020. <span>“<span class="nocase">Evaluating tropical forest classification and field sampling stratification from lidar to reduce effort and enable landscape monitoring</span>.”</span> <em>Forest Ecology and Management</em> 457 (September 2019). <a href="https://doi.org/10.1016/j.foreco.2019.117634">https://doi.org/10.1016/j.foreco.2019.117634</a>.
 </div>
 <div class="csl-entry">
-Reddy, Karuna G., and M. G. M. Khan. 2019. <em>stratifyR: Optimal Stratification of Univariate Populations</em>. <a href="https://CRAN.R-project.org/package=stratifyR">https://CRAN.R-project.org/package=stratifyR</a>.
-</div>
-<div class="csl-entry">
 Valbuena, Rubén, Matti Maltamo, Lauri Mehtätalo, and Petteri Packalen. 2017. <span>“<span class="nocase">Key structural features of Boreal forests may be detected directly using L-moments from airborne lidar data</span>.”</span> <em>Remote Sensing of Environment</em> 194: 437–46. <a href="https://doi.org/10.1016/j.rse.2016.10.024">https://doi.org/10.1016/j.rse.2016.10.024</a>.
 </div>
 <div class="csl-entry">
@@ -299,7 +296,7 @@ Valbuena, Rubén, Petteri Packalen, Lauri Mehtätalo, Antonio García-Abril, and
           </div>
         </div>
       </div>
-<a href="disc.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="calc.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
@@ -323,6 +320,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -350,6 +348,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

@@ -1,0 +1,99 @@
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{css, echo=FALSE}
+pre {
+  max-height: 500px;
+  overflow-y: auto;
+}
+pre[class] {
+  max-height: 500px;
+}
+```
+
+# `sgsR` fundamentals {#fund .unnumbered}
+
+To install the package from the github please run the following
+
+```{r message = FALSE, warning = FALSE, eval = FALSE}
+install.packages("devtools")
+devtools::install_github("https://github.com/tgoodbody/sgsR", build_vignettes = FALSE)
+
+```
+## Algorithm structure {#str .unnumbered}
+
+`sgsR` has been scripted primarily using the `terra` package for raster processing and the `sf` package for vector manipulation. There are 3 primary function verbs that the package uses:
+
+-   `calculate_*` - The calculate verb implies that these functions are performing calculations to be used in consequent processing. The use of predefined sample analysis algorithms (`calculate_coobs`, `calculate_ahels`) are also included.
+
+-   `strat_*` - The stratify verb implies that these functions are applying stratification algorithms to an input metrics raster (`mraster`) and output a stratified raster (`sraster`)
+
+-   `sample_*` - The sample verb implies that these functions are extracting samples from `srasters` produced from `strat_*` functions. A few algorithms (e.g. `sample_srs`, `sample_balanced`, `sample_grid`) are able to take `mrasters` as inputs as they are not dependent on stratified inputs for sampling.
+
+
+::: {.box-content .vig-content}
+::: {.box-title .vig-content-top}
+### Package Documentation {.unnumbered}
+:::
+I do not go into detail about the intricacies of each function in this vignette. Please see the documentation for functions e.g. `?sgsR::strat_kmeans` for all details about how use and intended application of each function.
+:::
+
+## Example data {.unnumbered}
+Worked examples of all functions are provided below using data internal to the package. To load internal `mraster` and road `access` data we use the following code.
+
+### Raster data {#rast .unnumbered}
+```{r,warning=F,message=F}
+library(sgsR)
+library(terra)
+
+#--- Load mraster and access files ---#
+r <- system.file("extdata", "wall_metrics_small.tif", package = "sgsR")
+
+#--- load the mraster using the terra package ---#
+mraster <- terra::rast(r)
+```
+
+### Road access data {#vect .unnumbered}
+```{r,warning=F,message=F}
+a <- system.file("extdata", "roads.shp", package = "sgsR")
+
+#--- load the access vector using the sf package ---#
+access <- sf::st_read(a)
+```
+
+```{r,warning=F,message=F}
+terra::plot(mraster[[1]])
+terra::plot(access, add = TRUE, col = "black")
+
+```
+
+From the plot we see the first band (`zmax`) of the `mraster` with the `access` vector overlaid. For the purposes of this tutorial I am also going to show how to produce a basic `sraster` and `existing` sample data that we will used in examples below. 
+
+## Additional example data {.unnumbered}
+
+To make the `sraster` we will use the `strat_kmeans` function where the input `mraster` will be stratified using a kmeans algorithm.
+
+After the `sraster` is produced we apply the `sample_srs` algorithm which randomly samples points within our `sraster` to produce an `existing` sample dataset.
+
+More detail and examples about these functions will be given below:
+
+```{r,warning=F,message=F}
+#--- apply kmeans algorithm to metrics raster ---#
+sraster <- strat_kmeans(mraster = mraster, 
+                        nStrata = 4, # algorithm will produce 4 strata
+                        plot = TRUE) # algorithm will plot output
+
+```
+
+```{r,warning=F,message=F}
+#--- apply kmeans algorithm to metrics raster ---#
+existing <- sample_srs(raster = mraster, # use sraster as input for sampling
+                       nSamp = 200, # request 200 samples be taken
+                       mindist = 100, # define that samples must be 100 m apart
+                       plot = TRUE) # algorithm will plot output
+
+```
+
+We now have `mraster`, `access`, `sraster` and `existing` datasets generated. Expect to see these data used in the following examples.
+
