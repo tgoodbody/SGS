@@ -24,7 +24,7 @@
 <meta name="author" content="Tristan Goodbody" />
 
 
-<meta name="date" content="2021-07-26" />
+<meta name="date" content="2021-07-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -184,14 +184,14 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="fund.html"><a href="fund.html"><i class="fa fa-check"></i>Algorithm structure</a></li>
 <li class="chapter" data-level="" data-path="fund.html"><a href="fund.html#example-data"><i class="fa fa-check"></i>Example data</a>
 <ul>
-<li class="chapter" data-level="" data-path="fund.html"><a href="fund.html#rast"><i class="fa fa-check"></i>Raster data</a></li>
-<li class="chapter" data-level="" data-path="fund.html"><a href="fund.html#vect"><i class="fa fa-check"></i>Road access data</a></li>
+<li><a href="fund.html#mrast">Metrics rasters - <code>mraster</code></a></li>
+<li><a href="fund.html#vect">Road <code>access</code> data</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="fund.html"><a href="fund.html#additional-example-data"><i class="fa fa-check"></i>Additional example data</a></li>
+<li><a href="fund.html#srast">Stratified rasters - <code>sraster</code></a></li>
 </ul></li>
 <li><a href="strat.html#strat"><code>strat_*</code> functions</a>
 <ul>
-<li><a href="strat.html#strat_kmeans"><code>strat_kmeans</code></a></li>
+<li><a href="strat.html#kmeans"><code>strat_kmeans</code></a></li>
 <li><a href="strat.html#strat_pcomp"><code>strat_pcomp</code></a></li>
 <li><a href="strat.html#strat_breaks"><code>strat_breaks</code></a></li>
 <li><a href="strat.html#strat_quantiles"><code>strat_quantiles</code></a></li>
@@ -200,13 +200,28 @@ div.csl-indent {
 <li><a href="sample.html#sample"><code>sample_*</code> functions</a>
 <ul>
 <li class="chapter" data-level="" data-path="sample.html"><a href="sample.html"><i class="fa fa-check"></i>Access</a></li>
-<li><a href="sample.html#sample_srs"><code>sample_srs</code></a></li>
-<li><a href="sample.html#sample_grid"><code>sample_grid</code></a></li>
-<li><a href="sample.html#sample_strat"><code>sample_strat</code></a></li>
-<li><a href="sample.html#sample_clhs"><code>sample_clhs</code></a></li>
-<li><a href="sample.html#sample_balanced"><code>sample_balanced</code></a></li>
+<li><a href="sample.html#srs"><code>sample_srs</code></a></li>
+<li><a href="sample.html#grid"><code>sample_grid</code></a></li>
+<li><a href="sample.html#sstrat"><code>sample_strat</code></a></li>
+<li><a href="sample.html#clhs"><code>sample_clhs</code></a></li>
+<li><a href="sample.html#balanced"><code>sample_balanced</code></a></li>
 </ul></li>
-<li><a href="calc.html#calc"><code>calculate_*</code> functions</a></li>
+<li><a href="calc.html#calc"><code>calculate_*</code> functions</a>
+<ul>
+<li><a href="calc.html#dist"><code>calculate_distance</code></a></li>
+<li><a href="calc.html#calculate_pcomp"><code>calculate_pcomp</code></a></li>
+<li><a href="calc.html#calculate_reqsamples"><code>calculate_reqSamples</code></a></li>
+<li class="chapter" data-level="" data-path="calc.html"><a href="calc.html"><i class="fa fa-check"></i>Sample evaluation algorithms</a>
+<ul>
+<li><a href="calc.html#ahels"><code>calculate_ahels</code></a></li>
+<li><a href="calc.html#coobs"><code>calculate_coobs</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="calc.html"><a href="calc.html#lhseval"><i class="fa fa-check"></i>Latin hypercube sampling evaluation algorithms</a>
+<ul>
+<li><a href="calc.html#lhspop"><code>calculate_lhsPop</code></a></li>
+<li><a href="calc.html#lhsopt"><code>calculate_lhsOpt</code></a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -239,40 +254,146 @@ div.csl-indent {
 <li><p><code>strat_quantiles</code> - quantile stratification</p></li>
 <li><p><code>strat_osb</code> - optimum sample boundary stratification</p></li>
 </ul>
-<div id="strat_kmeans" class="section level2 unnumbered">
+<div id="kmeans" class="section level2 unnumbered">
 <h2><code>strat_kmeans</code></h2>
-<p>We provide a preliminary example of the <code>strat_kmeans</code> algorithm to prepare our input data but here are a few more.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="strat.html#cb9-1" aria-hidden="true" tabindex="-1"></a> <span class="co">#--- perform stratification using k-means ---#</span></span>
-<span id="cb9-2"><a href="strat.html#cb9-2" aria-hidden="true" tabindex="-1"></a> kmeans <span class="ot">&lt;-</span> <span class="fu">strat_kmeans</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
-<span id="cb9-3"><a href="strat.html#cb9-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">nStrata =</span> <span class="dv">5</span>) <span class="co"># algorithm will produce 4 strata</span></span></code></pre></div>
+<p>We provide a preliminary example of the <code>strat_kmeans</code> algorithm to prepare our <a href="fund.html#srast"><code>sraster</code></a> input data but here are a few more.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="strat.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- perform stratification using k-means ---#</span></span>
+<span id="cb9-2"><a href="strat.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_kmeans</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
+<span id="cb9-3"><a href="strat.html#cb9-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">nStrata =</span> <span class="dv">5</span>) <span class="co"># algorithm will produce 4 strata</span></span></code></pre></div>
+<pre><code>## class       : SpatRaster 
+## dimensions  : 277, 373, 1  (nrow, ncol, nlyr)
+## resolution  : 20, 20  (x, y)
+## extent      : 431100, 438560, 5337700, 5343240  (xmin, xmax, ymin, ymax)
+## coord. ref. : +proj=utm +zone=17 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs 
+## source      : memory 
+## name        : strata 
+## min value   :      1 
+## max value   :      5</code></pre>
 <div class="box-content vig-content">
 <div id="plot" class="section level3 unnumbered box-title vig-content-top">
 <h3>Plot</h3>
 </div>
-<p>Notice that nothing plotted… That’s because <code>plot = FALSE</code> is the default for all functions in sgsR. See examples below where <code>plot = TRUE</code>.</p>
+<p>Notice that nothing plotted… That’s because <code>plot = FALSE</code> is the default for all functions in <code>sgsR</code>. See examples below where <code>plot = TRUE</code>.</p>
 </div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="strat.html#cb10-1" aria-hidden="true" tabindex="-1"></a> kmeans <span class="ot">&lt;-</span> <span class="fu">strat_kmeans</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
-<span id="cb10-2"><a href="strat.html#cb10-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">nStrata =</span> <span class="dv">10</span>, <span class="co"># algorithm will produce 10 strata</span></span>
-<span id="cb10-3"><a href="strat.html#cb10-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">iter =</span> <span class="dv">1000</span>, <span class="co"># set minimum number of interations to determine kmeans centers</span></span>
-<span id="cb10-4"><a href="strat.html#cb10-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">algorithm =</span> <span class="st">&quot;MacQueen&quot;</span>, <span class="co"># use MacQueen algorithm</span></span>
-<span id="cb10-5"><a href="strat.html#cb10-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="co"># plot output</span></span>
-<span id="cb10-6"><a href="strat.html#cb10-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">details =</span> <span class="cn">TRUE</span>) <span class="co"># output details - kmeans stratification data and output sraster</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="strat.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_kmeans</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
+<span id="cb11-2"><a href="strat.html#cb11-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">nStrata =</span> <span class="dv">10</span>, <span class="co"># algorithm will produce 10 strata</span></span>
+<span id="cb11-3"><a href="strat.html#cb11-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">iter =</span> <span class="dv">1000</span>, <span class="co"># set minimum number of interations to determine kmeans centers</span></span>
+<span id="cb11-4"><a href="strat.html#cb11-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">algorithm =</span> <span class="st">&quot;MacQueen&quot;</span>, <span class="co"># use MacQueen algorithm</span></span>
+<span id="cb11-5"><a href="strat.html#cb11-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="co"># plot output</span></span>
+<span id="cb11-6"><a href="strat.html#cb11-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">details =</span> <span class="cn">TRUE</span>) <span class="co"># output details - kmeans stratification data and output sraster</span></span></code></pre></div>
 <p><img src="SGS_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="strat.html#cb11-1" aria-hidden="true" tabindex="-1"></a> kmeans <span class="ot">&lt;-</span> <span class="fu">strat_kmeans</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
-<span id="cb11-2"><a href="strat.html#cb11-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">nStrata =</span> <span class="dv">5</span>, <span class="co"># algorithm will produce 4 strata</span></span>
-<span id="cb11-3"><a href="strat.html#cb11-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">center =</span> <span class="cn">FALSE</span>, <span class="co"># do not center data</span></span>
-<span id="cb11-4"><a href="strat.html#cb11-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">scale =</span> <span class="cn">FALSE</span>, <span class="co"># do not scale data</span></span>
-<span id="cb11-5"><a href="strat.html#cb11-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="co"># plot output</span></span>
-<span id="cb11-6"><a href="strat.html#cb11-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">filename =</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">&quot;.tif&quot;</span>), <span class="co"># write output sraster to file</span></span>
-<span id="cb11-7"><a href="strat.html#cb11-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">overwrite =</span> <span class="cn">TRUE</span>) <span class="co"># overwrite file on disc if it exists</span></span></code></pre></div>
+<pre><code>## $details
+## K-means clustering with 10 clusters of sizes 8460, 8175, 14401, 7390, 9868, 10001, 7523, 3621, 12801, 8955
+## 
+## Cluster means:
+##           zmax       zmean         zsd    pzabove2       zq20        zq50       zq70
+## 1  -1.61845760 -2.21644419 -1.63846390 -0.99047251 -1.1864738 -1.50396615 -1.6459599
+## 2  -1.18115418 -0.21578917 -1.08949828 -0.75875943 -0.9150003 -1.13205186 -1.2044319
+## 3   0.26583212  0.56153588  0.07272645  0.21463824  0.2881727  0.27517550  0.2418837
+## 4   1.39721946  0.62354818  0.34114940  1.80773962  1.7801397  1.35336933  1.1818874
+## 5   0.01721191  0.01098153  0.83805005 -0.56628465 -0.5185618 -0.04843908  0.2166482
+## 6   0.79331356  0.77058735 -0.19524776  1.43253552  1.1557104  0.73536980  0.5871320
+## 7  -0.94287627 -1.41892604 -0.28918661 -0.86547692 -0.9795565 -1.00411311 -0.9013863
+## 8   1.76150865  0.69261341  1.83496281  0.75707447  1.2237326  1.80930765  1.9196920
+## 9  -0.52954681  0.28400209 -0.29233160 -0.47235346 -0.5335791 -0.54493965 -0.5043006
+## 10  0.95859014  0.50659987  1.35742129 -0.08826613  0.3952886  1.01793988  1.0976238
+##          zq90       zq95        l_1         l_2        t_3         t_4
+## 1  -1.8468352 -1.9020831 -0.1781397 -1.18860515 -0.3617194 -2.20193918
+## 2  -1.2349361 -1.1929623  2.2901169 -1.10283325 -0.3604030 -0.10722060
+## 3   0.2056615  0.2189552 -0.4672981  0.84913943 -0.3165150  0.53656536
+## 4   0.9664822  0.8654981 -0.8835024  0.29909510  0.3395034  0.50972172
+## 5   0.4737554  0.5242885  0.1305378  0.04956952 -0.2194533  0.02085024
+## 6   0.4388289  0.4221690 -0.8717392  1.79501743 -0.2659370  0.72264588
+## 7  -0.6156040 -0.5435200  0.1293558 -0.98909181 -0.3531697 -1.39820377
+## 8   1.7151428  1.5461441 -0.5843340 -0.40512452  4.0847632  0.67617048
+## 9  -0.4021585 -0.3306150  0.6143076 -0.45100988 -0.3565298  0.34255658
+## 10  1.1301770  1.0744401 -0.3625802  0.09744738  0.5930486  0.47607905
+## 
+## Clustering vector:
+##    [1]  9  7  5  3  7  9  5  9  3  3  3  4 10 10  8  8  8  4  6  4  4 10 10 10  3 10  5
+##   [28]  5 10  5  4  3  5 10  4  5  1  5 10  4 10  4 10 10  4  4 10  4  4 10  4  4 10  4
+##   [55] 10  2  2  5  5  3  3  3  3  5  3  1  7  2  2  2  2  2  2  2  2  2  2  2  2  2  2
+##   [82]  2  1  2  2  2  2  2  2  2  2  2  9  7  5  9  2  9  2  2  2  2  2  2  2  2  2  1
+##  [109]  1  1  1  1  1  1  1  1  1  1  1  2  2  2  2  2  2  2  2  2  7  1  1  2  2  2  2
+##  [136]  2  2  2  2  2  2  1  2  2  1  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2
+##  [163]  2  2  7  5  5  5 10  8  8 10  5 10  3  5  9  9  5  9  9  9  9  9  9  2  9  9  9
+##  [190]  7  9  9  9  9  9  2  9  9  5  6  6  6  6  6  5  6  6  6  6  6  5 10  3  3  5  3
+##  [217]  3  3  3  5  3 10  5  5  2  7  7  6  6  6  6  3  3  3  9  2  2  2  2  7  7  3  5
+##  [244]  6  3  4  4  8  4  4  6  3  4  6  4  3  6  6  8  6  4 10  3  8  4  8  8 10  5 10
+##  [271] 10  8  8  8 10  2  1  1  1  1  1  2  7  5  5  5  7  1  1  1  1  1  1  1  1  1  1
+##  [298]  1  1  1  1  7  7  9  9  9  6  6  6  3  6  6  4  6  6 10  5  3  4  5  5 10  5  8
+##  [325]  5  3  7  7  7  9  7  5  9  3  4 10 10  4  4  4  4  4  4  6  6  4 10 10 10 10 10
+##  [352]  5 10 10  4  3 10 10  5  3  3  3  3  7  1  4 10  4 10  4 10  4 10 10  4 10 10  4
+##  [379]  4  5  9  3  3  5  3  3  3  3  3  7  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2
+##  [406]  2  2  2  2  2  2  2  2  2  2  2  2  9  2  2  9  2  2  2  2  2  7  5  5  5  5  2
+##  [433]  7  1  1  1  1  1  1  1  1  1  1  1  2  2  2  2  2  2  2  2  2  7  2  1  2  2  2
+##  [460]  2  1  2  2  2  9  2  2  2  1  1  2  1  1  2  2  2  2  2  2  2  2  2  2  2  2  2
+##  [487]  2  2  2  9  5  5  5 10  5 10 10 10 10  3  9  9  5  5  5  5  7  7  9  9  7  7  7
+##  [514]  5  9  9  9  9  2  9  3  5  5  4  6  3  3  6  6  6  6  6  3  6  6  5 10  5  3  3
+##  [541]  9  3  3  6 10  4 10  5  5  9  3  9  9  9  3  3  5  2  3  3  9  2  2  2  7  5  3
+##  [568]  7  4  4  5  4  3  6  6  3  4  4  7  6  6  6  3 10 10  8  8  7  5  8 10 10  4  4
+##  [595] 10  8  8 10  5  1  1  1  2  2  2  2  2  5  7  1  1  1  1  1  7  1  1  1  1  1  1
+##  [622]  1  1  1  7  9  9  9  3  6  6  4  3  6  4  3  6  6 10 10  5  5  3  5  4  5  8  9
+##  [649]  3  3  9  5  9  9  9  5  4  4  4  4  4  4 10  4  6  6  6  6  4 10 10 10  3 10  5
+##  [676]  5  6 10 10  5 10 10  4  3  3  9  3  5  7  1  1  1  5 10 10  4 10 10 10 10  8  4
+##  [703]  8  5  5  4  4  6  3  3  3  3  7  9  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2
+##  [730]  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  5  9  2  2  2  9  9  2
+##  [757]  1  1  1  1  1  1  1  7  1  1  2  2  2  2  2  2  2  2  2  2  2  2  2  1  1  1  1
+##  [784]  1  2  2  2  2  2  2  2  1  1  1  1  1  2  2  2  2  2  2  2  2  2  2  2  2  2  2
+##  [811]  2  7  5  5  5 10  8  8 10 10 10 10  9  9  9  5  5  5  5  7  1  7  9  9  7  7  7
+##  [838]  7  2  9  9  9  9  9  3  3 10  4  8  5  6  6  6  6  6  6  3 10  5  3  3  3  3  5
+##  [865]  9  9  5 10 10  4  4 10  5  9  9  9  9  2  9  3  2  7  3  9  9  7  1  1  1  1  7
+##  [892]  7  3  3  6  3  6  6  6  6  6  6  6  6  6  6  3 10 10  8  8  9  7  8  8 10 10 10
+##  [919]  8  8  8  2  2  1  1  1  1  2  2  2  2  1  1  7  1  1  1  7  1  1  1  1  1  1  1
+##  [946]  1  1  1  7  9  9  9  5  3  3  6  3  4  4  4  3  3  3  5  5  5  5  5  5  5  5  5
+##  [973]  9  3 10  3  9  3  3  5  6  6  4  4 10 10  4  4  4  6  6  6  6 10 10  4  4 10 10
+## [1000]  5
+##  [ reached getOption(&quot;max.print&quot;) -- omitted 90195 entries ]
+## 
+## Within cluster sum of squares by cluster:
+##  [1] 12158.85 17930.08 20050.11 18795.73 21479.44 13944.26 19130.48 25280.81 20918.38
+## [10] 26772.76
+##  (between_SS / total_SS =  83.4 %)
+## 
+## Available components:
+## 
+## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot;
+## [6] &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;      
+## 
+## $raster
+## class       : SpatRaster 
+## dimensions  : 277, 373, 1  (nrow, ncol, nlyr)
+## resolution  : 20, 20  (x, y)
+## extent      : 431100, 438560, 5337700, 5343240  (xmin, xmax, ymin, ymax)
+## coord. ref. : +proj=utm +zone=17 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs 
+## source      : memory 
+## name        : strata 
+## min value   :      1 
+## max value   :     10</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="strat.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_kmeans</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
+<span id="cb13-2"><a href="strat.html#cb13-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">nStrata =</span> <span class="dv">5</span>, <span class="co"># algorithm will produce 4 strata</span></span>
+<span id="cb13-3"><a href="strat.html#cb13-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">center =</span> <span class="cn">FALSE</span>, <span class="co"># do not center data</span></span>
+<span id="cb13-4"><a href="strat.html#cb13-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">scale =</span> <span class="cn">FALSE</span>, <span class="co"># do not scale data</span></span>
+<span id="cb13-5"><a href="strat.html#cb13-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="co"># plot output</span></span>
+<span id="cb13-6"><a href="strat.html#cb13-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">filename =</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">&quot;.tif&quot;</span>), <span class="co"># write output sraster to file</span></span>
+<span id="cb13-7"><a href="strat.html#cb13-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">overwrite =</span> <span class="cn">TRUE</span>) <span class="co"># overwrite file on disc if it exists</span></span></code></pre></div>
 <p><img src="SGS_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<pre><code>## class       : SpatRaster 
+## dimensions  : 277, 373, 1  (nrow, ncol, nlyr)
+## resolution  : 20, 20  (x, y)
+## extent      : 431100, 438560, 5337700, 5343240  (xmin, xmax, ymin, ymax)
+## coord. ref. : +proj=utm +zone=17 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs 
+## source      : memory 
+## name        : strata 
+## min value   :      1 
+## max value   :      5</code></pre>
 </div>
 <div id="strat_pcomp" class="section level2 unnumbered">
 <h2><code>strat_pcomp</code></h2>
-<p>The <code>strat_pcomp</code> algorithm calculates principal components on the input <code>mraster</code> then divides data into equal sized strata. Strata can be defined by using the primary (PC1) only, or primary &amp; secondary (PC2) principal components. If <code>nStata2</code> is defined, PC2 is used and the total number of strata will be <span class="math display">\[nStrata * nStrata2\]</span>.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="strat.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_pcomp</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
-<span id="cb12-2"><a href="strat.html#cb12-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">nStrata =</span> <span class="dv">5</span>, <span class="co"># 5 strata with primary PC only</span></span>
-<span id="cb12-3"><a href="strat.html#cb12-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>The <code>strat_pcomp</code> algorithm calculates principal components on the input <code>mraster</code> then divides data into equal sized strata. Strata can be defined by using the primary (PC1) only (<code>nStrata</code>), or primary &amp; secondary (PC2 - <code>nStata2</code>) principal components. If <code>nStata2</code> is defined, PC2 is used and the total number of strata will be <span class="math display">\[nStrata * nStrata2\]</span>.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="strat.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_pcomp</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
+<span id="cb15-2"><a href="strat.html#cb15-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">nStrata =</span> <span class="dv">5</span>, <span class="co"># 5 strata with primary PC only</span></span>
+<span id="cb15-3"><a href="strat.html#cb15-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
 <p><img src="SGS_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <pre><code>## class       : SpatRaster 
 ## dimensions  : 277, 373, 1  (nrow, ncol, nlyr)
@@ -283,11 +404,11 @@ div.csl-indent {
 ## name        : strata 
 ## min value   :      1 
 ## max value   :      5</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="strat.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_pcomp</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
-<span id="cb14-2"><a href="strat.html#cb14-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">nStrata =</span> <span class="dv">4</span>, <span class="co"># 4 strata with primary</span></span>
-<span id="cb14-3"><a href="strat.html#cb14-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">nStrata2 =</span> <span class="dv">4</span>, <span class="co"># 4 strata with secondary PC - will produce 16 output strata</span></span>
-<span id="cb14-4"><a href="strat.html#cb14-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="co"># plot</span></span>
-<span id="cb14-5"><a href="strat.html#cb14-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">details =</span> <span class="cn">TRUE</span>) <span class="co"># produce output details</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="strat.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_pcomp</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
+<span id="cb17-2"><a href="strat.html#cb17-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">nStrata =</span> <span class="dv">4</span>, <span class="co"># 4 strata with primary</span></span>
+<span id="cb17-3"><a href="strat.html#cb17-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">nStrata2 =</span> <span class="dv">4</span>, <span class="co"># 4 strata with secondary PC - will produce 16 output strata</span></span>
+<span id="cb17-4"><a href="strat.html#cb17-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="co"># plot</span></span>
+<span id="cb17-5"><a href="strat.html#cb17-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">details =</span> <span class="cn">TRUE</span>) <span class="co"># produce output details</span></span></code></pre></div>
 <p><img src="SGS_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <pre><code>## $details
 ## Standard deviations (1, .., p=13):
@@ -351,10 +472,10 @@ div.csl-indent {
 ## 
 ## $plot</code></pre>
 <p><img src="SGS_files/figure-html/unnamed-chunk-21-2.png" width="672" /></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="strat.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_pcomp</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
-<span id="cb16-2"><a href="strat.html#cb16-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">nStrata =</span> <span class="dv">3</span>, <span class="co"># 3 strata with primary PC</span></span>
-<span id="cb16-3"><a href="strat.html#cb16-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">nStrata2 =</span> <span class="dv">3</span>, <span class="co"># 4 strata with secondary PC - will produce 9 output strata</span></span>
-<span id="cb16-4"><a href="strat.html#cb16-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">filename =</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">&quot;.tif&quot;</span>)) <span class="co"># write output sraster to file</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="strat.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_pcomp</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
+<span id="cb19-2"><a href="strat.html#cb19-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">nStrata =</span> <span class="dv">3</span>, <span class="co"># 3 strata with primary PC</span></span>
+<span id="cb19-3"><a href="strat.html#cb19-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">nStrata2 =</span> <span class="dv">3</span>, <span class="co"># 4 strata with secondary PC - will produce 9 output strata</span></span>
+<span id="cb19-4"><a href="strat.html#cb19-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">filename =</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">&quot;.tif&quot;</span>)) <span class="co"># write output sraster to file</span></span></code></pre></div>
 <pre><code>## class       : SpatRaster 
 ## dimensions  : 277, 373, 1  (nrow, ncol, nlyr)
 ## resolution  : 20, 20  (x, y)
@@ -367,16 +488,16 @@ div.csl-indent {
 </div>
 <div id="strat_breaks" class="section level2 unnumbered">
 <h2><code>strat_breaks</code></h2>
-<p>The <code>strat_breaks</code> function stratifies data based on user-defined breaks in covariates. A single <code>metric</code> can be defined or an additional <code>metric2</code> can be supplied. <code>breaks</code> and <code>breaks2</code> correspond to the user-defined breaks for <code>metric</code> and metric2` respectively.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="strat.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- create vector breaks ---#</span></span>
-<span id="cb18-2"><a href="strat.html#cb18-2" aria-hidden="true" tabindex="-1"></a>br.max <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">11</span>, <span class="dv">18</span>) <span class="co">#zmax breaks</span></span>
-<span id="cb18-3"><a href="strat.html#cb18-3" aria-hidden="true" tabindex="-1"></a>br.sd <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>) <span class="co">#zsd breaks</span></span></code></pre></div>
-<p>Once the breaks have been created we can input them into the function.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="strat.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_breaks</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
-<span id="cb19-2"><a href="strat.html#cb19-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">metric =</span> <span class="st">&quot;zmax&quot;</span>, <span class="co"># covariate of interest - can be numeric index of mraster or character string</span></span>
-<span id="cb19-3"><a href="strat.html#cb19-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">breaks =</span> br.max, <span class="co"># breaks for primary covariate</span></span>
-<span id="cb19-4"><a href="strat.html#cb19-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="co"># plot</span></span>
-<span id="cb19-5"><a href="strat.html#cb19-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">details =</span> <span class="cn">TRUE</span>) <span class="co"># output details</span></span></code></pre></div>
+<p>The <code>strat_breaks</code> function stratifies data based on user-defined breaks in covariates. A single <code>metric</code> can be defined or an additional <code>metric2</code> can be supplied. <code>breaks</code> and <code>breaks2</code> correspond to the user-defined breaks for <code>metric</code> and <code>metric2</code> respectively.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="strat.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- define vector breaks ---#</span></span>
+<span id="cb21-2"><a href="strat.html#cb21-2" aria-hidden="true" tabindex="-1"></a>br.max <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">11</span>, <span class="dv">18</span>) <span class="co">#zmax breaks</span></span>
+<span id="cb21-3"><a href="strat.html#cb21-3" aria-hidden="true" tabindex="-1"></a>br.sd <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>) <span class="co">#zsd breaks</span></span></code></pre></div>
+<p>Once the breaks have been created we can input them into the function using the <code>breaks</code> and <code>breaks2</code> parameters.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="strat.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_breaks</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
+<span id="cb22-2"><a href="strat.html#cb22-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">metric =</span> <span class="st">&quot;zmax&quot;</span>, <span class="co"># covariate of interest - numeric index or character string</span></span>
+<span id="cb22-3"><a href="strat.html#cb22-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">breaks =</span> br.max, <span class="co"># breaks for primary covariate</span></span>
+<span id="cb22-4"><a href="strat.html#cb22-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="co"># plot</span></span>
+<span id="cb22-5"><a href="strat.html#cb22-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">details =</span> <span class="cn">TRUE</span>) <span class="co"># output details</span></span></code></pre></div>
 <p><img src="SGS_files/figure-html/unnamed-chunk-24-1.png" width="672" /><img src="SGS_files/figure-html/unnamed-chunk-24-2.png" width="672" /></p>
 <pre><code>## $details
 ## $details$breaks
@@ -399,12 +520,12 @@ div.csl-indent {
 ## 
 ## $plot</code></pre>
 <p><img src="SGS_files/figure-html/unnamed-chunk-24-3.png" width="672" /></p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="strat.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_breaks</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
-<span id="cb21-2"><a href="strat.html#cb21-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">metric =</span> <span class="dv">1</span>, <span class="co"># primary covariate of interest - can be numeric index of mraster or character string</span></span>
-<span id="cb21-3"><a href="strat.html#cb21-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">metric2 =</span> <span class="st">&quot;zsd&quot;</span>, <span class="co"># secondary covariate of interest - can be numeric index of mraster or character string</span></span>
-<span id="cb21-4"><a href="strat.html#cb21-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">breaks =</span> br.max, <span class="co"># breaks for primary covariate</span></span>
-<span id="cb21-5"><a href="strat.html#cb21-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">breaks2 =</span> br.sd, <span class="co"># breaks for secondary covariate</span></span>
-<span id="cb21-6"><a href="strat.html#cb21-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="strat.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_breaks</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
+<span id="cb24-2"><a href="strat.html#cb24-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">metric =</span> <span class="dv">1</span>, <span class="co"># primary covariate of interest - numeric index or character string</span></span>
+<span id="cb24-3"><a href="strat.html#cb24-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">metric2 =</span> <span class="st">&quot;zsd&quot;</span>, <span class="co"># secondary covariate of interest - numeric index or character string</span></span>
+<span id="cb24-4"><a href="strat.html#cb24-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">breaks =</span> br.max, <span class="co"># breaks for primary covariate</span></span>
+<span id="cb24-5"><a href="strat.html#cb24-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">breaks2 =</span> br.sd, <span class="co"># breaks for secondary covariate</span></span>
+<span id="cb24-6"><a href="strat.html#cb24-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
 <p><img src="SGS_files/figure-html/unnamed-chunk-25-1.png" width="672" /><img src="SGS_files/figure-html/unnamed-chunk-25-2.png" width="672" /></p>
 <pre><code>## class       : SpatRaster 
 ## dimensions  : 277, 373, 1  (nrow, ncol, nlyr)
@@ -418,11 +539,11 @@ div.csl-indent {
 </div>
 <div id="strat_quantiles" class="section level2 unnumbered">
 <h2><code>strat_quantiles</code></h2>
-<p>The <code>strat_quantiles</code> function stratifies data into the user-defined number of quantiles. A single <code>metric</code> can be defined or an additional <code>metric2</code> can be supplied. <code>nQuant</code> and <code>nQuant2</code> correspond to the desired number of quantiles for <code>metric</code> and metric2<code>respectively. If</code>nQuant` is defined, the total number of strata will be <span class="math display">\[nStrata = nQuant * nQuant2\]</span></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="strat.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_quantiles</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
-<span id="cb23-2"><a href="strat.html#cb23-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">metric =</span> <span class="dv">4</span>, <span class="co"># primary covariate of interest - can be numeric index of mraster or character string</span></span>
-<span id="cb23-3"><a href="strat.html#cb23-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">nQuant =</span> <span class="dv">10</span>, <span class="co"># number of quantiles for primary covariate</span></span>
-<span id="cb23-4"><a href="strat.html#cb23-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
+<p>The <code>strat_quantiles</code> function stratifies data into the user-defined number of quantiles (<code>nQuant</code>). A single <code>metric</code> can be defined or an additional <code>metric2</code> can be supplied. <code>nQuant</code> and <code>nQuant2</code> correspond to the desired number of quantiles for <code>metric</code> and <code>metric2</code> respectively. If <code>nQuant2</code> is defined, the total number of strata will be <span class="math display">\[nStrata = nQuant * nQuant2\]</span></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="strat.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_quantiles</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
+<span id="cb26-2"><a href="strat.html#cb26-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">metric =</span> <span class="dv">4</span>, <span class="co"># primary covariate of interest - numeric index or character string</span></span>
+<span id="cb26-3"><a href="strat.html#cb26-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">nQuant =</span> <span class="dv">10</span>, <span class="co"># number of quantiles for primary covariate</span></span>
+<span id="cb26-4"><a href="strat.html#cb26-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
 <p><img src="SGS_files/figure-html/unnamed-chunk-26-1.png" width="672" /><img src="SGS_files/figure-html/unnamed-chunk-26-2.png" width="672" /></p>
 <pre><code>## class       : SpatRaster 
 ## dimensions  : 277, 373, 1  (nrow, ncol, nlyr)
@@ -433,12 +554,12 @@ div.csl-indent {
 ## name        : strata 
 ## min value   :      1 
 ## max value   :     10</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="strat.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_quantiles</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
-<span id="cb25-2"><a href="strat.html#cb25-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">metric =</span> <span class="st">&quot;zsd&quot;</span>, <span class="co"># primary covariate of interest - can be numeric index of mraster or character string</span></span>
-<span id="cb25-3"><a href="strat.html#cb25-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">metric2 =</span> <span class="st">&quot;zq95&quot;</span>, <span class="co"># secondary covariate of interest - can be numeric index of mraster or character string</span></span>
-<span id="cb25-4"><a href="strat.html#cb25-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">nQuant =</span> <span class="dv">3</span>, <span class="co"># number of quantiles for primary covariate</span></span>
-<span id="cb25-5"><a href="strat.html#cb25-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">nQuant2 =</span> <span class="dv">4</span>, <span class="co"># number of quantiles for secondary covariate</span></span>
-<span id="cb25-6"><a href="strat.html#cb25-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="strat.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_quantiles</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
+<span id="cb28-2"><a href="strat.html#cb28-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">metric =</span> <span class="st">&quot;zsd&quot;</span>, <span class="co"># primary covariate of interest - numeric index or character string</span></span>
+<span id="cb28-3"><a href="strat.html#cb28-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">metric2 =</span> <span class="st">&quot;zq95&quot;</span>, <span class="co"># secondary covariate of interest - numeric index or character string</span></span>
+<span id="cb28-4"><a href="strat.html#cb28-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">nQuant =</span> <span class="dv">3</span>, <span class="co"># number of quantiles for primary covariate</span></span>
+<span id="cb28-5"><a href="strat.html#cb28-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">nQuant2 =</span> <span class="dv">4</span>, <span class="co"># number of quantiles for secondary covariate</span></span>
+<span id="cb28-6"><a href="strat.html#cb28-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
 <p><img src="SGS_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <pre><code>## class       : SpatRaster 
 ## dimensions  : 277, 373, 1  (nrow, ncol, nlyr)
@@ -449,12 +570,12 @@ div.csl-indent {
 ## name        : strata 
 ## min value   :      1 
 ## max value   :     12</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="strat.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_quantiles</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
-<span id="cb27-2"><a href="strat.html#cb27-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">metric =</span> <span class="dv">1</span>, <span class="co"># primary covariate of interest - can be numeric index of mraster or character string</span></span>
-<span id="cb27-3"><a href="strat.html#cb27-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">metric2 =</span> <span class="st">&quot;zsd&quot;</span>, <span class="co"># secondary covariate of interest - can be numeric index of mraster or character string</span></span>
-<span id="cb27-4"><a href="strat.html#cb27-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">nQuant =</span> <span class="dv">2</span>, <span class="co"># number of quantiles for primary covariate</span></span>
-<span id="cb27-5"><a href="strat.html#cb27-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">nQuant2 =</span> <span class="dv">2</span>, <span class="co"># number of quantiles for secondary covariate</span></span>
-<span id="cb27-6"><a href="strat.html#cb27-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">filename =</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">&quot;.tif&quot;</span>)) <span class="co"># write output sraster to file</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="strat.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_quantiles</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
+<span id="cb30-2"><a href="strat.html#cb30-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">metric =</span> <span class="dv">1</span>, <span class="co"># primary covariate of interest - numeric index or character string</span></span>
+<span id="cb30-3"><a href="strat.html#cb30-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">metric2 =</span> <span class="st">&quot;zsd&quot;</span>, <span class="co"># secondary covariate of interest - numeric index or character string</span></span>
+<span id="cb30-4"><a href="strat.html#cb30-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">nQuant =</span> <span class="dv">2</span>, <span class="co"># number of quantiles for primary covariate</span></span>
+<span id="cb30-5"><a href="strat.html#cb30-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">nQuant2 =</span> <span class="dv">2</span>, <span class="co"># number of quantiles for secondary covariate</span></span>
+<span id="cb30-6"><a href="strat.html#cb30-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">filename =</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">&quot;.tif&quot;</span>)) <span class="co"># write output sraster to file</span></span></code></pre></div>
 <pre><code>## class       : SpatRaster 
 ## dimensions  : 277, 373, 1  (nrow, ncol, nlyr)
 ## resolution  : 20, 20  (x, y)
@@ -467,25 +588,27 @@ div.csl-indent {
 </div>
 <div id="strat_osb" class="section level2 unnumbered">
 <h2><code>strat_osb</code></h2>
-<p>The <code>strat_osb</code> algorithm implements the optimum sample boundaries algorithm implmented in the <code>FortifyR</code> package. For further details about the algorithms used check out their package and also consult <code>?sgsR::strat_osb</code> for references. The basics of this algorithm are to provide the number of desired strata <code>nStrata</code> and samples <code>nSamp</code>. The algorithm then analyzes the data for the optimal locations to establish breaks in the covariate, which are used as stratum boundaries. This function can take a bit longer to run so please be patient! For the purpses of this vignette i have used a limited number of strata and samples to ensure they run and render quickly.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="strat.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- perform optimum sample boundary stratification ---#</span></span>
-<span id="cb29-2"><a href="strat.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_osb</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
-<span id="cb29-3"><a href="strat.html#cb29-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">metric =</span> <span class="st">&quot;zsd&quot;</span>, <span class="co"># covariate of interest - can be numeric index of mraster or character string</span></span>
-<span id="cb29-4"><a href="strat.html#cb29-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">nSamp =</span> <span class="dv">50</span>, <span class="co"># number of desired samples</span></span>
-<span id="cb29-5"><a href="strat.html#cb29-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">nStrata =</span> <span class="dv">3</span>, <span class="co"># number of desired strata</span></span>
-<span id="cb29-6"><a href="strat.html#cb29-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="strat.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_osb</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
-<span id="cb30-2"><a href="strat.html#cb30-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">metric =</span> <span class="dv">4</span>, <span class="co"># covariate of interest - can be numeric index of mraster or character string</span></span>
-<span id="cb30-3"><a href="strat.html#cb30-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">nSamp =</span> <span class="dv">25</span>, <span class="co"># number of desired samples</span></span>
-<span id="cb30-4"><a href="strat.html#cb30-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">nStrata =</span> <span class="dv">3</span>, <span class="co"># number of desired strata</span></span>
-<span id="cb30-5"><a href="strat.html#cb30-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="co"># plot</span></span>
-<span id="cb30-6"><a href="strat.html#cb30-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">details =</span> <span class="cn">TRUE</span>) <span class="co"># produce output details</span></span></code></pre></div>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="strat.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_osb</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
-<span id="cb31-2"><a href="strat.html#cb31-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">metric =</span> <span class="st">&quot;zmax&quot;</span>, <span class="co"># covariate of interest - can be numeric index of mraster or character string</span></span>
-<span id="cb31-3"><a href="strat.html#cb31-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">nSamp =</span> <span class="dv">50</span>, <span class="co"># number of desired samples</span></span>
-<span id="cb31-4"><a href="strat.html#cb31-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">nStrata =</span> <span class="dv">3</span>, <span class="co"># number of desired strata</span></span>
-<span id="cb31-5"><a href="strat.html#cb31-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">subset =</span> <span class="fl">0.75</span>, <span class="co"># used a subset of covariate data to determine optimum breaks</span></span>
-<span id="cb31-6"><a href="strat.html#cb31-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">filename =</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">&quot;.tif&quot;</span>)) <span class="co"># write output sraster to file</span></span></code></pre></div>
+<p>The <code>strat_osb</code> algorithm implements the optimum sample boundaries algorithm implmented in the <code>stratifyR</code> package. For further details about the algorithms used check out their package and also consult <code>?sgsR::strat_osb</code> for references.</p>
+<p>The basics of this algorithm are to provide the number of desired strata <code>nStrata</code> and samples <code>nSamp</code>. The algorithm then analyzes the data for the optimal locations to establish breaks in the covariate <code>metric</code>, which are used as stratum boundaries.</p>
+<p>This function can take a bit longer to run so please be patient! For the purpses of this example I have used a limited number of <code>nStrata</code> and <code>nSamp</code> to ensure they run and render quickly.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="strat.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- perform optimum sample boundary stratification ---#</span></span>
+<span id="cb32-2"><a href="strat.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_osb</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
+<span id="cb32-3"><a href="strat.html#cb32-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">metric =</span> <span class="st">&quot;zsd&quot;</span>, <span class="co"># covariate of interest - numeric index or character string</span></span>
+<span id="cb32-4"><a href="strat.html#cb32-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">nSamp =</span> <span class="dv">50</span>, <span class="co"># number of desired samples</span></span>
+<span id="cb32-5"><a href="strat.html#cb32-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">nStrata =</span> <span class="dv">3</span>, <span class="co"># number of desired strata</span></span>
+<span id="cb32-6"><a href="strat.html#cb32-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="strat.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_osb</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
+<span id="cb33-2"><a href="strat.html#cb33-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">metric =</span> <span class="dv">4</span>, <span class="co"># covariate of interest - numeric index or character string</span></span>
+<span id="cb33-3"><a href="strat.html#cb33-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">nSamp =</span> <span class="dv">25</span>, <span class="co"># number of desired samples</span></span>
+<span id="cb33-4"><a href="strat.html#cb33-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">nStrata =</span> <span class="dv">3</span>, <span class="co"># number of desired strata</span></span>
+<span id="cb33-5"><a href="strat.html#cb33-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="co"># plot</span></span>
+<span id="cb33-6"><a href="strat.html#cb33-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">details =</span> <span class="cn">TRUE</span>) <span class="co"># produce output details</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="strat.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_osb</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
+<span id="cb34-2"><a href="strat.html#cb34-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">metric =</span> <span class="st">&quot;zmax&quot;</span>, <span class="co"># covariate of interest - numeric index or character string</span></span>
+<span id="cb34-3"><a href="strat.html#cb34-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">nSamp =</span> <span class="dv">50</span>, <span class="co"># number of desired samples</span></span>
+<span id="cb34-4"><a href="strat.html#cb34-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">nStrata =</span> <span class="dv">3</span>, <span class="co"># number of desired strata</span></span>
+<span id="cb34-5"><a href="strat.html#cb34-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">subset =</span> <span class="fl">0.75</span>, <span class="co"># used a subset of covariate data to determine optimum breaks</span></span>
+<span id="cb34-6"><a href="strat.html#cb34-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">filename =</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">&quot;.tif&quot;</span>)) <span class="co"># write output sraster to file</span></span></code></pre></div>
 
 <style type="text/css">
 pre {

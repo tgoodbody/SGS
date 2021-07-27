@@ -24,7 +24,7 @@
 <meta name="author" content="Tristan Goodbody" />
 
 
-<meta name="date" content="2021-07-26" />
+<meta name="date" content="2021-07-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -184,14 +184,14 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="fund.html"><a href="fund.html"><i class="fa fa-check"></i>Algorithm structure</a></li>
 <li class="chapter" data-level="" data-path="fund.html"><a href="fund.html#example-data"><i class="fa fa-check"></i>Example data</a>
 <ul>
-<li class="chapter" data-level="" data-path="fund.html"><a href="fund.html#rast"><i class="fa fa-check"></i>Raster data</a></li>
-<li class="chapter" data-level="" data-path="fund.html"><a href="fund.html#vect"><i class="fa fa-check"></i>Road access data</a></li>
+<li><a href="fund.html#mrast">Metrics rasters - <code>mraster</code></a></li>
+<li><a href="fund.html#vect">Road <code>access</code> data</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="fund.html"><a href="fund.html#additional-example-data"><i class="fa fa-check"></i>Additional example data</a></li>
+<li><a href="fund.html#srast">Stratified rasters - <code>sraster</code></a></li>
 </ul></li>
 <li><a href="strat.html#strat"><code>strat_*</code> functions</a>
 <ul>
-<li><a href="strat.html#strat_kmeans"><code>strat_kmeans</code></a></li>
+<li><a href="strat.html#kmeans"><code>strat_kmeans</code></a></li>
 <li><a href="strat.html#strat_pcomp"><code>strat_pcomp</code></a></li>
 <li><a href="strat.html#strat_breaks"><code>strat_breaks</code></a></li>
 <li><a href="strat.html#strat_quantiles"><code>strat_quantiles</code></a></li>
@@ -200,13 +200,28 @@ div.csl-indent {
 <li><a href="sample.html#sample"><code>sample_*</code> functions</a>
 <ul>
 <li class="chapter" data-level="" data-path="sample.html"><a href="sample.html"><i class="fa fa-check"></i>Access</a></li>
-<li><a href="sample.html#sample_srs"><code>sample_srs</code></a></li>
-<li><a href="sample.html#sample_grid"><code>sample_grid</code></a></li>
-<li><a href="sample.html#sample_strat"><code>sample_strat</code></a></li>
-<li><a href="sample.html#sample_clhs"><code>sample_clhs</code></a></li>
-<li><a href="sample.html#sample_balanced"><code>sample_balanced</code></a></li>
+<li><a href="sample.html#srs"><code>sample_srs</code></a></li>
+<li><a href="sample.html#grid"><code>sample_grid</code></a></li>
+<li><a href="sample.html#sstrat"><code>sample_strat</code></a></li>
+<li><a href="sample.html#clhs"><code>sample_clhs</code></a></li>
+<li><a href="sample.html#balanced"><code>sample_balanced</code></a></li>
 </ul></li>
-<li><a href="calc.html#calc"><code>calculate_*</code> functions</a></li>
+<li><a href="calc.html#calc"><code>calculate_*</code> functions</a>
+<ul>
+<li><a href="calc.html#dist"><code>calculate_distance</code></a></li>
+<li><a href="calc.html#calculate_pcomp"><code>calculate_pcomp</code></a></li>
+<li><a href="calc.html#calculate_reqsamples"><code>calculate_reqSamples</code></a></li>
+<li class="chapter" data-level="" data-path="calc.html"><a href="calc.html"><i class="fa fa-check"></i>Sample evaluation algorithms</a>
+<ul>
+<li><a href="calc.html#ahels"><code>calculate_ahels</code></a></li>
+<li><a href="calc.html#coobs"><code>calculate_coobs</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="calc.html"><a href="calc.html#lhseval"><i class="fa fa-check"></i>Latin hypercube sampling evaluation algorithms</a>
+<ul>
+<li><a href="calc.html#lhspop"><code>calculate_lhsPop</code></a></li>
+<li><a href="calc.html#lhsopt"><code>calculate_lhsOpt</code></a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -233,112 +248,112 @@ div.csl-indent {
 <p>A total of 5 <code>sample</code> functions currently exist in the package:</p>
 <ul>
 <li><p><code>sample_srs</code> - simple random sampling</p></li>
-<li><p><code>sample_grid</code>- sample principal components on input <code>mraster</code></p></li>
-<li><p><code>sample_strat</code> - sample the number of samples needed for represntative sample within a <code>sraster</code></p></li>
-<li><p><code>sample_clhs</code> - appy the adapted Hypercube Evaluation of a Legacy Sample (ahels) algorithm to existing samples</p></li>
-<li><p><code>sample_balanced</code> - apply count of observations algorithm to existing samples</p></li>
+<li><p><code>sample_grid</code>- grid sampling</p></li>
+<li><p><code>sample_strat</code> - stratified sampling within a <code>sraster</code></p></li>
+<li><p><code>sample_clhs</code> - Latin hypercube sampling algorithm</p></li>
+<li><p><code>sample_balanced</code> - Balanced sampling <span class="citation">(<a href="#ref-R-BalancedSampling" role="doc-biblioref">Grafström and Lisic 2019</a>)</span></p></li>
 </ul>
 <div id="access" class="section level2 unnumbered">
 <h2>Access</h2>
-<p>A feature of the <code>sample_*</code> functions that may be of interest is the ability to define <code>access</code>. Users can supply a road access network (must be lines) as access aswell as define buffers around access where samples should be excluded and included.</p>
-<p>Important additional parameter when <code>access</code> is provided are:</p>
+<p>A feature of the <code>sample_*</code> functions that may be of interest is the ability to define <code>access</code>. Users can supply a road access network (must be <code>sf</code> line objects) and define buffers around <code>access</code> where samples should be excluded and included.</p>
+<p>Important additional parameters when <code>access</code> is provided are:</p>
 <ul>
 <li><p><code>buff_inner</code> - An inner buffer that defines the distance from <code>access</code> where samples cannot be takes (i.e. if you do not want samples within 50 m of your <code>access</code> layer set <code>buff_inner = 50</code>).</p></li>
 <li><p><code>buff_outer</code> - Maximum distance samples can be located from <code>access</code> (i.e. if you dont want samples more than 200 meters from a road set <code>buff_inner = 200</code>)</p></li>
 </ul>
 </div>
-<div id="sample_srs" class="section level2 unnumbered">
+<div id="srs" class="section level2 unnumbered">
 <h2><code>sample_srs</code></h2>
-<p>We provided a very simple example of using the <code>sample_srs</code> function when we were preparing our input data. We provide some addition examples below.</p>
+<p>We provided a very simple example of using the <code>sample_srs</code> function when we were preparing our <a href="fund.html#srast"><code>existing</code></a> data. We provide some additional examples below.</p>
 <div class="box-content vig-content">
 <div id="input-raster" class="section level3 unnumbered box-title vig-content-top">
 <h3>Input raster</h3>
 </div>
-<p>Notice that the input for <code>sample_srs</code> is <code>raster</code>. This means that an <code>sraster</code> or an <code>mraster</code> can be supplied.</p>
+<p>Notice that the input for <code>sample_srs</code> is <code>raster</code>. This means that either an <code>sraster</code> or an <code>mraster</code> can be supplied.</p>
 </div>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="sample.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- perform simple random sampling ---#</span></span>
-<span id="cb33-2"><a href="sample.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_srs</span>(<span class="at">raster =</span> sraster, <span class="co"># input sraster</span></span>
-<span id="cb33-3"><a href="sample.html#cb33-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">nSamp =</span> <span class="dv">200</span>, <span class="co"># number of desired samples</span></span>
-<span id="cb33-4"><a href="sample.html#cb33-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="sample.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- perform simple random sampling ---#</span></span>
+<span id="cb36-2"><a href="sample.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_srs</span>(<span class="at">raster =</span> sraster, <span class="co"># input sraster</span></span>
+<span id="cb36-3"><a href="sample.html#cb36-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">nSamp =</span> <span class="dv">200</span>, <span class="co"># number of desired samples</span></span>
+<span id="cb36-4"><a href="sample.html#cb36-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
 <p><img src="SGS_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <pre><code>## Simple feature collection with 200 features and 0 fields
 ## Geometry type: POINT
 ## Dimension:     XY
-## Bounding box:  xmin: 431130 ymin: 5337710 xmax: 438550 ymax: 5343230
+## Bounding box:  xmin: 431110 ymin: 5337710 xmax: 438410 ymax: 5343230
 ## CRS:           +proj=utm +zone=17 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
 ## First 10 features:
 ##                  geometry
-## 1  POINT (436550 5340070)
-## 2  POINT (435470 5338230)
-## 3  POINT (436630 5339490)
-## 4  POINT (432670 5339310)
-## 5  POINT (433950 5341710)
-## 6  POINT (437730 5341290)
-## 7  POINT (434110 5343170)
-## 8  POINT (434050 5340350)
-## 9  POINT (437410 5341870)
-## 10 POINT (432790 5340910)</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="sample.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_srs</span>(<span class="at">raster =</span> mraster, <span class="co"># input mraster</span></span>
-<span id="cb35-2"><a href="sample.html#cb35-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">nSamp =</span> <span class="dv">200</span>, <span class="co"># number of desired samples</span></span>
-<span id="cb35-3"><a href="sample.html#cb35-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">access =</span> access, <span class="co"># define access road network</span></span>
-<span id="cb35-4"><a href="sample.html#cb35-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">mindist =</span> <span class="dv">200</span>, <span class="co"># minimum distance samples must be apart from one another</span></span>
-<span id="cb35-5"><a href="sample.html#cb35-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">buff_inner =</span> <span class="dv">50</span>, <span class="co"># inner buffer - no samples within this distance from road</span></span>
-<span id="cb35-6"><a href="sample.html#cb35-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">buff_outer =</span> <span class="dv">200</span>, <span class="co"># outer buffer - no samples further than this distance from road</span></span>
-<span id="cb35-7"><a href="sample.html#cb35-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
+## 1  POINT (437450 5338550)
+## 2  POINT (433670 5341230)
+## 3  POINT (433430 5339390)
+## 4  POINT (431990 5338590)
+## 5  POINT (438370 5341450)
+## 6  POINT (432190 5342430)
+## 7  POINT (433510 5339250)
+## 8  POINT (436250 5342930)
+## 9  POINT (436730 5339650)
+## 10 POINT (433590 5342070)</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="sample.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_srs</span>(<span class="at">raster =</span> mraster, <span class="co"># input mraster</span></span>
+<span id="cb38-2"><a href="sample.html#cb38-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">nSamp =</span> <span class="dv">200</span>, <span class="co"># number of desired samples</span></span>
+<span id="cb38-3"><a href="sample.html#cb38-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">access =</span> access, <span class="co"># define access road network</span></span>
+<span id="cb38-4"><a href="sample.html#cb38-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">mindist =</span> <span class="dv">200</span>, <span class="co"># minimum distance samples must be apart from one another</span></span>
+<span id="cb38-5"><a href="sample.html#cb38-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">buff_inner =</span> <span class="dv">50</span>, <span class="co"># inner buffer - no samples within this distance from road</span></span>
+<span id="cb38-6"><a href="sample.html#cb38-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">buff_outer =</span> <span class="dv">200</span>, <span class="co"># outer buffer - no samples further than this distance from road</span></span>
+<span id="cb38-7"><a href="sample.html#cb38-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
 <p><img src="SGS_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
 <pre><code>## Simple feature collection with 200 features and 0 fields
 ## Geometry type: POINT
 ## Dimension:     XY
-## Bounding box:  xmin: 431250 ymin: 5337710 xmax: 438530 ymax: 5343230
+## Bounding box:  xmin: 431110 ymin: 5337730 xmax: 438510 ymax: 5343230
 ## CRS:           +proj=utm +zone=17 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
 ## First 10 features:
 ##                  geometry
-## 1  POINT (435870 5339950)
-## 2  POINT (432550 5340690)
-## 3  POINT (433570 5341270)
-## 4  POINT (435850 5339010)
-## 5  POINT (437230 5337750)
-## 6  POINT (434610 5342290)
-## 7  POINT (431950 5337770)
-## 8  POINT (433410 5343030)
-## 9  POINT (432710 5339430)
-## 10 POINT (435250 5341950)</code></pre>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="sample.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_srs</span>(<span class="at">raster =</span> sraster, <span class="co"># input</span></span>
-<span id="cb37-2"><a href="sample.html#cb37-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">nSamp =</span> <span class="dv">200</span>, <span class="co"># number of desired samples</span></span>
-<span id="cb37-3"><a href="sample.html#cb37-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">access =</span> access, <span class="co"># define access road network</span></span>
-<span id="cb37-4"><a href="sample.html#cb37-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">buff_inner =</span> <span class="dv">50</span>, <span class="co"># inner buffer - no samples within this distance from road</span></span>
-<span id="cb37-5"><a href="sample.html#cb37-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">buff_outer =</span> <span class="dv">200</span>, <span class="co"># outer buffer - no samples further than this distance from road</span></span>
-<span id="cb37-6"><a href="sample.html#cb37-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="co"># plot</span></span>
-<span id="cb37-7"><a href="sample.html#cb37-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">filename =</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">&quot;.shp&quot;</span>)) <span class="co"># write output samples to file</span></span></code></pre></div>
+## 1  POINT (432050 5342810)
+## 2  POINT (434270 5338050)
+## 3  POINT (437510 5338950)
+## 4  POINT (432770 5340250)
+## 5  POINT (432870 5340450)
+## 6  POINT (433610 5340490)
+## 7  POINT (436410 5341550)
+## 8  POINT (434110 5338510)
+## 9  POINT (433690 5342650)
+## 10 POINT (435390 5338550)</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="sample.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_srs</span>(<span class="at">raster =</span> sraster, <span class="co"># input</span></span>
+<span id="cb40-2"><a href="sample.html#cb40-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">nSamp =</span> <span class="dv">200</span>, <span class="co"># number of desired samples</span></span>
+<span id="cb40-3"><a href="sample.html#cb40-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">access =</span> access, <span class="co"># define access road network</span></span>
+<span id="cb40-4"><a href="sample.html#cb40-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">buff_inner =</span> <span class="dv">50</span>, <span class="co"># inner buffer - no samples within this distance from road</span></span>
+<span id="cb40-5"><a href="sample.html#cb40-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">buff_outer =</span> <span class="dv">200</span>, <span class="co"># outer buffer - no samples further than this distance from road</span></span>
+<span id="cb40-6"><a href="sample.html#cb40-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="co"># plot</span></span>
+<span id="cb40-7"><a href="sample.html#cb40-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">filename =</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">&quot;.shp&quot;</span>)) <span class="co"># write output samples to file</span></span></code></pre></div>
 <p><img src="SGS_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
-<pre><code>## Writing layer `file4b0054073f24&#39; to data source 
-##   `C:\Users\tgood.stu\AppData\Local\Temp\RtmpovDJyg\file4b0054073f24.shp&#39; using driver `ESRI Shapefile&#39;
+<pre><code>## Writing layer `filedfc47b22fd4&#39; to data source 
+##   `C:\Users\tgood.stu\AppData\Local\Temp\RtmpSecUsn\filedfc47b22fd4.shp&#39; using driver `ESRI Shapefile&#39;
 ## Writing 200 features with 0 fields and geometry type Point.</code></pre>
 <pre><code>## Simple feature collection with 200 features and 0 fields
 ## Geometry type: POINT
 ## Dimension:     XY
-## Bounding box:  xmin: 431150 ymin: 5337750 xmax: 438530 ymax: 5343230
+## Bounding box:  xmin: 431230 ymin: 5337710 xmax: 438510 ymax: 5343230
 ## CRS:           +proj=utm +zone=17 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
 ## First 10 features:
 ##                  geometry
-## 1  POINT (437670 5343230)
-## 2  POINT (436130 5342550)
-## 3  POINT (438050 5340130)
-## 4  POINT (434470 5337950)
-## 5  POINT (437590 5342210)
-## 6  POINT (433910 5340610)
-## 7  POINT (437750 5338190)
-## 8  POINT (436210 5340350)
-## 9  POINT (437950 5339310)
-## 10 POINT (438190 5338130)</code></pre>
+## 1  POINT (435330 5338970)
+## 2  POINT (433550 5342670)
+## 3  POINT (435030 5340430)
+## 4  POINT (435910 5342370)
+## 5  POINT (434330 5337930)
+## 6  POINT (432470 5340870)
+## 7  POINT (436430 5338370)
+## 8  POINT (436530 5341710)
+## 9  POINT (436470 5338170)
+## 10 POINT (438510 5339170)</code></pre>
 </div>
-<div id="sample_grid" class="section level2 unnumbered">
+<div id="grid" class="section level2 unnumbered">
 <h2><code>sample_grid</code></h2>
-<p>The <code>sample_grid</code> function applies regular grid sampling across an area where the <code>gridsize</code> parameter defined distance between samples.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="sample.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- perform grid sampling ---#</span></span>
-<span id="cb40-2"><a href="sample.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_grid</span>(<span class="at">raster =</span> sraster, <span class="co"># input sraster</span></span>
-<span id="cb40-3"><a href="sample.html#cb40-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">gridsize =</span> <span class="dv">200</span>, <span class="co"># grid distance</span></span>
-<span id="cb40-4"><a href="sample.html#cb40-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>The <code>sample_grid</code> function applies regular grid sampling across an area where the <code>gridsize</code> parameter defines distance between samples.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="sample.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- perform grid sampling ---#</span></span>
+<span id="cb43-2"><a href="sample.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_grid</span>(<span class="at">raster =</span> sraster, <span class="co"># input sraster</span></span>
+<span id="cb43-3"><a href="sample.html#cb43-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">gridsize =</span> <span class="dv">200</span>, <span class="co"># grid distance</span></span>
+<span id="cb43-4"><a href="sample.html#cb43-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
 <p><img src="SGS_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 <pre><code>## Simple feature collection with 953 features and 1 field
 ## Geometry type: POINT
@@ -347,21 +362,21 @@ div.csl-indent {
 ## CRS:           NA
 ## First 10 features:
 ##    strata               geometry
-## 1       2 POINT (431100 5337700)
-## 2       2 POINT (431300 5337700)
-## 3       2 POINT (431500 5337700)
-## 4       2 POINT (431700 5337700)
-## 5       2 POINT (431900 5337700)
-## 6       2 POINT (432100 5337700)
-## 7       1 POINT (432300 5337700)
-## 8       1 POINT (432500 5337700)
+## 1       1 POINT (431100 5337700)
+## 2       1 POINT (431300 5337700)
+## 3       1 POINT (431500 5337700)
+## 4       1 POINT (431700 5337700)
+## 5       1 POINT (431900 5337700)
+## 6       1 POINT (432100 5337700)
+## 7       4 POINT (432300 5337700)
+## 8       4 POINT (432500 5337700)
 ## 9       3 POINT (432700 5337700)
 ## 10      3 POINT (432900 5337700)</code></pre>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="sample.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_grid</span>(<span class="at">raster =</span> sraster, <span class="co"># input sraster</span></span>
-<span id="cb42-2"><a href="sample.html#cb42-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">gridsize =</span> <span class="dv">100</span>, <span class="co"># grid distance</span></span>
-<span id="cb42-3"><a href="sample.html#cb42-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">access =</span> access, <span class="co"># define access road network</span></span>
-<span id="cb42-4"><a href="sample.html#cb42-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">buff_inner =</span> <span class="dv">50</span>, <span class="co"># inner buffer - no samples within this distance from road</span></span>
-<span id="cb42-5"><a href="sample.html#cb42-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">buff_outer =</span> <span class="dv">200</span>) <span class="co"># outer buffer - no samples further than this distance from road</span></span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="sample.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_grid</span>(<span class="at">raster =</span> sraster, <span class="co"># input sraster</span></span>
+<span id="cb45-2"><a href="sample.html#cb45-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">gridsize =</span> <span class="dv">100</span>, <span class="co"># grid distance</span></span>
+<span id="cb45-3"><a href="sample.html#cb45-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">access =</span> access, <span class="co"># define access road network</span></span>
+<span id="cb45-4"><a href="sample.html#cb45-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">buff_inner =</span> <span class="dv">50</span>, <span class="co"># inner buffer - no samples within this distance from road</span></span>
+<span id="cb45-5"><a href="sample.html#cb45-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">buff_outer =</span> <span class="dv">200</span>) <span class="co"># outer buffer - no samples further than this distance from road</span></span></code></pre></div>
 <pre><code>## Simple feature collection with 1542 features and 1 field
 ## Geometry type: POINT
 ## Dimension:     XY
@@ -369,26 +384,26 @@ div.csl-indent {
 ## CRS:           NA
 ## First 10 features:
 ##    strata               geometry
-## 7       2 POINT (431700 5337700)
-## 8       2 POINT (431800 5337700)
+## 7       1 POINT (431700 5337700)
+## 8       1 POINT (431800 5337700)
 ## 10      3 POINT (432000 5337700)
-## 11      2 POINT (432100 5337700)
-## 29      1 POINT (433900 5337700)
-## 30      1 POINT (434000 5337700)
-## 32      1 POINT (434200 5337700)
-## 33      2 POINT (434300 5337700)
-## 38      2 POINT (434800 5337700)
-## 40      1 POINT (435000 5337700)</code></pre>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="sample.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_grid</span>(<span class="at">raster =</span> mraster, <span class="co"># input mraster</span></span>
-<span id="cb44-2"><a href="sample.html#cb44-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">gridsize =</span> <span class="dv">200</span>, <span class="co"># grid distance</span></span>
-<span id="cb44-3"><a href="sample.html#cb44-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">access =</span> access, <span class="co"># define access road network</span></span>
-<span id="cb44-4"><a href="sample.html#cb44-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">buff_inner =</span> <span class="dv">100</span>, <span class="co"># inner buffer - no samples within this distance from road</span></span>
-<span id="cb44-5"><a href="sample.html#cb44-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">buff_outer =</span> <span class="dv">400</span>, <span class="co"># outer buffer - no samples further than this distance from road</span></span>
-<span id="cb44-6"><a href="sample.html#cb44-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">filename =</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">&quot;.shp&quot;</span>), <span class="co"># write output samples to file</span></span>
-<span id="cb44-7"><a href="sample.html#cb44-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
+## 11      1 POINT (432100 5337700)
+## 29      4 POINT (433900 5337700)
+## 30      4 POINT (434000 5337700)
+## 32      4 POINT (434200 5337700)
+## 33      1 POINT (434300 5337700)
+## 38      1 POINT (434800 5337700)
+## 40      4 POINT (435000 5337700)</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="sample.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_grid</span>(<span class="at">raster =</span> mraster, <span class="co"># input mraster</span></span>
+<span id="cb47-2"><a href="sample.html#cb47-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">gridsize =</span> <span class="dv">200</span>, <span class="co"># grid distance</span></span>
+<span id="cb47-3"><a href="sample.html#cb47-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">access =</span> access, <span class="co"># define access road network</span></span>
+<span id="cb47-4"><a href="sample.html#cb47-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">buff_inner =</span> <span class="dv">100</span>, <span class="co"># inner buffer - no samples within this distance from road</span></span>
+<span id="cb47-5"><a href="sample.html#cb47-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">buff_outer =</span> <span class="dv">400</span>, <span class="co"># outer buffer - no samples further than this distance from road</span></span>
+<span id="cb47-6"><a href="sample.html#cb47-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">filename =</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">&quot;.shp&quot;</span>), <span class="co"># write output samples to file</span></span>
+<span id="cb47-7"><a href="sample.html#cb47-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
 <p><img src="SGS_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
-<pre><code>## Writing layer `file4b001a0ff9f&#39; to data source 
-##   `C:\Users\tgood.stu\AppData\Local\Temp\RtmpovDJyg\file4b001a0ff9f.shp&#39; using driver `ESRI Shapefile&#39;
+<pre><code>## Writing layer `filedfc44d63f99&#39; to data source 
+##   `C:\Users\tgood.stu\AppData\Local\Temp\RtmpSecUsn\filedfc44d63f99.shp&#39; using driver `ESRI Shapefile&#39;
 ## Writing 506 features with 13 fields and geometry type Point.</code></pre>
 <pre><code>## Simple feature collection with 506 features and 13 fields
 ## Geometry type: POINT
@@ -419,138 +434,145 @@ div.csl-indent {
 ## 19 POINT (434700 5337700)
 ## 22 POINT (435300 5337700)</code></pre>
 </div>
-<div id="sample_strat" class="section level2 unnumbered">
+<div id="sstrat" class="section level2 unnumbered">
 <h2><code>sample_strat</code></h2>
-<p>The <code>sample_strat</code> function contains a hierarchical sampling algorithm originally developped my Martin Queinnec. The algorithm uses a moving window (<code>wrow</code> and <code>wcol</code> parameters) to filter the input <code>sraster</code> for locations where stratum pixels are grouped rather than disperesed individually accross the landscape.</p>
+<p>The <code>sample_strat</code> function contains a hierarchical sampling algorithm originally developed my Martin Queinnec. The algorithm uses a moving window (<code>wrow</code> and <code>wcol</code> parameters) to filter the input <code>sraster</code> for locations where stratum pixels are spatially grouped rather than dispersed individually across the landscape.</p>
 <p>The sampling is performed in 2 stages:</p>
 <ul>
-<li><p><strong>Rule 1</strong> - Sample within grouped stratum pixels</p></li>
+<li><p><strong>Rule 1</strong> - Sample within spatially grouped stratum pixels.</p></li>
 <li><p><strong>Rule 2</strong> - If no more samples exist to satisfy desired sampling count, individual stratum pixels are sampled.</p></li>
 </ul>
 <p>The rule applied to a select a particular sample is defined in the <code>rule</code> attribute of output samples. We give a few examples below:</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="sample.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- perform stratified sampling random sampling ---#</span></span>
-<span id="cb47-2"><a href="sample.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_strat</span>(<span class="at">sraster =</span> sraster, <span class="co"># input sraster</span></span>
-<span id="cb47-3"><a href="sample.html#cb47-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">nSamp =</span> <span class="dv">200</span>, <span class="co"># desired sample number</span></span>
-<span id="cb47-4"><a href="sample.html#cb47-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="sample.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- perform stratified sampling random sampling ---#</span></span>
+<span id="cb50-2"><a href="sample.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_strat</span>(<span class="at">sraster =</span> sraster, <span class="co"># input sraster</span></span>
+<span id="cb50-3"><a href="sample.html#cb50-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">nSamp =</span> <span class="dv">200</span>, <span class="co"># desired sample number</span></span>
+<span id="cb50-4"><a href="sample.html#cb50-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
 <p><img src="SGS_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
 <pre><code>## Simple feature collection with 200 features and 3 fields
 ## Geometry type: POINT
 ## Dimension:     XY
-## Bounding box:  xmin: 431130 ymin: 5337730 xmax: 438510 ymax: 5343190
+## Bounding box:  xmin: 431130 ymin: 5337770 xmax: 438510 ymax: 5343210
 ## Projected CRS: UTM Zone 17, Northern Hemisphere
 ## First 10 features:
 ##    strata type  rule               geometry
-## x       1  new rule1 POINT (437730 5340870)
-## x1      1  new rule1 POINT (437730 5340870)
-## x2      1  new rule1 POINT (436930 5339710)
-## x3      1  new rule1 POINT (432490 5342750)
-## x4      1  new rule1 POINT (437170 5339650)
-## x5      1  new rule1 POINT (436410 5338110)
-## x6      1  new rule1 POINT (434310 5340830)
-## x7      1  new rule1 POINT (435950 5342790)
-## x8      1  new rule1 POINT (436350 5342370)
-## x9      1  new rule1 POINT (437250 5339690)</code></pre>
-<p>In some cases, a user may wish to included an existing sample dataset within the algorithm. In order to adjust the total number of samples needed per stratum, we can use the utility function <code>extract_strata</code>. This function takes an input <code>sraster</code> and the <code>existing</code> sample dataset and extracts the stratum for each sample. These samples can then be input into the <code>sample_strat</code> function which adjusts total requred sample per class based on representation in <code>existing</code>.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="sample.html#cb49-1" aria-hidden="true" tabindex="-1"></a> <span class="co">#--- extract strata values to existing samples ---#              </span></span>
-<span id="cb49-2"><a href="sample.html#cb49-2" aria-hidden="true" tabindex="-1"></a> e.sr <span class="ot">&lt;-</span> <span class="fu">extract_strata</span>(<span class="at">sraster =</span> sraster, <span class="co"># input sraster</span></span>
-<span id="cb49-3"><a href="sample.html#cb49-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">existing =</span> existing) <span class="co"># existing samples to add strata value to</span></span>
-<span id="cb49-4"><a href="sample.html#cb49-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-5"><a href="sample.html#cb49-5" aria-hidden="true" tabindex="-1"></a> e.sr</span></code></pre></div>
+## x       1  new rule1 POINT (432550 5340370)
+## x1      1  new rule1 POINT (432550 5340370)
+## x2      1  new rule1 POINT (436510 5341690)
+## x3      1  new rule1 POINT (432110 5339970)
+## x4      1  new rule1 POINT (434090 5338010)
+## x5      1  new rule1 POINT (431470 5341690)
+## x6      1  new rule1 POINT (431450 5341010)
+## x7      1  new rule1 POINT (431490 5341530)
+## x8      1  new rule1 POINT (432470 5341790)
+## x9      1  new rule1 POINT (435510 5341150)</code></pre>
+<p>In some cases, a user may wish to include an <code>existing</code> sample dataset within the algorithm. In order to adjust the total number of samples needed per stratum to reflect those already present in <code>existing</code>, we can use the utility function <code>extract_strata</code>.</p>
+<p>This function takes an input <code>sraster</code> and the <code>existing</code> sample dataset and extracts the stratum for each sample. These samples can then be input into the <code>sample_strat</code> function which adjusts total required sample per class based on representation in <code>existing</code>.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="sample.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- extract strata values to existing samples ---#              </span></span>
+<span id="cb52-2"><a href="sample.html#cb52-2" aria-hidden="true" tabindex="-1"></a>e.sr <span class="ot">&lt;-</span> <span class="fu">extract_strata</span>(<span class="at">sraster =</span> sraster, <span class="co"># input sraster</span></span>
+<span id="cb52-3"><a href="sample.html#cb52-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">existing =</span> existing) <span class="co"># existing samples to add strata value to</span></span>
+<span id="cb52-4"><a href="sample.html#cb52-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-5"><a href="sample.html#cb52-5" aria-hidden="true" tabindex="-1"></a>e.sr</span></code></pre></div>
 <pre><code>## Simple feature collection with 200 features and 1 field
 ## Geometry type: POINT
 ## Dimension:     XY
-## Bounding box:  xmin: 431270 ymin: 5337750 xmax: 438530 ymax: 5343230
+## Bounding box:  xmin: 431110 ymin: 5337730 xmax: 438490 ymax: 5343230
 ## Projected CRS: UTM Zone 17, Northern Hemisphere
 ## First 10 features:
 ##    strata               geometry
-## 1       2 POINT (438530 5338570)
-## 2       2 POINT (434850 5338310)
-## 3       1 POINT (435270 5340490)
-## 4       3 POINT (436150 5341230)
-## 5       2 POINT (431850 5342430)
-## 6       2 POINT (433350 5342390)
-## 7       3 POINT (436590 5341950)
-## 8       1 POINT (434790 5340210)
-## 9       4 POINT (435750 5338710)
-## 10      1 POINT (438050 5340930)</code></pre>
+## 1       4 POINT (432070 5340130)
+## 2       4 POINT (435010 5342150)
+## 3       4 POINT (437390 5338370)
+## 4       2 POINT (437850 5342890)
+## 5       4 POINT (434710 5342370)
+## 6       1 POINT (432870 5340230)
+## 7       4 POINT (435150 5340150)
+## 8       1 POINT (431850 5338570)
+## 9       4 POINT (432770 5342710)
+## 10      1 POINT (436190 5341450)</code></pre>
 <div class="box-content vig-content">
 <div id="existing-strata" class="section level3 unnumbered box-title vig-content-top">
 <h3>Existing strata</h3>
 </div>
 <p>Notice that <code>e.sr</code> now has an attribute named strata. If that parameter is not there, <code>sample_strat</code> will give an error.</p>
 </div>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="sample.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_strat</span>(<span class="at">sraster =</span> sraster, <span class="co"># input sraster</span></span>
-<span id="cb51-2"><a href="sample.html#cb51-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">nSamp =</span> <span class="dv">200</span>, <span class="co"># desired sample number</span></span>
-<span id="cb51-3"><a href="sample.html#cb51-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">access =</span> access, <span class="co"># define access road network</span></span>
-<span id="cb51-4"><a href="sample.html#cb51-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">existing =</span> e.sr, <span class="co"># existing samples with strata values</span></span>
-<span id="cb51-5"><a href="sample.html#cb51-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">mindist =</span> <span class="dv">200</span>, <span class="co"># minimum distance samples must be apart from one another</span></span>
-<span id="cb51-6"><a href="sample.html#cb51-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">buff_inner =</span> <span class="dv">50</span>, <span class="co"># inner buffer - no samples within this distance from road</span></span>
-<span id="cb51-7"><a href="sample.html#cb51-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">buff_outer =</span> <span class="dv">200</span>, <span class="co"># outer buffer - no samples further than this distance from road</span></span>
-<span id="cb51-8"><a href="sample.html#cb51-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="sample.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_strat</span>(<span class="at">sraster =</span> sraster, <span class="co"># input sraster</span></span>
+<span id="cb54-2"><a href="sample.html#cb54-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">nSamp =</span> <span class="dv">200</span>, <span class="co"># desired sample number</span></span>
+<span id="cb54-3"><a href="sample.html#cb54-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">access =</span> access, <span class="co"># define access road network</span></span>
+<span id="cb54-4"><a href="sample.html#cb54-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">existing =</span> e.sr, <span class="co"># existing samples with strata values</span></span>
+<span id="cb54-5"><a href="sample.html#cb54-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">mindist =</span> <span class="dv">200</span>, <span class="co"># minimum distance samples must be apart from one another</span></span>
+<span id="cb54-6"><a href="sample.html#cb54-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">buff_inner =</span> <span class="dv">50</span>, <span class="co"># inner buffer - no samples within this distance from road</span></span>
+<span id="cb54-7"><a href="sample.html#cb54-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">buff_outer =</span> <span class="dv">200</span>, <span class="co"># outer buffer - no samples further than this distance from road</span></span>
+<span id="cb54-8"><a href="sample.html#cb54-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
 <p><img src="SGS_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
 <pre><code>## Simple feature collection with 400 features and 3 fields
 ## Geometry type: POINT
 ## Dimension:     XY
-## Bounding box:  xmin: 431130 ymin: 5337730 xmax: 438530 ymax: 5343230
+## Bounding box:  xmin: 431110 ymin: 5337730 xmax: 438530 ymax: 5343230
 ## Projected CRS: UTM Zone 17, Northern Hemisphere
 ## First 10 features:
 ##    strata     type     rule               geometry
-## 3       1 existing existing POINT (435270 5340490)
-## 8       1 existing existing POINT (434790 5340210)
-## 10      1 existing existing POINT (438050 5340930)
-## 12      1 existing existing POINT (431950 5341710)
-## 16      1 existing existing POINT (433610 5343170)
-## 20      1 existing existing POINT (435990 5342970)
-## 22      1 existing existing POINT (432090 5340190)
-## 24      1 existing existing POINT (436090 5337790)
-## 25      1 existing existing POINT (437030 5338010)
-## 27      1 existing existing POINT (432290 5341850)</code></pre>
-<p>Notice that the sample outputs have <code>type</code> and <code>rule</code> attributes which outline whether samples are <code>existing</code> or <code>new</code> and whether <code>rule1</code> or <code>rule2</code> were used to select individual samples.</p>
+## 6       1 existing existing POINT (432870 5340230)
+## 8       1 existing existing POINT (431850 5338570)
+## 10      1 existing existing POINT (436190 5341450)
+## 11      1 existing existing POINT (438230 5341170)
+## 14      1 existing existing POINT (431170 5339890)
+## 15      1 existing existing POINT (434450 5340070)
+## 17      1 existing existing POINT (434930 5339010)
+## 19      1 existing existing POINT (438470 5338890)
+## 23      1 existing existing POINT (435290 5337850)
+## 27      1 existing existing POINT (431110 5338050)</code></pre>
+<div class="box-content vig-content">
+<div id="mindist" class="section level3 unnumbered box-title vig-content-top">
+<h3><code>mindist</code></h3>
+</div>
+<p>The <code>mindist</code> parameter defined in the above example specifies the minimum euclidian distance that samples must be apat from one another.</p>
+</div>
+<p>Notice that the sample outputs have <code>type</code> and <a href="sample.html#sstrat"><code>rule</code></a> attributes which outline whether samples are <code>existing</code> or <code>new</code> and whether <code>rule1</code> or <code>rule2</code> were used to select individual samples.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="sample.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_strat</span>(<span class="at">sraster =</span> sraster, <span class="co"># input</span></span>
+<span id="cb56-2"><a href="sample.html#cb56-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">nSamp =</span> <span class="dv">200</span>, <span class="co"># desired sample number</span></span>
+<span id="cb56-3"><a href="sample.html#cb56-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">access =</span> access, <span class="co"># define access road network</span></span>
+<span id="cb56-4"><a href="sample.html#cb56-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">existing =</span> e.sr, <span class="co"># existing samples with strata values</span></span>
+<span id="cb56-5"><a href="sample.html#cb56-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">include =</span> <span class="cn">TRUE</span>, <span class="co"># include existing plots in nSamp total</span></span>
+<span id="cb56-6"><a href="sample.html#cb56-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">buff_inner =</span> <span class="dv">50</span>, <span class="co"># inner buffer - no samples within this distance from road</span></span>
+<span id="cb56-7"><a href="sample.html#cb56-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">buff_outer =</span> <span class="dv">200</span>, <span class="co"># outer buffer - no samples further than this distance from road</span></span>
+<span id="cb56-8"><a href="sample.html#cb56-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">filename =</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">&quot;.shp&quot;</span>), <span class="co"># write output samples to file</span></span>
+<span id="cb56-9"><a href="sample.html#cb56-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
+<p><img src="SGS_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<pre><code>## Writing layer `filedfc58117c53&#39; to data source 
+##   `C:\Users\tgood.stu\AppData\Local\Temp\RtmpSecUsn\filedfc58117c53.shp&#39; using driver `ESRI Shapefile&#39;
+## Writing 113 features with 3 fields and geometry type Point.</code></pre>
+<pre><code>## Simple feature collection with 113 features and 3 fields
+## Geometry type: POINT
+## Dimension:     XY
+## Bounding box:  xmin: 431110 ymin: 5337730 xmax: 438490 ymax: 5343230
+## Projected CRS: UTM Zone 17, Northern Hemisphere
+## First 10 features:
+##    strata     type     rule               geometry
+## 6       1 existing existing POINT (432870 5340230)
+## 8       1 existing existing POINT (431850 5338570)
+## 10      1 existing existing POINT (436190 5341450)
+## 11      1 existing existing POINT (438230 5341170)
+## 14      1 existing existing POINT (431170 5339890)
+## 15      1 existing existing POINT (434450 5340070)
+## 17      1 existing existing POINT (434930 5339010)
+## 19      1 existing existing POINT (438470 5338890)
+## 23      1 existing existing POINT (435290 5337850)
+## 27      1 existing existing POINT (431110 5338050)</code></pre>
 <div class="box-content vig-content">
 <div id="include-parameter" class="section level3 unnumbered box-title vig-content-top">
 <h3><code>include</code> parameter</h3>
 </div>
-<p>The <code>include</code> parameter determines whether existing samples should be included in the total of samples defined by <code>nSamp</code>. By defaults <code>include = FALSE</code>.</p>
+<p>The <code>include</code> parameter determines whether existing samples should be included in the total count of samples defined by <code>nSamp</code>. By defaults <code>include = FALSE</code>.</p>
 </div>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="sample.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_strat</span>(<span class="at">sraster =</span> sraster, <span class="co"># input</span></span>
-<span id="cb53-2"><a href="sample.html#cb53-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">nSamp =</span> <span class="dv">200</span>, <span class="co"># desired sample number</span></span>
-<span id="cb53-3"><a href="sample.html#cb53-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">access =</span> access, <span class="co"># define access road network</span></span>
-<span id="cb53-4"><a href="sample.html#cb53-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">existing =</span> e.sr, <span class="co"># existing samples with strata values</span></span>
-<span id="cb53-5"><a href="sample.html#cb53-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">include =</span> <span class="cn">TRUE</span>, <span class="co"># include existing plots in nSamp total</span></span>
-<span id="cb53-6"><a href="sample.html#cb53-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">buff_inner =</span> <span class="dv">50</span>, <span class="co"># inner buffer - no samples within this distance from road</span></span>
-<span id="cb53-7"><a href="sample.html#cb53-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">buff_outer =</span> <span class="dv">200</span>, <span class="co"># outer buffer - no samples further than this distance from road</span></span>
-<span id="cb53-8"><a href="sample.html#cb53-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">filename =</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">&quot;.shp&quot;</span>), <span class="co"># write output samples to file</span></span>
-<span id="cb53-9"><a href="sample.html#cb53-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
-<pre><code>## Writing layer `file4b004f55746d&#39; to data source 
-##   `C:\Users\tgood.stu\AppData\Local\Temp\RtmpovDJyg\file4b004f55746d.shp&#39; using driver `ESRI Shapefile&#39;
-## Writing 110 features with 3 fields and geometry type Point.</code></pre>
-<pre><code>## Simple feature collection with 110 features and 3 fields
-## Geometry type: POINT
-## Dimension:     XY
-## Bounding box:  xmin: 431190 ymin: 5337750 xmax: 438510 ymax: 5343230
-## Projected CRS: UTM Zone 17, Northern Hemisphere
-## First 10 features:
-##    strata     type     rule               geometry
-## 3       1 existing existing POINT (435270 5340490)
-## 8       1 existing existing POINT (434790 5340210)
-## 10      1 existing existing POINT (438050 5340930)
-## 12      1 existing existing POINT (431950 5341710)
-## 16      1 existing existing POINT (433610 5343170)
-## 20      1 existing existing POINT (435990 5342970)
-## 22      1 existing existing POINT (432090 5340190)
-## 24      1 existing existing POINT (436090 5337790)
-## 25      1 existing existing POINT (437030 5338010)
-## 27      1 existing existing POINT (432290 5341850)</code></pre>
 </div>
-<div id="sample_clhs" class="section level2 unnumbered">
+<div id="clhs" class="section level2 unnumbered">
 <h2><code>sample_clhs</code></h2>
-<p>The <code>sample_clhs</code> functions implements conditioned latin hypercube (clhs) sampling functionality. A number of other functions in the <code>sgsR</code> package help to provide guidance on clhs sampling including <code>calculate_lhsPop</code> and <code>calculate_lhsOpt</code>. Be sure to check out those functions for better understanding of how many samples should be taken.</p>
-<p>Syntax for the function is similar to others shown above, though parameters like <code>iter</code>, which define the number of interations within the Metropolis-Hastings process are important to consider. In these examples we use a low <code>iter</code> value because it takes less time to run, but default values within the <code>clhs</code> package are 10,000.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="sample.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_clhs</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
-<span id="cb56-2"><a href="sample.html#cb56-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">nSamp =</span> <span class="dv">200</span>, <span class="co"># desired sample number</span></span>
-<span id="cb56-3"><a href="sample.html#cb56-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="co"># plot </span></span>
-<span id="cb56-4"><a href="sample.html#cb56-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">iter =</span> <span class="dv">100</span>) <span class="co"># number of iterations</span></span></code></pre></div>
+<p>The <code>sample_clhs</code> function implements conditioned latin hypercube (clhs) sampling functionality. A number of other functions in the <code>sgsR</code> package help to provide guidance on clhs sampling including <a href="calc.html#lhspop"><code>calculate_lhsPop</code></a> and <a href="calc.html#lhsopt"><code>calculate_lhsOpt</code></a>. Be sure to check out those functions for better understanding of how to optimize sample numbers.</p>
+<p>Syntax for this function is similar to others shown above, though parameters like <code>iter</code>, which define the number of iterations within the Metropolis-Hastings process are important to consider. In these examples we use a low <code>iter</code> value because it takes less time to run. Default values for <code>iter</code> within the <code>clhs</code> package are 10,000.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="sample.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_clhs</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
+<span id="cb59-2"><a href="sample.html#cb59-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">nSamp =</span> <span class="dv">200</span>, <span class="co"># desired sample number</span></span>
+<span id="cb59-3"><a href="sample.html#cb59-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="co"># plot </span></span>
+<span id="cb59-4"><a href="sample.html#cb59-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">iter =</span> <span class="dv">100</span>) <span class="co"># number of iterations</span></span></code></pre></div>
 <pre><code>## 
   |                                                                                   
   |                                                                             |   0%
@@ -756,36 +778,36 @@ div.csl-indent {
 <pre><code>## Simple feature collection with 200 features and 14 fields
 ## Geometry type: POINT
 ## Dimension:     XY
-## Bounding box:  xmin: 431130 ymin: 5337730 xmax: 438450 ymax: 5343150
+## Bounding box:  xmin: 431110 ymin: 5337710 xmax: 438470 ymax: 5343230
 ## CRS:           +proj=utm +zone=17 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
 ## First 10 features:
-##        zmax zmean  zsd pzabove2  zq20      zq50  zq70  zq90  zq95  l_1  l_2 t_3  t_4
-## 10031  4.01  43.5 2.98     1.78  2.20  2.940000  3.57 11.19 14.29 34.2  3.5 0.0 43.4
-## 8168   2.94  44.3 1.02     1.68  1.97  2.840000  3.41  4.76  5.77 42.3  0.0 0.0 44.3
-## 79535  8.51  91.2 4.34     3.08  4.85  8.099999  9.99 17.22 20.31 15.6 19.0 1.2 88.3
-## 78103  1.70   0.4 0.42     1.35  1.39  1.550000  1.74  2.77  2.93  0.4  0.0 0.0  0.4
-## 30083 13.95  90.5 4.38     8.32 12.18 14.660000 15.93 20.21 23.55  3.0 38.7 4.6 84.6
-## 55901 15.15  84.9 5.52     4.59 11.87 17.109999 18.39 20.64 21.65  5.6  7.5 8.0 75.8
-## 29030 13.11  80.8 6.43     2.51  5.03 14.639999 17.37 22.11 24.59 11.7 19.7 7.5 76.9
-## 66129  9.25  95.4 4.53     2.99  4.06  9.630000 12.17 15.97 18.34 21.8 35.1 0.3 93.8
-## 9154  10.66  41.8 4.50     3.31  6.97 10.980000 13.29 17.36 18.43  3.1 16.4 0.0 38.2
-## 86649 10.66  86.4 3.79     4.90  7.61 11.080000 12.98 16.23 17.70  6.8 39.9 0.0 79.1
+##        zmax zmean  zsd pzabove2      zq20  zq50  zq70  zq90  zq95  l_1  l_2 t_3  t_4
+## 77950  8.20  87.2 2.86 4.360000  5.670000  8.24  9.74 12.76 15.06 10.9 21.4 0.0 81.3
+## 50679  5.06  45.6 3.11 1.880000  2.320000  4.13  6.48 10.95 15.48 22.8  2.8 0.0 45.2
+## 26612 14.68  89.2 4.59 7.570000 12.740000 15.79 17.10 20.03 21.22  5.2 21.5 4.4 81.9
+## 6304  10.73  94.7 3.54 5.510000  7.940000 11.28 12.98 15.40 16.51  6.9 52.2 0.0 90.7
+## 6276  11.45  94.4 2.92 7.570000  9.059999 11.61 12.94 15.88 18.71  1.4 53.6 0.3 88.2
+## 81383  5.94  70.8 2.96 2.210000  3.160000  5.55  7.37 11.30 13.54 26.1  8.3 0.0 67.8
+## 80210 13.35  94.8 3.93 6.690000 10.610000 14.43 15.57 18.01 19.05  3.8 36.6 0.0 88.1
+## 86731 11.37  92.0 4.07 5.210000  7.400000 12.15 14.13 16.77 18.14  7.4 40.2 0.1 87.3
+## 45929  4.42  23.3 2.11 1.700000  2.340000  4.32  5.44  8.30  9.75 12.3  0.2 0.0 22.4
+## 46150 15.65  95.7 4.55 8.599999 14.900000 16.88 17.92 19.78 21.27  4.6  8.2 3.5 91.2
 ##       type               geometry
-## 10031  new POINT (437730 5342650)
-## 8168   new POINT (434950 5342750)
-## 79535  new POINT (434030 5338350)
-## 78103  new POINT (438350 5338450)
-## 30083  new POINT (436210 5341490)
-## 55901  new POINT (436290 5339970)
-## 29030  new POINT (435790 5341550)
-## 66129  new POINT (433950 5339330)
-## 9154   new POINT (433090 5342690)
-## 86649  new POINT (433710 5337950)</code></pre>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="sample.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_clhs</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
-<span id="cb59-2"><a href="sample.html#cb59-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">nSamp =</span> <span class="dv">400</span>, <span class="co"># desired sample number</span></span>
-<span id="cb59-3"><a href="sample.html#cb59-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">existing =</span> existing, <span class="co"># existing samples</span></span>
-<span id="cb59-4"><a href="sample.html#cb59-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">iter =</span> <span class="dv">100</span>, <span class="co"># number of iterations</span></span>
-<span id="cb59-5"><a href="sample.html#cb59-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">details =</span> <span class="cn">TRUE</span>) <span class="co"># clhs details</span></span></code></pre></div>
+## 77950  new POINT (434490 5338450)
+## 50679  new POINT (434530 5340270)
+## 26612  new POINT (435810 5341690)
+## 6304   new POINT (433970 5342850)
+## 6276   new POINT (433410 5342850)
+## 81383  new POINT (437890 5338250)
+## 80210  new POINT (434530 5338310)
+## 86731  new POINT (435530 5337950)
+## 45929  new POINT (433710 5340550)
+## 46150  new POINT (431590 5340530)</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="sample.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_clhs</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
+<span id="cb62-2"><a href="sample.html#cb62-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">nSamp =</span> <span class="dv">400</span>, <span class="co"># desired sample number</span></span>
+<span id="cb62-3"><a href="sample.html#cb62-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">existing =</span> existing, <span class="co"># existing samples</span></span>
+<span id="cb62-4"><a href="sample.html#cb62-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">iter =</span> <span class="dv">100</span>, <span class="co"># number of iterations</span></span>
+<span id="cb62-5"><a href="sample.html#cb62-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">details =</span> <span class="cn">TRUE</span>) <span class="co"># clhs details</span></span></code></pre></div>
 <pre><code>## 
   |                                                                                   
   |                                                                             |   0%
@@ -988,22 +1010,22 @@ div.csl-indent {
   |                                                                                   
   |=============================================================================| 100%</code></pre>
 <pre><code>## $clhs
-##   [1] 67071 22825 18821 81030 83539 17999  7012 36531 67078 39585 14573 13878 55563
-##  [14] 81150 74167  6181 23502  1118 41812 41958 73382 58991 58371 18437 78048 26916
-##  [27] 28356 77583 40557 83467 48644 74233  5772 88655 51024 90173 29693 26049 67907
-##  [40] 70663  2197  4417 90749 14376 32994 57148 23276 52790 78579 68882 83303 74423
-##  [53] 12827 19702 27278 71780 48216 26751 39665 79829 22334 43118 75828 30297 48860
-##  [66] 26373 35607 86555 55144 86902 16621 50611 86853 85487 11302 28442 35696  2005
-##  [79] 65938 13761 20035 57783 75586 55085 24333 66679 60936 61963  9841 46046  7091
-##  [92]  2056  8266 64276 87690 35625 73110 21556 58042 29180 63243  3743 48092 81741
-## [105] 65784 28345 61529 48545 14966 34298  6865 65643 56412 56332 75102 24755 90103
-## [118] 25172 56891  3928 91160 33942 24923 26337 40244 15236 16065 90152 75164 73553
-## [131] 46652 14906 33374  2886 55539 80209 46405 57539 26826  3820 87600 45848 83393
-## [144] 81870 51676 52472 67238 16478 12934 56214 87851 86517 87729 26530 30993 77469
-## [157] 71010 29551 27412 12001 25986 51074  4994 89214 74537 61283  5871  7738 57033
-## [170] 31225 23184 62621 82405 31900 76187 58819 15638 10444 82884 80076 29159 31614
-## [183] 48397 85336 28728 10138 75735 40095 45528  4385 77789  2058 19111 22725 58802
-## [196] 53251  8499  7906 72201 75638     1     2     3     4     5     6     7     8
+##   [1] 47484 59803 10201   377 34938 73954 17397 37910 41023 90550 37474 28116 38033
+##  [14] 83724 34364 53848 13459 32412 40951 87848   770 41675 57370 22141 43873 86222
+##  [27] 76473 72763 58706 87497  9959 54147 34361 77865 32027 61445 55401  1567 55968
+##  [40] 30922 22073  8962 45042 25384 47683 85041  7151 89563 45384 18441 87984 35492
+##  [53] 59047 32889 68234 91012 57225 84013 64147  4193 47556 76516 48947 42187 90520
+##  [66] 33481 11332 77631 55931 15506 53537 64266 86795 48379 16247  3269 56634  6187
+##  [79] 69586 74961 79086 19438 89223 77685 54573  4852 67461  3040 89645 77504 26314
+##  [92] 50211  1813 37448 79358  5973  7850 62956 60683 41723 35170 90811 45791 29938
+## [105] 88347 63505 83271 54320 22577   442 55043 47057 72337 36860 42865 88264 41139
+## [118] 89679  5712 52846 52455 27174 26641 36116 77729 61948 23772 23575 11118 38740
+## [131] 61533 32317 22253 11615  2980 12957 19393 40238 36992 65599 42161 78532 29564
+## [144] 60817 26807 86007 28852 38958 16090  5782 43147 75414 85059 62381 68004 14132
+## [157] 18872 86413 50958 79799 22186  3766 52347 44429 55015 84603 46813 43209  4381
+## [170] 41506 72293 63237 82657 16993 30757 82920 73386 16877 74862 64419 68700 14628
+## [183] 90440 32559 60281 28030 88746 60843 35832 18747 19809  9644 47164 35635 63648
+## [196] 31730 20334 74372 79103 73005     1     2     3     4     5     6     7     8
 ## [209]     9    10    11    12    13    14    15    16    17    18    19    20    21
 ## [222]    22    23    24    25    26    27    28    29    30    31    32    33    34
 ## [235]    35    36    37    38    39    40    41    42    43    44    45    46    47
@@ -1024,39 +1046,39 @@ div.csl-indent {
 ## Simple feature collection with 400 features and 14 fields
 ## Geometry type: POINT
 ## Dimension:     XY
-## Bounding box:  xmin: 431170 ymin: 5337710 xmax: 438530 ymax: 5343230
+## Bounding box:  xmin: 431110 ymin: 5337730 xmax: 438490 ymax: 5343230
 ## CRS:           +proj=utm +zone=17 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
 ## First 10 features:
-##            zmax zmean  zsd pzabove2  zq20  zq50      zq70      zq90  zq95       l_1
-## 66871  4.910000  92.1 1.77     2.64  3.35  4.88  5.800000  7.920000  9.76 46.400002
-## 22625 10.660000  94.9 3.82     5.98  7.72 10.25 12.300000 17.320000 19.81  5.400000
-## 18621  9.599999  89.8 3.37     4.50  6.94 10.13 11.849999 13.969999 15.21  6.300000
-## 80830 12.210000  83.5 5.54     4.29  6.88 12.54 16.190001 20.219999 21.24  7.500000
-## 83339 11.490000  94.6 3.29     7.61  9.13 11.62 13.330000 16.359999 17.74  3.700000
-## 17799  2.390000  10.0 0.90     1.44  1.59  2.15  2.680000  4.330000  4.74  9.900001
-## 6812   7.960000  88.7 4.25     2.81  3.89  7.31 10.300000 15.679999 17.42 24.700001
-## 36331 14.520000  77.2 4.17     7.82 12.37 15.70 16.930000 19.059999 20.32  2.700000
-## 66878  6.780000  67.0 3.53     1.99  3.29  6.70  8.599999 12.929999 16.17 16.900000
-## 39385  3.700000  71.9 2.11     1.82  2.17  3.01  3.720000  8.349999 10.63 54.500000
-##        l_2 t_3       t_4 type               geometry
-## 66871  0.8 0.0 91.400002  new POINT (437730 5339290)
-## 22625 35.2 0.8 90.599998  new POINT (438210 5341930)
-## 18621 43.3 0.0 83.300003  new POINT (437510 5342150)
-## 80830 21.8 4.8 77.200005  new POINT (433230 5338270)
-## 83339 51.2 0.0 89.300003  new POINT (433850 5338130)
-## 17799  0.0 0.0  9.900001  new POINT (435710 5342190)
-## 6812  22.4 0.1 86.200005  new POINT (436870 5342830)
-## 36331 17.0 1.2 65.700005  new POINT (436270 5341130)
-## 66878 10.4 0.0 65.800003  new POINT (437870 5339290)
-## 39385  1.6 0.0 71.200005  new POINT (437490 5340950)</code></pre>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="sample.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_clhs</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
-<span id="cb62-2"><a href="sample.html#cb62-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">nSamp =</span> <span class="dv">300</span>, <span class="co"># desired sample number</span></span>
-<span id="cb62-3"><a href="sample.html#cb62-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">iter =</span> <span class="dv">100</span>, <span class="co"># number of iterations</span></span>
-<span id="cb62-4"><a href="sample.html#cb62-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">existing =</span> existing, <span class="co"># existing samples</span></span>
-<span id="cb62-5"><a href="sample.html#cb62-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">access =</span> access, <span class="co"># define access road network</span></span>
-<span id="cb62-6"><a href="sample.html#cb62-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">buff_inner =</span> <span class="dv">100</span>,</span>
-<span id="cb62-7"><a href="sample.html#cb62-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">buff_outer =</span> <span class="dv">300</span>, </span>
-<span id="cb62-8"><a href="sample.html#cb62-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+##         zmax zmean  zsd pzabove2     zq20  zq50      zq70  zq90  zq95       l_1  l_2
+## 47284   9.13  88.8 4.33     3.29 4.990000  9.21 10.990000 17.02 20.23 14.900001 26.2
+## 59603  12.23  98.2 5.01     7.41 8.450000 10.70 13.750000 23.40 24.63  2.100000 32.2
+## 10001   8.27  83.1 4.05     3.01 4.550000  7.83 10.059999 15.72 18.69 16.400000 20.0
+## 177100  7.75  73.2 3.66     3.16 4.510000  7.57  9.460000 14.36 17.99 14.900001 15.6
+## 34738  10.85  97.0 2.52     7.45 8.880000 11.13 12.150000 14.66 16.07  1.500000 59.8
+## 73754  11.72  89.7 5.01     3.87 6.620000 12.45 15.219999 18.63 19.65  9.900001 29.9
+## 17197  10.34  95.4 2.39     7.15 8.679999 10.74 11.660000 13.56 14.43  3.200000 57.8
+## 37710  13.08  92.6 5.41     4.93 7.700000 14.35 16.299999 22.26 24.59  7.900000 22.9
+## 40823   6.63  92.1 3.63     2.43 3.160000  6.01  8.429999 13.56 15.38 34.200001 17.6
+## 90350   8.83  82.9 4.96     2.61 3.810000  8.34 11.719999 17.45 20.34 19.400000 22.6
+##         t_3  t_4 type               geometry
+## 47284   1.1 85.0  new POINT (434830 5340470)
+## 59603  10.8 94.6  new POINT (434290 5339730)
+## 10001   0.1 80.1  new POINT (436390 5342650)
+## 177100  0.1 68.7  new POINT (434730 5343230)
+## 34738   0.0 91.4  new POINT (431190 5341210)
+## 73754   0.3 84.5  new POINT (433110 5338750)
+## 17197   0.0 91.5  new POINT (438390 5342230)
+## 37710   6.1 86.0  new POINT (437170 5341050)
+## 40823   0.0 91.1  new POINT (432370 5340850)
+## 90350   0.9 78.6  new POINT (436290 5337750)</code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="sample.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_clhs</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
+<span id="cb65-2"><a href="sample.html#cb65-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">nSamp =</span> <span class="dv">300</span>, <span class="co"># desired sample number</span></span>
+<span id="cb65-3"><a href="sample.html#cb65-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">iter =</span> <span class="dv">100</span>, <span class="co"># number of iterations</span></span>
+<span id="cb65-4"><a href="sample.html#cb65-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">existing =</span> existing, <span class="co"># existing samples</span></span>
+<span id="cb65-5"><a href="sample.html#cb65-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">access =</span> access, <span class="co"># define access road network</span></span>
+<span id="cb65-6"><a href="sample.html#cb65-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">buff_inner =</span> <span class="dv">100</span>, <span class="co"># inner buffer - no samples within this distance from road</span></span>
+<span id="cb65-7"><a href="sample.html#cb65-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">buff_outer =</span> <span class="dv">300</span>, <span class="co"># outer buffer - no samples further than this distance from road</span></span>
+<span id="cb65-8"><a href="sample.html#cb65-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
 <pre><code>## 
   |                                                                                   
   |                                                                             |   0%
@@ -1262,48 +1284,48 @@ div.csl-indent {
 <pre><code>## Simple feature collection with 300 features and 14 fields
 ## Geometry type: POINT
 ## Dimension:     XY
-## Bounding box:  xmin: 431170 ymin: 5337730 xmax: 438530 ymax: 5343230
+## Bounding box:  xmin: 431110 ymin: 5337730 xmax: 438530 ymax: 5343230
 ## CRS:           +proj=utm +zone=17 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
 ## First 10 features:
-##            zmax zmean  zsd pzabove2 zq20      zq50      zq70  zq90  zq95  l_1  l_2 t_3
-## 36605  4.740000  73.2 2.14     2.00 2.67  4.590000  5.890000  8.32 10.10 36.4  0.8 0.0
-## 28701  6.630000  93.0 2.59     3.24 4.32  6.600000  7.880000 10.93 13.42 22.4  8.7 0.0
-## 12668  2.540000  34.1 1.45     1.45 1.59  2.060000  2.560000  5.84  8.59 29.1  0.2 0.0
-## 29810  9.780000  20.5 5.94     1.53 3.34  9.639999 12.690000 19.92 21.38  2.1  5.8 1.1
-## 3096   6.600000  71.5 3.04     2.61 3.96  6.390000  7.980000 12.33 14.16 18.6  9.8 0.0
-## 13232 11.130000  99.2 2.08     8.71 9.67 11.130000 11.929999 14.70 16.97  0.3 68.7 0.1
-## 2041   9.260000  78.1 4.25     2.56 4.44 10.059999 11.900000 15.45 17.27 12.5 34.1 0.0
-## 1872  12.920000  83.8 6.32     2.23 3.82 15.790000 17.389999 19.61 20.51 12.4 12.2 2.3
-## 19010  9.179999  88.7 2.97     5.39 6.70  9.270000 10.580000 13.70 17.00  5.1 30.4 0.0
-## 32193  7.100000  73.0 2.66     3.30 4.93  7.350000  8.429999 11.13 14.98 12.6  6.0 0.0
-##        t_4 type               geometry
-## 36605 70.1  new POINT (436390 5338090)
-## 28701 90.5  new POINT (437790 5339310)
-## 12668 34.0  new POINT (433330 5341630)
-## 29810 19.9  new POINT (435410 5339130)
-## 3096  67.7  new POINT (435290 5342790)
-## 13232 97.2  new POINT (434130 5341530)
-## 2041  73.9  new POINT (436870 5342890)
-## 1872  75.7  new POINT (431430 5342890)
-## 19010 83.0  new POINT (437990 5340730)
-## 32193 71.5  new POINT (438170 5338710)</code></pre>
+##            zmax zmean  zsd pzabove2      zq20      zq50      zq70  zq90  zq95  l_1
+## 4145   9.990000  78.7 3.64 4.690000  6.680000 10.250000 12.500000 15.32 16.23  7.3
+## 24961  7.170000  84.5 3.45 2.550000  3.730000  7.080000  8.950000 12.97 15.23 20.2
+## 32928  8.400000  96.1 2.59 5.560000  6.440000  8.099999  9.179999 13.58 16.75  5.2
+## 13404  9.190000  84.1 3.80 4.110000  6.070000  9.010000 11.080000 15.63 18.88  9.5
+## 7639  16.490000  92.0 5.32 6.000000 14.650000 18.000000 19.639999 21.81 22.51  4.6
+## 38460 10.990000  96.8 3.59 6.170000  8.349999 11.389999 12.719999 16.25 19.05  5.6
+## 26051  4.800000   4.2 4.82 1.380000  1.470000  3.000000  4.340000 15.21 16.20  2.7
+## 38665  9.059999  56.6 3.75 3.480000  5.530000  9.530000 11.520000 14.64 15.85  6.4
+## 7284  10.730000  88.8 3.91 4.620000  7.720000 11.440000 13.259999 15.46 18.65  6.6
+## 24170 12.050000  97.3 2.36 9.639999 10.530000 11.910000 12.990000 16.18 17.93  1.0
+##        l_2  t_3  t_4 type               geometry
+## 4145  32.5  0.0 71.3  new POINT (437950 5342650)
+## 24961 17.7  0.0 81.1  new POINT (432570 5339910)
+## 32928 15.1  0.0 92.5  new POINT (432690 5338590)
+## 13404 26.0  0.5 77.5  new POINT (437850 5341510)
+## 7639   6.6 22.8 85.7  new POINT (433770 5342230)
+## 38460 50.9  0.5 95.1  new POINT (431790 5337790)
+## 26051  0.8  0.0  4.2  new POINT (435130 5339730)
+## 38665 22.8  0.0 51.4  new POINT (434310 5337770)
+## 7284  48.8  0.4 84.8  new POINT (436390 5342290)
+## 24170 71.3  0.0 92.3  new POINT (432090 5340050)</code></pre>
 <div class="box-content vig-content">
 <div id="cost-parameter" class="section level3 unnumbered box-title vig-content-top">
 <h3><code>cost</code> parameter</h3>
 </div>
-<p>The <code>cost</code> parameter determines defines a covariate to be used to constrain the clhs sampling. This could be any number of variables. An example could be the distance a pixel is from road access (see example below), terrain slope, etc.</p>
+<p>The <code>cost</code> parameter defines an <code>mraster</code> covariate to be used to constrain the clhs sampling. This could be any number of variables. An example could be the distance a pixel is from road access (see example below), terrain slope, the output from <a href="calc.html#coobs"><code>calculate_coobs</code></a>, or many others.</p>
 </div>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="sample.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- cost constrained examples ---#</span></span>
-<span id="cb65-2"><a href="sample.html#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="co">#--- calculate distance to access layer for each pixel in mr ---#</span></span>
-<span id="cb65-3"><a href="sample.html#cb65-3" aria-hidden="true" tabindex="-1"></a>mr.c <span class="ot">&lt;-</span> <span class="fu">calculate_distance</span>(<span class="at">raster =</span> mraster, <span class="co"># input</span></span>
-<span id="cb65-4"><a href="sample.html#cb65-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">access =</span> access,</span>
-<span id="cb65-5"><a href="sample.html#cb65-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># define access road network</span></span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="sample.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- cost constrained examples ---#</span></span>
+<span id="cb68-2"><a href="sample.html#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="co">#--- calculate distance to access layer for each pixel in mr ---#</span></span>
+<span id="cb68-3"><a href="sample.html#cb68-3" aria-hidden="true" tabindex="-1"></a>mr.c <span class="ot">&lt;-</span> <span class="fu">calculate_distance</span>(<span class="at">raster =</span> mraster, <span class="co"># input</span></span>
+<span id="cb68-4"><a href="sample.html#cb68-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">access =</span> access,</span>
+<span id="cb68-5"><a href="sample.html#cb68-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># define access road network</span></span></code></pre></div>
 <p><img src="SGS_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="sample.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_clhs</span>(<span class="at">mraster =</span> mr.c, <span class="co"># input</span></span>
-<span id="cb66-2"><a href="sample.html#cb66-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">nSamp =</span> <span class="dv">250</span>, <span class="co"># desired sample number</span></span>
-<span id="cb66-3"><a href="sample.html#cb66-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">iter =</span> <span class="dv">100</span>, <span class="co"># number of iterations</span></span>
-<span id="cb66-4"><a href="sample.html#cb66-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">cost =</span> <span class="st">&quot;dist2access&quot;</span>, <span class="co"># cost parameter - name defined in calculate_distance()</span></span>
-<span id="cb66-5"><a href="sample.html#cb66-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="sample.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_clhs</span>(<span class="at">mraster =</span> mr.c, <span class="co"># input</span></span>
+<span id="cb69-2"><a href="sample.html#cb69-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">nSamp =</span> <span class="dv">250</span>, <span class="co"># desired sample number</span></span>
+<span id="cb69-3"><a href="sample.html#cb69-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">iter =</span> <span class="dv">100</span>, <span class="co"># number of iterations</span></span>
+<span id="cb69-4"><a href="sample.html#cb69-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">cost =</span> <span class="st">&quot;dist2access&quot;</span>, <span class="co"># cost parameter - name defined in calculate_distance()</span></span>
+<span id="cb69-5"><a href="sample.html#cb69-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
 <pre><code>## 
   |                                                                                   
   |                                                                             |   0%
@@ -1509,37 +1531,37 @@ div.csl-indent {
 <pre><code>## Simple feature collection with 250 features and 15 fields
 ## Geometry type: POINT
 ## Dimension:     XY
-## Bounding box:  xmin: 431110 ymin: 5337730 xmax: 438550 ymax: 5343210
+## Bounding box:  xmin: 431150 ymin: 5337710 xmax: 438550 ymax: 5343210
 ## CRS:           +proj=utm +zone=17 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
 ## First 10 features:
-##        zmax zmean  zsd pzabove2  zq20  zq50  zq70  zq90  zq95       l_1  l_2  t_3  t_4
-## 22545 14.83  90.1 6.37     2.53  8.73 17.62 19.00 20.90 24.64  8.900001 10.3  9.5 87.6
-## 87461 14.93  95.9 3.74     8.78 12.91 15.82 17.00 19.59 20.87  2.200000 23.4  3.0 90.8
-## 6436  18.63  87.3 5.38    11.31 14.82 20.62 21.85 23.42 24.06  2.100000 10.3 46.1 77.4
-## 64086  5.09  72.2 2.42     1.95  2.71  4.99  6.35  9.16 10.92 30.600000  1.6  0.0 69.2
-## 17097  7.97  69.9 4.37     2.48  3.77  7.22 10.59 15.84 17.44 17.200001 18.2  0.1 67.4
-## 69248  2.18  12.3 1.02     1.40  1.50  1.84  2.19  4.62  6.31 11.300000  0.0  0.0 12.3
-## 37362  5.86  77.8 4.49     1.98  2.46  3.93  6.68 16.00 18.47 43.500000  9.0  0.1 76.5
-## 84689 11.17  95.4 2.81     7.63  9.40 11.42 12.40 15.66 17.43  2.600000 60.9  0.0 91.1
-## 18973 14.41  81.1 5.34     3.32 11.14 16.33 17.64 19.67 20.48  4.300000 12.2  2.1 70.1
-## 50438 11.38  71.3 4.23     4.40  7.23 12.65 14.18 16.55 17.96  6.000000 32.5  0.0 61.1
-##       dist2access type               geometry
-## 22545   340.00000  new POINT (436590 5341930)
-## 87461   228.03509  new POINT (435610 5337910)
-## 6436    228.03509  new POINT (436610 5342850)
-## 64086   481.66378  new POINT (436630 5339470)
-## 17097   140.00000  new POINT (436250 5342230)
-## 69248   160.00000  new POINT (438490 5339130)
-## 37362   441.81444  new POINT (436770 5341070)
-## 84689   742.42845  new POINT (431110 5338050)
-## 18973    72.11103  new POINT (437250 5342130)
-## 50438   622.89646  new POINT (436910 5340290)</code></pre>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="sample.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_clhs</span>(<span class="at">mraster =</span> mr.c, <span class="co"># input</span></span>
-<span id="cb69-2"><a href="sample.html#cb69-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">nSamp =</span> <span class="dv">250</span>, <span class="co"># desired sample number</span></span>
-<span id="cb69-3"><a href="sample.html#cb69-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">existing =</span> existing, </span>
-<span id="cb69-4"><a href="sample.html#cb69-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">iter =</span> <span class="dv">100</span>, <span class="co"># number of iterations</span></span>
-<span id="cb69-5"><a href="sample.html#cb69-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">cost =</span> <span class="st">&quot;dist2access&quot;</span>, <span class="co"># cost parameter - name defined in calculate_distance()</span></span>
-<span id="cb69-6"><a href="sample.html#cb69-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
+##            zmax zmean  zsd pzabove2  zq20  zq50  zq70      zq90  zq95       l_1  l_2
+## 82151 12.710000  88.7 4.60     4.78  9.21 13.98 15.81 18.000000 19.64  5.800000 31.9
+## 6545  12.799999  81.0 6.49     2.36  3.76 15.69 17.52 19.889999 20.99 13.700000 10.3
+## 54019 12.540000  90.3 5.14     3.31  6.88 14.24 15.65 18.680000 19.58  9.900001 30.7
+## 15301 10.440000  81.0 4.16     3.18  6.75 11.35 12.75 16.299999 17.82  8.400001 41.6
+## 74866 18.289999  89.7 6.18     8.75 12.33 20.87 22.28 25.189999 26.52  2.900000 11.2
+## 8501   5.330000  69.4 2.38     2.13  2.93  5.34  6.77  9.130000 10.67 28.000000  1.5
+## 74751  4.710000  25.1 2.77     1.50  1.85  4.33  6.12  9.809999 12.28 11.400001  1.5
+## 38269  5.080000  69.0 3.00     1.79  2.35  4.34  6.20 10.840000 13.45 34.700001  6.0
+## 28719 11.530000  42.4 5.21     3.62  5.08 12.99 15.62 17.940001 18.61  7.500000 12.5
+## 58682  8.139999  83.5 4.22     2.17  3.18  8.71 11.31 14.059999 15.51 19.700001 34.3
+##        t_3  t_4 dist2access type               geometry
+## 82151  0.6 82.4   357.77088  new POINT (431490 5338190)
+## 6545   3.5 73.6   180.00000  new POINT (431450 5342830)
+## 54019  0.5 84.7    80.00000  new POINT (432530 5340070)
+## 15301  0.1 72.8   490.30603  new POINT (436590 5342330)
+## 74866 43.2 83.1    80.00000  new POINT (438490 5338670)
+## 8501   0.0 68.7    72.11103  new POINT (434430 5342730)
+## 74751  0.0 24.7    20.00000  new POINT (434270 5338670)
+## 38269  0.0 66.9    89.44272  new POINT (434390 5341010)
+## 28719  0.0 41.7     0.00000  new POINT (436570 5341570)
+## 58682  0.0 80.5   113.13708  new POINT (432630 5339790)</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="sample.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_clhs</span>(<span class="at">mraster =</span> mr.c, <span class="co"># input</span></span>
+<span id="cb72-2"><a href="sample.html#cb72-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">nSamp =</span> <span class="dv">250</span>, <span class="co"># desired sample number</span></span>
+<span id="cb72-3"><a href="sample.html#cb72-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">existing =</span> existing, <span class="co"># existing samples</span></span>
+<span id="cb72-4"><a href="sample.html#cb72-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">iter =</span> <span class="dv">100</span>, <span class="co"># number of iterations</span></span>
+<span id="cb72-5"><a href="sample.html#cb72-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">cost =</span> <span class="st">&quot;dist2access&quot;</span>, <span class="co"># cost parameter - name defined in calculate_distance()</span></span>
+<span id="cb72-6"><a href="sample.html#cb72-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
 <pre><code>## 
   |                                                                                   
   |                                                                             |   0%
@@ -1745,79 +1767,79 @@ div.csl-indent {
 <pre><code>## Simple feature collection with 250 features and 15 fields
 ## Geometry type: POINT
 ## Dimension:     XY
-## Bounding box:  xmin: 431270 ymin: 5337750 xmax: 438530 ymax: 5343230
+## Bounding box:  xmin: 431110 ymin: 5337730 xmax: 438490 ymax: 5343230
 ## CRS:           +proj=utm +zone=17 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
 ## First 10 features:
-##            zmax zmean  zsd pzabove2  zq20      zq50  zq70  zq90  zq95  l_1  l_2  t_3
-## 22557 15.330000  86.8 7.92 3.380000  6.50 15.870000 22.16 25.26 26.41 11.2 15.5 30.7
-## 30484 15.400000  92.2 4.31 8.150000 11.98 17.010000 18.02 19.55 20.03  2.5  9.3  1.0
-## 61596 16.840000  96.1 5.24 9.349999 13.96 18.039999 19.92 22.82 23.80  3.4 12.8 27.8
-## 85743 10.440000  98.0 4.59 5.030000  6.31  9.889999 12.80 18.79 23.53  9.0 33.6  3.1
-## 63665  9.059999  86.0 3.93 3.050000  5.02  9.679999 11.52 14.60 16.69 13.4 37.6  0.0
-## 24528 13.130000  97.3 6.97 3.030000  4.49 14.130000 18.03 23.36 26.54 19.7 22.3 14.3
-## 44080 13.660000  93.0 6.61 3.770000  6.34 14.790000 18.16 23.84 26.48 12.1 18.2 11.1
-## 2383   9.389999  76.6 6.42 1.930000  2.54  9.210000 14.45 19.11 20.55 25.6 18.6  1.9
-## 18272  8.990000  90.8 4.08 3.970000  5.24  8.420000 11.27 16.06 18.48 13.5 27.2  0.2
-## 1634   7.330000  41.8 3.45 2.760000  3.95  6.970000  9.69 12.79 13.66 10.9 11.9  0.0
-##        t_4 dist2access type               geometry
-## 22557 84.1   340.00000  new POINT (436830 5341930)
-## 30484 85.8   205.91260  new POINT (437170 5341470)
-## 61596 92.5   599.33296  new POINT (433770 5339610)
-## 85743 96.4    60.00000  new POINT (437630 5338010)
-## 63665 83.0    56.56854  new POINT (434810 5339490)
-## 24528 96.0   141.42136  new POINT (434210 5341810)
-## 44080 90.3   424.26407  new POINT (437770 5340670)
-## 2383  73.3    84.85281  new POINT (437250 5343090)
-## 18272 87.5   100.00000  new POINT (437850 5342170)
-## 1634  40.9    20.00000  new POINT (432110 5343130)</code></pre>
+##        zmax zmean  zsd pzabove2  zq20      zq50  zq70  zq90  zq95  l_1  l_2  t_3  t_4
+## 81614  7.24  79.1 2.94     2.94  4.57  7.360000  8.69 12.33 14.46 15.6 12.8  0.0 78.5
+## 85766  3.58  26.5 2.68     1.47  1.65  2.400000  3.84  9.42 12.42 17.3  1.7  0.0 26.1
+## 86783  7.82  95.6 2.70     4.41  5.47  7.810000  9.21 12.34 13.84 12.4 20.1  0.0 93.5
+## 32255 16.63  90.4 5.31     6.01 15.65 18.539999 19.64 21.37 21.90  4.2  1.1 20.1 82.1
+## 73459  9.36  93.1 3.46     4.40  6.35  9.849999 11.39 14.33 16.78  9.1 41.4  0.2 89.0
+## 20997 14.10  89.1 5.27     2.88 12.41 15.679999 17.02 19.80 20.86  8.0 19.0  3.4 84.7
+## 57712  6.08  67.4 4.09     1.67  2.11  4.840000  8.66 13.37 15.41 26.9 17.6  0.0 66.7
+## 7583   1.62   0.7 0.27     1.33  1.38  1.560000  1.73  2.16  2.40  0.7  0.0  0.0  0.7
+## 7727  11.51  84.3 3.78     5.12  7.93 12.750000 13.94 15.78 16.68  6.2 45.3  0.0 74.4
+## 9591   7.40  82.2 3.14     3.09  4.37  7.460000  9.19 12.58 14.37 18.1 17.5  0.0 79.0
+##       dist2access type               geometry
+## 81614    20.00000  new POINT (435270 5338230)
+## 85766    60.00000  new POINT (438110 5338010)
+## 86783    20.00000  new POINT (436570 5337950)
+## 32255   344.09301  new POINT (437270 5341370)
+## 73459   226.27417  new POINT (432070 5338770)
+## 20997   300.00000  new POINT (434190 5342010)
+## 57712   407.92156  new POINT (432050 5339850)
+## 7583     84.85281  new POINT (437770 5342790)
+## 7727     44.72136  new POINT (433330 5342770)
+## 9591     60.00000  new POINT (434870 5342670)</code></pre>
 </div>
-<div id="sample_balanced" class="section level2 unnumbered">
+<div id="balanced" class="section level2 unnumbered">
 <h2><code>sample_balanced</code></h2>
-<p>The <code>sample_balanced</code> algorithm performs the balanced sampling methodology from the <code>stratifyR</code> and <code>SamplingBigData</code> packagse. These functions can take a bit longer to run so be patient!</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="sample.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_balanced</span>(<span class="at">mraster =</span> mraster, </span>
-<span id="cb72-2"><a href="sample.html#cb72-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">nSamp =</span> <span class="dv">200</span>, </span>
-<span id="cb72-3"><a href="sample.html#cb72-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>The <code>sample_balanced</code> algorithm performs the balanced sampling methodology from the <code>stratifyR</code> and <code>SamplingBigData</code> packages. These functions can take a bit longer to run so be patient!</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="sample.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_balanced</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
+<span id="cb75-2"><a href="sample.html#cb75-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">nSamp =</span> <span class="dv">200</span>, <span class="co"># desired sample number</span></span>
+<span id="cb75-3"><a href="sample.html#cb75-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
 <p><img src="SGS_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
 <pre><code>## Simple feature collection with 200 features and 0 fields
 ## Geometry type: POINT
 ## Dimension:     XY
-## Bounding box:  xmin: 431110 ymin: 5337710 xmax: 438550 ymax: 5343230
+## Bounding box:  xmin: 431110 ymin: 5337710 xmax: 438550 ymax: 5343170
 ## CRS:           +proj=utm +zone=17 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
 ## First 10 features:
 ##                  geometry
-## 1  POINT (432010 5343230)
-## 2  POINT (434250 5343210)
-## 3  POINT (434450 5343190)
-## 4  POINT (435770 5343190)
-## 5  POINT (437370 5343190)
-## 6  POINT (432210 5343130)
-## 7  POINT (434610 5343110)
-## 8  POINT (432150 5343030)
-## 9  POINT (437550 5343030)
-## 10 POINT (431770 5343010)</code></pre>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="sample.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_balanced</span>(<span class="at">mraster =</span> mraster, </span>
-<span id="cb74-2"><a href="sample.html#cb74-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">nSamp =</span> <span class="dv">100</span>, </span>
-<span id="cb74-3"><a href="sample.html#cb74-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">algorithm =</span> <span class="st">&quot;lcube&quot;</span>,</span>
-<span id="cb74-4"><a href="sample.html#cb74-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">access =</span> access, </span>
-<span id="cb74-5"><a href="sample.html#cb74-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">buff_inner =</span> <span class="dv">50</span>, </span>
-<span id="cb74-6"><a href="sample.html#cb74-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">buff_outer =</span> <span class="dv">200</span>)</span></code></pre></div>
+## 1  POINT (435910 5343170)
+## 2  POINT (438550 5343130)
+## 3  POINT (435350 5343110)
+## 4  POINT (437750 5343110)
+## 5  POINT (438070 5343090)
+## 6  POINT (437010 5343070)
+## 7  POINT (438090 5343070)
+## 8  POINT (434870 5343030)
+## 9  POINT (436630 5343010)
+## 10 POINT (433830 5342990)</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="sample.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_balanced</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
+<span id="cb77-2"><a href="sample.html#cb77-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">nSamp =</span> <span class="dv">100</span>, <span class="co"># desired sample number</span></span>
+<span id="cb77-3"><a href="sample.html#cb77-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">algorithm =</span> <span class="st">&quot;lcube&quot;</span>, <span class="co"># algorithm type</span></span>
+<span id="cb77-4"><a href="sample.html#cb77-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">access =</span> access, <span class="co"># define access road network</span></span>
+<span id="cb77-5"><a href="sample.html#cb77-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">buff_inner =</span> <span class="dv">50</span>, <span class="co"># inner buffer - no samples within this distance from road</span></span>
+<span id="cb77-6"><a href="sample.html#cb77-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">buff_outer =</span> <span class="dv">200</span>) <span class="co"># outer buffer - no samples further than this distance from road</span></span></code></pre></div>
 <pre><code>## Simple feature collection with 100 features and 0 fields
 ## Geometry type: POINT
 ## Dimension:     XY
-## Bounding box:  xmin: 431730 ymin: 5337770 xmax: 438550 ymax: 5343230
+## Bounding box:  xmin: 431130 ymin: 5337750 xmax: 438470 ymax: 5343190
 ## CRS:           +proj=utm +zone=17 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
 ## First 10 features:
 ##                  geometry
-## 1  POINT (437990 5341270)
-## 2  POINT (432990 5339030)
-## 3  POINT (438210 5337930)
-## 4  POINT (432870 5340290)
-## 5  POINT (433070 5342850)
-## 6  POINT (435130 5338050)
-## 7  POINT (432750 5342030)
-## 8  POINT (434410 5340670)
-## 9  POINT (436050 5339850)
-## 10 POINT (438070 5343230)</code></pre>
+## 1  POINT (432910 5341990)
+## 2  POINT (434370 5337930)
+## 3  POINT (432550 5340430)
+## 4  POINT (433990 5341170)
+## 5  POINT (438390 5338150)
+## 6  POINT (438390 5340770)
+## 7  POINT (432550 5341010)
+## 8  POINT (436910 5341410)
+## 9  POINT (437930 5341410)
+## 10 POINT (433470 5342470)</code></pre>
 
 <style type="text/css">
 pre {
@@ -1836,6 +1858,12 @@ pre[class] {
 ## Dimension:     XY
 ## Bounding box:  xmin: 431100 ymin: 5337700 xmax: 438560 ymax: 5343240
 ## Projected CRS: UTM_Zone_17_Northern_Hemisphere</code></pre>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-R-BalancedSampling" class="csl-entry">
+Grafström, Anton, and Jonathan Lisic. 2019. <em>BalancedSampling: Balanced and Spatially Balanced Sampling</em>. <a href="http://www.antongrafstrom.se/balancedsampling">http://www.antongrafstrom.se/balancedsampling</a>.
 </div>
 </div>
             </section>

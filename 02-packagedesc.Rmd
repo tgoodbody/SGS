@@ -14,38 +14,31 @@ pre[class] {
 
 # `sgsR` fundamentals {#fund .unnumbered}
 
-To install the package from the github please run the following
-
-```{r message = FALSE, warning = FALSE, eval = FALSE}
-install.packages("devtools")
-devtools::install_github("https://github.com/tgoodbody/sgsR", build_vignettes = FALSE)
-
-```
 ## Algorithm structure {#str .unnumbered}
 
-`sgsR` has been scripted primarily using the `terra` package for raster processing and the `sf` package for vector manipulation. There are 3 primary function verbs that the package uses:
+`sgsR` has been scripted primarily using the `terra` package for raster processing and the `sf` package for vector manipulation. There are 3 primary function verbs that the package currently uses:
 
--   `calculate_*` - The calculate verb implies that these functions are performing calculations to be used in consequent processing. The use of predefined sample analysis algorithms (`calculate_coobs`, `calculate_ahels`) are also included.
+*   `strat_*` - The stratify verb implies that functions are applying stratification algorithms to an input metrics raster ([`mraster`](#mrast)) and output a stratified raster ([`sraster`](#srast))
 
--   `strat_*` - The stratify verb implies that these functions are applying stratification algorithms to an input metrics raster (`mraster`) and output a stratified raster (`sraster`)
+*   `sample_*` - The sample verb implies that functions are extracting samples from [`srasters`](#srast) produced from `strat_*` functions. A few algorithms (e.g. [`sample_srs`](#sample), [`sample_balanced`](#balanced), [`sample_grid`](#grid)) are able to take [`mrasters`](#mrast) as inputs as they are not dependent on stratified inputs for sampling.
 
--   `sample_*` - The sample verb implies that these functions are extracting samples from `srasters` produced from `strat_*` functions. A few algorithms (e.g. `sample_srs`, `sample_balanced`, `sample_grid`) are able to take `mrasters` as inputs as they are not dependent on stratified inputs for sampling.
-
+*   `calculate_*` - The calculate verb implies that functions are performing calculations to be used in consequent processing. The use of predefined sample analysis algorithms ([`calculate_ahels`](#ahels), [`calculate_coobs`](#coobs)) are also included.
 
 ::: {.box-content .vig-content}
 ::: {.box-title .vig-content-top}
 ### Package Documentation {.unnumbered}
 :::
-I do not go into detail about the intricacies of each function in this vignette. Please see the documentation for functions e.g. `?sgsR::strat_kmeans` for all details about how use and intended application of each function.
+I do not go into detail about the intricacies of each function in this document. Please see the documentation for functions e.g. `?sgsR::strat_kmeans` for intended application and use of each function.
 :::
 
 ## Example data {.unnumbered}
-Worked examples of all functions are provided below using data internal to the package. To load internal `mraster` and road `access` data we use the following code.
+Worked examples of all functions are provided using data internal to the package. To load internal `mraster` and road [`access`](#access) data we use the following code. Follow along on your own machine to see more outputs and get a better sense of how the package functions.
 
-### Raster data {#rast .unnumbered}
+### Metrics rasters - `mraster` {#mrast .unnumbered}
 ```{r,warning=F,message=F}
 library(sgsR)
 library(terra)
+library(sf)
 
 #--- Load mraster and access files ---#
 r <- system.file("extdata", "wall_metrics_small.tif", package = "sgsR")
@@ -54,7 +47,7 @@ r <- system.file("extdata", "wall_metrics_small.tif", package = "sgsR")
 mraster <- terra::rast(r)
 ```
 
-### Road access data {#vect .unnumbered}
+### Road `access` data {#vect .unnumbered}
 ```{r,warning=F,message=F}
 a <- system.file("extdata", "roads.shp", package = "sgsR")
 
@@ -68,15 +61,13 @@ terra::plot(access, add = TRUE, col = "black")
 
 ```
 
-From the plot we see the first band (`zmax`) of the `mraster` with the `access` vector overlaid. For the purposes of this tutorial I am also going to show how to produce a basic `sraster` and `existing` sample data that we will used in examples below. 
+From the plot we see the first band (`zmax`) of the `mraster` with the `access` vector overlaid. 
 
-## Additional example data {.unnumbered}
+## Stratified rasters - `sraster` {#srast .unnumbered}
 
-To make the `sraster` we will use the `strat_kmeans` function where the input `mraster` will be stratified using a kmeans algorithm.
+For the purposes of this tutorial I am also going to show how to produce a basic `sraster` and `existing` sample data that we will used in examples below. 
 
-After the `sraster` is produced we apply the `sample_srs` algorithm which randomly samples points within our `sraster` to produce an `existing` sample dataset.
-
-More detail and examples about these functions will be given below:
+To make the `sraster` we will use the [`strat_kmeans`](#kmeans) function where the input `mraster` will be stratified using a kmeans algorithm.
 
 ```{r,warning=F,message=F}
 #--- apply kmeans algorithm to metrics raster ---#
@@ -86,7 +77,12 @@ sraster <- strat_kmeans(mraster = mraster,
 
 ```
 
+After the `sraster` is produced we apply the [`sample_srs`](#srs) algorithm which randomly samples points within our `sraster` to produce an `existing` sample dataset.
+
 ```{r,warning=F,message=F}
+#--- set seed ---#
+set.seed(2021)
+
 #--- apply kmeans algorithm to metrics raster ---#
 existing <- sample_srs(raster = mraster, # use sraster as input for sampling
                        nSamp = 200, # request 200 samples be taken
@@ -95,5 +91,5 @@ existing <- sample_srs(raster = mraster, # use sraster as input for sampling
 
 ```
 
-We now have `mraster`, `access`, `sraster` and `existing` datasets generated. Expect to see these data used in the following examples.
+We now have `mraster`, `access`, `sraster` and `existing` data sets generated. Expect to see these data used in the all examples in this document.
 

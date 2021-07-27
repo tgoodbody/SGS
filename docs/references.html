@@ -24,7 +24,7 @@
 <meta name="author" content="Tristan Goodbody" />
 
 
-<meta name="date" content="2021-07-26" />
+<meta name="date" content="2021-07-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -184,14 +184,14 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="fund.html"><a href="fund.html"><i class="fa fa-check"></i>Algorithm structure</a></li>
 <li class="chapter" data-level="" data-path="fund.html"><a href="fund.html#example-data"><i class="fa fa-check"></i>Example data</a>
 <ul>
-<li class="chapter" data-level="" data-path="fund.html"><a href="fund.html#rast"><i class="fa fa-check"></i>Raster data</a></li>
-<li class="chapter" data-level="" data-path="fund.html"><a href="fund.html#vect"><i class="fa fa-check"></i>Road access data</a></li>
+<li><a href="fund.html#mrast">Metrics rasters - <code>mraster</code></a></li>
+<li><a href="fund.html#vect">Road <code>access</code> data</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="fund.html"><a href="fund.html#additional-example-data"><i class="fa fa-check"></i>Additional example data</a></li>
+<li><a href="fund.html#srast">Stratified rasters - <code>sraster</code></a></li>
 </ul></li>
 <li><a href="strat.html#strat"><code>strat_*</code> functions</a>
 <ul>
-<li><a href="strat.html#strat_kmeans"><code>strat_kmeans</code></a></li>
+<li><a href="strat.html#kmeans"><code>strat_kmeans</code></a></li>
 <li><a href="strat.html#strat_pcomp"><code>strat_pcomp</code></a></li>
 <li><a href="strat.html#strat_breaks"><code>strat_breaks</code></a></li>
 <li><a href="strat.html#strat_quantiles"><code>strat_quantiles</code></a></li>
@@ -200,13 +200,28 @@ div.csl-indent {
 <li><a href="sample.html#sample"><code>sample_*</code> functions</a>
 <ul>
 <li class="chapter" data-level="" data-path="sample.html"><a href="sample.html"><i class="fa fa-check"></i>Access</a></li>
-<li><a href="sample.html#sample_srs"><code>sample_srs</code></a></li>
-<li><a href="sample.html#sample_grid"><code>sample_grid</code></a></li>
-<li><a href="sample.html#sample_strat"><code>sample_strat</code></a></li>
-<li><a href="sample.html#sample_clhs"><code>sample_clhs</code></a></li>
-<li><a href="sample.html#sample_balanced"><code>sample_balanced</code></a></li>
+<li><a href="sample.html#srs"><code>sample_srs</code></a></li>
+<li><a href="sample.html#grid"><code>sample_grid</code></a></li>
+<li><a href="sample.html#sstrat"><code>sample_strat</code></a></li>
+<li><a href="sample.html#clhs"><code>sample_clhs</code></a></li>
+<li><a href="sample.html#balanced"><code>sample_balanced</code></a></li>
 </ul></li>
-<li><a href="calc.html#calc"><code>calculate_*</code> functions</a></li>
+<li><a href="calc.html#calc"><code>calculate_*</code> functions</a>
+<ul>
+<li><a href="calc.html#dist"><code>calculate_distance</code></a></li>
+<li><a href="calc.html#calculate_pcomp"><code>calculate_pcomp</code></a></li>
+<li><a href="calc.html#calculate_reqsamples"><code>calculate_reqSamples</code></a></li>
+<li class="chapter" data-level="" data-path="calc.html"><a href="calc.html"><i class="fa fa-check"></i>Sample evaluation algorithms</a>
+<ul>
+<li><a href="calc.html#ahels"><code>calculate_ahels</code></a></li>
+<li><a href="calc.html#coobs"><code>calculate_coobs</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="calc.html"><a href="calc.html#lhseval"><i class="fa fa-check"></i>Latin hypercube sampling evaluation algorithms</a>
+<ul>
+<li><a href="calc.html#lhspop"><code>calculate_lhsPop</code></a></li>
+<li><a href="calc.html#lhsopt"><code>calculate_lhsOpt</code></a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>

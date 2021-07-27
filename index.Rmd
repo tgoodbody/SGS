@@ -14,7 +14,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Overview {-#overview}
 
-This document is description of the structurally guided sampling project being undertaken by the IRSS Lab at the UBC Faculty fo Forestry. Herein we provide details related to:
+This document is a current summary and explaination of the structurally guided sampling ([`sgsR`](https://github.com/tgoodbody/sgsR)) project being undertaken by [Dr. Tristan R.H. Goodbody](https://scholar.google.ca/citations?user=C_qdYDsAAAAJ&hl=en) and [Dr. Nicholas C. Coops](https://scholar.google.ca/citations?user=XvUF8dUAAAAJ&hl=en) at the IRSS Lab at the UBC Faculty of Forestry. 
+
+Herein we provide a:
 
 * Literature review about [SGS](#SGS)
 
@@ -25,4 +27,12 @@ This document is description of the structurally guided sampling project being u
 * Overview of [sampling algorithms](#sample)
 
 * Overview of [calculate algorithms](#calc)
+
+To install the package from the github please run the following.
+
+```{r message = FALSE, warning = FALSE, eval = FALSE}
+install.packages("devtools")
+devtools::install_github("https://github.com/tgoodbody/sgsR", build_vignettes = FALSE)
+library(sgsR)
+```
  

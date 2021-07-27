@@ -15,6 +15,7 @@ pre[class] {
 ```{r,warning=F,message=F,echo=FALSE}
 library(sgsR)
 library(terra)
+library(sf)
 
 #--- Load mraster and access files ---#
 r <- system.file("extdata", "wall_metrics_small.tif", package = "sgsR")
@@ -44,24 +45,24 @@ Fundamental to many structurally guided sampling approaches is the use of strati
 
 A total of 5 `strat` functions currently exist in the package:
 
--   `strat_kmeans` - kmeans stratification
+*   `strat_kmeans` - kmeans stratification
 
--   `strat_pcomp`- principal component stratification
+*   `strat_pcomp`- principal component stratification
 
--   `strat_breaks` - user-defined break stratification
+*   `strat_breaks` - user-defined break stratification
 
--   `strat_quantiles` - quantile stratification
+*   `strat_quantiles` - quantile stratification
 
--   `strat_osb` - optimum sample boundary stratification
+*   `strat_osb` - optimum sample boundary stratification
 
-## `strat_kmeans` {.unnumbered}
+## `strat_kmeans` {#kmeans .unnumbered}
 
-We provide a preliminary example of the `strat_kmeans` algorithm to prepare our input data but here are a few more.
+We provide a preliminary example of the `strat_kmeans` algorithm to prepare our [`sraster`](#srast) input data but here are a few more.
 
 ```{r,warning=F,message=F}
- #--- perform stratification using k-means ---#
- kmeans <- strat_kmeans(mraster = mraster, # input
-                        nStrata = 5) # algorithm will produce 4 strata
+#--- perform stratification using k-means ---#
+strat_kmeans(mraster = mraster, # input
+             nStrata = 5) # algorithm will produce 4 strata
 
 ```
 
@@ -69,37 +70,37 @@ We provide a preliminary example of the `strat_kmeans` algorithm to prepare our 
 ::: {.box-title .vig-content-top}
 ### Plot {.unnumbered}
 :::
-Notice that nothing plotted... That's because `plot = FALSE` is the default for all functions in sgsR. See examples below where `plot = TRUE`.
+Notice that nothing plotted... That's because `plot = FALSE` is the default for all functions in `sgsR`. See examples below where `plot = TRUE`.
 :::
 
 ```{r,warning=F,message=F}
- kmeans <- strat_kmeans(mraster = mraster, # input
-                        nStrata = 10, # algorithm will produce 10 strata
-                        iter = 1000, # set minimum number of interations to determine kmeans centers
-                        algorithm = "MacQueen", # use MacQueen algorithm
-                        plot = TRUE, # plot output
-                        details = TRUE) # output details - kmeans stratification data and output sraster
+strat_kmeans(mraster = mraster, # input
+             nStrata = 10, # algorithm will produce 10 strata
+             iter = 1000, # set minimum number of interations to determine kmeans centers
+             algorithm = "MacQueen", # use MacQueen algorithm
+             plot = TRUE, # plot output
+             details = TRUE) # output details - kmeans stratification data and output sraster
 ```
 
 ```{r,warning=F,message=F}
- kmeans <- strat_kmeans(mraster = mraster, # input
-                        nStrata = 5, # algorithm will produce 4 strata
-                        center = FALSE, # do not center data
-                        scale = FALSE, # do not scale data
-                        plot = TRUE, # plot output
-                        filename = tempfile(fileext = ".tif"), # write output sraster to file
-                        overwrite = TRUE) # overwrite file on disc if it exists
+strat_kmeans(mraster = mraster, # input
+             nStrata = 5, # algorithm will produce 4 strata
+             center = FALSE, # do not center data
+             scale = FALSE, # do not scale data
+             plot = TRUE, # plot output
+             filename = tempfile(fileext = ".tif"), # write output sraster to file
+             overwrite = TRUE) # overwrite file on disc if it exists
 
 ```
 
 ## `strat_pcomp` {.unnumbered}
 
-The `strat_pcomp` algorithm calculates principal components on the input `mraster` then divides data into equal sized strata. Strata can be defined by using the primary (PC1) only, or primary & secondary (PC2) principal components. If `nStata2` is defined, PC2 is used and the total number of strata will be $$nStrata * nStrata2$$.
+The `strat_pcomp` algorithm calculates principal components on the input `mraster` then divides data into equal sized strata. Strata can be defined by using the primary (PC1) only (`nStrata`), or primary & secondary (PC2 - `nStata2`) principal components. If `nStata2` is defined, PC2 is used and the total number of strata will be $$nStrata * nStrata2$$.
 
 ```{r,warning=F,message=F}
 strat_pcomp(mraster = mraster, # input
             nStrata = 5, # 5 strata with primary PC only
-            plot = TRUE)
+            plot = TRUE) # plot
 ```
 
 ```{r,warning=F,message=F}
@@ -119,19 +120,20 @@ strat_pcomp(mraster = mraster, # input
 
 ## `strat_breaks` {.unnumbered}
 
-The `strat_breaks` function stratifies data based on user-defined breaks in covariates. A single `metric` can be defined or an additional `metric2` can be supplied. `breaks` and `breaks2` correspond to the user-defined breaks for `metric` and metric2` respectively.
+The `strat_breaks` function stratifies data based on user-defined breaks in covariates. A single `metric` can be defined or an additional `metric2` can be supplied. `breaks` and `breaks2` correspond to the user-defined breaks for `metric` and `metric2` respectively.
 
 ```{r,warning=F,message=F}
-#--- create vector breaks ---#
+#--- define vector breaks ---#
 br.max <- c(3, 5, 11, 18) #zmax breaks
 br.sd <- c(1, 2, 5) #zsd breaks
 
 ```
-Once the breaks have been created we can input them into the function.
+
+Once the breaks have been created we can input them into the function using the `breaks` and `breaks2` parameters.
 
 ```{r,warning=F,message=F}
 strat_breaks(mraster = mraster, # input
-             metric = "zmax", # covariate of interest - can be numeric index of mraster or character string
+             metric = "zmax", # covariate of interest - numeric index or character string
              breaks = br.max, # breaks for primary covariate
              plot = TRUE, # plot
              details = TRUE) # output details
@@ -139,8 +141,8 @@ strat_breaks(mraster = mraster, # input
 
 ```{r,warning=F,message=F}
 strat_breaks(mraster = mraster, # input
-             metric = 1, # primary covariate of interest - can be numeric index of mraster or character string
-             metric2 = "zsd", # secondary covariate of interest - can be numeric index of mraster or character string
+             metric = 1, # primary covariate of interest - numeric index or character string
+             metric2 = "zsd", # secondary covariate of interest - numeric index or character string
              breaks = br.max, # breaks for primary covariate
              breaks2 = br.sd, # breaks for secondary covariate
              plot = TRUE) # plot
@@ -148,19 +150,19 @@ strat_breaks(mraster = mraster, # input
 
 ## `strat_quantiles` {.unnumbered}
 
-The `strat_quantiles` function stratifies data into the user-defined number of quantiles. A single `metric` can be defined or an additional `metric2` can be supplied. `nQuant` and `nQuant2` correspond to the desired number of quantiles for `metric` and metric2` respectively. If `nQuant` is defined, the total number of strata will be $$nStrata = nQuant * nQuant2$$
+The `strat_quantiles` function stratifies data into the user-defined number of quantiles (`nQuant`). A single `metric` can be defined or an additional `metric2` can be supplied. `nQuant` and `nQuant2` correspond to the desired number of quantiles for `metric` and `metric2` respectively. If `nQuant2` is defined, the total number of strata will be $$nStrata = nQuant * nQuant2$$
 
 ```{r,warning=F,message=F}
 strat_quantiles(mraster = mraster, # input
-			          metric = 4, # primary covariate of interest - can be numeric index of mraster or character string
+			          metric = 4, # primary covariate of interest - numeric index or character string
 			          nQuant = 10, # number of quantiles for primary covariate
 			          plot = TRUE) # plot
 ```
 
 ```{r,warning=F,message=F} 
 strat_quantiles(mraster = mraster, # input
-			          metric = "zsd", # primary covariate of interest - can be numeric index of mraster or character string
-			          metric2 = "zq95", # secondary covariate of interest - can be numeric index of mraster or character string
+			          metric = "zsd", # primary covariate of interest - numeric index or character string
+			          metric2 = "zq95", # secondary covariate of interest - numeric index or character string
 			          nQuant = 3, # number of quantiles for primary covariate
 			          nQuant2 = 4, # number of quantiles for secondary covariate
 			          plot = TRUE) # plot
@@ -168,8 +170,8 @@ strat_quantiles(mraster = mraster, # input
 
 ```{r,warning=F,message=F} 
 strat_quantiles(mraster = mraster, # input
-			          metric = 1, # primary covariate of interest - can be numeric index of mraster or character string
-			          metric2 = "zsd", # secondary covariate of interest - can be numeric index of mraster or character string
+			          metric = 1, # primary covariate of interest - numeric index or character string
+			          metric2 = "zsd", # secondary covariate of interest - numeric index or character string
 			          nQuant = 2, # number of quantiles for primary covariate
 			          nQuant2 = 2, # number of quantiles for secondary covariate
 			          filename = tempfile(fileext = ".tif")) # write output sraster to file
@@ -177,12 +179,16 @@ strat_quantiles(mraster = mraster, # input
 
 ## `strat_osb` {.unnumbered}
 
-The `strat_osb` algorithm implements the optimum sample boundaries algorithm implmented in the `FortifyR` package. For further details about the algorithms used check out their package and also consult `?sgsR::strat_osb` for references. The basics of this algorithm are to provide the number of desired strata `nStrata` and samples `nSamp`. The algorithm then analyzes the data for the optimal locations to establish breaks in the covariate, which are used as stratum boundaries. This function can take a bit longer to run so please be patient! For the purpses of this vignette i have used a limited number of strata and samples to ensure they run and render quickly.
+The `strat_osb` algorithm implements the optimum sample boundaries algorithm implmented in the `stratifyR` package. For further details about the algorithms used check out their package and also consult `?sgsR::strat_osb` for references.
+
+The basics of this algorithm are to provide the number of desired strata `nStrata` and samples `nSamp`. The algorithm then analyzes the data for the optimal locations to establish breaks in the covariate `metric`, which are used as stratum boundaries. 
+
+This function can take a bit longer to run so please be patient! For the purpses of this example I have used a limited number of `nStrata` and `nSamp` to ensure they run and render quickly.
 
 ```{r,warning=F,message=F, eval = FALSE} 
 #--- perform optimum sample boundary stratification ---#
 strat_osb(mraster = mraster, # input
-	        metric = "zsd", # covariate of interest - can be numeric index of mraster or character string
+	        metric = "zsd", # covariate of interest - numeric index or character string
 	        nSamp = 50, # number of desired samples
 	        nStrata = 3, # number of desired strata
 	        plot = TRUE) # plot
@@ -190,7 +196,7 @@ strat_osb(mraster = mraster, # input
 
 ```{r,warning=F,message=F, eval = FALSE} 
 strat_osb(mraster = mraster, # input
-	        metric = 4, # covariate of interest - can be numeric index of mraster or character string
+	        metric = 4, # covariate of interest - numeric index or character string
 	        nSamp = 25, # number of desired samples
 	        nStrata = 3, # number of desired strata
 	        plot = TRUE, # plot
@@ -199,7 +205,7 @@ strat_osb(mraster = mraster, # input
 
 ```{r,warning=F,message=F, eval = FALSE} 
 strat_osb(mraster = mraster, # input
-	        metric = "zmax", # covariate of interest - can be numeric index of mraster or character string
+	        metric = "zmax", # covariate of interest - numeric index or character string
 	        nSamp = 50, # number of desired samples
 	        nStrata = 3, # number of desired strata
 	        subset = 0.75, # used a subset of covariate data to determine optimum breaks

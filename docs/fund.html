@@ -24,7 +24,7 @@
 <meta name="author" content="Tristan Goodbody" />
 
 
-<meta name="date" content="2021-07-26" />
+<meta name="date" content="2021-07-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -184,14 +184,14 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="fund.html"><a href="fund.html"><i class="fa fa-check"></i>Algorithm structure</a></li>
 <li class="chapter" data-level="" data-path="fund.html"><a href="fund.html#example-data"><i class="fa fa-check"></i>Example data</a>
 <ul>
-<li class="chapter" data-level="" data-path="fund.html"><a href="fund.html#rast"><i class="fa fa-check"></i>Raster data</a></li>
-<li class="chapter" data-level="" data-path="fund.html"><a href="fund.html#vect"><i class="fa fa-check"></i>Road access data</a></li>
+<li><a href="fund.html#mrast">Metrics rasters - <code>mraster</code></a></li>
+<li><a href="fund.html#vect">Road <code>access</code> data</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="fund.html"><a href="fund.html#additional-example-data"><i class="fa fa-check"></i>Additional example data</a></li>
+<li><a href="fund.html#srast">Stratified rasters - <code>sraster</code></a></li>
 </ul></li>
 <li><a href="strat.html#strat"><code>strat_*</code> functions</a>
 <ul>
-<li><a href="strat.html#strat_kmeans"><code>strat_kmeans</code></a></li>
+<li><a href="strat.html#kmeans"><code>strat_kmeans</code></a></li>
 <li><a href="strat.html#strat_pcomp"><code>strat_pcomp</code></a></li>
 <li><a href="strat.html#strat_breaks"><code>strat_breaks</code></a></li>
 <li><a href="strat.html#strat_quantiles"><code>strat_quantiles</code></a></li>
@@ -200,13 +200,28 @@ div.csl-indent {
 <li><a href="sample.html#sample"><code>sample_*</code> functions</a>
 <ul>
 <li class="chapter" data-level="" data-path="sample.html"><a href="sample.html"><i class="fa fa-check"></i>Access</a></li>
-<li><a href="sample.html#sample_srs"><code>sample_srs</code></a></li>
-<li><a href="sample.html#sample_grid"><code>sample_grid</code></a></li>
-<li><a href="sample.html#sample_strat"><code>sample_strat</code></a></li>
-<li><a href="sample.html#sample_clhs"><code>sample_clhs</code></a></li>
-<li><a href="sample.html#sample_balanced"><code>sample_balanced</code></a></li>
+<li><a href="sample.html#srs"><code>sample_srs</code></a></li>
+<li><a href="sample.html#grid"><code>sample_grid</code></a></li>
+<li><a href="sample.html#sstrat"><code>sample_strat</code></a></li>
+<li><a href="sample.html#clhs"><code>sample_clhs</code></a></li>
+<li><a href="sample.html#balanced"><code>sample_balanced</code></a></li>
 </ul></li>
-<li><a href="calc.html#calc"><code>calculate_*</code> functions</a></li>
+<li><a href="calc.html#calc"><code>calculate_*</code> functions</a>
+<ul>
+<li><a href="calc.html#dist"><code>calculate_distance</code></a></li>
+<li><a href="calc.html#calculate_pcomp"><code>calculate_pcomp</code></a></li>
+<li><a href="calc.html#calculate_reqsamples"><code>calculate_reqSamples</code></a></li>
+<li class="chapter" data-level="" data-path="calc.html"><a href="calc.html"><i class="fa fa-check"></i>Sample evaluation algorithms</a>
+<ul>
+<li><a href="calc.html#ahels"><code>calculate_ahels</code></a></li>
+<li><a href="calc.html#coobs"><code>calculate_coobs</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="calc.html"><a href="calc.html#lhseval"><i class="fa fa-check"></i>Latin hypercube sampling evaluation algorithms</a>
+<ul>
+<li><a href="calc.html#lhspop"><code>calculate_lhsPop</code></a></li>
+<li><a href="calc.html#lhsopt"><code>calculate_lhsOpt</code></a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -230,40 +245,38 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="fund" class="section level1 unnumbered">
 <h1><code>sgsR</code> fundamentals</h1>
-<p>To install the package from the github please run the following</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="fund.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
-<span id="cb1-2"><a href="fund.html#cb1-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;https://github.com/tgoodbody/sgsR&quot;</span>, <span class="at">build_vignettes =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <div id="str" class="section level2 unnumbered">
 <h2>Algorithm structure</h2>
-<p><code>sgsR</code> has been scripted primarily using the <code>terra</code> package for raster processing and the <code>sf</code> package for vector manipulation. There are 3 primary function verbs that the package uses:</p>
+<p><code>sgsR</code> has been scripted primarily using the <code>terra</code> package for raster processing and the <code>sf</code> package for vector manipulation. There are 3 primary function verbs that the package currently uses:</p>
 <ul>
-<li><p><code>calculate_*</code> - The calculate verb implies that these functions are performing calculations to be used in consequent processing. The use of predefined sample analysis algorithms (<code>calculate_coobs</code>, <code>calculate_ahels</code>) are also included.</p></li>
-<li><p><code>strat_*</code> - The stratify verb implies that these functions are applying stratification algorithms to an input metrics raster (<code>mraster</code>) and output a stratified raster (<code>sraster</code>)</p></li>
-<li><p><code>sample_*</code> - The sample verb implies that these functions are extracting samples from <code>srasters</code> produced from <code>strat_*</code> functions. A few algorithms (e.g. <code>sample_srs</code>, <code>sample_balanced</code>, <code>sample_grid</code>) are able to take <code>mrasters</code> as inputs as they are not dependent on stratified inputs for sampling.</p></li>
+<li><p><code>strat_*</code> - The stratify verb implies that functions are applying stratification algorithms to an input metrics raster (<a href="fund.html#mrast"><code>mraster</code></a>) and output a stratified raster (<a href="fund.html#srast"><code>sraster</code></a>)</p></li>
+<li><p><code>sample_*</code> - The sample verb implies that functions are extracting samples from <a href="fund.html#srast"><code>srasters</code></a> produced from <code>strat_*</code> functions. A few algorithms (e.g. <a href="sample.html#sample"><code>sample_srs</code></a>, <a href="sample.html#balanced"><code>sample_balanced</code></a>, <a href="sample.html#grid"><code>sample_grid</code></a>) are able to take <a href="fund.html#mrast"><code>mrasters</code></a> as inputs as they are not dependent on stratified inputs for sampling.</p></li>
+<li><p><code>calculate_*</code> - The calculate verb implies that functions are performing calculations to be used in consequent processing. The use of predefined sample analysis algorithms (<a href="calc.html#ahels"><code>calculate_ahels</code></a>, <a href="calc.html#coobs"><code>calculate_coobs</code></a>) are also included.</p></li>
 </ul>
 <div class="box-content vig-content">
 <div id="package-documentation" class="section level3 unnumbered box-title vig-content-top">
 <h3>Package Documentation</h3>
 </div>
-<p>I do not go into detail about the intricacies of each function in this vignette. Please see the documentation for functions e.g. <code>?sgsR::strat_kmeans</code> for all details about how use and intended application of each function.</p>
+<p>I do not go into detail about the intricacies of each function in this document. Please see the documentation for functions e.g. <code>?sgsR::strat_kmeans</code> for intended application and use of each function.</p>
 </div>
 </div>
 <div id="example-data" class="section level2 unnumbered">
 <h2>Example data</h2>
-<p>Worked examples of all functions are provided below using data internal to the package. To load internal <code>mraster</code> and road <code>access</code> data we use the following code.</p>
-<div id="rast" class="section level3 unnumbered">
-<h3>Raster data</h3>
+<p>Worked examples of all functions are provided using data internal to the package. To load internal <code>mraster</code> and road <a href="sample.html#access"><code>access</code></a> data we use the following code. Follow along on your own machine to see more outputs and get a better sense of how the package functions.</p>
+<div id="mrast" class="section level3 unnumbered">
+<h3>Metrics rasters - <code>mraster</code></h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="fund.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sgsR)</span>
 <span id="cb2-2"><a href="fund.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
-<span id="cb2-3"><a href="fund.html#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="fund.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#--- Load mraster and access files ---#</span></span>
-<span id="cb2-5"><a href="fund.html#cb2-5" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;wall_metrics_small.tif&quot;</span>, <span class="at">package =</span> <span class="st">&quot;sgsR&quot;</span>)</span>
-<span id="cb2-6"><a href="fund.html#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="fund.html#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#--- load the mraster using the terra package ---#</span></span>
-<span id="cb2-8"><a href="fund.html#cb2-8" aria-hidden="true" tabindex="-1"></a>mraster <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(r)</span></code></pre></div>
+<span id="cb2-3"><a href="fund.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb2-4"><a href="fund.html#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="fund.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#--- Load mraster and access files ---#</span></span>
+<span id="cb2-6"><a href="fund.html#cb2-6" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;wall_metrics_small.tif&quot;</span>, <span class="at">package =</span> <span class="st">&quot;sgsR&quot;</span>)</span>
+<span id="cb2-7"><a href="fund.html#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="fund.html#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#--- load the mraster using the terra package ---#</span></span>
+<span id="cb2-9"><a href="fund.html#cb2-9" aria-hidden="true" tabindex="-1"></a>mraster <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(r)</span></code></pre></div>
 </div>
 <div id="vect" class="section level3 unnumbered">
-<h3>Road access data</h3>
+<h3>Road <code>access</code> data</h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="fund.html#cb3-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;roads.shp&quot;</span>, <span class="at">package =</span> <span class="st">&quot;sgsR&quot;</span>)</span>
 <span id="cb3-2"><a href="fund.html#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="fund.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#--- load the access vector using the sf package ---#</span></span>
@@ -279,26 +292,29 @@ div.csl-indent {
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="fund.html#cb5-1" aria-hidden="true" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">plot</span>(mraster[[<span class="dv">1</span>]])</span>
 <span id="cb5-2"><a href="fund.html#cb5-2" aria-hidden="true" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">plot</span>(access, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
 <p><img src="SGS_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<p>From the plot we see the first band (<code>zmax</code>) of the <code>mraster</code> with the <code>access</code> vector overlaid. For the purposes of this tutorial I am also going to show how to produce a basic <code>sraster</code> and <code>existing</code> sample data that we will used in examples below.</p>
+<p>From the plot we see the first band (<code>zmax</code>) of the <code>mraster</code> with the <code>access</code> vector overlaid.</p>
 </div>
 </div>
-<div id="additional-example-data" class="section level2 unnumbered">
-<h2>Additional example data</h2>
-<p>To make the <code>sraster</code> we will use the <code>strat_kmeans</code> function where the input <code>mraster</code> will be stratified using a kmeans algorithm.</p>
-<p>After the <code>sraster</code> is produced we apply the <code>sample_srs</code> algorithm which randomly samples points within our <code>sraster</code> to produce an <code>existing</code> sample dataset.</p>
-<p>More detail and examples about these functions will be given below:</p>
+<div id="srast" class="section level2 unnumbered">
+<h2>Stratified rasters - <code>sraster</code></h2>
+<p>For the purposes of this tutorial I am also going to show how to produce a basic <code>sraster</code> and <code>existing</code> sample data that we will used in examples below.</p>
+<p>To make the <code>sraster</code> we will use the <a href="strat.html#kmeans"><code>strat_kmeans</code></a> function where the input <code>mraster</code> will be stratified using a kmeans algorithm.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="fund.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- apply kmeans algorithm to metrics raster ---#</span></span>
 <span id="cb6-2"><a href="fund.html#cb6-2" aria-hidden="true" tabindex="-1"></a>sraster <span class="ot">&lt;-</span> <span class="fu">strat_kmeans</span>(<span class="at">mraster =</span> mraster, </span>
 <span id="cb6-3"><a href="fund.html#cb6-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">nStrata =</span> <span class="dv">4</span>, <span class="co"># algorithm will produce 4 strata</span></span>
 <span id="cb6-4"><a href="fund.html#cb6-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># algorithm will plot output</span></span></code></pre></div>
 <p><img src="SGS_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="fund.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- apply kmeans algorithm to metrics raster ---#</span></span>
-<span id="cb7-2"><a href="fund.html#cb7-2" aria-hidden="true" tabindex="-1"></a>existing <span class="ot">&lt;-</span> <span class="fu">sample_srs</span>(<span class="at">raster =</span> mraster, <span class="co"># use sraster as input for sampling</span></span>
-<span id="cb7-3"><a href="fund.html#cb7-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">nSamp =</span> <span class="dv">200</span>, <span class="co"># request 200 samples be taken</span></span>
-<span id="cb7-4"><a href="fund.html#cb7-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">mindist =</span> <span class="dv">100</span>, <span class="co"># define that samples must be 100 m apart</span></span>
-<span id="cb7-5"><a href="fund.html#cb7-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># algorithm will plot output</span></span></code></pre></div>
+<p>After the <code>sraster</code> is produced we apply the <a href="sample.html#srs"><code>sample_srs</code></a> algorithm which randomly samples points within our <code>sraster</code> to produce an <code>existing</code> sample dataset.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="fund.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- set seed ---#</span></span>
+<span id="cb7-2"><a href="fund.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
+<span id="cb7-3"><a href="fund.html#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="fund.html#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#--- apply kmeans algorithm to metrics raster ---#</span></span>
+<span id="cb7-5"><a href="fund.html#cb7-5" aria-hidden="true" tabindex="-1"></a>existing <span class="ot">&lt;-</span> <span class="fu">sample_srs</span>(<span class="at">raster =</span> mraster, <span class="co"># use sraster as input for sampling</span></span>
+<span id="cb7-6"><a href="fund.html#cb7-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">nSamp =</span> <span class="dv">200</span>, <span class="co"># request 200 samples be taken</span></span>
+<span id="cb7-7"><a href="fund.html#cb7-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">mindist =</span> <span class="dv">100</span>, <span class="co"># define that samples must be 100 m apart</span></span>
+<span id="cb7-8"><a href="fund.html#cb7-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># algorithm will plot output</span></span></code></pre></div>
 <p><img src="SGS_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<p>We now have <code>mraster</code>, <code>access</code>, <code>sraster</code> and <code>existing</code> datasets generated. Expect to see these data used in the following examples.</p>
+<p>We now have <code>mraster</code>, <code>access</code>, <code>sraster</code> and <code>existing</code> data sets generated. Expect to see these data used in the all examples in this document.</p>
 
 <style type="text/css">
 pre {
