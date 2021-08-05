@@ -71,7 +71,7 @@ To make the `sraster` we will use the [`strat_kmeans`](#kmeans) function where t
 
 ```{r,warning=F,message=F}
 #--- apply kmeans algorithm to metrics raster ---#
-sraster <- strat_kmeans(mraster = mraster, 
+sraster <- strat_kmeans(mraster = mraster, # use mraster as input for sampling
                         nStrata = 4, # algorithm will produce 4 strata
                         plot = TRUE) # algorithm will plot output
 
@@ -84,7 +84,7 @@ After the `sraster` is produced we apply the [`sample_srs`](#srs) algorithm whic
 set.seed(2021)
 
 #--- apply kmeans algorithm to metrics raster ---#
-existing <- sample_srs(raster = mraster, # use sraster as input for sampling
+existing <- sample_srs(raster = mraster, # use mraster as input for sampling
                        nSamp = 200, # request 200 samples be taken
                        mindist = 100, # define that samples must be 100 m apart
                        plot = TRUE) # algorithm will plot output
