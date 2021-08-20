@@ -263,10 +263,10 @@ div.csl-indent {
 <div id="dist" class="section level2 unnumbered">
 <h2><code>calculate_distance</code></h2>
 <p>The <code>calculate_distance</code> function take input <code>raster</code> and <code>access</code> data and outputs a per pixel distance to the nearest access point. This function has particular value for constraining sampling protocols such the <a href="sample.html#clhs"><code>sample_clhs</code></a> function where the output raster layer can be used as a <code>cost</code> constraint.</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="calc.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_distance</span>(<span class="at">raster =</span> sraster, <span class="co"># input</span></span>
-<span id="cb82-2"><a href="calc.html#cb82-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">access =</span> access, <span class="co"># define access road network</span></span>
-<span id="cb82-3"><a href="calc.html#cb82-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="calc.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_distance</span>(<span class="at">raster =</span> sraster, <span class="co"># input</span></span>
+<span id="cb84-2"><a href="calc.html#cb84-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">access =</span> access, <span class="co"># define access road network</span></span>
+<span id="cb84-3"><a href="calc.html#cb84-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
+<p><img src="SGS_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
 <pre><code>## class       : SpatRaster 
 ## dimensions  : 277, 373, 2  (nrow, ncol, nlyr)
 ## resolution  : 20, 20  (x, y)
@@ -278,9 +278,9 @@ div.csl-indent {
 ## min values  :      1,           0 
 ## max values  :      4,        1060</code></pre>
 <p>The output raster is the input with the calculated <code>dist2access</code> layer appended.</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="calc.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_distance</span>(<span class="at">raster =</span> mraster, <span class="co"># input</span></span>
-<span id="cb84-2"><a href="calc.html#cb84-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">access =</span> access, <span class="co"># define access road network</span></span>
-<span id="cb84-3"><a href="calc.html#cb84-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">filename =</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">&quot;.tif&quot;</span>)) <span class="co"># write file to disc</span></span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="calc.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_distance</span>(<span class="at">raster =</span> mraster, <span class="co"># input</span></span>
+<span id="cb86-2"><a href="calc.html#cb86-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">access =</span> access, <span class="co"># define access road network</span></span>
+<span id="cb86-3"><a href="calc.html#cb86-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">filename =</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">&quot;.tif&quot;</span>)) <span class="co"># write file to disc</span></span></code></pre></div>
 <pre><code>## class       : SpatRaster 
 ## dimensions  : 277, 373, 14  (nrow, ncol, nlyr)
 ## resolution  : 20, 20  (x, y)
@@ -295,10 +295,10 @@ div.csl-indent {
 <div id="calculate_pcomp" class="section level2 unnumbered">
 <h2><code>calculate_pcomp</code></h2>
 <p>The <code>calculate_pcomp</code> function take a <code>mraster</code> as input and perform principal component analysis. The number of components defined by the <code>nComp</code> parameter specify the number of components that should be rasterized to output.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="calc.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_pcomp</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
-<span id="cb86-2"><a href="calc.html#cb86-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">nComp =</span> <span class="dv">5</span>, <span class="co"># number of components to output</span></span>
-<span id="cb86-3"><a href="calc.html#cb86-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot =</span> <span class="cn">TRUE</span> ) <span class="co"># plot</span></span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="calc.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_pcomp</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
+<span id="cb88-2"><a href="calc.html#cb88-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">nComp =</span> <span class="dv">5</span>, <span class="co"># number of components to output</span></span>
+<span id="cb88-3"><a href="calc.html#cb88-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot =</span> <span class="cn">TRUE</span> ) <span class="co"># plot</span></span></code></pre></div>
+<p><img src="SGS_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
 <pre><code>## class       : SpatRaster 
 ## dimensions  : 277, 373, 5  (nrow, ncol, nlyr)
 ## resolution  : 20, 20  (x, y)
@@ -311,11 +311,11 @@ div.csl-indent {
 ## names       :        PC1,        PC2,        PC3,        PC4,        PC5 
 ## min values  :  -6.853635,  -4.529725,  -4.215024, -10.636345,  -4.394728 
 ## max values  :  11.719434,  12.657038,   5.233462,   8.600372,   4.304005</code></pre>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="calc.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_pcomp</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
-<span id="cb88-2"><a href="calc.html#cb88-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">nComp =</span> <span class="dv">3</span>, <span class="co"># number of components to output</span></span>
-<span id="cb88-3"><a href="calc.html#cb88-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="co"># plot</span></span>
-<span id="cb88-4"><a href="calc.html#cb88-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">details =</span> <span class="cn">TRUE</span>) <span class="co"># details about the principal component analysis appended</span></span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="calc.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_pcomp</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
+<span id="cb90-2"><a href="calc.html#cb90-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">nComp =</span> <span class="dv">3</span>, <span class="co"># number of components to output</span></span>
+<span id="cb90-3"><a href="calc.html#cb90-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="co"># plot</span></span>
+<span id="cb90-4"><a href="calc.html#cb90-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">details =</span> <span class="cn">TRUE</span>) <span class="co"># details about the principal component analysis appended</span></span></code></pre></div>
+<p><img src="SGS_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
 <pre><code>## $pca
 ## Standard deviations (1, .., p=13):
 ##  [1] 2.93647150 1.26882709 1.15691535 0.86852611 0.53076565 0.42304219 0.35679023 0.21988261
@@ -373,21 +373,21 @@ div.csl-indent {
 </ul>
 <div id="proportional" class="section level3 unnumbered">
 <h3>Proportional Allocation</h3>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="calc.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- perform grid sampling ---#</span></span>
-<span id="cb90-2"><a href="calc.html#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_allocation</span>(<span class="at">sraster =</span> sraster, </span>
-<span id="cb90-3"><a href="calc.html#cb90-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">nSamp =</span> <span class="dv">200</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="calc.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- perform grid sampling ---#</span></span>
+<span id="cb92-2"><a href="calc.html#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_allocation</span>(<span class="at">sraster =</span> sraster, </span>
+<span id="cb92-3"><a href="calc.html#cb92-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">nSamp =</span> <span class="dv">200</span>)</span></code></pre></div>
 <pre><code>##   strata total
 ## 1      1    65
 ## 2      2    80
 ## 3      3    18
 ## 4      4    36</code></pre>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="calc.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- calculate existing samples to include ---#</span></span>
-<span id="cb92-2"><a href="calc.html#cb92-2" aria-hidden="true" tabindex="-1"></a>e.sr <span class="ot">&lt;-</span> <span class="fu">extract_strata</span>(<span class="at">sraster =</span> sraster, </span>
-<span id="cb92-3"><a href="calc.html#cb92-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">existing =</span> existing)</span>
-<span id="cb92-4"><a href="calc.html#cb92-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb92-5"><a href="calc.html#cb92-5" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_allocation</span>(<span class="at">sraster =</span> sraster, </span>
-<span id="cb92-6"><a href="calc.html#cb92-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">nSamp =</span> <span class="dv">200</span>, </span>
-<span id="cb92-7"><a href="calc.html#cb92-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">existing =</span> e.sr)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="calc.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- calculate existing samples to include ---#</span></span>
+<span id="cb94-2"><a href="calc.html#cb94-2" aria-hidden="true" tabindex="-1"></a>e.sr <span class="ot">&lt;-</span> <span class="fu">extract_strata</span>(<span class="at">sraster =</span> sraster, </span>
+<span id="cb94-3"><a href="calc.html#cb94-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">existing =</span> existing)</span>
+<span id="cb94-4"><a href="calc.html#cb94-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-5"><a href="calc.html#cb94-5" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_allocation</span>(<span class="at">sraster =</span> sraster, </span>
+<span id="cb94-6"><a href="calc.html#cb94-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">nSamp =</span> <span class="dv">200</span>, </span>
+<span id="cb94-7"><a href="calc.html#cb94-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">existing =</span> e.sr)</span></code></pre></div>
 <pre><code>##   strata total need
 ## 1      1     7   65
 ## 2      2    -6   80
@@ -398,13 +398,13 @@ div.csl-indent {
 <div id="Optimal" class="section level3 unnumbered">
 <h3>Optimal Allocation</h3>
 <p>Proportional allocation determine the number of samples based on the weights of strata. Optimal allocation utilizes within strata variation to allocate samples. This means that in addition to providing and <code>sraster</code>, that an <code>mraster</code> and a specific metric must be provided to calculate variation and appropriately allocate samples.</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="calc.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_allocation</span>(<span class="at">sraster =</span> sraster, <span class="co"># stratified raster</span></span>
-<span id="cb94-2"><a href="calc.html#cb94-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">nSamp =</span> <span class="dv">200</span>, <span class="co"># desired sample number</span></span>
-<span id="cb94-3"><a href="calc.html#cb94-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">existing =</span> e.sr, <span class="co">#existing samples</span></span>
-<span id="cb94-4"><a href="calc.html#cb94-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">allocation =</span> <span class="st">&quot;optim&quot;</span>, <span class="co"># optimal allocation</span></span>
-<span id="cb94-5"><a href="calc.html#cb94-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">mraster =</span> mraster, <span class="co"># metrics raster</span></span>
-<span id="cb94-6"><a href="calc.html#cb94-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">metric =</span> <span class="dv">1</span>, <span class="co"># metric to describe strata variance</span></span>
-<span id="cb94-7"><a href="calc.html#cb94-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">force =</span> <span class="cn">TRUE</span>) <span class="co"># force nSamp number</span></span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="calc.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_allocation</span>(<span class="at">sraster =</span> sraster, <span class="co"># stratified raster</span></span>
+<span id="cb96-2"><a href="calc.html#cb96-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">nSamp =</span> <span class="dv">200</span>, <span class="co"># desired sample number</span></span>
+<span id="cb96-3"><a href="calc.html#cb96-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">existing =</span> e.sr, <span class="co">#existing samples</span></span>
+<span id="cb96-4"><a href="calc.html#cb96-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">allocation =</span> <span class="st">&quot;optim&quot;</span>, <span class="co"># optimal allocation</span></span>
+<span id="cb96-5"><a href="calc.html#cb96-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">mraster =</span> mraster, <span class="co"># metrics raster</span></span>
+<span id="cb96-6"><a href="calc.html#cb96-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">metric =</span> <span class="dv">1</span>, <span class="co"># metric to describe strata variance</span></span>
+<span id="cb96-7"><a href="calc.html#cb96-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">force =</span> <span class="cn">TRUE</span>) <span class="co"># force nSamp number</span></span></code></pre></div>
 <pre><code>##   strata total need
 ## 1      1     5   63
 ## 2      2     1   87
@@ -428,9 +428,9 @@ div.csl-indent {
 <li><p>Prioritizes sampling within those quantile to improve representation.</p></li>
 </ol>
 <p>To use the function, the user will first specify the number of quantiles (<code>nQuant</code>) followed by either the <code>nSamp</code> (total number of desired samples to be added) or <code>threshold</code> (proportional represenation between sample and covariate quantiles - default is 0.9) parameters. Its recommended to use <code>threshold</code> values at or below 0.9 as higher values can currently cause the algorithm to add samples repeatedly.</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="calc.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_ahels</span>(<span class="at">mraster =</span> mraster[[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]], <span class="co"># input mraster - first 3 layers only</span></span>
-<span id="cb96-2"><a href="calc.html#cb96-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">existing =</span> existing, <span class="co"># existing samples</span></span>
-<span id="cb96-3"><a href="calc.html#cb96-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="calc.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_ahels</span>(<span class="at">mraster =</span> mraster[[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]], <span class="co"># input mraster - first 3 layers only</span></span>
+<span id="cb98-2"><a href="calc.html#cb98-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">existing =</span> existing, <span class="co"># existing samples</span></span>
+<span id="cb98-3"><a href="calc.html#cb98-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
 <pre><code>## 
   |                                                                                               
   |                                                                                         |   0%
@@ -823,7 +823,7 @@ div.csl-indent {
 ##  [8,] 1.6668647 1.0039715        NA
 ##  [9,]        NA 0.9212081        NA
 ## [10,]        NA 0.9406802        NA</code></pre>
-<p><img src="SGS_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
 <pre><code>## Simple feature collection with 247 features and 4 fields
 ## Geometry type: POINT
 ## Dimension:     XY
@@ -849,11 +849,11 @@ div.csl-indent {
 <p>Notice that no <code>threshold</code>, <code>nSamp</code>, or <code>nQuant</code> were defined. Thats because defaults are <code>threshold = 0.9</code> and <code>nQuant = 10</code>.</p>
 </div>
 <p>The first matrix output shows the quantile ratios between sample and covariates. A value of 1.0 means that samples and covariates are equally represented. Values above 1.0 are over represented in the sample, less than 1 under represented in the sample.</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="calc.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_ahels</span>(<span class="at">mraster =</span> mraster[[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]], <span class="co"># input mraster - first 3 layers only</span></span>
-<span id="cb99-2"><a href="calc.html#cb99-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">existing =</span> existing, <span class="co"># existing samples</span></span>
-<span id="cb99-3"><a href="calc.html#cb99-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">nQuant =</span> <span class="dv">20</span>, <span class="co"># define 20 quantiles</span></span>
-<span id="cb99-4"><a href="calc.html#cb99-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">nSamp =</span> <span class="dv">300</span>, <span class="co"># total samples desired</span></span>
-<span id="cb99-5"><a href="calc.html#cb99-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">filename =</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">&quot;.shp&quot;</span>)) <span class="co"># write samples to disc</span></span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="calc.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_ahels</span>(<span class="at">mraster =</span> mraster[[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]], <span class="co"># input mraster - first 3 layers only</span></span>
+<span id="cb101-2"><a href="calc.html#cb101-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">existing =</span> existing, <span class="co"># existing samples</span></span>
+<span id="cb101-3"><a href="calc.html#cb101-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">nQuant =</span> <span class="dv">20</span>, <span class="co"># define 20 quantiles</span></span>
+<span id="cb101-4"><a href="calc.html#cb101-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">nSamp =</span> <span class="dv">300</span>, <span class="co"># total samples desired</span></span>
+<span id="cb101-5"><a href="calc.html#cb101-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">filename =</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">&quot;.shp&quot;</span>)) <span class="co"># write samples to disc</span></span></code></pre></div>
 <pre><code>## 
   |                                                                                               
   |                                                                                         |   0%
@@ -1256,8 +1256,8 @@ div.csl-indent {
 ## [18,]        NA 0.9742058        NA
 ## [19,]        NA 0.9793525        NA
 ## [20,]        NA 0.9612838        NA
-## Writing layer `file25341d915f91&#39; to data source 
-##   `C:\Users\tgood.stu\AppData\Local\Temp\RtmpSOoCgd\file25341d915f91.shp&#39; using driver `ESRI Shapefile&#39;
+## Writing layer `file25342ca51e1&#39; to data source 
+##   `C:\Users\tgood.stu\AppData\Local\Temp\RtmpSOoCgd\file25342ca51e1.shp&#39; using driver `ESRI Shapefile&#39;
 ## Writing 500 features with 4 fields and geometry type Point.</code></pre>
 <pre><code>## Simple feature collection with 500 features and 4 fields
 ## Geometry type: POINT
@@ -1280,12 +1280,12 @@ div.csl-indent {
 <h3><code>calculate_coobs</code></h3>
 <p>The <code>calculate_coobs</code> function perform the COunt of OBServations (coobs) algorithm using <code>existing</code> sample data and <code>mraster</code> covariates. This algorithm aids the user in determining where additional samples could be located by comparing <code>existing</code> samples to each pixel and associated <code>mraster</code> covariates. The output coobs raster could be used to constrain clhs sampling using the <a href="sample.html#clhs"><code>sample_clhs</code></a> to areas that are underreprented.</p>
 <p>The coobs raster determines how many observations are similar in terms of the covariate space at every pixel. Given that this is fairly computationally intensive, I have implemented parallel processing for this function, but users should be patient to allow processing to complete.</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="calc.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_coobs</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
-<span id="cb102-2"><a href="calc.html#cb102-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">existing =</span> existing, <span class="co"># existing samples</span></span>
-<span id="cb102-3"><a href="calc.html#cb102-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">cores =</span> <span class="dv">4</span>, <span class="co"># parallel cores to use</span></span>
-<span id="cb102-4"><a href="calc.html#cb102-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">details =</span> <span class="cn">TRUE</span>, <span class="co"># provide details from algorithm output</span></span>
-<span id="cb102-5"><a href="calc.html#cb102-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="co"># plot</span></span>
-<span id="cb102-6"><a href="calc.html#cb102-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">filename =</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">&quot;.tif&quot;</span>)) <span class="co"># write output raster to tif</span></span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="calc.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_coobs</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
+<span id="cb104-2"><a href="calc.html#cb104-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">existing =</span> existing, <span class="co"># existing samples</span></span>
+<span id="cb104-3"><a href="calc.html#cb104-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">cores =</span> <span class="dv">4</span>, <span class="co"># parallel cores to use</span></span>
+<span id="cb104-4"><a href="calc.html#cb104-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">details =</span> <span class="cn">TRUE</span>, <span class="co"># provide details from algorithm output</span></span>
+<span id="cb104-5"><a href="calc.html#cb104-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="co"># plot</span></span>
+<span id="cb104-6"><a href="calc.html#cb104-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">filename =</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">&quot;.tif&quot;</span>)) <span class="co"># write output raster to tif</span></span></code></pre></div>
 </div>
 </div>
 <div id="lhseval" class="section level2 unnumbered">
@@ -1294,8 +1294,8 @@ div.csl-indent {
 <div id="lhspop" class="section level3 unnumbered">
 <h3><code>calculate_lhsPop</code></h3>
 <p>The <code>calculate_lhsPop</code> function calculates population level statistics about the <code>mraster</code> covariates being used including calculating principal components, quantile distributions, and Kullback–Leibler divergence testing. The outputs from this function are mandatory for use of the <a href="calc.html#lhsopt"><code>calculate_lhsOpt</code></a> function described in the next section.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="calc.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- by default all statistical data are calculated ---#</span></span>
-<span id="cb103-2"><a href="calc.html#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_lhsPop</span>(<span class="at">mraster =</span> mraster) <span class="co"># input </span></span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="calc.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- by default all statistical data are calculated ---#</span></span>
+<span id="cb105-2"><a href="calc.html#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_lhsPop</span>(<span class="at">mraster =</span> mraster) <span class="co"># input </span></span></code></pre></div>
 <p>The output details the following:</p>
 <ul>
 <li><p><code>$values</code> - Pixel values from <code>mraster</code></p></li>
@@ -1303,23 +1303,23 @@ div.csl-indent {
 <li><p><code>$matQ</code> - Quantile matrix</p></li>
 <li><p><code>$matCov</code> - Covariate matrix</p></li>
 </ul>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="calc.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- statistical analyses can be chose by setting their parameter to `FALSE` ---#</span></span>
-<span id="cb104-2"><a href="calc.html#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_lhsPop</span>(<span class="at">mraster =</span> mraster, <span class="co"># input </span></span>
-<span id="cb104-3"><a href="calc.html#cb104-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">nQuant =</span> <span class="dv">10</span>, <span class="co"># desired number of quantiles</span></span>
-<span id="cb104-4"><a href="calc.html#cb104-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">PCA =</span> <span class="cn">FALSE</span>) <span class="co"># choose not to calculate PCA&#39;s</span></span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="calc.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- statistical analyses can be chose by setting their parameter to `FALSE` ---#</span></span>
+<span id="cb106-2"><a href="calc.html#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_lhsPop</span>(<span class="at">mraster =</span> mraster, <span class="co"># input </span></span>
+<span id="cb106-3"><a href="calc.html#cb106-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">nQuant =</span> <span class="dv">10</span>, <span class="co"># desired number of quantiles</span></span>
+<span id="cb106-4"><a href="calc.html#cb106-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">PCA =</span> <span class="cn">FALSE</span>) <span class="co"># choose not to calculate PCA&#39;s</span></span></code></pre></div>
 </div>
 <div id="lhsopt" class="section level3 unnumbered">
 <h3><code>calculate_lhsOpt</code></h3>
 <p>The <code>calculate_lhsOpt</code> function performs an bootsrapped latin hypercube sampling approach where a population level analysis of <code>mraster</code> data is performed to determine the optimal Latin hypercube sample size.</p>
 <p>Using statistical data calculated using the <code>calculate_lhsPop</code> and varying sample sizes defined by <code>minSamp</code>, <code>maxSamp</code>, <code>step</code> and <code>rep</code>. Sampling protocols are conducted and statistical effectiveness of those sampling outcomes are evaluated to determine where sample size is minimized and statistical representation is maximized.</p>
 <p>This function is currently fairly slow to run as parallel is still being implemented.</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="calc.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- calculate lhsPop details ---#</span></span>
-<span id="cb105-2"><a href="calc.html#cb105-2" aria-hidden="true" tabindex="-1"></a>poplhs <span class="ot">&lt;-</span> <span class="fu">calculate_lhsPop</span>(<span class="at">mraster =</span> mr)</span>
-<span id="cb105-3"><a href="calc.html#cb105-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb105-4"><a href="calc.html#cb105-4" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_lhsOpt</span>(<span class="at">popLHS =</span> poplhs)</span></code></pre></div>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="calc.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_lhsOpt</span>(<span class="at">popLHS =</span> poplhs, </span>
-<span id="cb106-2"><a href="calc.html#cb106-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">PCA =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb106-3"><a href="calc.html#cb106-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">iter =</span> <span class="dv">200</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="calc.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- calculate lhsPop details ---#</span></span>
+<span id="cb107-2"><a href="calc.html#cb107-2" aria-hidden="true" tabindex="-1"></a>poplhs <span class="ot">&lt;-</span> <span class="fu">calculate_lhsPop</span>(<span class="at">mraster =</span> mr)</span>
+<span id="cb107-3"><a href="calc.html#cb107-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-4"><a href="calc.html#cb107-4" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_lhsOpt</span>(<span class="at">popLHS =</span> poplhs)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="calc.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_lhsOpt</span>(<span class="at">popLHS =</span> poplhs, </span>
+<span id="cb108-2"><a href="calc.html#cb108-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">PCA =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb108-3"><a href="calc.html#cb108-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">iter =</span> <span class="dv">200</span>)</span></code></pre></div>
 
 </div>
 </div>

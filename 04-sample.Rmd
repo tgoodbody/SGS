@@ -113,7 +113,16 @@ sample_systematic(raster = sraster, # input sraster
 ```{r,warning=F,message=F} 
 #--- perform grid sampling ---#
 sample_systematic(raster = sraster, # input sraster
-            cellsize = 200, # grid distance
+            cellsize = 500, # grid distance
+            square = FALSE, # hexagonal tessellation
+            centers = TRUE, # take corners instead of centers
+            plot = TRUE) # plot
+```
+
+```{r,warning=F,message=F} 
+#--- perform grid sampling ---#
+sample_systematic(raster = sraster, # input sraster
+            cellsize = 500, # grid distance
             square = FALSE, # hexagonal tessellation
             centers = FALSE, # take corners instead of centers
             plot = TRUE) # plot
@@ -121,7 +130,7 @@ sample_systematic(raster = sraster, # input sraster
 
 ```{r,warning=F,message=F} 
 sample_systematic(raster = sraster, # input sraster
-            cellsize = 100, # grid distance
+            cellsize = 500, # grid distance
             access = access, # define access road network
             square = FALSE, # hexagonal tessellation
             buff_inner = 50, # inner buffer - no samples within this distance from road
@@ -130,7 +139,7 @@ sample_systematic(raster = sraster, # input sraster
 
 ```{r,warning=F,message=F} 
 sample_systematic(raster = mraster, # input mraster
-            cellsize = 200, # grid distance
+            cellsize = 1000, # grid distance
             access = access, # define access road network
             buff_inner = 100, # inner buffer - no samples within this distance from road
             buff_outer = 400, # outer buffer - no samples further than this distance from road

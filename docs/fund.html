@@ -294,7 +294,7 @@ div.csl-indent {
 ## Projected CRS: UTM_Zone_17_Northern_Hemisphere</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="fund.html#cb5-1" aria-hidden="true" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">plot</span>(mraster[[<span class="dv">1</span>]])</span>
 <span id="cb5-2"><a href="fund.html#cb5-2" aria-hidden="true" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">plot</span>(access, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>From the plot we see the first band (<code>zmax</code>) of the <code>mraster</code> with the <code>access</code> vector overlaid.</p>
 </div>
 </div>
@@ -306,7 +306,7 @@ div.csl-indent {
 <span id="cb6-2"><a href="fund.html#cb6-2" aria-hidden="true" tabindex="-1"></a>sraster <span class="ot">&lt;-</span> <span class="fu">strat_kmeans</span>(<span class="at">mraster =</span> mraster, <span class="co"># use mraster as input for sampling</span></span>
 <span id="cb6-3"><a href="fund.html#cb6-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">nStrata =</span> <span class="dv">4</span>, <span class="co"># algorithm will produce 4 strata</span></span>
 <span id="cb6-4"><a href="fund.html#cb6-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># algorithm will plot output</span></span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>After the <code>sraster</code> is produced we apply the <a href="sample.html#srs"><code>sample_srs</code></a> algorithm which randomly samples points within our <code>sraster</code> to produce an <code>existing</code> sample dataset.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="fund.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- set seed ---#</span></span>
 <span id="cb7-2"><a href="fund.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
@@ -316,7 +316,7 @@ div.csl-indent {
 <span id="cb7-6"><a href="fund.html#cb7-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">nSamp =</span> <span class="dv">200</span>, <span class="co"># request 200 samples be taken</span></span>
 <span id="cb7-7"><a href="fund.html#cb7-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">mindist =</span> <span class="dv">100</span>, <span class="co"># define that samples must be 100 m apart</span></span>
 <span id="cb7-8"><a href="fund.html#cb7-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># algorithm will plot output</span></span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>We now have <code>mraster</code>, <code>access</code>, <code>sraster</code> and <code>existing</code> data sets generated. Expect to see these data used in the all examples in this document.</p>
 
 <style type="text/css">
