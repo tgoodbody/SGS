@@ -31,18 +31,18 @@ sample_srs(raster = sraster, # input
 ##### grid sampling #####
 
 #--- perform grid sampling ---#
-sample_grid(raster = sraster, # input sraster
-            gridsize = 200, # grid distance
+sample_systematic(raster = sraster, # input sraster
+            cellsize = 200, # grid distance
             plot = TRUE) # plot
 
-sample_grid(raster = sraster, # input sraster
-            gridsize = 100, # grid distance
+sample_systematic(raster = sraster, # input sraster
+            cellsize = 100, # grid distance
             access = access, # define access road network
             buff_inner = 50, # inner buffer - no samples within this distance from road
             buff_outer = 200) # outer buffer - no samples further than this distance from road
 
-sample_grid(raster = mraster, # input mraster
-            gridsize = 200, # grid distance
+sample_systematic(raster = mraster, # input mraster
+            cellsize = 200, # grid distance
             access = access, # define access road network
             buff_inner = 100, # inner buffer - no samples within this distance from road
             buff_outer = 400, # outer buffer - no samples further than this distance from road

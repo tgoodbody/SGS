@@ -47,7 +47,7 @@ A total of 7 `calculate` functions currently exist in the package:
 
 *   `calculate_pcomp`- calculate principal components on input `mraster`
 
-*   `calculate_reqSamples` - calculate the number of samples needed for representative samples within an `sraster`
+*   `calculate_allocation` - calculate the number of samples needed for samples within an `sraster` - proportional / optimal sampling
 
 *   `calculate_ahels` - apply the adapted Hypercube Evaluation of a Legacy Sample (ahels) algorithm to existing samples
 
@@ -96,13 +96,18 @@ calculate_pcomp(mraster = mraster, # input
                 details = TRUE) # details about the principal component analysis appended
 ```
 
-## `calculate_reqSamples` {.unnumbered}
+## `calculate_allocation` {.unnumbered}
 
-The `calculate_reqSamples` function calculates the total number of samples that should be allocated based on a total sample value (`nSamp`) and an input `sraster`. Samples are allocated based on the area coverage of strata within `sraster`. This function is utilized in a number of functions including [`sample_strat`](#strat).
+The `calculate_allocation` function calculates the total number of samples that should be allocated based on a total sample value (`nSamp`) and an input `sraster`. This function is utilized in a number of functions including [`sample_strat`](#strat). Two methods for allocation are currently included: proportional (`prop`), and optimal (`optim`) allocation. 
+
+* Proportional - Samples are allocated based on the area coverage of strata. This is the default method.
+* Optimal - Samples are allocated based on the within strata variation.
+
+### Proportional Allocation {#proportional .unnumbered}
 
 ```{r,warning=F,message=F}
 #--- perform grid sampling ---#
-calculate_reqSamples(sraster = sraster, 
+calculate_allocation(sraster = sraster, 
                      nSamp = 200)
 ```
 
@@ -111,12 +116,27 @@ calculate_reqSamples(sraster = sraster,
 e.sr <- extract_strata(sraster = sraster, 
                        existing = existing)
 
-calculate_reqSamples(sraster = sraster, 
+calculate_allocation(sraster = sraster, 
                      nSamp = 200, 
                      existing = e.sr)
 ```
 
-Notice that some of the results above are negative. This indicates that the `existing` samples over represent those strata and that some sample should likely be removed to avoid over represenation.
+Notice that some of the results above are negative. This indicates that the `existing` samples over represent those strata and that some sample should likely be removed to avoid over representation.
+
+### Optimal Allocation {#Optimal .unnumbered}
+
+Proportional allocation determine the number of samples based on the weights of strata. Optimal allocation utilizes within strata variation to allocate samples. This means that in addition to providing and `sraster`, that an `mraster` and a specific metric must be provided to calculate variation and appropriately allocate samples.
+
+```{r, warning=F,message=F}
+calculate_allocation(sraster = sraster, # stratified raster
+                     nSamp = 200, # desired sample number
+                     existing = e.sr, #existing samples
+                     allocation = "optim", # optimal allocation
+                     mraster = mraster, # metrics raster
+                     metric = 1, # metric to describe strata variance
+                     force = TRUE) # force nSamp number
+
+```
 
 ## Sample evaluation algorithms {#sampeval .unnumbered}
 

@@ -28,21 +28,21 @@ calculate_pcomp(mraster = mraster, # input
 # right now includes proportional allocation - optimal allocation to be added
 
 #--- perform grid sampling ---#
-calculate_reqSamples(sraster = sraster, # input
+calculate_allocation(sraster = sraster, # input
                      nSamp = 200) # number of desired samples
 
-calculate_reqSamples(sraster = sraster, # input
+calculate_allocation(sraster = sraster, # input
                      nSamp = 200) # number of desired samples
 
 #--- calculate existing samples to include ---#
 e.sr <- extract_strata(sraster = sraster, # input
                        existing = existing) # existing samples
 
-calculate_reqSamples(sraster = sraster, # input
+calculate_allocation(sraster = sraster, # input
                      nSamp = 200, # number of desired samples
                      existing = e.sr) # existing samples
 
-calculate_reqSamples(sraster = sraster, # input
+calculate_allocation(sraster = sraster, # input
                      nSamp = 200, # number of desired samples
                      existing = e.sr, # existing samples
                      include = TRUE) # include existing samples within total

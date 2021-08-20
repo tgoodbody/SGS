@@ -20,7 +20,7 @@ pre[class] {
 
 *   `strat_*` - The stratify verb implies that functions are applying stratification algorithms to an input metrics raster ([`mraster`](#mrast)) and output a stratified raster ([`sraster`](#srast))
 
-*   `sample_*` - The sample verb implies that functions are extracting samples from [`srasters`](#srast) produced from `strat_*` functions. A few algorithms (e.g. [`sample_srs`](#sample), [`sample_balanced`](#balanced), [`sample_grid`](#grid)) are able to take [`mrasters`](#mrast) as inputs as they are not dependent on stratified inputs for sampling.
+*   `sample_*` - The sample verb implies that functions are extracting samples from [`srasters`](#srast) produced from `strat_*` functions. A few algorithms (e.g. [`sample_srs`](#sample), [`sample_balanced`](#balanced), [`sample_systematic`](#systematic)) are able to take [`mrasters`](#mrast) as inputs as they are not dependent on stratified inputs for sampling.
 
 *   `calculate_*` - The calculate verb implies that functions are performing calculations to be used in consequent processing. The use of predefined sample analysis algorithms ([`calculate_ahels`](#ahels), [`calculate_coobs`](#coobs)) are also included.
 

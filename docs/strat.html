@@ -24,7 +24,7 @@
 <meta name="author" content="Tristan Goodbody" />
 
 
-<meta name="date" content="2021-08-05" />
+<meta name="date" content="2021-08-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -201,7 +201,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="" data-path="sample.html"><a href="sample.html"><i class="fa fa-check"></i>Access</a></li>
 <li><a href="sample.html#srs"><code>sample_srs</code></a></li>
-<li><a href="sample.html#grid"><code>sample_grid</code></a></li>
+<li><a href="sample.html#systematic"><code>sample_systematic</code></a></li>
 <li><a href="sample.html#sstrat"><code>sample_strat</code></a></li>
 <li><a href="sample.html#clhs"><code>sample_clhs</code></a></li>
 <li><a href="sample.html#balanced"><code>sample_balanced</code></a></li>
@@ -210,8 +210,12 @@ div.csl-indent {
 <ul>
 <li><a href="calc.html#dist"><code>calculate_distance</code></a></li>
 <li><a href="calc.html#calculate_pcomp"><code>calculate_pcomp</code></a></li>
-<li><a href="calc.html#calculate_reqsamples"><code>calculate_reqSamples</code></a></li>
-<li class="chapter" data-level="" data-path="calc.html"><a href="calc.html"><i class="fa fa-check"></i>Sample evaluation algorithms</a>
+<li><a href="calc.html#calculate_allocation"><code>calculate_allocation</code></a>
+<ul>
+<li class="chapter" data-level="" data-path="calc.html"><a href="calc.html"><i class="fa fa-check"></i>Proportional Allocation</a></li>
+<li class="chapter" data-level="" data-path="calc.html"><a href="calc.html#Optimal"><i class="fa fa-check"></i>Optimal Allocation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="calc.html"><a href="calc.html#sampeval"><i class="fa fa-check"></i>Sample evaluation algorithms</a>
 <ul>
 <li><a href="calc.html#ahels"><code>calculate_ahels</code></a></li>
 <li><a href="calc.html#coobs"><code>calculate_coobs</code></a></li>
@@ -281,64 +285,68 @@ div.csl-indent {
 <span id="cb11-4"><a href="strat.html#cb11-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">algorithm =</span> <span class="st">&quot;MacQueen&quot;</span>, <span class="co"># use MacQueen algorithm</span></span>
 <span id="cb11-5"><a href="strat.html#cb11-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="co"># plot output</span></span>
 <span id="cb11-6"><a href="strat.html#cb11-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">details =</span> <span class="cn">TRUE</span>) <span class="co"># output details - kmeans stratification data and output sraster</span></span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <pre><code>## $details
 ## K-means clustering with 10 clusters of sizes 8460, 8175, 14401, 7390, 9868, 10001, 7523, 3621, 12801, 8955
 ## 
 ## Cluster means:
-##           zmax       zmean         zsd    pzabove2       zq20        zq50       zq70       zq90       zq95
-## 1  -1.61845760 -2.21644419 -1.63846390 -0.99047251 -1.1864738 -1.50396615 -1.6459599 -1.8468352 -1.9020831
-## 2  -1.18115418 -0.21578917 -1.08949828 -0.75875943 -0.9150003 -1.13205186 -1.2044319 -1.2349361 -1.1929623
-## 3   0.26583212  0.56153588  0.07272645  0.21463824  0.2881727  0.27517550  0.2418837  0.2056615  0.2189552
-## 4   1.39721946  0.62354818  0.34114940  1.80773962  1.7801397  1.35336933  1.1818874  0.9664822  0.8654981
-## 5   0.01721191  0.01098153  0.83805005 -0.56628465 -0.5185618 -0.04843908  0.2166482  0.4737554  0.5242885
-## 6   0.79331356  0.77058735 -0.19524776  1.43253552  1.1557104  0.73536980  0.5871320  0.4388289  0.4221690
-## 7  -0.94287627 -1.41892604 -0.28918661 -0.86547692 -0.9795565 -1.00411311 -0.9013863 -0.6156040 -0.5435200
-## 8   1.76150865  0.69261341  1.83496281  0.75707447  1.2237326  1.80930765  1.9196920  1.7151428  1.5461441
-## 9  -0.52954681  0.28400209 -0.29233160 -0.47235346 -0.5335791 -0.54493965 -0.5043006 -0.4021585 -0.3306150
-## 10  0.95859014  0.50659987  1.35742129 -0.08826613  0.3952886  1.01793988  1.0976238  1.1301770  1.0744401
-##           l_1         l_2        t_3         t_4
-## 1  -0.1781397 -1.18860515 -0.3617194 -2.20193918
-## 2   2.2901169 -1.10283325 -0.3604030 -0.10722060
-## 3  -0.4672981  0.84913943 -0.3165150  0.53656536
-## 4  -0.8835024  0.29909510  0.3395034  0.50972172
-## 5   0.1305378  0.04956952 -0.2194533  0.02085024
-## 6  -0.8717392  1.79501743 -0.2659370  0.72264588
-## 7   0.1293558 -0.98909181 -0.3531697 -1.39820377
-## 8  -0.5843340 -0.40512452  4.0847632  0.67617048
-## 9   0.6143076 -0.45100988 -0.3565298  0.34255658
-## 10 -0.3625802  0.09744738  0.5930486  0.47607905
+##           zmax       zmean         zsd    pzabove2       zq20        zq50       zq70       zq90
+## 1  -1.61845760 -2.21644419 -1.63846390 -0.99047251 -1.1864738 -1.50396615 -1.6459599 -1.8468352
+## 2  -1.18115418 -0.21578917 -1.08949828 -0.75875943 -0.9150003 -1.13205186 -1.2044319 -1.2349361
+## 3   0.26583212  0.56153588  0.07272645  0.21463824  0.2881727  0.27517550  0.2418837  0.2056615
+## 4   1.39721946  0.62354818  0.34114940  1.80773962  1.7801397  1.35336933  1.1818874  0.9664822
+## 5   0.01721191  0.01098153  0.83805005 -0.56628465 -0.5185618 -0.04843908  0.2166482  0.4737554
+## 6   0.79331356  0.77058735 -0.19524776  1.43253552  1.1557104  0.73536980  0.5871320  0.4388289
+## 7  -0.94287627 -1.41892604 -0.28918661 -0.86547692 -0.9795565 -1.00411311 -0.9013863 -0.6156040
+## 8   1.76150865  0.69261341  1.83496281  0.75707447  1.2237326  1.80930765  1.9196920  1.7151428
+## 9  -0.52954681  0.28400209 -0.29233160 -0.47235346 -0.5335791 -0.54493965 -0.5043006 -0.4021585
+## 10  0.95859014  0.50659987  1.35742129 -0.08826613  0.3952886  1.01793988  1.0976238  1.1301770
+##          zq95        l_1         l_2        t_3         t_4
+## 1  -1.9020831 -0.1781397 -1.18860515 -0.3617194 -2.20193918
+## 2  -1.1929623  2.2901169 -1.10283325 -0.3604030 -0.10722060
+## 3   0.2189552 -0.4672981  0.84913943 -0.3165150  0.53656536
+## 4   0.8654981 -0.8835024  0.29909510  0.3395034  0.50972172
+## 5   0.5242885  0.1305378  0.04956952 -0.2194533  0.02085024
+## 6   0.4221690 -0.8717392  1.79501743 -0.2659370  0.72264588
+## 7  -0.5435200  0.1293558 -0.98909181 -0.3531697 -1.39820377
+## 8   1.5461441 -0.5843340 -0.40512452  4.0847632  0.67617048
+## 9  -0.3306150  0.6143076 -0.45100988 -0.3565298  0.34255658
+## 10  1.0744401 -0.3625802  0.09744738  0.5930486  0.47607905
 ## 
 ## Clustering vector:
-##    [1]  9  7  5  3  7  9  5  9  3  3  3  4 10 10  8  8  8  4  6  4  4 10 10 10  3 10  5  5 10  5  4  3  5 10  4
-##   [36]  5  1  5 10  4 10  4 10 10  4  4 10  4  4 10  4  4 10  4 10  2  2  5  5  3  3  3  3  5  3  1  7  2  2  2
-##   [71]  2  2  2  2  2  2  2  2  2  2  2  2  1  2  2  2  2  2  2  2  2  2  9  7  5  9  2  9  2  2  2  2  2  2  2
-##  [106]  2  2  1  1  1  1  1  1  1  1  1  1  1  1  2  2  2  2  2  2  2  2  2  7  1  1  2  2  2  2  2  2  2  2  2
-##  [141]  2  1  2  2  1  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  7  5  5  5 10  8  8 10  5 10  3
-##  [176]  5  9  9  5  9  9  9  9  9  9  2  9  9  9  7  9  9  9  9  9  2  9  9  5  6  6  6  6  6  5  6  6  6  6  6
-##  [211]  5 10  3  3  5  3  3  3  3  5  3 10  5  5  2  7  7  6  6  6  6  3  3  3  9  2  2  2  2  7  7  3  5  6  3
-##  [246]  4  4  8  4  4  6  3  4  6  4  3  6  6  8  6  4 10  3  8  4  8  8 10  5 10 10  8  8  8 10  2  1  1  1  1
-##  [281]  1  2  7  5  5  5  7  1  1  1  1  1  1  1  1  1  1  1  1  1  1  7  7  9  9  9  6  6  6  3  6  6  4  6  6
-##  [316] 10  5  3  4  5  5 10  5  8  5  3  7  7  7  9  7  5  9  3  4 10 10  4  4  4  4  4  4  6  6  4 10 10 10 10
-##  [351] 10  5 10 10  4  3 10 10  5  3  3  3  3  7  1  4 10  4 10  4 10  4 10 10  4 10 10  4  4  5  9  3  3  5  3
-##  [386]  3  3  3  3  7  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  9  2  2
-##  [421]  9  2  2  2  2  2  7  5  5  5  5  2  7  1  1  1  1  1  1  1  1  1  1  1  2  2  2  2  2  2  2  2  2  7  2
-##  [456]  1  2  2  2  2  1  2  2  2  9  2  2  2  1  1  2  1  1  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  9
-##  [491]  5  5  5 10  5 10 10 10 10  3  9  9  5  5  5  5  7  7  9  9  7  7  7  5  9  9  9  9  2  9  3  5  5  4  6
-##  [526]  3  3  6  6  6  6  6  3  6  6  5 10  5  3  3  9  3  3  6 10  4 10  5  5  9  3  9  9  9  3  3  5  2  3  3
-##  [561]  9  2  2  2  7  5  3  7  4  4  5  4  3  6  6  3  4  4  7  6  6  6  3 10 10  8  8  7  5  8 10 10  4  4 10
-##  [596]  8  8 10  5  1  1  1  2  2  2  2  2  5  7  1  1  1  1  1  7  1  1  1  1  1  1  1  1  1  7  9  9  9  3  6
-##  [631]  6  4  3  6  4  3  6  6 10 10  5  5  3  5  4  5  8  9  3  3  9  5  9  9  9  5  4  4  4  4  4  4 10  4  6
-##  [666]  6  6  6  4 10 10 10  3 10  5  5  6 10 10  5 10 10  4  3  3  9  3  5  7  1  1  1  5 10 10  4 10 10 10 10
-##  [701]  8  4  8  5  5  4  4  6  3  3  3  3  7  9  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2
-##  [736]  2  2  2  2  2  2  2  2  2  2  2  2  2  5  9  2  2  2  9  9  2  1  1  1  1  1  1  1  7  1  1  2  2  2  2
-##  [771]  2  2  2  2  2  2  2  2  2  1  1  1  1  1  2  2  2  2  2  2  2  1  1  1  1  1  2  2  2  2  2  2  2  2  2
-##  [806]  2  2  2  2  2  2  7  5  5  5 10  8  8 10 10 10 10  9  9  9  5  5  5  5  7  1  7  9  9  7  7  7  7  2  9
-##  [841]  9  9  9  9  3  3 10  4  8  5  6  6  6  6  6  6  3 10  5  3  3  3  3  5  9  9  5 10 10  4  4 10  5  9  9
-##  [876]  9  9  2  9  3  2  7  3  9  9  7  1  1  1  1  7  7  3  3  6  3  6  6  6  6  6  6  6  6  6  6  3 10 10  8
-##  [911]  8  9  7  8  8 10 10 10  8  8  8  2  2  1  1  1  1  2  2  2  2  1  1  7  1  1  1  7  1  1  1  1  1  1  1
-##  [946]  1  1  1  7  9  9  9  5  3  3  6  3  4  4  4  3  3  3  5  5  5  5  5  5  5  5  5  9  3 10  3  9  3  3  5
-##  [981]  6  6  4  4 10 10  4  4  4  6  6  6  6 10 10  4  4 10 10  5
+##    [1]  9  7  5  3  7  9  5  9  3  3  3  4 10 10  8  8  8  4  6  4  4 10 10 10  3 10  5  5 10  5  4
+##   [32]  3  5 10  4  5  1  5 10  4 10  4 10 10  4  4 10  4  4 10  4  4 10  4 10  2  2  5  5  3  3  3
+##   [63]  3  5  3  1  7  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  1  2  2  2  2  2  2  2  2  2  9
+##   [94]  7  5  9  2  9  2  2  2  2  2  2  2  2  2  1  1  1  1  1  1  1  1  1  1  1  1  2  2  2  2  2
+##  [125]  2  2  2  2  7  1  1  2  2  2  2  2  2  2  2  2  2  1  2  2  1  2  2  2  2  2  2  2  2  2  2
+##  [156]  2  2  2  2  2  2  2  2  2  7  5  5  5 10  8  8 10  5 10  3  5  9  9  5  9  9  9  9  9  9  2
+##  [187]  9  9  9  7  9  9  9  9  9  2  9  9  5  6  6  6  6  6  5  6  6  6  6  6  5 10  3  3  5  3  3
+##  [218]  3  3  5  3 10  5  5  2  7  7  6  6  6  6  3  3  3  9  2  2  2  2  7  7  3  5  6  3  4  4  8
+##  [249]  4  4  6  3  4  6  4  3  6  6  8  6  4 10  3  8  4  8  8 10  5 10 10  8  8  8 10  2  1  1  1
+##  [280]  1  1  2  7  5  5  5  7  1  1  1  1  1  1  1  1  1  1  1  1  1  1  7  7  9  9  9  6  6  6  3
+##  [311]  6  6  4  6  6 10  5  3  4  5  5 10  5  8  5  3  7  7  7  9  7  5  9  3  4 10 10  4  4  4  4
+##  [342]  4  4  6  6  4 10 10 10 10 10  5 10 10  4  3 10 10  5  3  3  3  3  7  1  4 10  4 10  4 10  4
+##  [373] 10 10  4 10 10  4  4  5  9  3  3  5  3  3  3  3  3  7  2  2  2  2  2  2  2  2  2  2  2  2  2
+##  [404]  2  2  2  2  2  2  2  2  2  2  2  2  2  2  9  2  2  9  2  2  2  2  2  7  5  5  5  5  2  7  1
+##  [435]  1  1  1  1  1  1  1  1  1  1  2  2  2  2  2  2  2  2  2  7  2  1  2  2  2  2  1  2  2  2  9
+##  [466]  2  2  2  1  1  2  1  1  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  9  5  5  5 10  5 10
+##  [497] 10 10 10  3  9  9  5  5  5  5  7  7  9  9  7  7  7  5  9  9  9  9  2  9  3  5  5  4  6  3  3
+##  [528]  6  6  6  6  6  3  6  6  5 10  5  3  3  9  3  3  6 10  4 10  5  5  9  3  9  9  9  3  3  5  2
+##  [559]  3  3  9  2  2  2  7  5  3  7  4  4  5  4  3  6  6  3  4  4  7  6  6  6  3 10 10  8  8  7  5
+##  [590]  8 10 10  4  4 10  8  8 10  5  1  1  1  2  2  2  2  2  5  7  1  1  1  1  1  7  1  1  1  1  1
+##  [621]  1  1  1  1  7  9  9  9  3  6  6  4  3  6  4  3  6  6 10 10  5  5  3  5  4  5  8  9  3  3  9
+##  [652]  5  9  9  9  5  4  4  4  4  4  4 10  4  6  6  6  6  4 10 10 10  3 10  5  5  6 10 10  5 10 10
+##  [683]  4  3  3  9  3  5  7  1  1  1  5 10 10  4 10 10 10 10  8  4  8  5  5  4  4  6  3  3  3  3  7
+##  [714]  9  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2
+##  [745]  2  2  2  2  5  9  2  2  2  9  9  2  1  1  1  1  1  1  1  7  1  1  2  2  2  2  2  2  2  2  2
+##  [776]  2  2  2  2  1  1  1  1  1  2  2  2  2  2  2  2  1  1  1  1  1  2  2  2  2  2  2  2  2  2  2
+##  [807]  2  2  2  2  2  7  5  5  5 10  8  8 10 10 10 10  9  9  9  5  5  5  5  7  1  7  9  9  7  7  7
+##  [838]  7  2  9  9  9  9  9  3  3 10  4  8  5  6  6  6  6  6  6  3 10  5  3  3  3  3  5  9  9  5 10
+##  [869] 10  4  4 10  5  9  9  9  9  2  9  3  2  7  3  9  9  7  1  1  1  1  7  7  3  3  6  3  6  6  6
+##  [900]  6  6  6  6  6  6  6  3 10 10  8  8  9  7  8  8 10 10 10  8  8  8  2  2  1  1  1  1  2  2  2
+##  [931]  2  1  1  7  1  1  1  7  1  1  1  1  1  1  1  1  1  1  7  9  9  9  5  3  3  6  3  4  4  4  3
+##  [962]  3  3  5  5  5  5  5  5  5  5  5  9  3 10  3  9  3  3  5  6  6  4  4 10 10  4  4  4  6  6  6
+##  [993]  6 10 10  4  4 10 10  5
 ##  [ reached getOption(&quot;max.print&quot;) -- omitted 90195 entries ]
 ## 
 ## Within cluster sum of squares by cluster:
@@ -347,8 +355,8 @@ div.csl-indent {
 ## 
 ## Available components:
 ## 
-## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot; &quot;betweenss&quot;    &quot;size&quot;        
-## [8] &quot;iter&quot;         &quot;ifault&quot;      
+## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot; &quot;betweenss&quot;   
+## [7] &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;      
 ## 
 ## $raster
 ## class       : SpatRaster 
@@ -367,7 +375,7 @@ div.csl-indent {
 <span id="cb13-5"><a href="strat.html#cb13-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="co"># plot output</span></span>
 <span id="cb13-6"><a href="strat.html#cb13-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">filename =</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">&quot;.tif&quot;</span>), <span class="co"># write output sraster to file</span></span>
 <span id="cb13-7"><a href="strat.html#cb13-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">overwrite =</span> <span class="cn">TRUE</span>) <span class="co"># overwrite file on disc if it exists</span></span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <pre><code>## class       : SpatRaster 
 ## dimensions  : 277, 373, 1  (nrow, ncol, nlyr)
 ## resolution  : 20, 20  (x, y)
@@ -385,7 +393,7 @@ div.csl-indent {
 <span id="cb15-2"><a href="strat.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_pcomp</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
 <span id="cb15-3"><a href="strat.html#cb15-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">nStrata =</span> <span class="dv">5</span>, <span class="co"># 5 strata with primary PC only</span></span>
 <span id="cb15-4"><a href="strat.html#cb15-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <pre><code>## class       : SpatRaster 
 ## dimensions  : 277, 373, 1  (nrow, ncol, nlyr)
 ## resolution  : 20, 20  (x, y)
@@ -400,41 +408,41 @@ div.csl-indent {
 <span id="cb17-3"><a href="strat.html#cb17-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">nStrata2 =</span> <span class="dv">4</span>, <span class="co"># 4 strata with secondary PC - will produce 16 output strata</span></span>
 <span id="cb17-4"><a href="strat.html#cb17-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="co"># plot</span></span>
 <span id="cb17-5"><a href="strat.html#cb17-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">details =</span> <span class="cn">TRUE</span>) <span class="co"># produce output details</span></span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <pre><code>## $details
 ## Standard deviations (1, .., p=13):
-##  [1] 2.93647150 1.26882709 1.15691535 0.86852611 0.53076565 0.42304219 0.35679023 0.21988261 0.14290118
-## [10] 0.09666573 0.07179753 0.05016994 0.02570635
+##  [1] 2.93647150 1.26882709 1.15691535 0.86852611 0.53076565 0.42304219 0.35679023 0.21988261
+##  [9] 0.14290118 0.09666573 0.07179753 0.05016994 0.02570635
 ## 
 ## Rotation (n x k) = (13 x 13):
-##                 PC1         PC2          PC3         PC4         PC5          PC6         PC7           PC8
-## zmax      0.3359531  0.01817295 -0.085980156  0.04883369 -0.16446975  0.134888577 -0.15339832  0.0308922302
-## zmean     0.2692352 -0.14320556  0.484261417  0.08715503  0.10021008  0.208524587  0.28510651 -0.0021690322
-## zsd       0.2525172  0.46307645  0.056280928 -0.35189237 -0.05790180 -0.047159024 -0.05015151  0.1340537231
-## pzabove2  0.2575694 -0.38512031 -0.153689213  0.33477151 -0.20262484 -0.504470621  0.11141535  0.5392526124
-## zq20      0.2957809 -0.25072438 -0.163557453  0.28595035 -0.26718846 -0.008654979 -0.08550919 -0.6885132239
-## zq50      0.3271212  0.02248762 -0.100221327  0.07934796 -0.16569646  0.420247325 -0.29668394  0.0329045573
-## zq70      0.3296060  0.11882609 -0.062083857 -0.02690735 -0.12986291  0.271021251 -0.22963234  0.3370366252
-## zq90      0.3192555  0.21122345  0.009465806 -0.18799597 -0.09477864 -0.264930469  0.08153534 -0.0006831206
-## zq95      0.3091490  0.21445676  0.055153306 -0.23449020 -0.07471056 -0.451270472  0.21011887 -0.3114508486
-## l_1      -0.1885162  0.18294540  0.614448790  0.27802959 -0.27135857 -0.287232900 -0.56400277 -0.0188834161
-## l_2       0.2327722 -0.43278499  0.060836142 -0.34982009  0.57978716 -0.188355371 -0.50772612 -0.0466621166
-## t_3       0.1690462  0.45853939 -0.166263397  0.60467076  0.59765870 -0.091199035 -0.03067072 -0.0310296725
-## t_4       0.2561467 -0.13145011  0.527861021  0.09849843  0.14573821  0.177036168  0.32336804  0.0324261270
-##                    PC9          PC10          PC11          PC12          PC13
-## zmax     -1.886049e-02  0.0560186614 -0.1278804649 -0.0052115172  0.8873685582
-## zmean     2.826642e-02  0.0270039439  0.0675442390 -0.7236917619 -0.0162558333
-## zsd       3.445926e-01 -0.0513256272  0.6681251318  0.0295065391  0.0098559868
-## pzabove2 -2.020873e-02  0.0120286554  0.2179924264 -0.0004334086 -0.0531021769
-## zq20      3.627060e-01 -0.1271545992  0.1378591128  0.0390001016 -0.1416169733
-## zq50     -5.353496e-01  0.4057583148  0.2063460374  0.0609622299 -0.2923086818
-## zq70      1.490613e-01 -0.5945209546 -0.4103363124 -0.0257022931 -0.2670379822
-## zq90      3.087370e-01  0.5970060214 -0.4980350813 -0.0047718481 -0.1800345902
-## zq95     -5.847183e-01 -0.3194796103 -0.0758389467 -0.0171556239 -0.0045593830
-## l_1      -2.142108e-02  0.0060754571 -0.0313981609 -0.0077753523  0.0029767582
-## l_2       2.094108e-02  0.0009527472  0.0201177308 -0.0003045197 -0.0008875782
-## t_3       7.516919e-05 -0.0011560670  0.0009191501 -0.0216941448 -0.0022824635
-## t_4       3.474720e-02 -0.0238296876 -0.0055552525  0.6845626123  0.0117767342
+##                 PC1         PC2          PC3         PC4         PC5          PC6         PC7
+## zmax      0.3359531  0.01817295 -0.085980156  0.04883369 -0.16446975  0.134888577 -0.15339832
+## zmean     0.2692352 -0.14320556  0.484261417  0.08715503  0.10021008  0.208524587  0.28510651
+## zsd       0.2525172  0.46307645  0.056280928 -0.35189237 -0.05790180 -0.047159024 -0.05015151
+## pzabove2  0.2575694 -0.38512031 -0.153689213  0.33477151 -0.20262484 -0.504470621  0.11141535
+## zq20      0.2957809 -0.25072438 -0.163557453  0.28595035 -0.26718846 -0.008654979 -0.08550919
+## zq50      0.3271212  0.02248762 -0.100221327  0.07934796 -0.16569646  0.420247325 -0.29668394
+## zq70      0.3296060  0.11882609 -0.062083857 -0.02690735 -0.12986291  0.271021251 -0.22963234
+## zq90      0.3192555  0.21122345  0.009465806 -0.18799597 -0.09477864 -0.264930469  0.08153534
+## zq95      0.3091490  0.21445676  0.055153306 -0.23449020 -0.07471056 -0.451270472  0.21011887
+## l_1      -0.1885162  0.18294540  0.614448790  0.27802959 -0.27135857 -0.287232900 -0.56400277
+## l_2       0.2327722 -0.43278499  0.060836142 -0.34982009  0.57978716 -0.188355371 -0.50772612
+## t_3       0.1690462  0.45853939 -0.166263397  0.60467076  0.59765870 -0.091199035 -0.03067072
+## t_4       0.2561467 -0.13145011  0.527861021  0.09849843  0.14573821  0.177036168  0.32336804
+##                    PC8           PC9          PC10          PC11          PC12          PC13
+## zmax      0.0308922302 -1.886049e-02  0.0560186614 -0.1278804649 -0.0052115172  0.8873685582
+## zmean    -0.0021690322  2.826642e-02  0.0270039439  0.0675442390 -0.7236917619 -0.0162558333
+## zsd       0.1340537231  3.445926e-01 -0.0513256272  0.6681251318  0.0295065391  0.0098559868
+## pzabove2  0.5392526124 -2.020873e-02  0.0120286554  0.2179924264 -0.0004334086 -0.0531021769
+## zq20     -0.6885132239  3.627060e-01 -0.1271545992  0.1378591128  0.0390001016 -0.1416169733
+## zq50      0.0329045573 -5.353496e-01  0.4057583148  0.2063460374  0.0609622299 -0.2923086818
+## zq70      0.3370366252  1.490613e-01 -0.5945209546 -0.4103363124 -0.0257022931 -0.2670379822
+## zq90     -0.0006831206  3.087370e-01  0.5970060214 -0.4980350813 -0.0047718481 -0.1800345902
+## zq95     -0.3114508486 -5.847183e-01 -0.3194796103 -0.0758389467 -0.0171556239 -0.0045593830
+## l_1      -0.0188834161 -2.142108e-02  0.0060754571 -0.0313981609 -0.0077753523  0.0029767582
+## l_2      -0.0466621166  2.094108e-02  0.0009527472  0.0201177308 -0.0003045197 -0.0008875782
+## t_3      -0.0310296725  7.516919e-05 -0.0011560670  0.0009191501 -0.0216941448 -0.0022824635
+## t_4       0.0324261270  3.474720e-02 -0.0238296876 -0.0055552525  0.6845626123  0.0117767342
 ## 
 ## $raster
 ## class       : SpatRaster 
@@ -448,7 +456,7 @@ div.csl-indent {
 ## max value   :     16 
 ## 
 ## $plot</code></pre>
-<p><img src="SGS_files/figure-html/unnamed-chunk-30-2.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-21-2.png" width="672" /></p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="strat.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_pcomp</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
 <span id="cb19-2"><a href="strat.html#cb19-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">nStrata =</span> <span class="dv">3</span>, <span class="co"># 3 strata with primary PC</span></span>
 <span id="cb19-3"><a href="strat.html#cb19-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">nStrata2 =</span> <span class="dv">3</span>, <span class="co"># 4 strata with secondary PC - will produce 9 output strata</span></span>
@@ -476,7 +484,7 @@ div.csl-indent {
 <span id="cb22-4"><a href="strat.html#cb22-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">breaks =</span> br.max, <span class="co"># breaks for primary covariate</span></span>
 <span id="cb22-5"><a href="strat.html#cb22-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="co"># plot</span></span>
 <span id="cb22-6"><a href="strat.html#cb22-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">details =</span> <span class="cn">TRUE</span>) <span class="co"># output details</span></span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-33-1.png" width="672" /><img src="SGS_files/figure-html/unnamed-chunk-33-2.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-24-1.png" width="672" /><img src="SGS_files/figure-html/unnamed-chunk-24-2.png" width="672" /></p>
 <pre><code>## $details
 ## $details$breaks
 ## [1]  3  5 11 18
@@ -497,14 +505,14 @@ div.csl-indent {
 ## max value   :      5 
 ## 
 ## $plot</code></pre>
-<p><img src="SGS_files/figure-html/unnamed-chunk-33-3.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-24-3.png" width="672" /></p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="strat.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strat_breaks</span>(<span class="at">mraster =</span> mraster, <span class="co"># input</span></span>
 <span id="cb24-2"><a href="strat.html#cb24-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">metric =</span> <span class="dv">1</span>, <span class="co"># primary covariate of interest - numeric index or character string</span></span>
 <span id="cb24-3"><a href="strat.html#cb24-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">metric2 =</span> <span class="st">&quot;zsd&quot;</span>, <span class="co"># secondary covariate of interest - numeric index or character string</span></span>
 <span id="cb24-4"><a href="strat.html#cb24-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">breaks =</span> br.max, <span class="co"># breaks for primary covariate</span></span>
 <span id="cb24-5"><a href="strat.html#cb24-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">breaks2 =</span> br.sd, <span class="co"># breaks for secondary covariate</span></span>
 <span id="cb24-6"><a href="strat.html#cb24-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-34-1.png" width="672" /><img src="SGS_files/figure-html/unnamed-chunk-34-2.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-25-1.png" width="672" /><img src="SGS_files/figure-html/unnamed-chunk-25-2.png" width="672" /></p>
 <pre><code>## class       : SpatRaster 
 ## dimensions  : 277, 373, 1  (nrow, ncol, nlyr)
 ## resolution  : 20, 20  (x, y)
@@ -523,7 +531,7 @@ div.csl-indent {
 <span id="cb26-3"><a href="strat.html#cb26-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">metric =</span> <span class="dv">4</span>, <span class="co"># primary covariate of interest - numeric index or character string</span></span>
 <span id="cb26-4"><a href="strat.html#cb26-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">nQuant =</span> <span class="dv">10</span>, <span class="co"># number of quantiles for primary covariate</span></span>
 <span id="cb26-5"><a href="strat.html#cb26-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-35-1.png" width="672" /><img src="SGS_files/figure-html/unnamed-chunk-35-2.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-26-1.png" width="672" /><img src="SGS_files/figure-html/unnamed-chunk-26-2.png" width="672" /></p>
 <pre><code>## class       : SpatRaster 
 ## dimensions  : 277, 373, 1  (nrow, ncol, nlyr)
 ## resolution  : 20, 20  (x, y)
@@ -539,7 +547,7 @@ div.csl-indent {
 <span id="cb28-4"><a href="strat.html#cb28-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">nQuant =</span> <span class="dv">3</span>, <span class="co"># number of quantiles for primary covariate</span></span>
 <span id="cb28-5"><a href="strat.html#cb28-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">nQuant2 =</span> <span class="dv">4</span>, <span class="co"># number of quantiles for secondary covariate</span></span>
 <span id="cb28-6"><a href="strat.html#cb28-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># plot</span></span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <pre><code>## class       : SpatRaster 
 ## dimensions  : 277, 373, 1  (nrow, ncol, nlyr)
 ## resolution  : 20, 20  (x, y)
@@ -598,7 +606,8 @@ pre[class] {
   max-height: 500px;
 }
 </style>
-<pre><code>## Reading layer `roads&#39; from data source `C:\Users\tgood.stu\Documents\R\win-library\4.1\sgsR\extdata\roads.shp&#39; using driver `ESRI Shapefile&#39;
+<pre><code>## Reading layer `roads&#39; from data source 
+##   `C:\Users\tgood.stu\Documents\R\win-library\4.1\sgsR\extdata\roads.shp&#39; using driver `ESRI Shapefile&#39;
 ## Simple feature collection with 167 features and 36 fields
 ## Geometry type: MULTILINESTRING
 ## Dimension:     XY

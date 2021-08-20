@@ -24,7 +24,7 @@
 <meta name="author" content="Tristan Goodbody" />
 
 
-<meta name="date" content="2021-08-05" />
+<meta name="date" content="2021-08-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -201,7 +201,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="" data-path="sample.html"><a href="sample.html"><i class="fa fa-check"></i>Access</a></li>
 <li><a href="sample.html#srs"><code>sample_srs</code></a></li>
-<li><a href="sample.html#grid"><code>sample_grid</code></a></li>
+<li><a href="sample.html#systematic"><code>sample_systematic</code></a></li>
 <li><a href="sample.html#sstrat"><code>sample_strat</code></a></li>
 <li><a href="sample.html#clhs"><code>sample_clhs</code></a></li>
 <li><a href="sample.html#balanced"><code>sample_balanced</code></a></li>
@@ -210,8 +210,12 @@ div.csl-indent {
 <ul>
 <li><a href="calc.html#dist"><code>calculate_distance</code></a></li>
 <li><a href="calc.html#calculate_pcomp"><code>calculate_pcomp</code></a></li>
-<li><a href="calc.html#calculate_reqsamples"><code>calculate_reqSamples</code></a></li>
-<li class="chapter" data-level="" data-path="calc.html"><a href="calc.html"><i class="fa fa-check"></i>Sample evaluation algorithms</a>
+<li><a href="calc.html#calculate_allocation"><code>calculate_allocation</code></a>
+<ul>
+<li class="chapter" data-level="" data-path="calc.html"><a href="calc.html"><i class="fa fa-check"></i>Proportional Allocation</a></li>
+<li class="chapter" data-level="" data-path="calc.html"><a href="calc.html#Optimal"><i class="fa fa-check"></i>Optimal Allocation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="calc.html"><a href="calc.html#sampeval"><i class="fa fa-check"></i>Sample evaluation algorithms</a>
 <ul>
 <li><a href="calc.html#ahels"><code>calculate_ahels</code></a></li>
 <li><a href="calc.html#coobs"><code>calculate_coobs</code></a></li>
@@ -250,7 +254,7 @@ div.csl-indent {
 <p><code>sgsR</code> has been scripted primarily using the <code>terra</code> package for raster processing and the <code>sf</code> package for vector manipulation. There are 3 primary function verbs that the package currently uses:</p>
 <ul>
 <li><p><code>strat_*</code> - The stratify verb implies that functions are applying stratification algorithms to an input metrics raster (<a href="fund.html#mrast"><code>mraster</code></a>) and output a stratified raster (<a href="fund.html#srast"><code>sraster</code></a>)</p></li>
-<li><p><code>sample_*</code> - The sample verb implies that functions are extracting samples from <a href="fund.html#srast"><code>srasters</code></a> produced from <code>strat_*</code> functions. A few algorithms (e.g. <a href="sample.html#sample"><code>sample_srs</code></a>, <a href="sample.html#balanced"><code>sample_balanced</code></a>, <a href="sample.html#grid"><code>sample_grid</code></a>) are able to take <a href="fund.html#mrast"><code>mrasters</code></a> as inputs as they are not dependent on stratified inputs for sampling.</p></li>
+<li><p><code>sample_*</code> - The sample verb implies that functions are extracting samples from <a href="fund.html#srast"><code>srasters</code></a> produced from <code>strat_*</code> functions. A few algorithms (e.g. <a href="sample.html#sample"><code>sample_srs</code></a>, <a href="sample.html#balanced"><code>sample_balanced</code></a>, <a href="sample.html#systematic"><code>sample_systematic</code></a>) are able to take <a href="fund.html#mrast"><code>mrasters</code></a> as inputs as they are not dependent on stratified inputs for sampling.</p></li>
 <li><p><code>calculate_*</code> - The calculate verb implies that functions are performing calculations to be used in consequent processing. The use of predefined sample analysis algorithms (<a href="calc.html#ahels"><code>calculate_ahels</code></a>, <a href="calc.html#coobs"><code>calculate_coobs</code></a>) are also included.</p></li>
 </ul>
 <div class="box-content vig-content">
@@ -281,7 +285,8 @@ div.csl-indent {
 <span id="cb3-2"><a href="fund.html#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="fund.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#--- load the access vector using the sf package ---#</span></span>
 <span id="cb3-4"><a href="fund.html#cb3-4" aria-hidden="true" tabindex="-1"></a>access <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(a)</span></code></pre></div>
-<pre><code>## Reading layer `roads&#39; from data source `C:\Users\tgood.stu\Documents\R\win-library\4.1\sgsR\extdata\roads.shp&#39; using driver `ESRI Shapefile&#39;
+<pre><code>## Reading layer `roads&#39; from data source 
+##   `C:\Users\tgood.stu\Documents\R\win-library\4.1\sgsR\extdata\roads.shp&#39; using driver `ESRI Shapefile&#39;
 ## Simple feature collection with 167 features and 36 fields
 ## Geometry type: MULTILINESTRING
 ## Dimension:     XY
@@ -289,7 +294,7 @@ div.csl-indent {
 ## Projected CRS: UTM_Zone_17_Northern_Hemisphere</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="fund.html#cb5-1" aria-hidden="true" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">plot</span>(mraster[[<span class="dv">1</span>]])</span>
 <span id="cb5-2"><a href="fund.html#cb5-2" aria-hidden="true" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">plot</span>(access, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>From the plot we see the first band (<code>zmax</code>) of the <code>mraster</code> with the <code>access</code> vector overlaid.</p>
 </div>
 </div>
@@ -301,7 +306,7 @@ div.csl-indent {
 <span id="cb6-2"><a href="fund.html#cb6-2" aria-hidden="true" tabindex="-1"></a>sraster <span class="ot">&lt;-</span> <span class="fu">strat_kmeans</span>(<span class="at">mraster =</span> mraster, <span class="co"># use mraster as input for sampling</span></span>
 <span id="cb6-3"><a href="fund.html#cb6-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">nStrata =</span> <span class="dv">4</span>, <span class="co"># algorithm will produce 4 strata</span></span>
 <span id="cb6-4"><a href="fund.html#cb6-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># algorithm will plot output</span></span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>After the <code>sraster</code> is produced we apply the <a href="sample.html#srs"><code>sample_srs</code></a> algorithm which randomly samples points within our <code>sraster</code> to produce an <code>existing</code> sample dataset.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="fund.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#--- set seed ---#</span></span>
 <span id="cb7-2"><a href="fund.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
@@ -311,7 +316,7 @@ div.csl-indent {
 <span id="cb7-6"><a href="fund.html#cb7-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">nSamp =</span> <span class="dv">200</span>, <span class="co"># request 200 samples be taken</span></span>
 <span id="cb7-7"><a href="fund.html#cb7-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">mindist =</span> <span class="dv">100</span>, <span class="co"># define that samples must be 100 m apart</span></span>
 <span id="cb7-8"><a href="fund.html#cb7-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">plot =</span> <span class="cn">TRUE</span>) <span class="co"># algorithm will plot output</span></span></code></pre></div>
-<p><img src="SGS_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="SGS_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>We now have <code>mraster</code>, <code>access</code>, <code>sraster</code> and <code>existing</code> data sets generated. Expect to see these data used in the all examples in this document.</p>
 
 <style type="text/css">
@@ -323,7 +328,8 @@ pre[class] {
   max-height: 500px;
 }
 </style>
-<pre><code>## Reading layer `roads&#39; from data source `C:\Users\tgood.stu\Documents\R\win-library\4.1\sgsR\extdata\roads.shp&#39; using driver `ESRI Shapefile&#39;
+<pre><code>## Reading layer `roads&#39; from data source 
+##   `C:\Users\tgood.stu\Documents\R\win-library\4.1\sgsR\extdata\roads.shp&#39; using driver `ESRI Shapefile&#39;
 ## Simple feature collection with 167 features and 36 fields
 ## Geometry type: MULTILINESTRING
 ## Dimension:     XY

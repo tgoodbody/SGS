@@ -44,7 +44,7 @@ A total of 5 `sample` functions currently exist in the package:
 
 *   `sample_srs` - simple random sampling
 
-*   `sample_grid`- grid sampling
+*   `sample_systematic`- grid sampling
 
 *   `sample_strat` - stratified sampling within a `sraster`
 
@@ -99,28 +99,38 @@ sample_srs(raster = sraster, # input
            filename = tempfile(fileext = ".shp")) # write output samples to file
 ```
 
-## `sample_grid` {#grid .unnumbered}
+## `sample_systematic` {#systematic .unnumbered}
 
-The `sample_grid` function applies regular grid sampling across an area where the `gridsize` parameter defines distance between samples.
+The `sample_systematic` function applies systematic sampling across an area where the `cellsize` parameter defines resolution of the tessellation. Tesselation shape options are defined by the `square` parameter, which is a regular grid when `TRUE` (default) and hexagonal when `FALSE`. The location of samples can also be adjusted using the `centers` parameter, where `TRUE` takes the center of each tessellation, and `FALSE` takes all corners.
 
 ```{r,warning=F,message=F} 
 #--- perform grid sampling ---#
-sample_grid(raster = sraster, # input sraster
-            gridsize = 200, # grid distance
+sample_systematic(raster = sraster, # input sraster
+            cellsize = 200, # grid distance
             plot = TRUE) # plot
 ```
 
 ```{r,warning=F,message=F} 
-sample_grid(raster = sraster, # input sraster
-            gridsize = 100, # grid distance
+#--- perform grid sampling ---#
+sample_systematic(raster = sraster, # input sraster
+            cellsize = 200, # grid distance
+            square = FALSE, # hexagonal tessellation
+            centers = FALSE, # take corners instead of centers
+            plot = TRUE) # plot
+```
+
+```{r,warning=F,message=F} 
+sample_systematic(raster = sraster, # input sraster
+            cellsize = 100, # grid distance
             access = access, # define access road network
+            square = FALSE, # hexagonal tessellation
             buff_inner = 50, # inner buffer - no samples within this distance from road
             buff_outer = 200) # outer buffer - no samples further than this distance from road
 ```
 
 ```{r,warning=F,message=F} 
-sample_grid(raster = mraster, # input mraster
-            gridsize = 200, # grid distance
+sample_systematic(raster = mraster, # input mraster
+            cellsize = 200, # grid distance
             access = access, # define access road network
             buff_inner = 100, # inner buffer - no samples within this distance from road
             buff_outer = 400, # outer buffer - no samples further than this distance from road
@@ -220,7 +230,7 @@ sample_clhs(mraster = mraster, # input
 
 ```{r,warning=F,message=F} 
 sample_clhs(mraster = mraster, # input
-            nSamp = 400, # desired sample number
+            nSamp = 300, # desired sample number
             existing = existing, # existing samples
             iter = 100, # number of iterations
             details = TRUE) # clhs details
